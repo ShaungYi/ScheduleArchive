@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="700" maxWidth="1300.0" prefHeight="700" prefWidth="1300.0" stylesheets="@bar.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.BarDisplay">
+    <top>
+        <HBox>
+
+            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" text="Creator" GridPane.rowIndex="1">
+                <font>
+                    <Font name="Phosphate" size="45" />
+                </font>
+
+            </Button>
+         <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="86.0" prefWidth="173.0" text="Back">
+            <font>
+               <Font size="45.0" />
+            </font>
+         </Button>
+        </HBox>
+    </top>
+
+    <center>
+        <BarChart fx:id="compositionBar" barGap="1.0" maxHeight="600.0" maxWidth="1300.0" prefHeight="600.0" prefWidth="1300.0" title="Activity By Percent Time Occupied " BorderPane.alignment="TOP_CENTER">
+            <xAxis>
+                <CategoryAxis fx:id="compoCatAxis" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="compoNumAxis" label="\% of Day" lowerBound="95.0" side="LEFT" upperBound="95.0" />
+            </yAxis>
+         <padding>
+            <Insets top="30.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+        </BarChart>
+    </center>
+
+    <left>
+        <GridPane alignment="TOP_CENTER" vgap="30">
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+
+        </GridPane>
+    </left>
+
+</BorderPane>

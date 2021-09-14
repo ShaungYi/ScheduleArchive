@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="motherPane" prefHeight="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.TimeLine">
+    <children>
+        <Pane fx:id="portalContainerPane" maxHeight="176.0" onScroll="#onScroll" prefHeight="176.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
+            <children>
+                <HBox fx:id="portalPane">
+                    <children>
+                        <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" text="Creator">
+                            <font>
+                                <Font size="45.0" />
+                            </font></Button>
+                        <Button onAction="#goToMain" prefWidth="173" text="Back">
+                            <font>
+                                <Font size="45.0" />
+                            </font></Button>
+                  <Button mnemonicParsing="false" onAction="#goToEditor" prefHeight="86.0" prefWidth="276.0" text="Edit Mode">
+                     <font>
+                        <Font size="45.0" />
+                     </font>
+                  </Button>
+                        <Text fx:id="testText" text="text" visible="false" />
+                    </children>
+                </HBox>
+            </children>
+
+        </Pane>
+
+
+        <GridPane fx:id="allContainerPane" maxHeight="700.0" onScroll="#onScroll" prefHeight="700.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
+            <!--        <columnConstraints>-->
+            <!--          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />-->
+            <!--        </columnConstraints>-->
+            <!--        <rowConstraints>-->
+            <!--          <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />-->
+            <!--          <RowConstraints maxHeight="125.0" minHeight="125.0" prefHeight="153.0" vgrow="SOMETIMES" />-->
+            <!--            <RowConstraints maxHeight="12.0" minHeight="0.0" prefHeight="12.0" />-->
+            <!--            <RowConstraints maxHeight="17.0" minHeight="5.0" prefHeight="244.0" />-->
+            <!--            <RowConstraints />-->
+            <!--        </rowConstraints>-->
+            <children>
+                <Pane fx:id="yearPane" maxHeight="200.0" prefHeight="200.0" prefWidth="1300.0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+               <children>
+                  <Label fx:id="dateDisplay" layoutX="548.0" layoutY="108.0" text="2020-9-17">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+                <HBox fx:id="colorPane" maxHeight="125.0" prefHeight="125.0" prefWidth="1100.0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                    <GridPane.margin>
+                        <Insets left="200.0" />
+                    </GridPane.margin>
+                    <children>
+<!--                        <Label prefHeight="126.0" prefWidth="120.0" style="-fx-background-color: green; -fx-alignment: center; -fx-border-color: white; -fx-border-width: 1;" text="Label" textAlignment="CENTER" />-->
+                    </children>
+                </HBox>
+                <HBox fx:id="nodePane" maxHeight="12.0" prefHeight="12.0" prefWidth="1100.0" spacing="119.0" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="200.0" />
+                    </GridPane.margin></HBox>
+                <HBox fx:id="timePane" maxHeight="17.0" onScroll="#onScroll" prefHeight="17" prefWidth="1000.0" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets left="140.0" />
+                    </GridPane.margin>
+                    <children>
+                        <!--                   <Label maxWidth="120.0" minWidth="120.0" prefHeight="15.0" prefWidth="120.0" style="-fx-alignment: center;" text="Label" textAlignment="CENTER" />-->
+                    </children>
+                </HBox>
+                <Pane fx:id="detailContainerPane" maxHeight="260.0" onScroll="#onScroll" prefHeight="260.0" prefWidth="1300.0" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <children>
+                  <BorderPane fx:id="detailPane" layoutX="13.0" layoutY="98.0" prefHeight="148.0" prefWidth="1272.0">
+                     <top>
+                        <Label fx:id="categoryTitle" style="-fx-text-fill: maroon;" text="Reading" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </top>
+                     <left>
+                        <VBox prefHeight="111.0" prefWidth="625.0" spacing="3.0" style="-fx-alignment: bottom-right;" BorderPane.alignment="BOTTOM_RIGHT">
+                           <children>
+                              <Label text="Specific:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label text="duration:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label text="began at:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label text="finished at:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                           </children></VBox>
+                     </left>
+                     <right>
+                        <VBox prefHeight="111.0" prefWidth="625.0" spacing="3.0" style="-fx-alignment: bottom-left;" BorderPane.alignment="BOTTOM_CENTER">
+                           <children>
+                              <Label fx:id="specificLabel" text="Piano">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="durationLabel" text="1 hour 12 minutes 4 seconds">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label fx:id="beganAt" text="12:30 P.M.">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Label fx:id="finishedAt" style="-fx-alignment: bottom-left;" text="1:42 P.M.">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                           </children></VBox>
+                     </right>
+                  </BorderPane>
+               </children></Pane>
+            </children>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints maxHeight="17.0" minHeight="11.0" prefHeight="14.0" />
+                <RowConstraints maxHeight="35.0" minHeight="4.0" prefHeight="18.0" />
+                <RowConstraints maxHeight="287.0" minHeight="260.0" prefHeight="260.0" />
+            </rowConstraints>
+        </GridPane>
+    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+
+
+
+</VBox>

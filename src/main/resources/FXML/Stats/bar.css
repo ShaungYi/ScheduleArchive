@@ -1,0 +1,53 @@
+.data0.chart-bar {
+    -fx-bar-fill: cyan;
+}
+.data1.chart-bar {
+    -fx-bar-fill: fuchsia;
+}
+
+.data2.chart-bar {
+    -fx-bar-fill: gold;
+}
+
+.data3.chart-bar {
+    -fx-bar-fill: chartreuse;
+}
+
+.data4.chart-bar {
+    -fx-bar-fill: bisque;
+}
+
+.data5.chart-bar {
+    -fx-bar-fill: chocolate;
+}
+
+.data6.chart-bar {
+    -fx-bar-fill: deepskyblue;
+}
+
+.data7.chart-bar {
+    -fx-bar-fill: crimson;
+}
+
+.data8.chart-bar {
+    -fx-bar-fill: olive;
+}
+
+.data9.chart-bar {
+    -fx-bar-fill: green;
+}
+
+.data10.chart-bar {
+    -fx-bar-fill: coral;
+}
+
+.data11.chart-bar {
+    -fx-bar-fill: blueviolet;
+}
+
+
+
+
+/*.default-color2.chart-bar {*/
+/*    -fx-bar-fill: gold;*/
+/*}*/

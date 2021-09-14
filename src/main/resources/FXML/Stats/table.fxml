@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:id="motherPane" maxHeight="2800.0" minHeight="-Infinity" minWidth="-Infinity" onScroll="#onScroll" prefHeight="2800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Table">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToScheduleCreator" prefHeight="100.0" prefWidth="226.0" text="Creator">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goToStats" prefHeight="100.0" prefWidth="180.0" text="Back">
+               <font>
+                  <Font size="45.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" />
+               </padding>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <GridPane maxHeight="2500.0" maxWidth="1200.0" prefHeight="2500.0" style="-fx-background-color: white;" BorderPane.alignment="TOP_CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="232.0" minHeight="100.0" prefHeight="203.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="360.0" minHeight="241.0" prefHeight="360.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="200.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="44.0" prefWidth="333.0" text="Duration of Activities by Category" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label prefHeight="44.0" prefWidth="245.0" text="Duration of Each Activity" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <HBox maxHeight="500.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                   <TableView fx:id="exerciseTable" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="500.0" prefWidth="380.0">
+                       <columns>
+                           <TableColumn fx:id="exerciseCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Exercise" />
+                           <TableColumn fx:id="exerciseDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                       </columns>
+                       <HBox.margin>
+                           <Insets right="30.0" top="30.0" />
+                       </HBox.margin>
+                   </TableView>
+
+                  <TableView fx:id="restTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="500.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="restCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Rest" />
+                      <TableColumn fx:id="restDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets right="30.0" top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                   <TableView fx:id="readingTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                       <columns>
+                           <TableColumn fx:id="readingCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Reading" />
+                           <TableColumn fx:id="readingDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                       </columns>
+                       <HBox.margin>
+                           <Insets top="30.0" />
+                       </HBox.margin>
+                   </TableView>
+
+               </children>
+            </HBox>
+            <HBox maxHeight="500.0" maxWidth="1200.0" prefHeight="500.0" prefWidth="1200.0" GridPane.rowIndex="3">
+               <children>
+
+                  <TableView fx:id="studyTable" maxHeight="500.0" maxWidth="380.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="studyCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Study" />
+                      <TableColumn fx:id="studyDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <TableView fx:id="entertainmentTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="entertainmentCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Entertainment" />
+                      <TableColumn fx:id="entertainmentDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                   <TableView fx:id="spiritualityTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefWidth="380.0">
+                       <columns>
+                           <TableColumn fx:id="spiritualityCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Spirituality" />
+                           <TableColumn fx:id="spiritualityDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                       </columns>
+                   </TableView>
+               </children>
+            </HBox>
+            <TableView fx:id="categoryTable" editable="true" maxHeight="360.0" maxWidth="700.0" prefHeight="360.0" prefWidth="700.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="categoryCol" prefWidth="350.0" text="Category" />
+                <TableColumn fx:id="durationByCategoryCol" prefWidth="350.0" text="Duration" />
+              </columns>
+               <padding>
+                  <Insets bottom="1.0" />
+               </padding>
+            </TableView>
+            <HBox maxHeight="500.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                   <TableView fx:id="writingTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                       <columns>
+                           <TableColumn fx:id="writingCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Writing" />
+                           <TableColumn fx:id="writingDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                       </columns>
+                       <HBox.margin>
+                           <Insets right="30.0" top="30.0" />
+                       </HBox.margin>
+                   </TableView>
+                  <TableView fx:id="artsTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="artsCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Arts" />
+                      <TableColumn fx:id="artsDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets right="30.0" top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <TableView fx:id="miscellaneousTable" maxHeight="500.0" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="100.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="miscellaneousCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Miscellaneous" />
+                      <TableColumn fx:id="miscellaneousDurationCol" maxWidth="1.7976931348623157E308" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox maxHeight="500.0" prefHeight="500.0" GridPane.rowIndex="6">
+               <children>
+                  <TableView fx:id="socialTable" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="200.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="socialColumn" prefWidth="190.0" text="Social" />
+                      <TableColumn fx:id="socialDurationColumn" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <TableView fx:id="mediaTable" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="mediaColumn" prefWidth="190.0" text="Media" />
+                      <TableColumn fx:id="mediaDurationColumn" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <TableView fx:id="serviceTable" onMouseEntered="#extendOnMouseEnter" onMouseExited="#shrinkOnMouseExit" prefHeight="200.0" prefWidth="380.0">
+                    <columns>
+                      <TableColumn fx:id="serviceColumn" prefWidth="190.0" text="Service" />
+                      <TableColumn fx:id="serviceDurationColumn" prefWidth="190.0" text="Duration" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </HBox.margin>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
+</BorderPane>

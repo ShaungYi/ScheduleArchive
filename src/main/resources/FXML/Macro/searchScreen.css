@@ -1,0 +1,24 @@
+#seek-button{
+    -fx-background-radius: 25px;
+    -fx-background-color:  orange;
+    -fx-text-fill:  rgb(211, 108, 211);
+}
+
+.clear-button{
+    -fx-background-radius: 25px;
+    -fx-background-color: #9d9b0a;
+    -fx-text-fill: rgb(147, 38, 147);
+    -fx-opacity: 0.45;
+
+}
+
+.clear-button-hovered{
+    -fx-opacity: 1;
+}
+
+.clear-button-clicked{
+    -fx-opacity: 1;
+    -fx-background-color: #df4c4c;
+    -fx-text-fill: rgb(222, 172, 236);
+}
+

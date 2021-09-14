@@ -1,0 +1,35 @@
+.y2020 {
+    -fx-background-color: rgba(236, 171, 216, 0.41);
+}
+
+.y2021 {
+    -fx-background-color: rgba(228, 239, 160, 0.41);
+}
+
+.year-label {
+    -fx-font-family: "Chalkboard SE";
+    -fx-text-fill: #0080ff;
+}
+
+.month-label {
+    -fx-font-family: "Chalkboard SE";
+    -fx-text-fill: #0080ff;
+}
+
+.background-pane {
+    -fx-background-color: rgba(141, 204, 13, 0.24);
+}
+
+.navigation-button{
+
+    -fx-background-radius: 0.5em;
+    -fx-background-color: #1cdae7;
+    -fx-text-fill: rgb(135, 27, 166);
+
+
+}
+
+.navigation-button:hover{
+    -fx-background-color: #2f76c9;
+    -fx-text-fill: rgb(226, 201, 241);
+}

@@ -1,0 +1,38 @@
+.main-background {
+    -fx-background-image: url("images/creator_background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+}
+
+.label {
+    -fx-text-fill: black;
+
+}
+
+.save-button {
+    -fx-background-image: url("images/save_button.png");
+    -fx-translate-y: 0px;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 145%;
+    -fx-background-position: center;
+}
+
+.save-button:hover {
+    -fx-translate-y: -5px;
+    -fx-background-image: url("images/save_button_hovered.png");
+    -fx-background-size: 145%;
+}
+
+.stats-button {
+    -fx-background-image: url("images/stats_button.png");
+    -fx-translate-y: 0px;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 145%;
+    -fx-background-position: center;
+}
+
+.stats-button:hover {
+    -fx-translate-y: -5px;
+    -fx-background-image: url("images/stats_button_hovered.png");
+    -fx-background-size: 145%;
+}

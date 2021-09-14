@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgba(255, 230, 0, 0.103);;" stylesheets="@searchScreen.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchScreen">
+   <children>
+      <TextField fx:id="activitySearchField" layoutX="37.0" layoutY="204.0" onKeyTyped="#onEntryToActivitySearchField" prefHeight="59.0" prefWidth="349.0" promptText="Search Activities" style="-fx-background-color: rgba(134, 224, 252, 0.397);;">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Button fx:id="clearButton" layoutX="906.0" layoutY="655.0" mnemonicParsing="false" onAction="#clear" onMouseEntered="#onClearButtonHovered" onMouseExited="#onClearButtonUnHovered" prefHeight="65.0" prefWidth="150.0" styleClass="clear-button" text="Clear">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button id="seek-button" layoutX="668.0" layoutY="655.0" mnemonicParsing="false" onAction="#seek" prefHeight="65.0" prefWidth="150.0" styleClass="seek-button" text="Seek">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <ScrollPane fx:id="activityTagBoxContainer" layoutX="470.0" layoutY="42.0" prefHeight="592.0" prefWidth="783.0">
+         <content>
+            <FlowPane fx:id="selectedActivitiesBox" hgap="10.0" prefHeight="592.0" prefWidth="783.0" style="-fx-background-color: rgba(255, 253, 116, 0.46);" vgap="10.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+               </children></FlowPane>
+         </content>
+      </ScrollPane>
+
+      <Label layoutX="91.0" layoutY="128.0" prefHeight="76.0" prefWidth="269.0" style="-fx-text-fill: brown;" text="Add Activities">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" style="-fx-background-color: rgba(45, 206, 255, 0.3);" />
+      <HBox prefHeight="109.0" prefWidth="431.0" style="-fx-background-color: rgba(173, 83, 42, 0.438);;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: rgb(173, 101, 42); -fx-text-fill: gold; -fx-background-radius: 30px;" text="Back">
+               <font>
+                  <Font size="45.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" style="-fx-background-color: rgb(173, 101, 42); -fx-text-fill: gold; -fx-background-radius: 30px;" text="Creator">
+               <font>
+                  <Font size="45.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      
+   </children>
+</AnchorPane>

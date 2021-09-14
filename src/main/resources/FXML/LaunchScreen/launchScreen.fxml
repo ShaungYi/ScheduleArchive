@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgba(59, 199, 59, 0.5);" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.LaunchScreen.LaunchScreen">
+   <children>
+      <Label fx:id="logoPiece1" layoutX="126.0" layoutY="163.0" style="-fx-text-fill: rgb(110, 87, 68);;" text="Schedule">
+         <font>
+            <Font name="System Bold" size="200.0" />
+         </font>
+      </Label>
+      <Label fx:id="logoPiece2" layoutX="529.0" layoutY="350.0" style="-fx-text-fill: rgb(110, 87, 68);;" text="Archive">
+         <font>
+            <Font name="System Bold" size="200.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="199.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3">
+         <image>
+            <Image url="@../../Images/barChart.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="104.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
+         <image>
+            <Image url="@../../Images/piChart.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="62.0" fitWidth="244.0" layoutX="872.0" layoutY="634.0" pickOnBounds="true" preserveRatio="true" scaleX="2.5" scaleY="2.5">
+         <image>
+            <Image url="@../../Images/timeLine.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="155.0" fitWidth="200.0" layoutX="973.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/list.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="loadingLabel" layoutX="492.0" layoutY="606.0" opacity="0.0" prefHeight="41.0" prefWidth="116.0" style="-fx-text-fill: rgb(216, 143, 9);;" text="Loading">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="dot1" layoutX="614.0" layoutY="606.0" opacity="0.0" prefHeight="41.0" prefWidth="0.0" style="-fx-text-fill: rgb(216, 143, 9);;" text=".">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="dot2" layoutX="630.0" layoutY="606.0" opacity="0.0" prefHeight="41.0" prefWidth="8.0" style="-fx-text-fill: rgb(216, 143, 9);;" text=".">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="dot3" layoutX="646.0" layoutY="606.0" opacity="0.0" prefHeight="41.0" prefWidth="8.0" style="-fx-text-fill: rgb(216, 143, 9);;" text=".">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

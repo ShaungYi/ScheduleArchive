@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="motherPane" maxHeight="900.0" maxWidth="1300.0" onScroll="#onScroll" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: white;" stylesheets="@pi.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.PiChart">
+    <top>
+        <HBox>
+
+            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" text="Creator" GridPane.rowIndex="1">
+                <font>
+                    <Font name="Phosphate" size="45" />
+                </font>
+
+            </Button>
+         <Button  mnemonicParsing="false" onAction="#goToMain" text="Back" prefHeight="86.0" prefWidth="173.0">
+            <font>
+               <Font size="45.0" />
+            </font>
+         </Button>
+        </HBox>
+    </top>
+
+    <left>
+        <GridPane alignment="TOP_CENTER" vgap="30">
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+
+        </GridPane>
+    </left>
+   <center>
+      <PieChart fx:id="piChart" BorderPane.alignment="CENTER" />
+   </center>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+
+</BorderPane>

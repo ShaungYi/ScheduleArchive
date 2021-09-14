@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="UniversalCommonAncestor" style="-fx-background-color: white;" styleClass="main-background" stylesheets="@creator.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.ScheduleCreator">
+
+    <center>
+        <GridPane fx:id="topPane" alignment="TOP_CENTER" hgap="10" vgap="10">
+
+            <padding>
+                <Insets top="100.0" />
+            </padding>
+            <children>
+                <Label text="New Activity" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                    <font>
+                        <Font name="Times New Roman bold" size="50" />
+                    </font>
+                </Label>
+
+                <Label fx:id="stopWatchDisplay" text="00:00:00" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="80" />
+                    </font>
+                </Label>
+
+                <Label fx:id="startTime" text="00:00:00" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+
+                <Label fx:id="startTimeAMPM" text="----" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="15" />
+                    </font>
+                </Label>
+
+                <Label text="  +  " GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+
+                <Label text="  =  " GridPane.columnIndex="4" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+
+                <Label fx:id="endTime" text="00:00:00" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+
+                <Label fx:id="endTimeAMPM" text="----" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Times New Roman bold" size="15" />
+                    </font>
+                </Label>
+
+
+<!--                <Button fx:id="saveButton" onAction="#processSubmission" prefWidth="200.0" styleClass="save-button" textFill="green" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">-->
+<!--                    <font>-->
+<!--                        <Font name="Impact" size="40" />-->
+<!--                    </font>-->
+<!--                </Button>-->
+                <Pane fx:id="saveButton" maxWidth="200.0" minHeight="70.0" minWidth="260.0" onMouseClicked="#processSubmission" prefHeight="70.0" prefWidth="228.0" styleClass="save-button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <children>
+<!--                  <ImageView fx:id="saveButtonBackground" fitHeight="165.0" fitWidth="200.0" layoutX="8.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.7">-->
+<!--                     <image>-->
+<!--                        <Image url="@images/save_button.png" />-->
+<!--                     </image>-->
+<!--                  </ImageView>-->
+               </children>
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin></Pane>
+            </children>
+
+            <BorderPane.margin>
+                <Insets top="230.0" />
+            </BorderPane.margin>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+
+        </GridPane>
+    </center>
+
+    <top>
+        <GridPane alignment="center" hgap="10" vgap="10">
+            <children>
+                <Label fx:id="universalClockDisplay" text="00:00:00" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <font>
+                        <Font name="Times New Roman bold" size="100" />
+                    </font>
+                </Label>
+
+                <Label fx:id="noonRelationMarker" text="P.M." GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+
+                <Label fx:id="date" text="OCT-20-2020" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <font>
+                        <Font name="Times New Roman bold" size="20" />
+                    </font>
+                </Label>
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+
+
+        </GridPane>
+    </top>
+
+
+
+
+    <right>
+
+        <GridPane alignment="TOP_CENTER" maxWidth="250" minWidth="250" vgap="20">
+
+
+            <children>
+                <RadioButton fx:id="Study" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Study" textFill="aqua" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="ActivityTypes" />
+                    </toggleGroup>
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Entertainment" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Entertainment" textFill="fuchsia" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Spirituality" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Spirituality" textFill="gold" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Exercise" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Exercise" textFill="chartreuse" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Rest" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Rest" textFill="bisque" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Reading" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Reading" textFill="chocolate" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Writing" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Writing" textFill="deepskyblue" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Arts" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Arts" textFill="crimson" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Social" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Social" textFill="olive" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Media" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Media" textFill="green" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Service" onAction="#proclaimActivityType" style="-fx-background-color: ivory" text="Service" textFill="coral" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+
+                <RadioButton fx:id="Miscellaneous" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="miscellaneous" textFill="blueviolet" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="11">
+                    <font>
+                        <Font name="Herculanum" size="20" />
+                    </font>
+                </RadioButton>
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+
+
+
+        </GridPane>
+    </right>
+
+    <left>
+        <GridPane alignment="TOP_LEFT" minWidth="250" vgap="10">
+            <children>
+<!--                <Button onAction="#goToStats" text="stats" GridPane.rowIndex="1">-->
+<!--                    <font>-->
+<!--                        <Font name="Phosphate" size="45" />-->
+<!--                    </font>-->
+
+<!--                </Button >-->
+                <Pane prefHeight="228.0" prefWidth="215.0" styleClass="stats-button" GridPane.rowIndex="1" onMouseClicked="#goToStats">
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin></Pane>
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </left>
+
+
+
+</BorderPane>
