@@ -31,7 +31,7 @@ public class ArchiveDBModel {
     //if adding a backup makes backup list grow to more than this, delete the oldest backup
     public static int maxBackupNum = 6;
     //a list of available archive backup names
-    public static ObservableList<String> availableBackupsObservableList = FXCollections.observableArrayList();
+    public static ObservableList<String> availableBackupsObservableList = FXCollections.observableArrayList("12:23 P.M. 1248-03-04", "04:23 P.M. 1776-02-05", "01:35 P.M. 1996-11-04");
 
     public static String getArchiveUrl(){
 

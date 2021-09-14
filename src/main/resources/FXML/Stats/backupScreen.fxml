@@ -35,8 +35,8 @@
                         <Insets top="50.0" />
                      </VBox.margin>
                   </Label>
-                  <ListView fx:id="availableBackupsListView" prefHeight="396.0" prefWidth="611.0" />
-                  <Button mnemonicParsing="false" onAction="#loadBackupArchive" text="Load">
+                  <ListView fx:id="availableBackupsListView" onMouseClicked="#setSelectedBackup" prefHeight="396.0" prefWidth="611.0" />
+                  <Button fx:id="loadBackupButton" disable="true" mnemonicParsing="false" onAction="#loadBackupArchive" text="Load">
                      <font>
                         <Font size="40.0" />
                      </font>
