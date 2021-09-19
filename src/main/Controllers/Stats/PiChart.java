@@ -9,6 +9,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.DBModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -153,11 +154,11 @@ public class PiChart extends PrototypeController {
 
 
     public void goToScheduleCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, App.piChart);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.piChart);
     }
 
     public void goToMain(){
-        App.sceneNavigationModel.gotoScene(App.stats, App.piChart);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.piChart);
     }
 
 

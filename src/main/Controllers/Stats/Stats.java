@@ -9,6 +9,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.DBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,20 +102,20 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.stats);
     }
 
 
     @FXML
     public void goToBarChart(){
         BarDisplay.updateBarChart();
-        App.sceneNavigationModel.gotoScene(App.bars, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.bars, SceneNavigationModel.stats);
     }
 
 
     @FXML
     public void goToTable(){
-        App.sceneNavigationModel.gotoScene(App.table, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.table, SceneNavigationModel.stats);
     }
 
 
@@ -124,16 +125,16 @@ public class Stats extends PrototypeController {
             PiChart.updatePi();
         }
 
-        App.sceneNavigationModel.gotoScene(App.piChart, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.piChart, SceneNavigationModel.stats);
     }
 
     @FXML
     public void goToLoader() throws IOException {
 
-        System.out.println(App.stats);
+        System.out.println(SceneNavigationModel.stats);
 
 
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", App.stats);
+        App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", SceneNavigationModel.stats);
 
 
         if (Loader.resumeMode || Loader.loadMode){
@@ -153,22 +154,22 @@ public class Stats extends PrototypeController {
     @FXML
     public void goToMacro(){
 
-        if (App.macro == null){
-            App.macro = App.sceneNavigationModel.loadNewScene("../resources/FXML/Macro/searchScreen.fxml", App.stats);
+        if (SceneNavigationModel.macro == null){
+            SceneNavigationModel.macro = App.sceneNavigationModel.loadNewScene("../resources/FXML/Macro/searchScreen.fxml", SceneNavigationModel.stats);
             return;
         }
-        App.sceneNavigationModel.gotoScene(App.macro, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, SceneNavigationModel.stats);
     }
 
     @FXML
     public void goToBackups(){
-        App.sceneNavigationModel.gotoScene(App.backups, App.stats);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.backups, SceneNavigationModel.stats);
     }
 
 
     @FXML
     public void goToTimeLine(){
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", App.stats);
+        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", SceneNavigationModel.stats);
     }
 
 

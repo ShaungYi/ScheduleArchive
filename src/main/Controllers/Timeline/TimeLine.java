@@ -16,6 +16,7 @@ import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.DBModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -377,14 +378,14 @@ public class TimeLine extends PrototypeController {
 
 
     public void goToScheduleCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, motherPane.getScene());
         Stats.currentTimelineLayoutInitialized = false;
     }
 
     public void goToMain() {
         Stats.currentTimelineLayoutInitialized = false;
 
-        App.sceneNavigationModel.gotoScene(App.stats, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, motherPane.getScene());
     }
 
     public void goToEditor() throws IOException {

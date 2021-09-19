@@ -20,6 +20,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.DBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -428,7 +429,7 @@ public class Editor extends PrototypeController {
 
         suggestedNamesObservableList.clear();
 
-        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList);
+        SearchModel.loadToObservableListSynchronously(newName, suggestedNamesObservableList, true);
 
 
         if (!suggestedNamesObservableList.isEmpty() && suggestedNamesObservableList.size() < 16){
@@ -1287,14 +1288,14 @@ public class Editor extends PrototypeController {
         Table.updateData(DBModel.archive);
         Stats.currentTimelineLayoutInitialized = false;
 
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, motherPane.getScene());
     }
 
     public void goToMain() {
         Table.updateData(DBModel.archive);
         Stats.currentTimelineLayoutInitialized = false;
 
-        App.sceneNavigationModel.gotoScene(App.stats, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, motherPane.getScene());
     }
 
     public void goToTimeLine() throws IOException {

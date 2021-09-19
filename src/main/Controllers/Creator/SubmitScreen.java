@@ -11,6 +11,7 @@ import main.Models.DBModels.DBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -129,7 +130,7 @@ public class SubmitScreen extends PrototypeController {
             submitButton.setDisable(false);
 
 
-            SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions);
+            SearchModel.loadToObservableListSynchronously(nameField.getText(), observableListOfsuggestions, false);
 
 
 
@@ -177,7 +178,7 @@ public class SubmitScreen extends PrototypeController {
 
 
     public void goToCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, suggestionsContainer.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, suggestionsContainer.getScene());
     }
 
 }

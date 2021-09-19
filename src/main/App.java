@@ -10,8 +10,6 @@ import main.Utility.EditLog;
 public class App extends Application {
     public static EditLog editLog = new EditLog();
 
-    //stuff related to scenes
-    public static Scene scheduleCreator, stats, bars, table, piChart, macro, launchScreen, backups;
     public static SceneNavigationModel sceneNavigationModel = new SceneNavigationModel();
 
 
@@ -19,28 +17,19 @@ public class App extends Application {
     public void start(Stage primaryStage){
         System.out.println("1");
 
-        //generate past activity archive
-        //PastActivityArchiveModel.loadAllPastActivities();
 
-        //initializing scenes
+        //initializing launchscreen scene
+        SceneNavigationModel.launchScreen = sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
 
-        scheduleCreator = sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
-        stats = sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
-        bars = sceneNavigationModel.createNewScene("../resources/FXML/Stats/barDisplay.fxml");
-        table = sceneNavigationModel.createNewScene("../resources/FXML/Stats/table.fxml");
-        piChart = sceneNavigationModel.createNewScene("../resources/FXML/Stats/piChart.fxml");
-        launchScreen = sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
-        backups = sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
-        System.out.println("user data: "+scheduleCreator.getUserData());
         primaryStage.setTitle("Schedule Archive");
-        primaryStage.setScene(launchScreen);
+        primaryStage.setScene(SceneNavigationModel.launchScreen);
 
         primaryStage.show();
     }
 
 
     public static void setScheduleCreator(Scene newSc){
-        scheduleCreator = newSc;
+        SceneNavigationModel.scheduleCreator = newSc;
     }
 
 

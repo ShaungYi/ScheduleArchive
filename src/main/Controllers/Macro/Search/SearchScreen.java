@@ -15,6 +15,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.MacroDataModel;
 import main.Models.PastActivityArchiveModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class SearchScreen extends PrototypeController {
     @FXML
     void onEntryToActivitySearchField(){
         observableListOfsuggestedActivityNames.clear();
-        SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames);
+        SearchModel.loadToObservableListSynchronously(activitySearchField.getText(), observableListOfsuggestedActivityNames, false);
     }
 
     @FXML
@@ -126,12 +127,12 @@ public class SearchScreen extends PrototypeController {
 
     @FXML
     public void goBack(){
-        App.sceneNavigationModel.gotoScene(App.stats, App.macro);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.macro);
     }
 
     @FXML
     public void goToCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, App.macro);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.macro);
     }
 
 

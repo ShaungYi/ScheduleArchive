@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
-import main.Models.PastActivityArchiveModel;
+import main.Models.SceneNavigationModel;
 
 public class LaunchScreen extends PrototypeController {
     @FXML
@@ -27,7 +27,7 @@ public class LaunchScreen extends PrototypeController {
 
 
     public void initialize(){
-        new Thread(loadAllPastActivitiesRunnable).start();
+        new Thread(loadScenesRunnable).start();
         loadingAnimationThread.start();
         Font font = Font.font("Times New Roman", 200);
         logoPiece1.setFont(font);
@@ -36,9 +36,16 @@ public class LaunchScreen extends PrototypeController {
     }
 
 
-    Runnable loadAllPastActivitiesRunnable = new Runnable() {
+    Runnable loadScenesRunnable = new Runnable() {
         @Override
         public void run() {
+
+            SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
+            SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
+            SceneNavigationModel.bars = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/barDisplay.fxml");
+            SceneNavigationModel.table = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/table.fxml");
+            SceneNavigationModel.piChart = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/piChart.fxml");
+            SceneNavigationModel.backups = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -46,8 +53,8 @@ public class LaunchScreen extends PrototypeController {
 
                     loadingAnimationThread.stop();
 
-                    Scene creator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", App.launchScreen);
-                    App.scheduleCreator = creator;
+                    Scene creator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", SceneNavigationModel.launchScreen);
+                    SceneNavigationModel.scheduleCreator = creator;
 
                 }
             });

@@ -16,6 +16,15 @@ import java.io.IOException;
 
 public class SceneNavigationModel{
 
+    //stuff related to scenes
+    public static Scene scheduleCreator;
+    public static Scene stats;
+    public static Scene bars;
+    public static Scene table;
+    public static Scene piChart;
+    public static Scene macro;
+    public static Scene launchScreen;
+    public static Scene backups;
     static Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     public static final double screenWidth = screenSize.getWidth();
     public static final double screenHeight = 800;
@@ -96,6 +105,6 @@ public class SceneNavigationModel{
     }
 
     public void setScheduleCreator(Scene scheduleCreator) {
-        App.scheduleCreator = scheduleCreator;
+        scheduleCreator = scheduleCreator;
     }
 }

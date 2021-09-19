@@ -12,6 +12,7 @@ import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.DBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -121,7 +122,7 @@ public class Loader extends PrototypeController {
 
     @FXML
     public void goToStats(){
-        App.sceneNavigationModel.gotoScene(App.stats, backups.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, backups.getScene());
     }
 
 
@@ -132,14 +133,14 @@ public class Loader extends PrototypeController {
         loadMode = true;
         App.editLog.wipe();
 
-        App.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
-        App.sceneNavigationModel.gotoScene(App.stats, backups.getScene());
+        SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, backups.getScene());
 
     }
 
 
     private void wrapUpAndGoToCreator() {
-        App.scheduleCreator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", backups.getScene());
+        SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", backups.getScene());
         //reenable creator
         disAbleCreator = false;
 

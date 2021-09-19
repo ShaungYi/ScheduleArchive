@@ -8,6 +8,7 @@ import main.App;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.BackupArchiveModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 
 public class BackupScreenController extends PrototypeController {
 
@@ -104,11 +105,11 @@ public class BackupScreenController extends PrototypeController {
 
     @FXML
     public void goToScheduleCreator() {
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, App.backups);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.backups);
     }
 
     @FXML
     public void goToMain() {
-        App.sceneNavigationModel.gotoScene(App.stats, App.backups);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.backups);
     }
 }

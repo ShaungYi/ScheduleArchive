@@ -36,3 +36,30 @@
     -fx-background-image: url("images/stats_button_hovered.png");
     -fx-background-size: 145%;
 }
+
+.toggle-button {
+    -fx-translate-x: 0px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-background-image: url("images/toggle_button.png");
+    -fx-background-color: none;
+    -fx-background-size: 100%;
+    -fx-background-repeat: stretch;
+    -fx-background-position: 50% 53%;
+
+    -fx-padding: 15px 0px 15px 20px;
+}
+
+.toggle-button:hover {
+    -fx-background-image: url("images/toggle_button_hovered.png");
+}
+
+.toggle-button-selected{
+    -fx-translate-x: -50;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+/*.toggle-button:selected:hover{*/
+/*    -fx-background-image: url("images/toggle-button-sprouted_hovered.png");*/
+/*}*/

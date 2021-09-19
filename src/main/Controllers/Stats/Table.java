@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.DBModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -508,12 +509,12 @@ public class Table extends PrototypeController {
 
 
     public void goToScheduleCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, App.table);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.table);
     }
 
 
     public void goToStats(){
-        App.sceneNavigationModel.gotoScene(App.stats, App.table);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.table);
     }
 
 

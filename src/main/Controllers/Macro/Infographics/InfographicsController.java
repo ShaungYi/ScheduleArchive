@@ -283,15 +283,15 @@ public class InfographicsController extends PrototypeController {
 
     @FXML
     public void goBack(){
-        App.sceneNavigationModel.gotoScene(App.macro, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, motherPane.getScene());
     }
     @FXML
     public void goToStats(){
-        App.sceneNavigationModel.gotoScene(App.stats, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, motherPane.getScene());
     }
     @FXML
     public void goToCreator(){
-        App.sceneNavigationModel.gotoScene(App.scheduleCreator, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, motherPane.getScene());
     }
 
 }

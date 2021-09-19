@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="UniversalCommonAncestor" style="-fx-background-color: white;" styleClass="main-background" stylesheets="@creator.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.ScheduleCreator">
+<BorderPane fx:id="UniversalCommonAncestor" style="-fx-background-color: white;" styleClass="main-background" stylesheets="@creator.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.ScheduleCreator">
 
     <center>
         <GridPane fx:id="topPane" alignment="TOP_CENTER" hgap="10" vgap="10">
@@ -141,84 +141,85 @@
 
     <right>
 
-        <GridPane alignment="TOP_CENTER" maxWidth="250" minWidth="250" vgap="20">
+        <GridPane alignment="TOP_CENTER" maxWidth="338.0" minWidth="250" prefHeight="628.0" prefWidth="296.0" styleClass="category-buttons-container">
 
 
             <children>
-                <RadioButton fx:id="Study" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Study" textFill="aqua" GridPane.columnIndex="0" GridPane.rowIndex="0">
+
+                <ToggleButton id="b" fx:id="Study" onAction="#proclaimActivityType" prefWidth="320.0" styleClass="tb" text="Study" textFill="aqua" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <toggleGroup>
                         <ToggleGroup fx:id="ActivityTypes" />
                     </toggleGroup>
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
-
-                <RadioButton fx:id="Entertainment" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Entertainment" textFill="fuchsia" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                </ToggleButton>
+                <ToggleButton fx:id="Entertainment" onAction="#proclaimActivityType" prefWidth="320.0" text="Entertainment" textFill="fuchsia" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Spirituality" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Spirituality" textFill="gold" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="2">
+
+                <ToggleButton fx:id="Spirituality" onAction="#proclaimActivityType" prefWidth="320.0" text="Spirituality" textFill="gold" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Exercise" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Exercise" textFill="chartreuse" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <ToggleButton fx:id="Exercise" onAction="#proclaimActivityType" prefWidth="320.0" text="Exercise" textFill="chartreuse" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="3">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Rest" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Rest" textFill="bisque" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <ToggleButton fx:id="Rest" onAction="#proclaimActivityType" prefWidth="320.0" text="Rest" textFill="bisque" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="4">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Reading" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Reading" textFill="chocolate" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                <ToggleButton fx:id="Reading" onAction="#proclaimActivityType" prefWidth="320.0" text="Reading" textFill="chocolate" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="5">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Writing" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Writing" textFill="deepskyblue" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                <ToggleButton fx:id="Writing" onAction="#proclaimActivityType" prefWidth="320.0" text="Writing" textFill="deepskyblue" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="6">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Arts" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Arts" textFill="crimson" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                <ToggleButton fx:id="Arts" onAction="#proclaimActivityType" prefWidth="320.0" text="Arts" textFill="crimson" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="7">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Social" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Social" textFill="olive" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="8">
+                <ToggleButton fx:id="Social" onAction="#proclaimActivityType" prefWidth="320.0" text="Social" textFill="olive" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="8">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Media" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="Media" textFill="green" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="9">
+                <ToggleButton fx:id="Media" onAction="#proclaimActivityType" prefWidth="320.0" text="Media" textFill="green" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="9">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Service" onAction="#proclaimActivityType" style="-fx-background-color: ivory" text="Service" textFill="coral" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="10">
+                <ToggleButton fx:id="Service" onAction="#proclaimActivityType" prefWidth="320.0" text="Service" textFill="coral" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="10">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
 
-                <RadioButton fx:id="Miscellaneous" onAction="#proclaimActivityType" style="-fx-background-color: ivory;" text="miscellaneous" textFill="blueviolet" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="11">
+                <ToggleButton fx:id="Miscellaneous" onAction="#proclaimActivityType" prefWidth="320.0" text="miscellaneous" textFill="blueviolet" toggleGroup="$ActivityTypes" GridPane.columnIndex="0" GridPane.rowIndex="11">
                     <font>
                         <Font name="Herculanum" size="20" />
                     </font>
-                </RadioButton>
+                </ToggleButton>
             </children>
          <columnConstraints>
             <ColumnConstraints />
@@ -252,7 +253,7 @@
 <!--                    </font>-->
 
 <!--                </Button >-->
-                <Pane prefHeight="228.0" prefWidth="215.0" styleClass="stats-button" GridPane.rowIndex="1" onMouseClicked="#goToStats">
+                <Pane onMouseClicked="#goToStats" prefHeight="228.0" prefWidth="215.0" styleClass="stats-button" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets top="30.0" />
                </GridPane.margin></Pane>

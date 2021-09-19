@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.Controllers.Loader.Loader;
@@ -11,10 +12,12 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.DBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 import main.Utility.stopWatch;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -63,31 +66,33 @@ public class ScheduleCreator extends PrototypeController {
     ToggleGroup ActivityTypes;
 
     @FXML
-    RadioButton Study;
+    ToggleButton Study;
     @FXML
-    RadioButton Entertainment;
+    ToggleButton Entertainment;
     @FXML
-    RadioButton Spirituality;
+    ToggleButton Spirituality;
     @FXML
-    RadioButton Exercise;
+    ToggleButton Exercise;
     @FXML
-    RadioButton Rest;
+    ToggleButton Rest;
     @FXML
-    RadioButton Reading;
+    ToggleButton Reading;
     @FXML
-    RadioButton Writing;
+    ToggleButton Writing;
     @FXML
-    RadioButton Arts;
+    ToggleButton Arts;
     @FXML
-    RadioButton Social;
+    ToggleButton Social;
     @FXML
-    RadioButton Media;
+    ToggleButton Media;
     @FXML
-    RadioButton Service;
+    ToggleButton Service;
     @FXML
-    RadioButton Miscellaneous;
+    ToggleButton Miscellaneous;
 
     public void initialize(){
+
+
 
 
         stopWatch = new stopWatch(0);
@@ -127,29 +132,26 @@ public class ScheduleCreator extends PrototypeController {
 
                 waitUntilSynchronizedWithUniverse();
 
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
+                Platform.runLater(() -> {
 
 
-                        int currentTime = getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond());
+                    int currentTime = getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond());
 
 
-                        if (currentTime - stopWatch.getStartTimeSec() != stopWatch.getMeasuredTime()){
+                    if (currentTime - stopWatch.getStartTimeSec() != stopWatch.getMeasuredTime()){
 
-                            stopWatch.recalibrate(currentTime);
+                        stopWatch.recalibrate(currentTime);
 
-                        }
-                        else {
-                            stopWatch.tick();
-                        }
-
-
-                        String display = stopWatch.makeDisplay();
-                        stopWatchDisplay.setText(display);
-                        endTime.setText(getCurrentAMPMTime());;
-                        endTimeAMPM.setText(isAM ? "A.M." : "P.M.");
                     }
+                    else {
+                        stopWatch.tick();
+                    }
+
+
+                    String display = stopWatch.makeDisplay();
+                    stopWatchDisplay.setText(display);
+                    endTime.setText(getCurrentAMPMTime());;
+                    endTimeAMPM.setText(isAM ? "A.M." : "P.M.");
                 });
             }
         }
@@ -283,7 +285,7 @@ public class ScheduleCreator extends PrototypeController {
 
 
     public void proclaimActivityType(ActionEvent e){
-        RadioButton button = (RadioButton) e.getSource();
+        ToggleButton button = (ToggleButton) e.getSource();
         String id = button.getId();
         switch (id){
             case "Study":
@@ -335,16 +337,26 @@ public class ScheduleCreator extends PrototypeController {
                 break;
         }
 
+        //update toggle style to selected
+        ActivityTypes.getToggles().stream().map((toggle) -> (ToggleButton)toggle).forEach((togbut) -> {
+            if (togbut.equals(button)){
+                togbut.getStyleClass().add("toggle-button-selected");
+            } else {
+                togbut.getStyleClass().clear();
+                togbut.getStyleClass().add("toggle-button");
+            }
+        });
+
     }
 
     @FXML
 
     public void goToStats(){
-        App.sceneNavigationModel.gotoScene(App.stats, App.scheduleCreator);
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.scheduleCreator);
     }
 
     public void goToSubmitField() throws IOException {
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/submitScreen.fxml", App.scheduleCreator);
+        App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/submitScreen.fxml", SceneNavigationModel.scheduleCreator);
     }
 
 
@@ -384,7 +396,7 @@ public class ScheduleCreator extends PrototypeController {
 
 
     public String getSelectedActivityCategory(ToggleGroup group) {
-        RadioButton selected = (RadioButton) group.getSelectedToggle();
+        ToggleButton selected = (ToggleButton) group.getSelectedToggle();
 
         if (selected.equals(null)) {
             return null;
