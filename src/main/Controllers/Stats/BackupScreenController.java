@@ -1,15 +1,12 @@
 package main.Controllers.Stats;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import main.App;
 import main.Controllers.PrototypeController;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.BackupArchiveModel;
 import main.Models.DateTimeModel;
 
 public class BackupScreenController extends PrototypeController {
@@ -30,7 +27,7 @@ public class BackupScreenController extends PrototypeController {
 
 
     public void initialize(){
-        availableBackupsListView.setItems(ArchiveDBModel.availableBackupsObservableList);
+        availableBackupsListView.setItems(BackupArchiveModel.availableBackupsObservableList);
     }
 
 
@@ -48,11 +45,11 @@ public class BackupScreenController extends PrototypeController {
 
 
             //update data in ArchiveDBModel
-            ArchiveDBModel.maxBackupNum = maxBackupNum;
-            ArchiveDBModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
+            BackupArchiveModel.maxBackupNum = maxBackupNum;
+            BackupArchiveModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
 
-            System.out.println("(from BackupScreenController.applySettings) max num backups: " + ArchiveDBModel.maxBackupNum);
-            System.out.println("(from BackupScreenController.applySettings) create backup archive every " + ArchiveDBModel.backupCreationIntervalInSeconds + " seconds");
+            System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
+            System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
 
         } catch (NumberFormatException e) {
             System.out.println("(from BackupScreenController.applySettings) invalid settings");
@@ -90,15 +87,15 @@ public class BackupScreenController extends PrototypeController {
 
     //displays current settings stored in ArchiveDBModel in settings fields
     public void displaySettings(){
-        maxBackupNumField.setText(String.valueOf(ArchiveDBModel.maxBackupNum));
+        maxBackupNumField.setText(String.valueOf(BackupArchiveModel.maxBackupNum));
 
-        DateTimeModel.Time time = DateTimeModel.parseDuration(ArchiveDBModel.backupCreationIntervalInSeconds);
+        DateTimeModel.Time time = DateTimeModel.parseDuration(BackupArchiveModel.backupCreationIntervalInSeconds);
         backupEveryHourField.setText(String.valueOf(time.getHh()));
         backupEveryMinuteField.setText(String.valueOf(time.getMm()));
         backupEverySecondField.setText(String.valueOf(time.getSs()));
 
-        System.out.println("(from BackupScreenController.displaySettings) max num backups: " + ArchiveDBModel.maxBackupNum);
-        System.out.println("(from BackupScreenController.displaySettings) create backup archive every " + ArchiveDBModel.backupCreationIntervalInSeconds + "seconds");
+        System.out.println("(from BackupScreenController.displaySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
+        System.out.println("(from BackupScreenController.displaySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + "seconds");
     }
 
 

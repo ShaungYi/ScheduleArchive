@@ -1,5 +1,6 @@
 package main.Models;
 
+import main.Models.DBModels.DBModel;
 import main.Utility.PastActivity;
 
 import java.sql.*;
@@ -26,10 +27,10 @@ public class PastActivityArchiveModel {
             int relevanceScore1 = p1.getFrequency();
             int relevanceScore2 = p2.getFrequency();
 
-            if (p1.getDurationsByDate().equals(ArchiveDBModel.selectedDay)){
+            if (p1.getDurationsByDate().equals(DateTimeModel.selectedDay)){
                 relevanceScore1 += 50;
             }
-            if (p2.getDurationsByDate().equals(ArchiveDBModel.selectedDay)){
+            if (p2.getDurationsByDate().equals(DateTimeModel.selectedDay)){
                 relevanceScore2 += 50;
             }
 
@@ -44,55 +45,6 @@ public class PastActivityArchiveModel {
             }
         }
     };
-
-
-    public static void loadAllPastActivities(){
-
-        try {
-
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection(ArchiveDBModel.getArchiveUrl());
-            Statement statement = conn.createStatement();
-
-
-            DatabaseMetaData metaData = conn.getMetaData();
-            String[] types = {"TABLE"};
-            ResultSet days = metaData.getTables(null, null, "%", types);
-
-
-            days.next();
-            while (days.next()) {
-                String tableID = days.getString("TABLE_NAME");
-
-                ResultSet activities = statement.executeQuery("SELECT * FROM " + tableID);
-
-                while (activities.next()){
-
-                    String activityName = activities.getString("name");
-                    String activityCategory = activities.getString("category");
-                    int activityDuration = activities.getInt("duration");
-                    String activityDate = activities.getString("date");
-
-                    loadActivity(activityName, activityCategory, activityDuration, activityDate);
-                }
-            }
-
-            pastActivities.sort(pastActivityComparator);
-
-
-            loadingComplete = true;
-
-            conn.close();
-
-            System.out.println("loaded all past activities");
-
-        } catch (SQLException | ClassNotFoundException throwables) {
-            throwables.printStackTrace();
-        }
-
-    }
-
-
 
 
     public static void loadActivity(String activityName, String activityCategory, int activityDuration, String activityDate){
@@ -117,7 +69,13 @@ public class PastActivityArchiveModel {
 
 
         if (!activityAlreadyExists){
-            PastActivity newActivity = new PastActivity(activityName, activityCategory, activityDate, 1, activityDuration);
+            PastActivity newActivity = new PastActivity();
+
+            newActivity.setName(activityName);
+            newActivity.setCategory(activityCategory);
+            newActivity.setFrequency(1);
+            newActivity.setNetDuration(activityDuration);
+
             newActivity.updateDates(activityDate, activityDuration);
             pastActivities.add(newActivity);
 

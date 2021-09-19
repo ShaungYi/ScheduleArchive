@@ -12,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import main.App;
 import main.Controllers.Macro.Search.SearchTag.SearchTag;
 import main.Controllers.PrototypeController;
+import main.Models.DBModels.ReadFromDBModel;
 import main.Models.MacroDataModel;
 import main.Models.PastActivityArchiveModel;
 import main.Models.SearchModel;
@@ -90,6 +91,7 @@ public class SearchScreen extends PrototypeController {
 
         //add selected pastActivities to macro data model
         MacroDataModel.composeSelectedPastActivitiesListFromNames();
+        System.out.println("selectedPastActivities: " + MacroDataModel.selectedPastActivities);
         MacroDataModel.composeTotalActivityDurationsByDate();
 
         //find maximum duration of activity

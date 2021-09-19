@@ -40,9 +40,6 @@ public class LaunchScreen extends PrototypeController {
         @Override
         public void run() {
 
-            PastActivityArchiveModel.loadAllPastActivities();
-
-
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {

@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.DBModel;
 import main.Models.DateTimeModel;
 import main.Utility.Activity;
 import main.App;
@@ -112,7 +112,7 @@ public class TimeLine extends PrototypeController {
 
     HashMap colorMap = Stats.colorMap;
 
-    ArrayList<Activity> archive = ArchiveDBModel.archive;
+    ArrayList<Activity> archive = DBModel.archive;
 
     public static double currentLayout;
 
@@ -388,7 +388,7 @@ public class TimeLine extends PrototypeController {
     }
 
     public void goToEditor() throws IOException {
-        Table.updateData(ArchiveDBModel.archive);
+        Table.updateData(DBModel.archive);
         App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/editor.fxml", motherPane.getScene());
     }
 

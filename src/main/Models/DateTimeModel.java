@@ -1,18 +1,20 @@
 package main.Models;
 
 import main.Controllers.Timeline.TimeLine;
-
+import main.Models.DBModels.ReadFromDBModel;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DateTimeModel {
-
-    public static ArrayList<String> allDates = new ArrayList<>();
+    public static String currentDay = LocalDate.now().toString();
+    public static ArrayList<String> allDates = ReadFromDBModel.getAllDates();
+    public static String lastDay = allDates.get(ReadFromDBModel.getAllDates().size() - 1);
+    public static String selectedDay;
     static final String [] monthNamesInOrder = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     static final String [] numericalMonthNamesInOrder = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     static final String [] monthColorsInOrder = {"red", "orange", "yellow", "green", "blue", "violet", "purple", "magenta", "cyan", "lime", "crimson", "coral"};
     static final HashMap<String, String[]> monthData = new HashMap<>();
-
 
 
     //<get>s month, number, color <from> month || number || color
@@ -42,6 +44,17 @@ public class DateTimeModel {
         return "";
     }
 
+    public static String addDayToDate(String date, int amount) {
+        String[] intDate = date.split("-");
+        LocalDate nextDay = LocalDate.of(Integer.valueOf(intDate[0]), Integer.valueOf(intDate[1]), Integer.valueOf(intDate[2])).plusDays(amount);
+        return String.valueOf(nextDay);
+    }
+
+    public static String subDayFromDate(String date, int amount) {
+        String[] intDate = date.split("-");
+        LocalDate nextDay = LocalDate.of(Integer.valueOf(intDate[0]), Integer.valueOf(intDate[1]), Integer.valueOf(intDate[2])).minusDays(amount);
+        return String.valueOf(nextDay);
+    }
 
     public static String getDayIDFromDate(String date){
         String id = date.substring(8, 10);
@@ -57,6 +70,10 @@ public class DateTimeModel {
 
     public static String getYearFromDate(String date){
         return date.substring(0,4);
+    }
+
+    public static String getDayFromDate(String date){
+        return date.substring(8,10);
     }
 
 

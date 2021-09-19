@@ -7,17 +7,30 @@ public class PastActivity {
 
     String name;
     String category;
-
-    HashMap<String, Integer> durationsByDate = new HashMap<>();
     int frequency;
     int netDuration;
 
-    public PastActivity(String name, String category, String date, int frequency, int netDuration) {
-        this.name = name;
-        this.category = category;
-        this.frequency = frequency;
-        this.netDuration = netDuration;
+    HashMap<String, Integer> durationsByDate = new HashMap<>();
+
+    public PastActivity() {
+        String name;
+        String category;
+        int frequency;
+        int netDuration;
     }
+
+    public void setName(String newName) {name = newName;}
+
+    public void setCategory(String newCategory) {category = newCategory;}
+
+    public void setFrequency(int newFrequency) {frequency = newFrequency;}
+
+    public void setNetDuration(int NewNetDuration) {netDuration = NewNetDuration;}
+
+    public void incrementFrequency() {
+        this.frequency++;
+    }
+
 
     public String getName() {
         return name;
@@ -38,23 +51,14 @@ public class PastActivity {
         } else {
             durationsByDate.put(date, duration);
         }
-
     }
 
     public int getFrequency() {
         return frequency;
     }
 
-    public void incrementFrequency() {
-        this.frequency++;
-    }
-
     public int getNetDuration() {
         return netDuration;
-    }
-
-    public void setNetDuration(int netDuration) {
-        this.netDuration = netDuration;
     }
 
     public String toString(){

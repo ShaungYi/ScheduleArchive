@@ -70,7 +70,7 @@ public class Activity implements Cloneable{
     }
 
     public String toString(){
-        return "Activity: "+"name = "+name+", category = "+category+", duration = "+durationSeconds+" seconds, "+"startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs();
+        return "Activity: "+"name = "+name+", category = "+category+", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
     }
 
 
@@ -98,8 +98,6 @@ public class Activity implements Cloneable{
 
 
     //returns true if list 'activities' contains an Activity that is equal to (.equals -> true) this
-    // use like this: dumbAct = new Activity(blah blah joonius sucks) -> dumbAct.arrayListContainsActivity(arraylist you are checking)
-    // OOP tip: this = dumbAct
     public boolean arrayListContainsActivity(ArrayList<Activity> activities){
         for (Activity activity : activities){
             if (this.equals(activity)){

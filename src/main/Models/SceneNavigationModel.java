@@ -9,6 +9,7 @@ import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.BackupScreenController;
 import main.Controllers.Timeline.Editor;
+import main.Models.DBModels.WriteToDBModel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class SceneNavigationModel{
 
         // saving data when exiting the editor screen
         if (currentSceneController instanceof Editor) {
-            ArchiveDBModel.backupDataSyncronously();
+            WriteToDBModel.backupDataSynchronously();
         }
 
 

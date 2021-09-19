@@ -4,13 +4,13 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ReadFromDBModel;
+import main.Models.DateTimeModel;
 import main.Utility.Activity;
 import main.App;
 import main.Utility.stopWatch;
@@ -135,7 +135,7 @@ public class ScheduleCreator extends PrototypeController {
                         int currentTime = getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond());
 
 
-                        if (currentTime - stopWatch.getStarTimeSec() != stopWatch.getMeasuredTime()){
+                        if (currentTime - stopWatch.getStartTimeSec() != stopWatch.getMeasuredTime()){
 
                             stopWatch.recalibrate(currentTime);
 
@@ -354,13 +354,13 @@ public class ScheduleCreator extends PrototypeController {
     @FXML
     public void processSubmission() throws NullPointerException, IOException {
         // auto resume when selectedDay is NULL and currentDay is equal to lastDay
-        System.out.println("(from auto resume) currentDay: " + ArchiveDBModel.currentDay);
-        System.out.println("(from auto resume) lastDay: " + ArchiveDBModel.lastDay);
-        String currentDay = ArchiveDBModel.currentDay;
+        System.out.println("(from auto resume) currentDay: " + DateTimeModel.currentDay);
+        System.out.println("(from auto resume) lastDay: " + DateTimeModel.lastDay);
+        String currentDay = DateTimeModel.currentDay;
 
-        if (ArchiveDBModel.selectedDay == null && currentDay.equals(ArchiveDBModel.lastDay)) {
-            ArchiveDBModel.selectedDay = currentDay;
-            ArchiveDBModel.archive = ArchiveDBModel.readDay(currentDay);
+        if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.lastDay)) {
+            DateTimeModel.selectedDay = currentDay;
+            DBModel.archive = ReadFromDBModel.readDay(currentDay);
             System.out.println("(from auto resume) auto resumed");
         }
 
@@ -372,7 +372,7 @@ public class ScheduleCreator extends PrototypeController {
         }
 
         if (!category.equals("null") && stopWatch.getMeasuredTime() != 0){
-            ArchiveDBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStarTimeSec(),getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond()), LocalDate.now().toString()));
+            DBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
             UniversalCommonAncestor.setStyle("-fx-background-color: white");

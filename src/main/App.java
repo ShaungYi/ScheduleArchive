@@ -1,21 +1,14 @@
 package main;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.*;
 import main.Models.SceneNavigationModel;
 import main.Utility.EditLog;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
 public class App extends Application {
-
-
     public static EditLog editLog = new EditLog();
-
 
     //stuff related to scenes
     public static Scene scheduleCreator, stats, bars, table, piChart, macro, launchScreen, backups;
@@ -39,15 +32,10 @@ public class App extends Application {
         launchScreen = sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
         backups = sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
         System.out.println("user data: "+scheduleCreator.getUserData());
-
-        System.out.println("3");
         primaryStage.setTitle("Schedule Archive");
         primaryStage.setScene(launchScreen);
 
         primaryStage.show();
-
-        System.out.println("4");
-
     }
 
 
@@ -57,16 +45,15 @@ public class App extends Application {
 
 
     public void stop(){
-
-        ArchiveDBModel.backupDataSyncronously();
-        new Thread(ArchiveDBModel.exitSystemSyncronously).start();
+        WriteToDBModel.backupDataSynchronously();
+        new Thread(WriteToDBModel.exitSystemSynchronously).start();
 
     }
 
 
     public static void main(String[] args) {
-        ArchiveDBModel.createBackup("test.db");
-        ArchiveDBModel.removeBackup("test.db");
+        DBModel.connect(DBModel.dbName);
+        BackupArchiveModel.createBackup();
         Application.launch(args);
     }
 }

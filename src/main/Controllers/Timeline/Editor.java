@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import main.Controllers.PrototypeController;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.DBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
 import main.Models.SearchModel;
@@ -153,7 +153,7 @@ public class Editor extends PrototypeController {
 
 
 
-        addActivities(ArchiveDBModel.archive);
+        addActivities(DBModel.archive);
         computeAndSetScrollableWidth();
         resizePanes(scrollableWidth);
         makeTimeLine(startTimeSecs, endTimeSecs);
@@ -175,11 +175,11 @@ public class Editor extends PrototypeController {
         if (App.editLog.canGoBack()){
             ArrayList<Activity> prevArchive = App.editLog.mostRecentLog();
 
-            ArchiveDBModel.archive = prevArchive;
+            DBModel.archive = prevArchive;
 
             colorPane.getChildren().clear();
 
-            addActivities(ArchiveDBModel.archive);
+            addActivities(DBModel.archive);
 
             detailPane.setOpacity(0);
             detailPane.setDisable(true);
@@ -201,7 +201,7 @@ public class Editor extends PrototypeController {
             ArrayList<Activity> nextArchive = App.editLog.forwardLog();
 
 
-            ArchiveDBModel.archive = nextArchive;
+            DBModel.archive = nextArchive;
 
             colorPane.getChildren().clear();
 
@@ -326,7 +326,7 @@ public class Editor extends PrototypeController {
 //        System.out.println(Main.archive.get(selectedIndex).getCategory());
 //        Main.editLog.debuggingIndex = selectedIndex;
         if (isFirstEdit){
-            App.editLog.addLog(ArchiveDBModel.archive);
+            App.editLog.addLog(DBModel.archive);
             isFirstEdit = false;
         }
 
@@ -345,9 +345,9 @@ public class Editor extends PrototypeController {
         }
         categoryTitlePicker.setText(newCat);
 
-        ArchiveDBModel.archive.get(selectedIndex).setCategory(newCat);
-        System.out.println(ArchiveDBModel.archive.get(selectedIndex).getCategory());
-        App.editLog.addLog(ArchiveDBModel.archive);
+        DBModel.archive.get(selectedIndex).setCategory(newCat);
+        System.out.println(DBModel.archive.get(selectedIndex).getCategory());
+        App.editLog.addLog(DBModel.archive);
     }
 
 
@@ -479,7 +479,7 @@ public class Editor extends PrototypeController {
 
         //addUneditedOriginalToEditLogIfNoLogs();
 
-        App.editLog.addLog(ArchiveDBModel.archive);
+        App.editLog.addLog(DBModel.archive);
 
         Label givenEpoch = (Label)colorPane.getChildren().get(selectedIndex);
         String oldName = givenEpoch.getText();
@@ -487,7 +487,7 @@ public class Editor extends PrototypeController {
         givenEpoch.setText(newName);
 
 
-        Activity givenActivity = ArchiveDBModel.archive.get(selectedIndex);
+        Activity givenActivity = DBModel.archive.get(selectedIndex);
 
 
         givenActivity.setName(newName);
@@ -502,7 +502,7 @@ public class Editor extends PrototypeController {
         removePastActivity(oldName);
 
 
-        App.editLog.addLog(ArchiveDBModel.archive);
+        App.editLog.addLog(DBModel.archive);
 
     }
 
@@ -531,8 +531,8 @@ public class Editor extends PrototypeController {
 
             int neighborIndex = selectedIndex - 1;
 
-            Activity selected = ArchiveDBModel.archive.get(selectedIndex);
-            Activity neighbor = ArchiveDBModel.archive.get(neighborIndex);
+            Activity selected = DBModel.archive.get(selectedIndex);
+            Activity neighbor = DBModel.archive.get(neighborIndex);
 
 
             if (neighbor.getDurationSeconds() > 1){
@@ -593,14 +593,14 @@ public class Editor extends PrototypeController {
     //check
     public void expandRight(double deltaX){
 
-        if (selectedIndex != ArchiveDBModel.archive.size() - 1){
+        if (selectedIndex != DBModel.archive.size() - 1){
             deltaX = Math.abs(deltaX);
             int deltaSecs = (int)(deltaX / WIDTH_OF_1_SEC);
 
             int neighborIndex = selectedIndex + 1;
 
-            Activity selected = ArchiveDBModel.archive.get(selectedIndex);
-            Activity neighbor = ArchiveDBModel.archive.get(neighborIndex);
+            Activity selected = DBModel.archive.get(selectedIndex);
+            Activity neighbor = DBModel.archive.get(neighborIndex);
 
 
 
@@ -664,8 +664,8 @@ public class Editor extends PrototypeController {
 
         int neighborIndex = selectedIndex + 1;
 
-        Activity selected = ArchiveDBModel.archive.get(selectedIndex);
-        Activity neighbor = ArchiveDBModel.archive.get(neighborIndex);
+        Activity selected = DBModel.archive.get(selectedIndex);
+        Activity neighbor = DBModel.archive.get(neighborIndex);
 
 
         if (selected.getDurationSeconds() > 1){
@@ -731,8 +731,8 @@ public class Editor extends PrototypeController {
 
         int neighborIndex = selectedIndex - 1;
 
-        Activity selected = ArchiveDBModel.archive.get(selectedIndex);
-        Activity neighbor = ArchiveDBModel.archive.get(neighborIndex);
+        Activity selected = DBModel.archive.get(selectedIndex);
+        Activity neighbor = DBModel.archive.get(neighborIndex);
 
 
         if (selected.getDurationSeconds() > 1){
@@ -806,7 +806,7 @@ public class Editor extends PrototypeController {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("log added when drag started");
-                App.editLog.addLog(ArchiveDBModel.archive);
+                App.editLog.addLog(DBModel.archive);
             }
         });
 
@@ -862,7 +862,7 @@ public class Editor extends PrototypeController {
             public void handle(MouseEvent event) {
                 isNewStart = true;
 
-                App.editLog.addLog(ArchiveDBModel.archive);
+                App.editLog.addLog(DBModel.archive);
 
             }
         });
@@ -880,7 +880,7 @@ public class Editor extends PrototypeController {
 
         //addUneditedOriginalToEditLogIfNoLogs();
 
-        Activity selectedActivity = ArchiveDBModel.archive.get(selectedIndex);
+        Activity selectedActivity = DBModel.archive.get(selectedIndex);
         Label selectedLabel = (Label) colorPane.getChildren().get(selectedIndex);
 
 
@@ -902,7 +902,7 @@ public class Editor extends PrototypeController {
         existingEndtime = newStartTime - 1;
         selectedActivity.setEndTimeSecs(existingEndtime);
 
-        ArchiveDBModel.archive.add(selectedIndex+1, newActivity);
+        DBModel.archive.add(selectedIndex+1, newActivity);
 
         selectedLabel.setPrefWidth(existingSecs * WIDTH_OF_1_SEC);
         selectedLabel.setMaxWidth(existingSecs * WIDTH_OF_1_SEC);
@@ -927,9 +927,9 @@ public class Editor extends PrototypeController {
         updateSelectedEpoch(newActivity);
 
 
-        selectedIndex = ArchiveDBModel.archive.indexOf(selectedActivity);
+        selectedIndex = DBModel.archive.indexOf(selectedActivity);
 
-        App.editLog.addLog(ArchiveDBModel.archive);
+        App.editLog.addLog(DBModel.archive);
 
     }
 
@@ -953,8 +953,8 @@ public class Editor extends PrototypeController {
 
             int mergerIndex = selectedIndex - 1;
 
-            Activity merger = ArchiveDBModel.archive.get(mergerIndex);
-            Activity engulfed = ArchiveDBModel.archive.get(selectedIndex);
+            Activity merger = DBModel.archive.get(mergerIndex);
+            Activity engulfed = DBModel.archive.get(selectedIndex);
 
 
             removePastActivity(engulfed.getName());
@@ -967,7 +967,7 @@ public class Editor extends PrototypeController {
             int engulfedEndTime = engulfed.getEndTimeSecs();
             int engulfedDuration = engulfed.getDurationSeconds();
 
-            ArchiveDBModel.archive.remove(engulfed);
+            DBModel.archive.remove(engulfed);
 
             mergerEndTime = engulfedEndTime;
             mergerDuration += engulfedDuration;
@@ -993,7 +993,7 @@ public class Editor extends PrototypeController {
             selectedIndex = mergerIndex;
 
 
-            App.editLog.addLog(ArchiveDBModel.archive);
+            App.editLog.addLog(DBModel.archive);
 
         }
     }
@@ -1032,7 +1032,7 @@ public class Editor extends PrototypeController {
         allContainerPane.setMargin(colorPane, new Insets(0, 0, 0, 200 + (startTiempo - beginTime) * WIDTH_OF_1_SEC));
         int finishTime = FIVE_MINS_IN_SECONDS * (endTiempo / FIVE_MINS_IN_SECONDS) + FIVE_MINS_IN_SECONDS;
 
-        if (!ArchiveDBModel.archive.isEmpty()) {
+        if (!DBModel.archive.isEmpty()) {
             for (int currentTime = beginTime; currentTime <= finishTime; currentTime += FIVE_MINS_IN_SECONDS) {
                 Label timeLabel = new Label(getAMPMTimeFromSeconds(currentTime));
                 timeLabel.setPrefWidth(WIDTH_OF_5_MINS);
@@ -1051,16 +1051,16 @@ public class Editor extends PrototypeController {
         if (! activities.isEmpty()){
             Activity firstAct = activities.get(0);
             Activity lastAct = activities.get(activities.size()-1);
-            if (ArchiveDBModel.archive.size() == 1) {
+            if (DBModel.archive.size() == 1) {
                 this.startTimeSecs = firstAct.getStartTimeSecs();
                 this.endTimeSecs = firstAct.getEndTimeSecs();
                 firstDate = firstAct.getDate();
                 lastDate = decrementDate(firstDate);
-            } else if (!ArchiveDBModel.archive.isEmpty()) {
+            } else if (!DBModel.archive.isEmpty()) {
                 this.startTimeSecs = firstAct.getStartTimeSecs();
-                this.endTimeSecs = ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() - 1).getEndTimeSecs();
+                this.endTimeSecs = DBModel.archive.get(DBModel.archive.size() - 1).getEndTimeSecs();
                 firstDate = firstAct.getDate();
-                lastDate = ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() - 1).getDate();
+                lastDate = DBModel.archive.get(DBModel.archive.size() - 1).getDate();
             }
 //        System.out.println("starttime: "+this.startTimeSecs);
 //        System.out.println("endTime: "+this.endTimeSecs);
@@ -1105,8 +1105,8 @@ public class Editor extends PrototypeController {
             @Override
             public void handle(MouseEvent event) {
 
-                if (!ArchiveDBModel.archive.isEmpty()){
-                    Activity represented = ArchiveDBModel.archive.get(colorPane.getChildren().indexOf(activity));
+                if (!DBModel.archive.isEmpty()){
+                    Activity represented = DBModel.archive.get(colorPane.getChildren().indexOf(activity));
 
                     String activityCategory = represented.getCategory();
 
@@ -1131,7 +1131,7 @@ public class Editor extends PrototypeController {
 
                     finishedAt.setText(getAMPMTimeFromSeconds(represented.getEndTimeSecs()));
 
-                    selectedIndex = ArchiveDBModel.archive.indexOf(represented);
+                    selectedIndex = DBModel.archive.indexOf(represented);
 
                     detailPane.setOpacity(1);
                     detailPane.setDisable(false);
@@ -1235,7 +1235,7 @@ public class Editor extends PrototypeController {
 
 
     private void makeNodes(int nodeNum){
-        if (!ArchiveDBModel.archive.isEmpty()){
+        if (!DBModel.archive.isEmpty()){
             for (int i = 0; i <= nodeNum; i++){
                 Line nodeMarker = new Line(0,nodeStartPointY,0,nodeEndPointY);
                 nodeMarker.setScaleX(2);
@@ -1284,21 +1284,21 @@ public class Editor extends PrototypeController {
 
 
     public void goToScheduleCreator() {
-        Table.updateData(ArchiveDBModel.archive);
+        Table.updateData(DBModel.archive);
         Stats.currentTimelineLayoutInitialized = false;
 
         App.sceneNavigationModel.gotoScene(App.scheduleCreator, motherPane.getScene());
     }
 
     public void goToMain() {
-        Table.updateData(ArchiveDBModel.archive);
+        Table.updateData(DBModel.archive);
         Stats.currentTimelineLayoutInitialized = false;
 
         App.sceneNavigationModel.gotoScene(App.stats, motherPane.getScene());
     }
 
     public void goToTimeLine() throws IOException {
-        Table.updateData(ArchiveDBModel.archive);
+        Table.updateData(DBModel.archive);
         App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", motherPane.getScene());
     }
 

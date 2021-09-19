@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
-import main.Models.ArchiveDBModel;
+import main.Models.DBModels.DBModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -58,7 +58,7 @@ public class PiChart extends PrototypeController {
         int netSecondsMedia = 0;
         int netSecondsService = 0;
         int netSecondsMiscellaneous = 0;
-        for (Activity activity : ArchiveDBModel.archive){
+        for (Activity activity : DBModel.archive){
             String cat = activity.getCategory();
             switch (cat){
                 case "Study":

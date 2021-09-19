@@ -59,7 +59,7 @@ public class stopWatch {
         this.measuredSecs = measuredSecs;
     }
 
-    public int getStarTimeSec() {
+    public int getStartTimeSec() {
         return starTimeSec;
     }
 

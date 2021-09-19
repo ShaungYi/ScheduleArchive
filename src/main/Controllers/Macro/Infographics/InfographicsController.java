@@ -166,7 +166,7 @@ public class InfographicsController extends PrototypeController {
         double transitionX = 0;
         String prevDate = "how many months to babylon?";
 
-        for (String date : ArchiveDBModel.allDates) {
+        for (String date : DateTimeModel.allDates) {
             transitionX += InfographicsModel.barWidth;
 
             //change year if year and prevYear don't match
@@ -217,7 +217,7 @@ public class InfographicsController extends PrototypeController {
             InfographicsModel.infographicWidth += InfographicsModel.barWidth;
 
             //if this is the last day, setup month and year graphically and modelically
-            if (ArchiveDBModel.getAllDates().indexOf(date) == ArchiveDBModel.getAllDates().size() - 1){
+            if (DateTimeModel.allDates.indexOf(date) == DateTimeModel.allDates.size() - 1){
 
                 //month
                 addMonth(DateTimeModel.getMonthFromDate(date), monthWidth);

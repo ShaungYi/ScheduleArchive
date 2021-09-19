@@ -1,5 +1,6 @@
 package main.Models;
 
+import main.Models.DBModels.ReadFromDBModel;
 import main.Utility.PastActivity;
 
 import java.util.ArrayList;
@@ -13,13 +14,10 @@ public class MacroDataModel {
 
 
     public static void composeSelectedPastActivitiesListFromNames(){
-        for (PastActivity pastActivity : PastActivityArchiveModel.pastActivities){
-//            System.out.println(pastActivity.getDurationsByDate());
-            for (String selectedActivityName : selectedActivityNames){
-                if (pastActivity.getName().equals(selectedActivityName)){
-                    selectedPastActivities.add(pastActivity);
-                }
-            }
+
+        for (String selectedActivityName : selectedActivityNames){
+            PastActivity pastActivity = ReadFromDBModel.loadSelectedPastActivities(selectedActivityName);
+            selectedPastActivities.add(pastActivity);
         }
     }
 
@@ -43,7 +41,7 @@ public class MacroDataModel {
     }
 
     public static void setMaximumActivityDuration(){
-        System.out.println(totalActivityDurationsByDate);
+
         for (String date : totalActivityDurationsByDate.keySet()){
             int duration = totalActivityDurationsByDate.get(date);
             if (duration > InfographicsModel.maximumActivityDuration){
@@ -51,6 +49,4 @@ public class MacroDataModel {
             }
         }
     }
-
-
 }
