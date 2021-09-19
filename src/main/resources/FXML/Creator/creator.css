@@ -47,7 +47,7 @@
     -fx-background-repeat: stretch;
     -fx-background-position: 50% 53%;
 
-    -fx-padding: 15px 0px 15px 20px;
+    -fx-padding: 23px 0px 23px 20px;
 }
 
 .toggle-button:hover {
@@ -58,6 +58,10 @@
     -fx-translate-x: -50;
     -fx-scale-x: 1.2;
     -fx-scale-y: 1.2;
+}
+
+.category-buttons-container{
+    -fx-translate-y: -115;
 }
 
 /*.toggle-button:selected:hover{*/
