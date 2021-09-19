@@ -164,30 +164,24 @@ public class ReadFromDBModel {
 
 
     public static ArrayList<String> getNameSuggestions(String nameFragment) {
-//        ArrayList<String> nameSuggestions = new ArrayList<>();
-//
-//        try {
-//          PreparedStatement getSuggestions = DBModel.getNameSuggestions;
-//          getSuggestions.setString(1, DateTimeModel.currentDay);
-//          getSuggestions.setString(2, nameFragment + "%");
-//          ResultSet suggestions = getSuggestions.executeQuery();
-//
-//          while (suggestions.next()) {
-//              String name = suggestions.getString("name");
-//
-//              if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !nameSuggestions.contains(name)){
-//                  nameSuggestions.add(name);
-//              }
-//          }
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-
         ArrayList<String> nameSuggestions = new ArrayList<>();
 
-        for (int i = 0; i < 1000000; i++){
-            nameSuggestions.add("hey na na na");
+        try {
+          PreparedStatement getSuggestions = DBModel.getNameSuggestions;
+          getSuggestions.setString(1, DateTimeModel.currentDay);
+          getSuggestions.setString(2, nameFragment + "%");
+          ResultSet suggestions = getSuggestions.executeQuery();
+
+          while (suggestions.next()) {
+              String name = suggestions.getString("name");
+
+              if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !nameSuggestions.contains(name)){
+                  nameSuggestions.add(name);
+              }
+          }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return nameSuggestions;
