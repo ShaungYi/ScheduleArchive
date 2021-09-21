@@ -2,9 +2,7 @@ package main.Models;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import main.App;
 import main.Models.DBModels.ReadFromDBModel;
-import main.Utility.PastActivity;
 
 import java.util.ArrayList;
 
@@ -22,13 +20,12 @@ public class SearchModel {
             }
         });
 
+
     }
 
     public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list){
 
         ArrayList<String> result = ReadFromDBModel.getNameSuggestions(targetFragment);
-
-//        System.out.println(result);
 
         Platform.runLater( () -> {
             for (String name : result){
@@ -59,10 +56,5 @@ public class SearchModel {
 
         //start new loading process
         loadToObservableListThread.start();
-
-
-
     }
-
-
 }

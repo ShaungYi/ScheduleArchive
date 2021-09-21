@@ -32,8 +32,6 @@ public class DBModel {
     public static PreparedStatement getNameSuggestions;
 
     // preparedStatement for creating databases
-    public static PreparedStatement createActivitiesTable;
-    public static PreparedStatement createEventsTable;
 
     public static void connect(String name) {
         // getting the full path to the database
@@ -44,6 +42,17 @@ public class DBModel {
             Class.forName("org.sqlite.JDBC");
             // connecting to the database
             connection = DriverManager.getConnection(path);
+
+            // creating tables
+
+            Statement statement = connection.createStatement();
+
+            statement.execute("CREATE TABLE IF NOT EXISTS activities (activityID INTEGER, name TEXT, category TEXT)");
+            statement.execute("CREATE TABLE IF NOT EXISTS events (activityID INTEGER, startTime INTEGER, endTime INTEGER, date TEXT)");
+            statement.execute("CREATE TABLE IF NOT EXISTS frequencies (activityID INTEGER, frequency INTEGER)");
+
+            statement.close();
+
 
             // write statements
 
@@ -126,14 +135,8 @@ public class DBModel {
                             "JOIN events USING (activityID) " +
                             "WHERE name LIKE ? " +
                             "ORDER BY point DESC " +
-                            "LIMIT 150"
+                            "LIMIT 50"
             );
-
-            // create statements
-
-            createActivitiesTable = connection.prepareStatement("CREATE TABLE IF NOT EXISTS activities (activityID INTEGER, name TEXT, category TEXT)");
-
-            createEventsTable = connection.prepareStatement("CREATE TABLE IF NOT EXISTS events (activityID INTEGER, endTime INTEGER, date TEXT)");
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

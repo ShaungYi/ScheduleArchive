@@ -1,14 +1,19 @@
 package main.Controllers.Stats;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import main.App;
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.BackupArchiveModel;
+import main.Models.BackupArchiveModel;
+import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
+
+import java.util.Date;
 
 public class BackupScreenController extends PrototypeController {
 
@@ -83,7 +88,35 @@ public class BackupScreenController extends PrototypeController {
 
     @FXML
     public void loadBackupArchive(){
-        //to be implemented by joonius
+        String formattedBackupName =
+                BackupArchiveModel.formatBackupName(
+                        BackupArchiveModel.parseBackupName(
+                                selectedBackup,
+                                BackupArchiveModel.parsedDateFormat
+                        )
+                );
+
+
+        if (WriteToDBModel.dataBackupProcessAtRest){
+            //just create backup
+            BackupArchiveModel.loadBackup(formattedBackupName);
+
+        } else {
+            //wait until data backup process finished then create backup to prevent DB corruption
+            while (!WriteToDBModel.dataBackupProcessAtRest){
+
+            }
+
+            BackupArchiveModel.loadBackup(formattedBackupName);
+
+        }
+
+        //restart app (wink)
+        SceneNavigationModel.launchScreen = App.sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
+        Stage primaryStage = (Stage) SceneNavigationModel.launchScreen.getWindow();
+        primaryStage.setScene(SceneNavigationModel.launchScreen);
+
+
     }
 
     //displays current settings stored in ArchiveDBModel in settings fields

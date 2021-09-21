@@ -92,7 +92,7 @@ public class SubmitScreen extends PrototypeController {
         PastActivityArchiveModel.loadActivity(activityInQuestion.getName(), activityInQuestion.getCategory(), activityInQuestion.getDurationSeconds(), activityInQuestion.getDate());
 
 
-        WriteToDBModel.backupDataSynchronously();
+        WriteToDBModel.saveDataSynchronously();
 
 
 

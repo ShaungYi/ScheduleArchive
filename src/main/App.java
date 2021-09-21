@@ -3,9 +3,11 @@ package main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.Models.BackupArchiveModel;
 import main.Models.DBModels.*;
 import main.Models.SceneNavigationModel;
 import main.Utility.EditLog;
+
 
 public class App extends Application {
     public static EditLog editLog = new EditLog();
@@ -34,15 +36,16 @@ public class App extends Application {
 
 
     public void stop(){
-        WriteToDBModel.backupDataSynchronously();
+        WriteToDBModel.saveDataSynchronously();
         new Thread(WriteToDBModel.exitSystemSynchronously).start();
 
     }
 
 
     public static void main(String[] args) {
+        new Thread(BackupArchiveModel.createBackupArchiveDBRegularly).start();
         DBModel.connect(DBModel.dbName);
-        BackupArchiveModel.createBackup();
+        BackupArchiveModel.availableBackupsObservableList = BackupArchiveModel.listBackups();
         Application.launch(args);
     }
 }

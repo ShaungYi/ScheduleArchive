@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.App;
 import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.BackupScreenController;
@@ -59,7 +58,7 @@ public class SceneNavigationModel{
 
         // saving data when exiting the editor screen
         if (currentSceneController instanceof Editor) {
-            WriteToDBModel.backupDataSynchronously();
+            WriteToDBModel.saveDataSynchronously();
         }
 
 

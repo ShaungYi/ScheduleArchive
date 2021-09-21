@@ -143,7 +143,7 @@ public class Stats extends PrototypeController {
             String temp = DateTimeModel.selectedDay;
             DateTimeModel.selectedDay = DateTimeModel.selectedDay.replaceAll("-", "_");;
 
-            WriteToDBModel.backupDataSynchronously();
+            WriteToDBModel.saveDataSynchronously();
 
             //reset selectedDay
             DateTimeModel.selectedDay = temp;

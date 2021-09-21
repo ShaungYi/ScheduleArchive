@@ -1,6 +1,5 @@
 package main.Models.DBModels;
 
-import main.App;
 import main.Models.DateTimeModel;
 import main.Controllers.Loader.Loader;
 import main.Utility.Activity;
@@ -8,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class WriteToDBModel {
-    static boolean dataBackupProcessAtRest = true;
+    public static boolean dataBackupProcessAtRest = true;
     static Thread backupSynchronizerThread = new Thread();
 
     public static void saveArchive() {
@@ -158,14 +157,14 @@ public class WriteToDBModel {
 
 
 
-    public static void backupDataSynchronously(){
+    public static void saveDataSynchronously(){
 
         if (dataBackupProcessAtRest){
             // just back up if no backup process is in progress
             //System.out.println("(from syncro)just start data backup thread when resting");
             new Thread(backingUpData).start();
 
-                //do nothing though edit made if syncro is already running
+                //do nothing though edit made if synchro is already running
         }else if (!backupSynchronizerThread.isAlive()){
 
             backupSynchronizerThread = new Thread(backupSynchronizer);
@@ -195,7 +194,7 @@ public class WriteToDBModel {
     private static final Runnable backupSynchronizer = new Runnable() {
         @Override
         public void run() {
-            //System.out.println("(from syncro)waiting for previous process to finish");
+            //System.out.println("(from synchro)waiting for previous process to finish");
             //wait until previous backup process finishes
             while (!dataBackupProcessAtRest){
                 try {
@@ -220,7 +219,7 @@ public class WriteToDBModel {
             //System.out.println("(from backingUpData runnable)data backup process started");
             //data backup process in progress
             dataBackupProcessAtRest = false;
-            backupData();
+            saveData();
             //data backup process finished
             //System.out.println("(from backingUpData runnable)data backup process finished");
             dataBackupProcessAtRest = true;
@@ -230,7 +229,7 @@ public class WriteToDBModel {
 
 
 
-    private static void backupData(){
+    private static void saveData(){
 
         if (DBModel.archive.isEmpty()){
             return;
