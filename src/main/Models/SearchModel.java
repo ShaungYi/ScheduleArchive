@@ -11,6 +11,7 @@ public class SearchModel {
     public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
         String name;
         String suggestionCategory;
+        list.clear();
 
         for (Suggestion suggestion : suggestionList) {
             name = suggestion.getName();
@@ -29,6 +30,7 @@ public class SearchModel {
     public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list, String category) {
         String name;
         String suggestionCategory;
+        list.clear();
 
         for (int i = suggestionList.size() - 1; i >= 0; i--) {
             name = suggestionList.get(i).getName();
