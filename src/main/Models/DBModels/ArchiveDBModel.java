@@ -29,7 +29,7 @@ public class ArchiveDBModel {
     public static PreparedStatement readAllFromActivitiesTable;
     public static PreparedStatement readAllFromEventsTable;
     public static PreparedStatement getAllOccurrences;
-    public static PreparedStatement getNameSuggestions;
+    public static PreparedStatement getSuggestions;
 
     // preparedStatement for creating databases
 
@@ -115,13 +115,13 @@ public class ArchiveDBModel {
             readAllFromEventsTable = connection.prepareStatement("SELECT * FROM events");
 
             getAllOccurrences = connection.prepareStatement(
-                    "SELECT endTime - startTime AS duration, date, startTime " +
+                    "SELECT endTime - startTime AS duration, date " +
                     "FROM events " +
                     "JOIN activities USING (activityID) " +
                     "WHERE name = ? "
             );
 
-            getNameSuggestions = connection.prepareStatement(
+            getSuggestions = connection.prepareStatement(
                         "SELECT DISTINCT name, category, " +
 
                             "CASE date " +

@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import main.Models.BackupArchiveModel;
 import main.Models.DBModels.*;
 import main.Models.SceneNavigationModel;
+import main.Models.SearchModel;
 import main.Utility.EditLog;
 
 import java.sql.SQLException;

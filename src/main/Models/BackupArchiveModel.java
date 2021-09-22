@@ -183,7 +183,6 @@ public class BackupArchiveModel {
             for (int index = listBackups().size() - 1; index >= 0; index--) {
                 availableBackupsObservableList.add(listBackups().get(index).toString());
             }
-
         });
     }
 }

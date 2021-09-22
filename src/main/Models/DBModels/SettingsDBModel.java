@@ -47,7 +47,7 @@ public class SettingsDBModel {
 
             // read statements
 
-            readBackupSettings = connection.prepareStatement("SELECT * FROM backupSettings WHERE name = ? LIMIT 1");
+            readBackupSettings = connection.prepareStatement("SELECT value FROM backupSettings WHERE name = ? LIMIT 1");
 
             // creating settings
 

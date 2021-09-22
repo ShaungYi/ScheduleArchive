@@ -97,6 +97,10 @@ public class WriteToDBModel {
                     addFrequency.setInt(1, activityID);
                     addFrequency.execute();
 
+                    // updating the suggestionList
+
+                    ReadFromDBModel.updateSuggestionList();
+
                     System.out.println("(from saveArchive) event saved to optimizedArchive.db");
 
                 } else {
@@ -242,6 +246,7 @@ public class WriteToDBModel {
             saveArchive();
         }
     }
+
 
     public static void updateBackupSettings(String name, int value) {
 

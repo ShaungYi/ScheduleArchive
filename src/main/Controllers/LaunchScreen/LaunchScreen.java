@@ -42,9 +42,9 @@ public class LaunchScreen extends PrototypeController {
         @Override
         public void run() {
 
-            // loading all suggestions
+            // updating suggestionList
 
-            SearchModel.suggestionList = ReadFromDBModel.getSuggestions();
+            ReadFromDBModel.updateSuggestionList();
 
             // loading new scenes
 

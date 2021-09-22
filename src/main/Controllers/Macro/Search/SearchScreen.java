@@ -84,7 +84,7 @@ public class SearchScreen extends PrototypeController {
     }
 
     @FXML
-    public void seek() throws IOException {
+    public void seek() {
 
         //initialize Macro Data Model
         MacroDataModel.totalActivityDurationsByDate.clear();

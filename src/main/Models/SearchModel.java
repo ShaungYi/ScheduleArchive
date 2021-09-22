@@ -4,12 +4,14 @@ import javafx.collections.ObservableList;
 import main.Utility.Suggestion;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchModel {
 
-    public static ArrayList<Suggestion> suggestionList;
+    public static ArrayList<Suggestion> suggestionList = new ArrayList<>();
 
     public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
+        targetFragment = targetFragment.toLowerCase();
         String name;
         String suggestionCategory;
 
@@ -28,6 +30,7 @@ public class SearchModel {
 
 
     public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list, String category) {
+        targetFragment = targetFragment.toLowerCase();
         String name;
         String suggestionCategory;
 
