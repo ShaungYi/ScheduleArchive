@@ -4,6 +4,7 @@ import main.Models.DateTimeModel;
 import main.Models.SearchModel;
 import main.Utility.Activity;
 import main.Utility.PastActivity;
+import main.Utility.Suggestion;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -168,33 +169,25 @@ public class ReadFromDBModel {
     }
 
 
-    public static ArrayList<String> getSuggestions(String name, String category) {
-        ArrayList<String> suggestionList = new ArrayList();
-        String suggestion;
+    public static void updateSuggestionList() {
 
         try {
-          PreparedStatement getSuggestions = ArchiveDBModel.getSuggestions;
-          getSuggestions.setString(1, DateTimeModel.currentDay);
-          getSuggestions.setString(2, "%" + name + "%");
-          getSuggestions.setString(3, "%" + category + "%");
-          ResultSet suggestions = getSuggestions.executeQuery();
+            PreparedStatement getSuggestions = ArchiveDBModel.getSuggestions;
+            getSuggestions.setString(1, DateTimeModel.currentDay);
+            ResultSet suggestions = getSuggestions.executeQuery();
 
-          while (suggestions.next()) {
-              suggestion = suggestions.getString(1);
+            while (suggestions.next()) {
+                String name = suggestions.getString(1);
+                String category = suggestions.getString(2);
 
-              if (!suggestion.equals("undefined") && !suggestion.equals("new") && !suggestion.equals("no data") && !(suggestionList.contains(suggestion))) {
-                  suggestionList.add(suggestion);
-              }
-          }
-
-          suggestions.close();
+                if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !name.equals("no name") && !SearchModel.suggestionList.contains(name)){
+                    SearchModel.suggestionList.add(new Suggestion(name, category));
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return suggestionList;
-
     }
 
 

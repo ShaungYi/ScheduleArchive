@@ -41,6 +41,12 @@ public class WriteToDBModel {
 
                     int activityID;
 
+                    // setting the name to no name if its null
+
+                    if (name.equals("")) {
+                        name = "no name";
+                    }
+
                     // adding 86400 to endTime if the time is above 12:00 am
 
                     if (!date.equals(day) && endTime < 86400) {
@@ -107,6 +113,9 @@ public class WriteToDBModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        ReadFromDBModel.updateSuggestionList();
+
     }
 
 
@@ -192,6 +201,14 @@ public class WriteToDBModel {
 
         System.out.println("(from exit) previous process finished. exiting system...");
         //exit system
+
+        try {
+            ArchiveDBModel.connection.close();
+            SettingsDBModel.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         System.exit(0);
 
     };

@@ -1,28 +1,45 @@
 package main.Models;
-
 import javafx.collections.ObservableList;
-import main.Models.DBModels.ReadFromDBModel;
-
+import main.Utility.Suggestion;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchModel {
 
-    public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
-        ArrayList<String> suggestionList = ReadFromDBModel.getSuggestions(targetFragment, category);
-        list.clear();
+    public static ArrayList<Suggestion> suggestionList = new ArrayList<>();
 
-        for (String suggestion : suggestionList) {
-            list.add(suggestion);
+    public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
+        String name;
+        String suggestionCategory;
+
+        for (Suggestion suggestion : suggestionList) {
+            name = suggestion.getName();
+            suggestionCategory = suggestion.getCategory();
+
+            if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
+
+                if (suggestionCategory.equals(category) || category == null) {
+                    list.add(name);
+                }
+            }
         }
     }
 
 
     public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list, String category) {
-        ArrayList<String> suggestionList = ReadFromDBModel.getSuggestions(targetFragment, category);
-        list.clear();
+        String name;
+        String suggestionCategory;
 
         for (int i = suggestionList.size() - 1; i >= 0; i--) {
-            list.add(suggestionList.get(i));
+            name = suggestionList.get(i).getName();
+            suggestionCategory = suggestionList.get(i).getCategory();
+
+            if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
+
+                if (suggestionCategory.equals(category) || category == null) {
+                    list.add(name);
+                }
+            }
         }
     }
 }

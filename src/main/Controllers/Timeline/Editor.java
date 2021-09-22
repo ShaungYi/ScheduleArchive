@@ -427,9 +427,7 @@ public class Editor extends PrototypeController {
 
     private void updateSuggestedNames(String newName){
 
-        suggestedNamesObservableList.clear();
-
-        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, "");
+        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, null);
 
 
         if (!suggestedNamesObservableList.isEmpty() && suggestedNamesObservableList.size() < 16){
@@ -447,10 +445,6 @@ public class Editor extends PrototypeController {
 
 
         suggestedNamesObservableList.remove(newName);
-
-
-
-
     }
 
 

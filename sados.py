@@ -157,4 +157,4 @@ optimizedDB.close()
 
 oldDB.close()
 
-print("[+] Created file %s\\optimizedArchive.db" % getPaths().destination)
+print("[+] Created file {0}\\{1}".format(getPaths().destination, getPaths().name))

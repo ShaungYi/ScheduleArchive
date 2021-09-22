@@ -46,10 +46,7 @@ public class App extends Application {
 
     public void stop() throws SQLException {
         WriteToDBModel.saveDataSynchronously();
-        ArchiveDBModel.connection.close();
-        SettingsDBModel.connection.close();
         new Thread(WriteToDBModel.exitSystemSynchronously).start();
-
     }
 
 
