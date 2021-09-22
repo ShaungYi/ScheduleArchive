@@ -27,13 +27,19 @@ public class ReadFromDBModel {
             readDayContent.setString(1, date);
             ResultSet day = readDayContent.executeQuery();
 
+            int nameColumnID = day.findColumn("name");
+            int categoryColumnID = day.findColumn("category");
+            int startTimeColumnID = day.findColumn("startTime");
+            int endTimeColumnID = day.findColumn("endTime");
+            int durationColumnID = day.findColumn("duration");
+
             while (day.next()) {
                 // extracting data from events
-                name = day.getString("name");
-                category = day.getString("category");
-                startTime = day.getInt("startTime");
-                endTime = day.getInt("endTime");
-                duration = day.getInt("duration");
+                name = day.getString(nameColumnID);
+                category = day.getString(categoryColumnID);
+                startTime = day.getInt(startTimeColumnID);
+                endTime = day.getInt(endTimeColumnID);
+                duration = day.getInt(durationColumnID);
 
                 // Setting previous endTime to the start time of the day if the event name is DayStart
 
@@ -70,8 +76,10 @@ public class ReadFromDBModel {
             ResultSet allDates = ArchiveDBModel.getAllDatesEntered.executeQuery();
 
             // extracting dates from the result set and adding them to an arraylist
+            int dateColumnID = allDates.findColumn("date");
+
             while (allDates.next()) {
-                allDatesList.add(allDates.getString("date"));
+                allDatesList.add(allDates.getString(dateColumnID));
             }
 
             allDates.close();
@@ -91,8 +99,10 @@ public class ReadFromDBModel {
         try {
             ResultSet activityNames = ArchiveDBModel.getAllActivityNamesEntered.executeQuery();
 
+            int nameColumnID = activityNames.findColumn("name");
+
             while (activityNames.next()) {
-                activityNamesList.add(activityNames.getString("name"));
+                activityNamesList.add(activityNames.getString(nameColumnID));
             }
 
             activityNames.close();
@@ -115,9 +125,11 @@ public class ReadFromDBModel {
             findActivityID.setString(2, category);
             ResultSet id = findActivityID.executeQuery();
 
+            int activityIDColumnID = id.findColumn("activityID");
+
             // if id was found
             if (id.next()) {
-                activityID = id.getInt("activityID");
+                activityID = id.getInt(activityIDColumnID);
             }
 
             id.close();
@@ -142,9 +154,12 @@ public class ReadFromDBModel {
             getAllOccurrences.setString(1, name);
             ResultSet occurrences = getAllOccurrences.executeQuery();
 
+            int dateColumnID = occurrences.findColumn("date");
+            int durationColumnID = occurrences.findColumn("duration");
+
             while (occurrences.next()) {
-                String date = occurrences.getString("date");
-                int duration = occurrences.getInt("duration");
+                String date = occurrences.getString(dateColumnID);
+                int duration = occurrences.getInt(durationColumnID);
                 frequency ++;
                 netDuration += duration;
                 pastActivity.updateDates(date, duration);
@@ -170,10 +185,12 @@ public class ReadFromDBModel {
           PreparedStatement getSuggestions = ArchiveDBModel.getNameSuggestions;
           getSuggestions.setString(1, DateTimeModel.currentDay);
           ResultSet suggestions = getSuggestions.executeQuery();
+          int nameColumnID = suggestions.findColumn("name");
+          int categoryColumnID = suggestions.findColumn("category");
 
           while (suggestions.next()) {
-              String name = suggestions.getString("name");
-              String category = suggestions.getString("category");
+              String name = suggestions.getString(nameColumnID);
+              String category = suggestions.getString(categoryColumnID);
 
               if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !nameSuggestions.contains(name)){
                   nameSuggestions.add(new Suggestion(name, category));
@@ -192,9 +209,11 @@ public class ReadFromDBModel {
     public static int getBackupSettings(String name) {
 
         try {
-            PreparedStatement readBackupSettings = SettingsDBModel.readBackupSettings;
-            readBackupSettings.setString(1, name);
-            ResultSet maxNumberOfBackups = readBackupSettings.executeQuery();
+            PreparedStatement getBackupSettingValue = SettingsDBModel.readBackupSettings;
+            getBackupSettingValue.setString(1, name);
+            ResultSet maxNumberOfBackups = getBackupSettingValue.executeQuery();
+
+            int valueColumnID = maxNumberOfBackups.findColumn("value");
 
             if (maxNumberOfBackups.next()) {
                 return maxNumberOfBackups.getInt("value");
