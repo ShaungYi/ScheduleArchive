@@ -94,15 +94,6 @@ public class SceneNavigationModel{
         return null;
     }
 
-
-    public static double getScreenWidth() {
-        return screenWidth;
-    }
-
-    public static double getScreenHeight() {
-        return screenHeight;
-    }
-
     public void setScheduleCreator(Scene scheduleCreator) {
         scheduleCreator = scheduleCreator;
     }
