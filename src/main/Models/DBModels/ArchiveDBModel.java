@@ -5,8 +5,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DBModel {
-    public static String dbName = "Database/archive.db";
+public class ArchiveDBModel {
+    public static String pathToArchiveDB = "Databases/archive.db";
     public static ArrayList<Activity> archive = new ArrayList<>();
     public static Connection connection;
 
@@ -33,15 +33,15 @@ public class DBModel {
 
     // preparedStatement for creating databases
 
-    public static void connect(String name) {
+    public static void connect() {
         // getting the full path to the database
-        File dbFile = new File(name);
-        String path = "jdbc:sqlite:" + dbFile.getAbsolutePath();
+        File archiveDB = new File(pathToArchiveDB);
+        String fullPathToArchiveDB = "jdbc:sqlite:" + archiveDB.getAbsolutePath();
 
         try {
             Class.forName("org.sqlite.JDBC");
             // connecting to the database
-            connection = DriverManager.getConnection(path);
+            connection = DriverManager.getConnection(fullPathToArchiveDB);
 
             // creating tables
 
@@ -122,20 +122,18 @@ public class DBModel {
             );
 
             getNameSuggestions = connection.prepareStatement(
-                        "SELECT DISTINCT name, " +
+                        "SELECT DISTINCT name, category, " +
 
                             "CASE date " +
                                 "WHEN ? " +
                                     "THEN frequency + 50 " +
                                     "ELSE frequency " +
-                            "END AS point " +
+                            "END AS score " +
 
                             "FROM activities " +
                             "JOIN frequencies USING (activityID) " +
                             "JOIN events USING (activityID) " +
-                            "WHERE name LIKE ? " +
-                            "ORDER BY point DESC " +
-                            "LIMIT 50"
+                            "ORDER BY score DESC "
             );
 
         } catch (ClassNotFoundException | SQLException e) {

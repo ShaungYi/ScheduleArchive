@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
@@ -439,7 +439,7 @@ public class Table extends PrototypeController {
 
     public static void updateTotal(){
         total.setDurationSecs(0);
-        for (Activity activity : DBModel.archive){
+        for (Activity activity : ArchiveDBModel.archive){
             total.setDurationSecs(total.getDurationSecs() + activity.getDurationSeconds());
         }
     }

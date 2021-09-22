@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
+import main.Models.DBModels.ReadFromDBModel;
 import main.Models.SceneNavigationModel;
+import main.Models.SearchModel;
 
 public class LaunchScreen extends PrototypeController {
     @FXML
@@ -27,7 +29,7 @@ public class LaunchScreen extends PrototypeController {
 
 
     public void initialize(){
-        new Thread(loadScenesRunnable).start();
+        new Thread(setupRunnable).start();
         loadingAnimationThread.start();
         Font font = Font.font("Times New Roman", 200);
         logoPiece1.setFont(font);
@@ -36,9 +38,15 @@ public class LaunchScreen extends PrototypeController {
     }
 
 
-    Runnable loadScenesRunnable = new Runnable() {
+    Runnable setupRunnable = new Runnable() {
         @Override
         public void run() {
+
+            // loading all suggestions
+
+            SearchModel.suggestionList = ReadFromDBModel.getSuggestions();
+
+            // loading new scenes
 
             SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
             SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");

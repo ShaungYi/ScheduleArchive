@@ -1,6 +1,5 @@
 package main.Controllers.Stats;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -9,11 +8,14 @@ import javafx.stage.Stage;
 import main.App;
 import main.Controllers.PrototypeController;
 import main.Models.BackupArchiveModel;
+import main.Models.DBModels.ArchiveDBModel;
+import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
-
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BackupScreenController extends PrototypeController {
 
@@ -57,6 +59,16 @@ public class BackupScreenController extends PrototypeController {
             System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
             System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
 
+            WriteToDBModel.updateBackupSettings(SettingsDBModel.maxBackupNum, maxBackupNum);
+            WriteToDBModel.updateBackupSettings(SettingsDBModel.backupCreationInterval, backupCreationIntervalInSeconds);
+
+            System.out.println("(from apply settings) settings saved to DB");
+            System.out.println(BackupArchiveModel.backupCreationIntervalInSeconds);
+
+            App.backupRegularly.stop();
+            App.backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
+            App.backupRegularly.start();
+
         } catch (NumberFormatException e) {
             System.out.println("(from BackupScreenController.applySettings) invalid settings");
             //do nothing if cannot format any of the number string user inputs
@@ -87,7 +99,7 @@ public class BackupScreenController extends PrototypeController {
 
 
     @FXML
-    public void loadBackupArchive(){
+    public void loadBackupArchive() throws SQLException {
         String formattedBackupName =
                 BackupArchiveModel.formatBackupName(
                         BackupArchiveModel.parseBackupName(
@@ -112,11 +124,13 @@ public class BackupScreenController extends PrototypeController {
         }
 
         //restart app (wink)
+
+        ArchiveDBModel.connection.close();
+        ArchiveDBModel.connect();
+
         SceneNavigationModel.launchScreen = App.sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
-        Stage primaryStage = (Stage) SceneNavigationModel.launchScreen.getWindow();
+        Stage primaryStage = (Stage) availableBackupsListView.getScene().getWindow();
         primaryStage.setScene(SceneNavigationModel.launchScreen);
-
-
     }
 
     //displays current settings stored in ArchiveDBModel in settings fields

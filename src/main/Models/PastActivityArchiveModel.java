@@ -1,9 +1,7 @@
 package main.Models;
 
-import main.Models.DBModels.DBModel;
 import main.Utility.PastActivity;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 

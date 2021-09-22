@@ -12,7 +12,7 @@ public class WriteToDBModel {
 
     public static void saveArchive() {
         // cloning data from arraylist: archive
-        ArrayList<Activity> clonedArchive = (ArrayList<Activity>) DBModel.archive.clone();
+        ArrayList<Activity> clonedArchive = (ArrayList<Activity>) ArchiveDBModel.archive.clone();
         // extracting date from the first element of the archive
         String day = clonedArchive.get(0).getDate();
         // reading contents of the current day in the database
@@ -56,22 +56,27 @@ public class WriteToDBModel {
                         System.out.println("(from saveArchive) saving new activity");
 
                         // searching for the last id entered
-                        ResultSet lastIdEntered = DBModel.getLastIDEntered.executeQuery();
+                        ResultSet lastIdEntered = ArchiveDBModel.getLastIDEntered.executeQuery();
 
-                        lastIdEntered.next();
-                        activityID = lastIdEntered.getInt("activityID");
-                        activityID++;
+                        if (lastIdEntered.next()) {
+                            activityID = lastIdEntered.getInt("activityID");
+                            activityID++;
+                        } else {
+                            activityID = 0;
+                        }
+
+                        lastIdEntered.close();
 
                         // saving the new activity
 
-                        PreparedStatement saveActivity = DBModel.insertDataToActivitiesTable;
+                        PreparedStatement saveActivity = ArchiveDBModel.insertDataToActivitiesTable;
                         saveActivity.setInt(1, activityID);
                         saveActivity.setString(2, name);
                         saveActivity.setString(3, category);
                         saveActivity.execute();
 
                         // adding the new activity to the frequency table
-                        PreparedStatement saveActivityToFrequencyTable = DBModel.insertDataToFrequenciesTable;
+                        PreparedStatement saveActivityToFrequencyTable = ArchiveDBModel.insertDataToFrequenciesTable;
                         saveActivityToFrequencyTable.setInt(1, activityID);
                         saveActivityToFrequencyTable.setInt(2, 0);
                         saveActivityToFrequencyTable.execute();
@@ -79,7 +84,7 @@ public class WriteToDBModel {
 
                     // saving the event
 
-                    PreparedStatement saveEvent = DBModel.insertDataToEventsTable;
+                    PreparedStatement saveEvent = ArchiveDBModel.insertDataToEventsTable;
                     saveEvent.setInt(1, activityID);
                     saveEvent.setInt(2, startTime);
                     saveEvent.setInt(3, endTime);
@@ -88,7 +93,7 @@ public class WriteToDBModel {
 
                     // adding 1 to the frequency of the activity
 
-                    PreparedStatement addFrequency = DBModel.addFrequency;
+                    PreparedStatement addFrequency = ArchiveDBModel.addFrequency;
                     addFrequency.setInt(1, activityID);
                     addFrequency.execute();
 
@@ -128,7 +133,7 @@ public class WriteToDBModel {
                     }
 
                     // deleting events that's not in the archive
-                    PreparedStatement deleteEvent = DBModel.deleteEvent;
+                    PreparedStatement deleteEvent = ArchiveDBModel.deleteEvent;
                     deleteEvent.setInt(1, activityID);
                     deleteEvent.setInt(2, startTime);
                     deleteEvent.setInt(3, endTime);
@@ -136,7 +141,7 @@ public class WriteToDBModel {
                     deleteEvent.execute();
 
                     // subtracting 1 from the frequency the activity
-                    PreparedStatement subFrequency = DBModel.subFrequency;
+                    PreparedStatement subFrequency = ArchiveDBModel.subFrequency;
                     subFrequency.setInt(1, activityID);
                     subFrequency.execute();
 
@@ -146,9 +151,9 @@ public class WriteToDBModel {
             }
 
             // deleting all activities that's not referenced in the events table
-            DBModel.deleteActivities.execute();
+            ArchiveDBModel.deleteActivities.execute();
 
-            DBModel.deleteFrequencies.execute();
+            ArchiveDBModel.deleteFrequencies.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -227,16 +232,26 @@ public class WriteToDBModel {
     };
 
 
-
-
     private static void saveData(){
 
-        if (DBModel.archive.isEmpty()){
+        if (ArchiveDBModel.archive.isEmpty()){
             return;
         }
 
         if (!Loader.loadMode){
             saveArchive();
+        }
+    }
+
+    public static void updateBackupSettings(String name, int value) {
+
+        try {
+            PreparedStatement updateBackupSettings = SettingsDBModel.updateBackupSettings;
+            updateBackupSettings.setInt(1, value);
+            updateBackupSettings.setString(2, name);
+            updateBackupSettings.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

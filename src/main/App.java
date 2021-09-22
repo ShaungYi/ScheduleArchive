@@ -8,17 +8,25 @@ import main.Models.DBModels.*;
 import main.Models.SceneNavigationModel;
 import main.Utility.EditLog;
 
+import java.sql.SQLException;
+
 
 public class App extends Application {
     public static EditLog editLog = new EditLog();
-
     public static SceneNavigationModel sceneNavigationModel = new SceneNavigationModel();
+    public static Thread backupRegularly;
 
 
     @Override
     public void start(Stage primaryStage){
-        System.out.println("1");
+        // initializing DB connections
+        ArchiveDBModel.connect();
+        SettingsDBModel.connect();
 
+        // starting the backup thread
+        backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
+        backupRegularly.start();
+        BackupArchiveModel.updateBackupsObservableList();
 
         //initializing launchscreen scene
         SceneNavigationModel.launchScreen = sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
@@ -35,17 +43,16 @@ public class App extends Application {
     }
 
 
-    public void stop(){
+    public void stop() throws SQLException {
         WriteToDBModel.saveDataSynchronously();
+        ArchiveDBModel.connection.close();
+        SettingsDBModel.connection.close();
         new Thread(WriteToDBModel.exitSystemSynchronously).start();
 
     }
 
 
     public static void main(String[] args) {
-        new Thread(BackupArchiveModel.createBackupArchiveDBRegularly).start();
-        DBModel.connect(DBModel.dbName);
-        BackupArchiveModel.availableBackupsObservableList = BackupArchiveModel.listBackups();
         Application.launch(args);
     }
 }

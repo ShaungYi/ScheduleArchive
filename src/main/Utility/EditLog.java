@@ -1,7 +1,6 @@
 package main.Utility;
 
-import main.App;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 
 import java.util.ArrayList;
 
@@ -86,7 +85,7 @@ public class EditLog {
 
                 boolean edited = true;
 
-                for (Activity activity : DBModel.archive){
+                for (Activity activity : ArchiveDBModel.archive){
                     if (activity.getDurationSeconds() == loggedActivity.getDurationSeconds()
                             && activity.getCategory().equals(loggedActivity.getCategory())
                             && activity.getName().equals(loggedActivity.getName())

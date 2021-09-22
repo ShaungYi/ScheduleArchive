@@ -9,16 +9,13 @@ import main.Controllers.Creator.ScheduleCreator;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.Table;
 import main.Controllers.Timeline.TimeLine;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
-
-
 import java.io.IOException;
-import java.sql.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,11 +31,6 @@ public class Loader extends PrototypeController {
     ObservableList<String> backupData = FXCollections.observableArrayList();
 
 
-
-    Connection conn;
-    Statement statement;
-
-
     @FXML
     Button loadButton;
     @FXML
@@ -52,13 +44,6 @@ public class Loader extends PrototypeController {
 
     public static boolean disAbleCreator = false;
 
-    public static int currentTimeInSeconds = ScheduleCreator.getTimeInSeconds(
-            LocalTime.now().getHour(),
-            LocalTime.now().getMinute(),
-            LocalTime.now().getSecond()
-    );
-
-
     public void initialize(){
         setupBackups();
     }
@@ -69,19 +54,17 @@ public class Loader extends PrototypeController {
         // reading contents of selectedDay on the database
         ArrayList<Activity> loadedDay = ReadFromDBModel.readDay(DateTimeModel.selectedDay);
         // overwriting archive to the contents of the selectedDay
-        DBModel.archive = loadedDay;
+        ArchiveDBModel.archive = loadedDay;
     }
 
     public void setupBackups() {
         backups.setItems(backupData);
 
-        for (String date : DateTimeModel.allDates) {
+        for (String date : ReadFromDBModel.getAllDates()) {
             backupData.add(date);
         }
 
         if (!backupData.isEmpty()){
-            DateTimeModel.lastDay = backupData.get(backupData.size() - 1);
-
             backups.scrollTo(backupData.size() - 1);
         }
 
@@ -94,29 +77,41 @@ public class Loader extends PrototypeController {
         loadData();
 
         // getting data for NoData
-        int gapStartTime = DBModel.archive.get(DBModel.archive.size()-1).getEndTimeSecs();
-        int gapEndTime = currentTimeInSeconds;
+        Activity lastEventEntered =  ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() -1);
+        int gapStartTime;
+        int gapEndTime = DateTimeModel.getCurrentTimeInSeconds();
+
+        if (lastEventEntered.getName().equals("no data") && lastEventEntered.getCategory().equals("NoData")) {
+            ArchiveDBModel.archive.remove(lastEventEntered);
+            gapStartTime = lastEventEntered.getStartTimeSecs();
+        } else {
+            gapStartTime = lastEventEntered.getEndTimeSecs();
+        }
 
         if (gapEndTime < gapStartTime){
+            System.out.println("(from resumeCreation) gapStartTime: " + gapStartTime);
+            System.out.println("(from resumeCreation) gapEntTime: " + gapEndTime);
             gapEndTime += TimeLine.SECONDS_IN_A_DAY;
+            System.out.println("(from resumeCreation) modedGapEndTime: " + gapEndTime);
         }
 
         // adding NoData to archive
-        DBModel.archive.add(new Activity("no data", "NoData", gapEndTime - gapStartTime, gapStartTime, gapEndTime, LocalDate.now().toString()));
+
+        ArchiveDBModel.archive.add(new Activity("no data", "NoData", gapEndTime - gapStartTime, gapStartTime, gapEndTime, LocalDate.now().toString()));
 
         resumeMode = true;
         loadMode = false;
 
         // exiting
-        DateTimeModel.currentDay = DBModel.archive.get(0).getDate();
-        Table.updateData(DBModel.archive);
+        DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
+        Table.updateData(ArchiveDBModel.archive);
         wrapUpAndGoToCreator();
     }
 
 
     public void loadDaysOfOld() throws IOException {
         loadData();
-        Table.updateData(DBModel.archive);
+        Table.updateData(ArchiveDBModel.archive);
         disableAndGotoStats();
     }
 
@@ -162,7 +157,7 @@ public class Loader extends PrototypeController {
             // getting the dayStartTime of the selectedDay
             ArrayList<Activity> day = ReadFromDBModel.readDay(currentSelectedDate);
             int dayStartTime = day.get(0).getStartTimeSecs();
-            int currentTimeInSec = currentTimeInSeconds;
+            int currentTimeInSec = DateTimeModel.getCurrentTimeInSeconds();
 
             // adding 86400 to currentTimeInSec if the date has changed
             if (currentDay.equals(DateTimeModel.addDayToDate(currentSelectedDate, 1))) {
@@ -190,7 +185,7 @@ public class Loader extends PrototypeController {
 
             loadButton.setDisable(false);
 
-            if (selectedDayTemp.equals(DateTimeModel.lastDay) && canResume() && (selectedDayTemp.equals(DateTimeModel.currentDay) || selectedDayTemp.equals(DateTimeModel.subDayFromDate(DateTimeModel.currentDay, 1)))){
+            if (selectedDayTemp.equals(DateTimeModel.getLastDay()) && canResume() && (selectedDayTemp.equals(DateTimeModel.currentDay) || selectedDayTemp.equals(DateTimeModel.subDayFromDate(DateTimeModel.currentDay, 1)))){
                 resumeButton.setDisable(false);
             }
             else {

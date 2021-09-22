@@ -1,60 +1,46 @@
 package main.Models;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import main.Models.DBModels.ReadFromDBModel;
+import main.Utility.Suggestion;
 
 import java.util.ArrayList;
 
 public class SearchModel {
 
-    static Thread loadToObservableListThread = new Thread();
+    public static ArrayList<Suggestion> suggestionList;
 
-    public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list){
+    public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
+        String name;
+        String suggestionCategory;
 
-        ArrayList<String> result = ReadFromDBModel.getNameSuggestions(targetFragment);
+        for (Suggestion suggestion : suggestionList) {
+            name = suggestion.getName();
+            suggestionCategory = suggestion.getCategory();
 
-        Platform.runLater( () -> {
-            for (int i = result.size() - 1; i >= 0; i--){
-                list.add(result.get(i));
+            if (name.contains(targetFragment)) {
+
+                if (suggestionCategory.equals(category) || category == null) {
+                    list.add(name);
+                }
             }
-        });
-
-
+        }
     }
 
-    public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list){
 
-        ArrayList<String> result = ReadFromDBModel.getNameSuggestions(targetFragment);
+    public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list, String category) {
+        String name;
+        String suggestionCategory;
 
-        Platform.runLater( () -> {
-            for (String name : result){
-                list.add(name);
+        for (int i = suggestionList.size() - 1; i >= 0; i--) {
+            name = suggestionList.get(i).getName();
+            suggestionCategory = suggestionList.get(i).getCategory();
+
+            if (name.contains(targetFragment)) {
+
+                if (suggestionCategory.equals(category) || category == null) {
+                    list.add(name);
+                }
             }
-        });
-
-    }
-
-    public static void loadToObservableListSynchronously(String targetFragment, ObservableList<String> list, boolean inReverse){
-
-        //stop previous loading process
-        loadToObservableListThread.stop();
-
-        //clear list for another load
-        list.clear();
-
-        //construct loader runnable that loads in reverse or not depending on inReverse
-        Runnable loadToObservableListRunnable = inReverse
-                ?
-                () -> searchPastActivityListForNameAndLoadToObservableListInReverse(targetFragment, list)
-                :
-                () -> searchPastActivityListForNameAndLoadToObservableList(targetFragment, list);
-
-
-        //reset loader thread with new loader runnable
-        loadToObservableListThread = new Thread(loadToObservableListRunnable);
-
-        //start new loading process
-        loadToObservableListThread.start();
+        }
     }
 }

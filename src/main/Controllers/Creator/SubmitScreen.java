@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
@@ -61,7 +61,7 @@ public class SubmitScreen extends PrototypeController {
 
     private void updateActivityInQuestion(){
         ;
-        activityInQuestion = DBModel.archive.get(DBModel.archive.size() - 1);
+        activityInQuestion = ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() - 1);
     }
 
     public void setUpDisplays(){
@@ -75,7 +75,7 @@ public class SubmitScreen extends PrototypeController {
 
     public void submit(){
 
-        DateTimeModel.currentDay = DBModel.archive.get(0).getDate();
+        DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
 
         activityInQuestion.setName(nameField.getText());
 
@@ -84,7 +84,7 @@ public class SubmitScreen extends PrototypeController {
         mergeLikeActivities();
 
 
-        Table.updateData(DBModel.archive);
+        Table.updateData(ArchiveDBModel.archive);
         Table.categoryData.sort(Stats.chartDataUnitComparator);
         Table.moveTotalToBottom();
 
@@ -106,8 +106,8 @@ public class SubmitScreen extends PrototypeController {
 
     public void mergeLikeActivities(){
 
-        if (DBModel.archive.size() > 1){
-            Activity prevActivity = DBModel.archive.get(DBModel.archive.indexOf(activityInQuestion) - 1);
+        if (ArchiveDBModel.archive.size() > 1){
+            Activity prevActivity = ArchiveDBModel.archive.get(ArchiveDBModel.archive.indexOf(activityInQuestion) - 1);
 
 
             if (activityInQuestion.getName().equals(prevActivity.getName()) && activityInQuestion.getCategory().equals(prevActivity.getCategory())){
@@ -115,7 +115,7 @@ public class SubmitScreen extends PrototypeController {
                 activityInQuestion.setDurationSeconds(prevActivity.getDurationSeconds() + activityInQuestion.getDurationSeconds());
                 activityInQuestion.setStartTimeSecs(prevActivity.getStartTimeSecs());
 
-                DBModel.archive.remove(prevActivity);
+                ArchiveDBModel.archive.remove(prevActivity);
             }
         }
     }
@@ -125,35 +125,23 @@ public class SubmitScreen extends PrototypeController {
 
         observableListOfsuggestions.clear();
 
-        if (!nameField.getText().equals("")){
-
-            submitButton.setDisable(false);
-
-
-            SearchModel.loadToObservableListSynchronously(nameField.getText(), observableListOfsuggestions, false);
-
-
-
-            if (observableListOfsuggestions.isEmpty()){
-                hideSuggestions();
-                suggestions.setDisable(true);
-            }
-            else{
-                showSuggestions();
-                suggestions.setDisable(false);
-
-            }
-
-
-
-        }
-        else {
-            hideSuggestions();
+        if (nameField.getText().equals("")) {
             submitButton.setDisable(true);
+        } else {
+            submitButton.setDisable(false);
+        }
+
+        SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions, activityInQuestion.getCategory());
+
+        if (observableListOfsuggestions.isEmpty()){
+            hideSuggestions();
             suggestions.setDisable(true);
         }
+        else{
+            showSuggestions();
+            suggestions.setDisable(false);
 
-
+        }
     }
 
 

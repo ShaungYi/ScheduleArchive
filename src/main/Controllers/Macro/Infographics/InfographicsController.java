@@ -15,6 +15,7 @@ import main.App;
 import main.Controllers.Macro.Infographics.Barcomponent.Barcomponent;
 import main.Controllers.PrototypeController;
 import main.Models.*;
+import main.Models.DBModels.ReadFromDBModel;
 
 
 public class InfographicsController extends PrototypeController {
@@ -166,7 +167,7 @@ public class InfographicsController extends PrototypeController {
         double transitionX = 0;
         String prevDate = "how many months to babylon?";
 
-        for (String date : DateTimeModel.allDates) {
+        for (String date : ReadFromDBModel.getAllDates()) {
             transitionX += InfographicsModel.barWidth;
 
             //change year if year and prevYear don't match
@@ -217,7 +218,7 @@ public class InfographicsController extends PrototypeController {
             InfographicsModel.infographicWidth += InfographicsModel.barWidth;
 
             //if this is the last day, setup month and year graphically and modelically
-            if (DateTimeModel.allDates.indexOf(date) == DateTimeModel.allDates.size() - 1){
+            if (ReadFromDBModel.getAllDates().indexOf(date) == ReadFromDBModel.getAllDates().size() - 1){
 
                 //month
                 addMonth(DateTimeModel.getMonthFromDate(date), monthWidth);

@@ -1,20 +1,24 @@
 package main.Models;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
+import main.Models.DBModels.ReadFromDBModel;
+import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class BackupArchiveModel {
-    public static int backupCreationIntervalInSeconds = 3600;
+    public static int backupCreationIntervalInSeconds = ReadFromDBModel.getBackupSettings(SettingsDBModel.backupCreationInterval);
     //if adding a backup makes backup list grow to more than this, delete the oldest backup
-    public static int maxBackupNum = 6;
+    public static int maxBackupNum = ReadFromDBModel.getBackupSettings(SettingsDBModel.maxBackupNum);
     //a list of available archive backup names
     public static ObservableList<String> availableBackupsObservableList = FXCollections.observableArrayList();
 
@@ -30,7 +34,13 @@ public class BackupArchiveModel {
 
             try {
 
-                if (WriteToDBModel.dataBackupProcessAtRest){
+                //wait until it's time to create the next backup
+                for (int i = backupCreationIntervalInSeconds; i >= 0; i--){
+
+                    Thread.sleep(1000);
+                }
+
+                if (!WriteToDBModel.dataBackupProcessAtRest){
                     //just create backup
                     createBackup();
                 } else {
@@ -41,13 +51,7 @@ public class BackupArchiveModel {
                     createBackup();
                 }
 
-
-                //wait until it's time to create the next backup
-                for (int i = backupCreationIntervalInSeconds; i >= 0; i--){
-
-                    Thread.sleep(1000);
-
-                }
+                removeOldBackups();
 
                 //catch any exception from Thread.sleep()
             } catch (InterruptedException e){
@@ -76,11 +80,9 @@ public class BackupArchiveModel {
 
     public static void createBackup() {
         String backupName = formatBackupName(new Date());
-        copyPasteFile(DBModel.dbName, "Backups/" + backupName);
+        copyPasteFile(ArchiveDBModel.pathToArchiveDB, "Backups/" + backupName);
+        updateBackupsObservableList();
         System.out.println("(from createBackup) successfully created backup: " + backupName);
-
-
-
     }
 
 
@@ -94,21 +96,31 @@ public class BackupArchiveModel {
         else if(backup.delete()) {
             System.out.println("(from removeBackup) backup deleted, name: " + name);
         }
+
+        updateBackupsObservableList();
+
     }
 
 
     public static void loadBackup(String backupName) {
         createBackup();
+
         Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
         String formattedBackupName = formatBackupName(parsedBackupName);
-        copyPasteFile("Backups/" + formattedBackupName, DBModel.dbName);
+        copyPasteFile("Backups/" + formattedBackupName, ArchiveDBModel.pathToArchiveDB);
+
+        BackupArchiveModel.removeBackup(formattedBackupName);
+        ArchiveDBModel.archive = new ArrayList<>();
+        DateTimeModel.selectedDay = LocalDate.now().toString();
+
+        removeOldBackups();
         System.out.println("(from loadBackup) successfully loaded backup: " + backupName);
 
     }
 
 
-    public static ObservableList<String> listBackups() {
-        ObservableList<String> parsedBackupList = FXCollections.observableArrayList();
+    public static ArrayList<Date> listBackups() {
+        ArrayList<Date> parsedBackupList = new ArrayList<>();
 
         File backupDirectory = new File("Backups");
         String[] backupList = backupDirectory.list();
@@ -116,13 +128,31 @@ public class BackupArchiveModel {
         for (int index = 0; index < backupList.length; index++) {
             String backupName = backupList[index];
             Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
-            parsedBackupList.add(parsedBackupName.toString());
+            parsedBackupList.add(parsedBackupName);
         }
 
         return parsedBackupList;
 
     }
 
+
+    public static void removeOldBackups() {
+        Date oldestBackup;
+
+        while (listBackups().size() > maxBackupNum) {
+            oldestBackup = new Date();
+
+            for (Date backup : listBackups()) {
+
+                if (backup.compareTo(oldestBackup) < 0) {
+                    oldestBackup = backup;
+                }
+            }
+
+            removeBackup(formatBackupName(oldestBackup));
+
+        }
+    }
 
 
     public static String formatBackupName(Date parsedBackupName) {
@@ -145,4 +175,15 @@ public class BackupArchiveModel {
 
     }
 
+    public static void updateBackupsObservableList() {
+
+        Platform.runLater(() -> {
+            availableBackupsObservableList.clear();
+
+            for (int index = listBackups().size() - 1; index >= 0; index--) {
+                availableBackupsObservableList.add(listBackups().get(index).toString());
+            }
+
+        });
+    }
 }

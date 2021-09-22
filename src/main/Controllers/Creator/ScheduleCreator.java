@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
@@ -17,7 +17,6 @@ import main.Utility.Activity;
 import main.App;
 import main.Utility.stopWatch;
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -367,12 +366,12 @@ public class ScheduleCreator extends PrototypeController {
     public void processSubmission() throws NullPointerException, IOException {
         // auto resume when selectedDay is NULL and currentDay is equal to lastDay
         System.out.println("(from auto resume) currentDay: " + DateTimeModel.currentDay);
-        System.out.println("(from auto resume) lastDay: " + DateTimeModel.lastDay);
+        System.out.println("(from auto resume) lastDay: " + DateTimeModel.getLastDay());
         String currentDay = DateTimeModel.currentDay;
 
-        if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.lastDay)) {
+        if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.getLastDay())) {
             DateTimeModel.selectedDay = currentDay;
-            DBModel.archive = ReadFromDBModel.readDay(currentDay);
+            ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);
             System.out.println("(from auto resume) auto resumed");
         }
 
@@ -384,7 +383,7 @@ public class ScheduleCreator extends PrototypeController {
         }
 
         if (!category.equals("null") && stopWatch.getMeasuredTime() != 0){
-            DBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
+            ArchiveDBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
             UniversalCommonAncestor.setStyle("-fx-background-color: white");

@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import main.App;
 import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.DBModel;
+import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
@@ -121,7 +121,7 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToPiChart(){
-        if (!DBModel.archive.isEmpty()){
+        if (!ArchiveDBModel.archive.isEmpty()){
             PiChart.updatePi();
         }
 
@@ -137,7 +137,7 @@ public class Stats extends PrototypeController {
         App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", SceneNavigationModel.stats);
 
 
-        if (Loader.resumeMode || Loader.loadMode){
+        if (Loader.resumeMode || Loader.loadMode) {
 
             //set selectedDay temporaryly to changing day
             String temp = DateTimeModel.selectedDay;

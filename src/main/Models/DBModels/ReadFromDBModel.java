@@ -1,13 +1,12 @@
 package main.Models.DBModels;
 
-import main.App;
 import main.Models.DateTimeModel;
 import main.Utility.Activity;
 import main.Utility.PastActivity;
+import main.Utility.Suggestion;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ReadFromDBModel {
 
@@ -24,7 +23,7 @@ public class ReadFromDBModel {
             String eventDate;
 
             // Searching for the given date in the database
-            PreparedStatement readDayContent = DBModel.readDayContent;
+            PreparedStatement readDayContent = ArchiveDBModel.readDayContent;
             readDayContent.setString(1, date);
             ResultSet day = readDayContent.executeQuery();
 
@@ -68,7 +67,7 @@ public class ReadFromDBModel {
 
         try {
             // searching for all dates in the database
-            ResultSet allDates = DBModel.getAllDatesEntered.executeQuery();
+            ResultSet allDates = ArchiveDBModel.getAllDatesEntered.executeQuery();
 
             // extracting dates from the result set and adding them to an arraylist
             while (allDates.next()) {
@@ -90,7 +89,7 @@ public class ReadFromDBModel {
         ArrayList<String> activityNamesList = new ArrayList<>();
 
         try {
-            ResultSet activityNames = DBModel.getAllActivityNamesEntered.executeQuery();
+            ResultSet activityNames = ArchiveDBModel.getAllActivityNamesEntered.executeQuery();
 
             while (activityNames.next()) {
                 activityNamesList.add(activityNames.getString("name"));
@@ -111,7 +110,7 @@ public class ReadFromDBModel {
         try {
             // searching for the activityId of the given name and category
 
-            PreparedStatement findActivityID = DBModel.findActivityID;
+            PreparedStatement findActivityID = ArchiveDBModel.findActivityID;
             findActivityID.setString(1, name);
             findActivityID.setString(2, category);
             ResultSet id = findActivityID.executeQuery();
@@ -131,6 +130,7 @@ public class ReadFromDBModel {
 
     }
 
+
     public static PastActivity loadSelectedPastActivities(String name) {
         PastActivity pastActivity = new PastActivity();
 
@@ -138,7 +138,7 @@ public class ReadFromDBModel {
         int netDuration = 0;
 
         try {
-            PreparedStatement getAllOccurrences =  DBModel.getAllOccurrences;
+            PreparedStatement getAllOccurrences =  ArchiveDBModel.getAllOccurrences;
             getAllOccurrences.setString(1, name);
             ResultSet occurrences = getAllOccurrences.executeQuery();
 
@@ -163,30 +163,48 @@ public class ReadFromDBModel {
     }
 
 
-    public static ArrayList<String> getNameSuggestions(String nameFragment) {
-        ArrayList<String> nameSuggestions = new ArrayList<>();
-        nameSuggestions.add("test");
+    public static ArrayList<Suggestion> getSuggestions() {
+        ArrayList<Suggestion> nameSuggestions = new ArrayList<>();
 
-//        try {
-//          PreparedStatement getSuggestions = DBModel.getNameSuggestions;
-//          getSuggestions.setString(1, DateTimeModel.currentDay);
-//          getSuggestions.setString(2, nameFragment + "%");
-//          ResultSet suggestions = getSuggestions.executeQuery();
-//
-//          while (suggestions.next()) {
-//              String name = suggestions.getString("name");
-//
-//              if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !nameSuggestions.contains(name)){
-//                  nameSuggestions.add(name);
-//              }
-//          }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+          PreparedStatement getSuggestions = ArchiveDBModel.getNameSuggestions;
+          getSuggestions.setString(1, DateTimeModel.currentDay);
+          ResultSet suggestions = getSuggestions.executeQuery();
+
+          while (suggestions.next()) {
+              String name = suggestions.getString("name");
+              String category = suggestions.getString("category");
+
+              if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !nameSuggestions.contains(name)){
+                  nameSuggestions.add(new Suggestion(name, category));
+              }
+          }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return nameSuggestions;
 
     }
 
+
+    public static int getBackupSettings(String name) {
+
+        try {
+            PreparedStatement readBackupSettings = SettingsDBModel.readBackupSettings;
+            readBackupSettings.setString(1, name);
+            ResultSet maxNumberOfBackups = readBackupSettings.executeQuery();
+
+            if (maxNumberOfBackups.next()) {
+                return maxNumberOfBackups.getInt("value");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
 }
