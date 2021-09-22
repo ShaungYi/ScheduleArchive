@@ -64,7 +64,7 @@ public class SearchScreen extends PrototypeController {
     @FXML
     void onEntryToActivitySearchField(){
         observableListOfsuggestedActivityNames.clear();
-        SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames, null);
+        SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames, "");
     }
 
     @FXML

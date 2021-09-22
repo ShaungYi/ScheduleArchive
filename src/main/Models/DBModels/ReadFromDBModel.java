@@ -4,7 +4,6 @@ import main.Models.DateTimeModel;
 import main.Models.SearchModel;
 import main.Utility.Activity;
 import main.Utility.PastActivity;
-import main.Utility.Suggestion;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -169,21 +168,22 @@ public class ReadFromDBModel {
     }
 
 
-    public static void updateSuggestionList() {
+    public static ArrayList<String> getSuggestions(String name, String category) {
+        ArrayList<String> suggestionList = new ArrayList();
+        String suggestion;
 
         try {
           PreparedStatement getSuggestions = ArchiveDBModel.getSuggestions;
           getSuggestions.setString(1, DateTimeModel.currentDay);
+          getSuggestions.setString(2, "%" + name + "%");
+          getSuggestions.setString(3, "%" + category + "%");
           ResultSet suggestions = getSuggestions.executeQuery();
 
-          SearchModel.suggestionList.clear();
-
           while (suggestions.next()) {
-              String name = suggestions.getString(1);
-              String category = suggestions.getString(2);
+              suggestion = suggestions.getString(1);
 
-              if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !SearchModel.suggestionList.contains(name)) {
-                  SearchModel.suggestionList.add(new Suggestion(name, category));
+              if (!suggestion.equals("undefined") && !suggestion.equals("new") && !suggestion.equals("no data") && !(suggestionList.contains(suggestion))) {
+                  suggestionList.add(suggestion);
               }
           }
 
@@ -192,6 +192,8 @@ public class ReadFromDBModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return suggestionList;
 
     }
 

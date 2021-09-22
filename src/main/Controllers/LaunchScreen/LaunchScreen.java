@@ -42,10 +42,6 @@ public class LaunchScreen extends PrototypeController {
         @Override
         public void run() {
 
-            // updating suggestionList
-
-            ReadFromDBModel.updateSuggestionList();
-
             // loading new scenes
 
             SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");

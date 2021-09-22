@@ -429,7 +429,7 @@ public class Editor extends PrototypeController {
 
         suggestedNamesObservableList.clear();
 
-        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, null);
+        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, "");
 
 
         if (!suggestedNamesObservableList.isEmpty() && suggestedNamesObservableList.size() < 16){

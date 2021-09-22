@@ -133,6 +133,7 @@ public class ArchiveDBModel {
                             "FROM activities " +
                             "JOIN frequencies USING (activityID) " +
                             "JOIN events USING (activityID) " +
+                            "WHERE name LIKE ? AND category LIKE ? " +
                             "ORDER BY score DESC "
             );
 
