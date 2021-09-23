@@ -75,7 +75,7 @@ public class Loader extends PrototypeController {
     public void resumeCreation() throws IOException {
         loadData();
 
-        addNoData();
+        addNoData(DateTimeModel.getCurrentTimeInSeconds());
 
         resumeMode = true;
         loadMode = false;
@@ -87,10 +87,9 @@ public class Loader extends PrototypeController {
     }
 
 
-    public static void addNoData() {
+    public static void addNoData(int gapEndTime) {
         Activity lastEventEntered =  ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() -1);
         int gapStartTime;
-        int gapEndTime = DateTimeModel.getCurrentTimeInSeconds();
 
         if (lastEventEntered.getName().equals("no data") && lastEventEntered.getCategory().equals("NoData")) {
             ArchiveDBModel.archive.remove(lastEventEntered);
