@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import main.Controllers.Creator.ScheduleCreator;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.Table;
 import main.Controllers.Timeline.TimeLine;
@@ -76,7 +75,19 @@ public class Loader extends PrototypeController {
     public void resumeCreation() throws IOException {
         loadData();
 
-        // getting data for NoData
+        addNoData();
+
+        resumeMode = true;
+        loadMode = false;
+
+        // exiting
+        DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
+        Table.updateData(ArchiveDBModel.archive);
+        wrapUpAndGoToCreator();
+    }
+
+
+    public static void addNoData() {
         Activity lastEventEntered =  ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() -1);
         int gapStartTime;
         int gapEndTime = DateTimeModel.getCurrentTimeInSeconds();
@@ -89,23 +100,12 @@ public class Loader extends PrototypeController {
         }
 
         if (gapEndTime < gapStartTime){
-            System.out.println("(from resumeCreation) gapStartTime: " + gapStartTime);
-            System.out.println("(from resumeCreation) gapEntTime: " + gapEndTime);
-            gapEndTime += TimeLine.SECONDS_IN_A_DAY;
-            System.out.println("(from resumeCreation) modedGapEndTime: " + gapEndTime);
+            gapEndTime += TimeLine.SECONDS_IN_A_DAY;;
         }
 
         // adding NoData to archive
 
         ArchiveDBModel.archive.add(new Activity("no data", "NoData", gapEndTime - gapStartTime, gapStartTime, gapEndTime, LocalDate.now().toString()));
-
-        resumeMode = true;
-        loadMode = false;
-
-        // exiting
-        DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
-        Table.updateData(ArchiveDBModel.archive);
-        wrapUpAndGoToCreator();
     }
 
 
