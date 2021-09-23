@@ -180,7 +180,7 @@ public class ReadFromDBModel {
                 String name = suggestions.getString(1);
                 String category = suggestions.getString(2);
 
-                if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !name.equals("no name") && !SearchModel.suggestionList.contains(name)){
+                if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !name.equals("no name") && !SearchModel.suggestionList.contains(new Suggestion(name, category))){
                     SearchModel.suggestionList.add(new Suggestion(name, category));
                 }
             }
