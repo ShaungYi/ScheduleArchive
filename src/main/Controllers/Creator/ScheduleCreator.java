@@ -372,6 +372,13 @@ public class ScheduleCreator extends PrototypeController {
         if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.getLastDay())) {
             DateTimeModel.selectedDay = currentDay;
             ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);
+
+            //add no data representing the gap from last entry to the start time at auto resume
+            int startT = ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() - 1).getEndTimeSecs(); //end time of last activity in archive
+            int endT = stopWatch.getStartTimeSec();
+            int dur = endT - startT;
+            ArchiveDBModel.archive.add(new Activity("no data", "NoData", dur, startT, endT, currentDay));
+
             System.out.println("(from auto resume) auto resumed");
         }
 
@@ -386,7 +393,6 @@ public class ScheduleCreator extends PrototypeController {
             ArchiveDBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
-            UniversalCommonAncestor.setStyle("-fx-background-color: white");
             goToSubmitField();
         }
 
