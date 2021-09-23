@@ -20,7 +20,10 @@ public class SearchModel {
             if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
 
                 if (suggestionCategory.equals(category) || category == null) {
-                    list.add(name);
+
+                    if (!list.contains(name)) {
+                        list.add(name);
+                    }
                 }
             }
         }
@@ -39,7 +42,10 @@ public class SearchModel {
             if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
 
                 if (suggestionCategory.equals(category) || category == null) {
-                    list.add(name);
+
+                    if (!list.contains(name)) {
+                        list.add(name);
+                    }
                 }
             }
         }
