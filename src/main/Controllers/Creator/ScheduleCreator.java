@@ -369,6 +369,7 @@ public class ScheduleCreator extends PrototypeController {
         System.out.println("(from auto resume) lastDay: " + DateTimeModel.getLastDay());
         String currentDay = DateTimeModel.currentDay;
 
+
         if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.getLastDay())) {
             DateTimeModel.selectedDay = currentDay;
             ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);

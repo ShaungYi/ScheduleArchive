@@ -1,5 +1,6 @@
 package main.Controllers.Stats;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -30,8 +31,7 @@ public class BackupScreenController extends PrototypeController {
     TextField backupEveryHourField;
     @FXML
     TextField backupEveryMinuteField;
-    @FXML
-    TextField backupEverySecondField;
+
 
 
     public void initialize(){
@@ -48,8 +48,7 @@ public class BackupScreenController extends PrototypeController {
 
             int hh = Integer.parseInt(backupEveryHourField.getText());
             int mm = Integer.parseInt(backupEveryMinuteField.getText());
-            int ss = Integer.parseInt(backupEverySecondField.getText());
-            int backupCreationIntervalInSeconds = DateTimeModel.convertHHMMSSToSeconds(hh, mm, ss);
+            int backupCreationIntervalInSeconds = DateTimeModel.convertHHMMSSToSeconds(hh, mm, 0);
 
 
             //update data in ArchiveDBModel
@@ -140,7 +139,6 @@ public class BackupScreenController extends PrototypeController {
         DateTimeModel.Time time = DateTimeModel.parseDuration(BackupArchiveModel.backupCreationIntervalInSeconds);
         backupEveryHourField.setText(String.valueOf(time.getHh()));
         backupEveryMinuteField.setText(String.valueOf(time.getMm()));
-        backupEverySecondField.setText(String.valueOf(time.getSs()));
 
         System.out.println("(from BackupScreenController.displaySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
         System.out.println("(from BackupScreenController.displaySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + "seconds");
@@ -158,5 +156,13 @@ public class BackupScreenController extends PrototypeController {
     @FXML
     public void goToMain() {
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.backups);
+    }
+
+    @FXML
+    public void createBackup(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void deleteBackup(ActionEvent actionEvent) {
     }
 }
