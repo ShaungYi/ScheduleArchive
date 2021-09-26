@@ -1,12 +1,10 @@
 package main.Controllers.Stats;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.App;
 import main.Controllers.PrototypeController;
@@ -16,10 +14,7 @@ import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
-
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class BackupScreenController extends PrototypeController {
 
@@ -28,7 +23,8 @@ public class BackupScreenController extends PrototypeController {
     String selectedBackup;
     @FXML
     Button loadBackupButton;
-
+    @FXML
+    Button deleteBackupButton;
 
     @FXML
     TextField maxBackupNumField;
@@ -54,8 +50,10 @@ public class BackupScreenController extends PrototypeController {
 
     @FXML
     public void applySettings() {
+        saveSettings();
+    }
 
-
+    public void saveSettings() {
         int maxBackupNum = Integer.parseInt(maxBackupNumField.getText());
 
         int hh = Integer.parseInt(backupEveryHourField.getText());
@@ -64,6 +62,7 @@ public class BackupScreenController extends PrototypeController {
 
 
         //update data in ArchiveDBModel
+
         BackupArchiveModel.maxBackupNum = maxBackupNum;
         BackupArchiveModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
 
@@ -79,8 +78,6 @@ public class BackupScreenController extends PrototypeController {
         App.backupRegularly.stop();
         App.backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
         App.backupRegularly.start();
-
-
     }
 
 
@@ -93,11 +90,14 @@ public class BackupScreenController extends PrototypeController {
         //disable load button if invalid backup selected
         if (backupName == null || backupName == "") {
             loadBackupButton.setDisable(true);
+            deleteBackupButton.setDisable(true);
+
             System.out.println("(from BackupScreenController.setSelectedBackup) invalid selection");
         }
         // enable load button and update selected day
         else {
             loadBackupButton.setDisable(false);
+            deleteBackupButton.setDisable(false);
             selectedBackup = backupName;
             System.out.println("(from BackupScreenController.setSelectedBackup) backup to load: " + selectedBackup);
         }
@@ -154,15 +154,25 @@ public class BackupScreenController extends PrototypeController {
 
     //sets invalid label over the input field to visible and disable apply button if user input not a valid number, visible and undisable if not
     private void showInvalidInputAlertLabelAndDisableApplyButton(Label alertLabel, TextField inputField) {
-
         String input = inputField.getText();
 
         try {
-            Integer.parseInt(input);
+
+            if (Integer.parseInt(input) == 0 && inputField.equals(maxBackupNumField)){
+                int error = 0/0;
+            }
+
+            if (DateTimeModel.convertHHMMSSToSeconds(Integer.parseInt(backupEveryHourField.getText()), Integer.parseInt(backupEveryMinuteField.getText()), 0) == 0) {
+                int error = 0/0;
+            } else {
+                hoursInvalidAlertLabel.setVisible(false);
+                minutesInvalidAlertLabel.setVisible(false);
+            }
+
             alertLabel.setVisible(false);
             applySettingsButton.setDisable(false);
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArithmeticException e) {
             alertLabel.setVisible(true);
             applySettingsButton.setDisable(true);
         }
@@ -195,11 +205,33 @@ public class BackupScreenController extends PrototypeController {
     }
 
     @FXML
-    public void createBackup(ActionEvent actionEvent) {
+    public void createBackup() {
+        BackupArchiveModel.createBackup();
+        setMaxBackupNumToNumberOfBackupsExisting();
     }
+
 
     @FXML
-    public void deleteBackup(ActionEvent actionEvent) {
+    public void deleteBackup() {
+        String formattedBackupName =
+                BackupArchiveModel.formatBackupName(
+                        BackupArchiveModel.parseBackupName(
+                                selectedBackup,
+                                BackupArchiveModel.parsedDateFormat
+                        )
+                );
+
+        BackupArchiveModel.removeBackup(formattedBackupName);
+        setMaxBackupNumToNumberOfBackupsExisting();
     }
 
+    public void setMaxBackupNumToNumberOfBackupsExisting() {
+        int numberOfBackups = BackupArchiveModel.listBackups().size();
+
+        if (0 < numberOfBackups) {
+            maxBackupNumField.setText(Integer.toString(numberOfBackups));
+            maxNumBackupsInvalidAlertLabel.setVisible(false);
+            saveSettings();
+        }
+    }
 }

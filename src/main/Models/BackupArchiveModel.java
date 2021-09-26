@@ -80,9 +80,12 @@ public class BackupArchiveModel {
 
     public static void createBackup() {
         String backupName = formatBackupName(new Date());
-        copyPasteFile(ArchiveDBModel.pathToArchiveDB, "Backups/" + backupName);
-        updateBackupsObservableList();
-        System.out.println("(from createBackup) successfully created backup: " + backupName);
+
+        if (!listBackups().contains(backupName)) {
+            copyPasteFile(ArchiveDBModel.pathToArchiveDB, "Backups/" + backupName);
+            updateBackupsObservableList();
+            System.out.println("(from createBackup) successfully created backup: " + backupName);
+        }
     }
 
 
@@ -115,7 +118,6 @@ public class BackupArchiveModel {
 
         removeOldBackups();
         System.out.println("(from loadBackup) successfully loaded backup: " + backupName);
-
     }
 
 
@@ -161,6 +163,7 @@ public class BackupArchiveModel {
         return formattedBackupName;
     }
 
+
     public static Date parseBackupName(String formattedBackupName, String pattern) {
 
         try {
@@ -175,12 +178,13 @@ public class BackupArchiveModel {
 
     }
 
+
     public static void updateBackupsObservableList() {
 
         Platform.runLater(() -> {
             availableBackupsObservableList.clear();
 
-            for (int index = listBackups().size() - 1; index >= 0; index--) {
+            for (int index = listBackups().size() - 1; index > 0; index--) {
                 availableBackupsObservableList.add(listBackups().get(index).toString());
             }
         });
