@@ -16,6 +16,7 @@ import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,56 +47,51 @@ public class BackupScreenController extends PrototypeController {
     Label minutesInvalidAlertLabel;
 
 
-    public void initialize(){
+    public void initialize() {
         availableBackupsListView.setItems(BackupArchiveModel.availableBackupsObservableList);
     }
 
 
     @FXML
-    public void applySettings(){
-
-        try {
-            //get user inputs and convert to archiveDBModel form
-            int maxBackupNum = Integer.parseInt(maxBackupNumField.getText());
-
-            int hh = Integer.parseInt(backupEveryHourField.getText());
-            int mm = Integer.parseInt(backupEveryMinuteField.getText());
-            int backupCreationIntervalInSeconds = DateTimeModel.convertHHMMSSToSeconds(hh, mm, 0);
+    public void applySettings() {
 
 
-            //update data in ArchiveDBModel
-            BackupArchiveModel.maxBackupNum = maxBackupNum;
-            BackupArchiveModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
+        int maxBackupNum = Integer.parseInt(maxBackupNumField.getText());
 
-            System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
-            System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
+        int hh = Integer.parseInt(backupEveryHourField.getText());
+        int mm = Integer.parseInt(backupEveryMinuteField.getText());
+        int backupCreationIntervalInSeconds = DateTimeModel.convertHHMMSSToSeconds(hh, mm, 0);
 
-            WriteToDBModel.updateBackupSettings(SettingsDBModel.maxBackupNum, maxBackupNum);
-            WriteToDBModel.updateBackupSettings(SettingsDBModel.backupCreationInterval, backupCreationIntervalInSeconds);
 
-            System.out.println("(from apply settings) settings saved to DB");
-            System.out.println(BackupArchiveModel.backupCreationIntervalInSeconds);
+        //update data in ArchiveDBModel
+        BackupArchiveModel.maxBackupNum = maxBackupNum;
+        BackupArchiveModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
 
-            App.backupRegularly.stop();
-            App.backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
-            App.backupRegularly.start();
+        System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
+        System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
 
-        } catch (NumberFormatException e) {
-            System.out.println("(from BackupScreenController.applySettings) invalid settings");
-            //do nothing if cannot format any of the number string user inputs
-        }
+        WriteToDBModel.updateBackupSettings(SettingsDBModel.maxBackupNum, maxBackupNum);
+        WriteToDBModel.updateBackupSettings(SettingsDBModel.backupCreationInterval, backupCreationIntervalInSeconds);
+
+        System.out.println("(from apply settings) settings saved to DB");
+        System.out.println(BackupArchiveModel.backupCreationIntervalInSeconds);
+
+        App.backupRegularly.stop();
+        App.backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
+        App.backupRegularly.start();
+
 
     }
 
 
     //when an item in availableBackupsListView is clicked
     @FXML
-    public void setSelectedBackup(){
+    public void setSelectedBackup() {
 
         String backupName = (String) availableBackupsListView.getSelectionModel().getSelectedItem();
 
         //disable load button if invalid backup selected
-        if (backupName == null || backupName == ""){
+        if (backupName == null || backupName == "") {
             loadBackupButton.setDisable(true);
             System.out.println("(from BackupScreenController.setSelectedBackup) invalid selection");
         }
@@ -106,7 +102,6 @@ public class BackupScreenController extends PrototypeController {
             System.out.println("(from BackupScreenController.setSelectedBackup) backup to load: " + selectedBackup);
         }
     }
-
 
 
     @FXML
@@ -120,13 +115,13 @@ public class BackupScreenController extends PrototypeController {
                 );
 
 
-        if (WriteToDBModel.dataBackupProcessAtRest){
+        if (WriteToDBModel.dataBackupProcessAtRest) {
             //just create backup
             BackupArchiveModel.loadBackup(formattedBackupName);
 
         } else {
             //wait until data backup process finished then create backup to prevent DB corruption
-            while (!WriteToDBModel.dataBackupProcessAtRest){
+            while (!WriteToDBModel.dataBackupProcessAtRest) {
 
             }
 
@@ -145,7 +140,7 @@ public class BackupScreenController extends PrototypeController {
     }
 
     //displays current settings stored in ArchiveDBModel in settings fields
-    public void displaySettings(){
+    public void displaySettings() {
         maxBackupNumField.setText(String.valueOf(BackupArchiveModel.maxBackupNum));
 
         DateTimeModel.Time time = DateTimeModel.parseDuration(BackupArchiveModel.backupCreationIntervalInSeconds);
@@ -158,7 +153,7 @@ public class BackupScreenController extends PrototypeController {
 
 
     //sets invalid label over the input field to visible and disable apply button if user input not a valid number, visible and undisable if not
-    private void showInvalidInputAlertLabelAndDisableApplyButton(Label alertLabel, TextField inputField){
+    private void showInvalidInputAlertLabelAndDisableApplyButton(Label alertLabel, TextField inputField) {
 
         String input = inputField.getText();
 
@@ -177,17 +172,16 @@ public class BackupScreenController extends PrototypeController {
     public void maxBackupNumFieldTyped() {
         showInvalidInputAlertLabelAndDisableApplyButton(maxNumBackupsInvalidAlertLabel, maxBackupNumField);
     }
+
     @FXML
     public void minutesFieldTyped() {
         showInvalidInputAlertLabelAndDisableApplyButton(minutesInvalidAlertLabel, backupEveryMinuteField);
     }
+
     @FXML
     public void hoursFieldTyped() {
         showInvalidInputAlertLabelAndDisableApplyButton(hoursInvalidAlertLabel, backupEveryHourField);
     }
-
-
-
 
 
     @FXML
