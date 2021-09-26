@@ -3,8 +3,10 @@ package main.Controllers.Stats;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.App;
 import main.Controllers.PrototypeController;
@@ -25,13 +27,23 @@ public class BackupScreenController extends PrototypeController {
     String selectedBackup;
     @FXML
     Button loadBackupButton;
+
+
     @FXML
     TextField maxBackupNumField;
     @FXML
     TextField backupEveryHourField;
     @FXML
     TextField backupEveryMinuteField;
+    @FXML
+    Button applySettingsButton;
 
+    @FXML
+    Label maxNumBackupsInvalidAlertLabel;
+    @FXML
+    Label hoursInvalidAlertLabel;
+    @FXML
+    Label minutesInvalidAlertLabel;
 
 
     public void initialize(){
@@ -145,6 +157,36 @@ public class BackupScreenController extends PrototypeController {
     }
 
 
+    //sets invalid label over the input field to visible and disable apply button if user input not a valid number, visible and undisable if not
+    private void showInvalidInputAlertLabelAndDisableApplyButton(Label alertLabel, TextField inputField){
+
+        String input = inputField.getText();
+
+        try {
+            Integer.parseInt(input);
+            alertLabel.setVisible(false);
+            applySettingsButton.setDisable(false);
+
+        } catch (NumberFormatException e) {
+            alertLabel.setVisible(true);
+            applySettingsButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void maxBackupNumFieldTyped() {
+        showInvalidInputAlertLabelAndDisableApplyButton(maxNumBackupsInvalidAlertLabel, maxBackupNumField);
+    }
+    @FXML
+    public void minutesFieldTyped() {
+        showInvalidInputAlertLabelAndDisableApplyButton(minutesInvalidAlertLabel, backupEveryMinuteField);
+    }
+    @FXML
+    public void hoursFieldTyped() {
+        showInvalidInputAlertLabelAndDisableApplyButton(hoursInvalidAlertLabel, backupEveryHourField);
+    }
+
+
 
 
 
@@ -165,4 +207,5 @@ public class BackupScreenController extends PrototypeController {
     @FXML
     public void deleteBackup(ActionEvent actionEvent) {
     }
+
 }

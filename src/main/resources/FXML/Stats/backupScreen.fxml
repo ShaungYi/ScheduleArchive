@@ -22,123 +22,145 @@
             </Button>
         </HBox>
     </top>
-   <center>
-       <HBox BorderPane.alignment="TOP_CENTER">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="714.0" prefWidth="611.0">
-               <children>
-                  <Label text="Select A Backup">
-                     <font>
-                        <Font size="60.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ListView fx:id="availableBackupsListView" onMouseClicked="#setSelectedBackup" prefHeight="396.0" prefWidth="611.0" />
-                   <HBox alignment="CENTER" spacing="20.0">
-                       <Button mnemonicParsing="false" onAction="#createBackup" text="Create">
-                           <font>
-                               <Font size="40.0" />
-                           </font>
-                           <VBox.margin>
-                               <Insets top="50.0" />
-                           </VBox.margin>
-                       </Button>
-                       <Button fx:id="loadBackupButton" disable="true" mnemonicParsing="false" onAction="#loadBackupArchive" text="Load">
-                           <font>
-                               <Font size="40.0" />
-                           </font>
-                           <VBox.margin>
-                               <Insets top="50.0" />
-                           </VBox.margin>
-                       </Button>
-                       <Button disable="true" mnemonicParsing="false" onAction="#deleteBackup" text="Delete">
-                           <font>
-                               <Font size="40.0" />
-                           </font>
-                           <VBox.margin>
-                               <Insets top="50.0" />
-                           </VBox.margin>
-                       </Button>
-                   </HBox>
-
-               </children>
-               <HBox.margin>
-                  <Insets left="45.0" right="45.0" />
-               </HBox.margin></VBox>
-            <VBox alignment="CENTER" prefHeight="714.0" prefWidth="912.0">
-               <padding>
-                  <Insets left="45.0" right="45.0" />
-               </padding>
-               <children>
-                  <Label text="Settings">
-                     <font>
-                        <Font size="60.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Maximum Number of Backups">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin></Label>
-                        <TextField fx:id="maxBackupNumField" prefHeight="27.0" prefWidth="60.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Create Backup Every:">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
+    <center>
+        <HBox BorderPane.alignment="TOP_CENTER">
+            <children>
+                <VBox alignment="TOP_CENTER" prefHeight="714.0" prefWidth="611.0">
+                    <children>
+                        <Label text="Select A Backup">
+                            <font>
+                                <Font size="60.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="50.0" />
+                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="backupEveryHourField" prefHeight="27.0" prefWidth="60.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font></TextField>
-                        <Label text="hours">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="6.0" right="20.0" />
-                           </HBox.margin></Label>
-                         <TextField fx:id="backupEveryMinuteField" prefHeight="27.0" prefWidth="60.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font></TextField>
-                         <Label text="minutes">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="6.0" right="20.0" />
-                           </HBox.margin></Label>
-                     </children></HBox>
-                  <Button mnemonicParsing="false" onAction="#applySettings" text="Apply">
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-         </children></HBox>
-   </center>
+                        <ListView fx:id="availableBackupsListView" onMouseClicked="#setSelectedBackup" prefHeight="396.0" prefWidth="611.0" />
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <Button mnemonicParsing="false" onAction="#createBackup" text="Create">
+                                <font>
+                                    <Font size="40.0" />
+                                </font>
+                                <VBox.margin>
+                                    <Insets top="50.0" />
+                                </VBox.margin>
+                            </Button>
+                            <Button fx:id="loadBackupButton" disable="true" mnemonicParsing="false" onAction="#loadBackupArchive" text="Load">
+                                <font>
+                                    <Font size="40.0" />
+                                </font>
+                                <VBox.margin>
+                                    <Insets top="50.0" />
+                                </VBox.margin>
+                            </Button>
+                            <Button disable="true" mnemonicParsing="false" onAction="#deleteBackup" text="Delete">
+                                <font>
+                                    <Font size="40.0" />
+                                </font>
+                                <VBox.margin>
+                                    <Insets top="50.0" />
+                                </VBox.margin>
+                            </Button>
+                        </HBox>
+
+                    </children>
+                    <HBox.margin>
+                        <Insets left="45.0" right="45.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="714.0" prefWidth="912.0">
+                    <padding>
+                        <Insets left="45.0" right="45.0" />
+                    </padding>
+                    <children>
+                        <Label text="Settings">
+                            <font>
+                                <Font size="60.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="50.0" />
+                            </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label text="Maximum Number of Backups">
+                                    <font>
+                                        <Font size="25.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <VBox alignment="CENTER">
+                                    <Label fx:id="maxNumBackupsInvalidAlertLabel" style="-fx-text-fill: red;" text="Invalid!" visible="false" />
+                                    <TextField fx:id="maxBackupNumField" onKeyTyped="#maxBackupNumFieldTyped" prefHeight="27.0" prefWidth="60.0">
+                                        <font>
+                                            <Font size="25.0" />
+                                        </font>
+                                    </TextField>
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding>
+                                </VBox>
+
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label text="Create Backup Every:">
+                                    <font>
+                                        <Font size="25.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets right="20.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <VBox alignment="TOP_CENTER">
+                                    <Label fx:id="hoursInvalidAlertLabel" style="-fx-text-fill: red;" text="Invalid!" visible="false" />
+                                    <TextField fx:id="backupEveryHourField" onKeyTyped="#hoursFieldTyped" prefHeight="27.0" prefWidth="60.0">
+                                        <font>
+                                            <Font size="25.0" />
+                                        </font>
+                                    </TextField>
+                                </VBox>
+                                <Label text="hours">
+                                    <font>
+                                        <Font size="25.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="6.0" right="20.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <VBox alignment="TOP_CENTER">
+                                    <Label fx:id="minutesInvalidAlertLabel" style="-fx-text-fill: red;" text="Invalid!" visible="false" />
+                                    <TextField fx:id="backupEveryMinuteField" onKeyTyped="#minutesFieldTyped" prefHeight="27.0" prefWidth="60.0">
+                                        <font>
+                                            <Font size="25.0" />
+                                        </font>
+                                    </TextField>
+                                </VBox>
+
+                                <Label text="minutes">
+                                    <font>
+                                        <Font size="25.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="6.0" right="20.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Button fx:id="applySettingsButton" mnemonicParsing="false" onAction="#applySettings" text="Apply">
+                            <VBox.margin>
+                                <Insets top="50.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="40.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
 </BorderPane>
