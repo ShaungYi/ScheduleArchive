@@ -80,12 +80,12 @@ def fillEvents(cursor, data):
 
             if dateOfRow != date:
 
-                if endTime < 86400:
+                if endTime < DateTimeModel.SECONDS_IN_A_DAY:
 
                     if startTime < endTime:
-                        startTime += 86400
+                        startTime += DateTimeModel.SECONDS_IN_A_DAY
 
-                    endTime += 86400
+                    endTime += DateTimeModel.SECONDS_IN_A_DAY
 
             tableContent.append((activityID, startTime, endTime, date))
             activityCount.append(activityID)

@@ -57,7 +57,6 @@ public class Editor extends PrototypeController {
     public static final double WIDTH_OF_1_SEC = 0.4;
     public static final int FIVE_MINS_IN_SECONDS = 300;
     private double dateChangePoint = -1;
-    public static final int SECONDS_IN_A_DAY = 86400;
 
 
     private String firstDate = "";
@@ -1078,7 +1077,7 @@ public class Editor extends PrototypeController {
 
 
                 if (activity.getEndTimeSecs() > endTimeSecs){
-                    endTimeSecs += SECONDS_IN_A_DAY;
+                    endTimeSecs += DateTimeModel.SECONDS_IN_A_DAY;
                 }
             }
         }
@@ -1201,7 +1200,7 @@ public class Editor extends PrototypeController {
 
 
     private void configureDateChangePoint(int beginTime) {
-        dateChangePoint = (double) (SECONDS_IN_A_DAY - beginTime) * WIDTH_OF_1_SEC + 200;
+        dateChangePoint = (double) (DateTimeModel.SECONDS_IN_A_DAY - beginTime) * WIDTH_OF_1_SEC + 200;
 
         Line upperBorder = new Line(0, 0, 0, 200);
         upperBorder.setLayoutY(0);
@@ -1374,8 +1373,8 @@ public class Editor extends PrototypeController {
 
         int template;
 
-        if (seconds > SECONDS_IN_A_DAY) {
-            template = seconds - SECONDS_IN_A_DAY;
+        if (seconds > DateTimeModel.SECONDS_IN_A_DAY) {
+            template = seconds - DateTimeModel.SECONDS_IN_A_DAY;
         } else {
             template = seconds;
         }

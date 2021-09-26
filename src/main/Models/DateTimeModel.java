@@ -5,10 +5,10 @@ import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.ReadFromDBModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DateTimeModel {
+    public static final int SECONDS_IN_A_DAY = 86400;
     public static String currentDay = LocalDate.now().toString();
     public static String selectedDay;
     static final String [] monthNamesInOrder = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};

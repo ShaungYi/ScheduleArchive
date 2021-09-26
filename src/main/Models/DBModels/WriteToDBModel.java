@@ -47,11 +47,11 @@ public class WriteToDBModel {
                         name = "no name";
                     }
 
-                    // adding 86400 to endTime if the time is above 12:00 am
+                    // adding DateTimeModel.SECONDS_IN_A_DAY to endTime if the time is above 12:00 am
 
-                    if (!date.equals(day) && endTime < 86400) {
-                        startTime += 86400;
-                        endTime += 86400;
+                    if (!date.equals(day) && endTime < DateTimeModel.SECONDS_IN_A_DAY) {
+                        startTime += DateTimeModel.SECONDS_IN_A_DAY;
+                        endTime += DateTimeModel.SECONDS_IN_A_DAY;
                     }
 
                     // searching for activityID for the event name and category
@@ -136,9 +136,9 @@ public class WriteToDBModel {
                     endTime = event.getEndTimeSecs();
                     date = event.getDate();
 
-                    if (date.equals(DateTimeModel.subDayFromDate(DateTimeModel.currentDay, 1)) && endTime < 86400) {
-                        startTime += 86400;
-                        endTime += 86400;
+                    if (date.equals(DateTimeModel.subDayFromDate(DateTimeModel.currentDay, 1)) && endTime < DateTimeModel.SECONDS_IN_A_DAY) {
+                        startTime += DateTimeModel.SECONDS_IN_A_DAY;
+                        endTime += DateTimeModel.SECONDS_IN_A_DAY;
                     }
 
                     // deleting events that's not in the archive

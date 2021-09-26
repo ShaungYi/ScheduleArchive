@@ -50,7 +50,7 @@ public class TimeLine extends PrototypeController {
     public static final double WIDTH_OF_1_SEC = 0.4;
     public static final int FIVE_MINS_IN_SECONDS = 300;
     private double dateChangePoint = -1;
-    public static final int SECONDS_IN_A_DAY = 86400;
+    public static final int SECONDS_IN_A_DAY = DateTimeModel.SECONDS_IN_A_DAY;
     public static final double screenWidth = 1280.0;
 
 

@@ -158,16 +158,16 @@ public class Loader extends PrototypeController {
             int dayStartTime = day.get(0).getStartTimeSecs();
             int currentTimeInSec = DateTimeModel.getCurrentTimeInSeconds();
 
-            // adding 86400 to currentTimeInSec if the date has changed
+            // adding DateTimeModel.SECONDS_IN_A_DAY to currentTimeInSec if the date has changed
             if (currentDay.equals(DateTimeModel.addDayToDate(currentSelectedDate, 1))) {
-                currentTimeInSec += 86400;
+                currentTimeInSec += DateTimeModel.SECONDS_IN_A_DAY;
             }
 
             System.out.println("(from canResume) currentTime in seconds: " + currentTimeInSec);
             System.out.println("(from canResume) dayStartTime of the selectedDay: " + dayStartTime);
 
-            // returning True if the time pass since the dayStartTime of the selected day is less than 86400
-            if (currentTimeInSec - dayStartTime < 86400) {
+            // returning True if the time pass since the dayStartTime of the selected day is less than DateTimeModel.SECONDS_IN_A_DAY
+            if (currentTimeInSec - dayStartTime < DateTimeModel.SECONDS_IN_A_DAY) {
                 return true;
             }
         }
