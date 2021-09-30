@@ -11,11 +11,14 @@ import java.io.IOException;
 
 public class Barcomponent extends AnchorPane {
 
+    String date;
 
     public BarComponentController controller;
 
     public Barcomponent(String date, double barFrequency){
         super();
+
+        this.date = date;
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -24,6 +27,7 @@ public class Barcomponent extends AnchorPane {
             this.getChildren().add(n);
 
             controller = fxmlLoader.getController();
+            controller.thisComp = this;
 
             controller.configure(date, barFrequency);
 
@@ -64,6 +68,16 @@ public class Barcomponent extends AnchorPane {
             this.setDurationLabelText("");
         }
 
+
+
+    }
+
+
+
+
+
+    public String getDate() {
+        return date;
     }
 
 }

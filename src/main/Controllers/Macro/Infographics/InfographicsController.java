@@ -1,23 +1,35 @@
 package main.Controllers.Macro.Infographics;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import main.App;
 import main.Controllers.Macro.Infographics.Barcomponent.Barcomponent;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.Table;
 import main.Models.*;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.Graphics.InfographicsModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
+import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
+
+import java.io.File;
+import java.lang.reflect.Field;
 
 
 public class InfographicsController extends PrototypeController {
@@ -70,6 +82,38 @@ public class InfographicsController extends PrototypeController {
         //align labels
         new Thread(totallyUnnecessaryBackgroundLabelAlignProcessBecauseOfAStupidCannotGetBoundsInInitializeMethodError).start();
 
+
+        //set dayinfocontainerpane
+        InfographicsModel.dayInfoPopupListViewContainerPane = grandmotherPane;
+
+
+
+        //configure day info popup
+
+        InfographicsModel.dayInfoPopupListView.setEditable(false);
+        InfographicsModel.dayInfoPopupListView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        TableColumn nameCol = new TableColumn("Activity Name");
+        TableColumn durationCol = new TableColumn("Net Duration");
+        InfographicsModel.dayInfoPopupListView.getColumns().clear();
+        InfographicsModel.dayInfoPopupListView.getColumns().addAll(nameCol, durationCol);
+        System.out.println(InfographicsModel.dayInfoPopupListView.getColumns());
+
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("header"));
+        durationCol.setCellValueFactory(
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("durationParsed"));
+
+        InfographicsModel.dayInfoPopupListView.setItems(InfographicsModel.dayInfoPopupData);
+
+
+
+        File f = new File("src/main/resources/customNodes/activitySummaryTableView/activity-summary-table-view.css");
+        InfographicsModel.dayInfoPopupListView.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+
+
+        InfographicsModel.dayInfoPopupListView.setPrefWidth(380);
+        InfographicsModel.dayInfoPopupListView.setPrefHeight(500);
     }
 
     private Runnable totallyUnnecessaryBackgroundLabelAlignProcessBecauseOfAStupidCannotGetBoundsInInitializeMethodError = () -> {
@@ -270,26 +314,42 @@ public class InfographicsController extends PrototypeController {
     }
 
     private void addDayBar(String date){
-        Barcomponent barcomponent = new Barcomponent(DateTimeModel.getDayIDFromDate(date), 0);
+        Barcomponent barcomponent = new Barcomponent(date, 0);
         infographicPane.getChildren().add(barcomponent);
-        BarComponentManager.addBarComp(barcomponent, date);
+        BarComponentManager.addBarComp(barcomponent);
     }
 
 
 
     @FXML
     public void goBack(){
+        hideInfoPopup();
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, motherPane.getScene());
         //set default macro screen to search
         SceneNavigationModel.macro = SceneNavigationModel.searchScreen;
     }
     @FXML
     public void goToStats(){
+        hideInfoPopup();
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, motherPane.getScene());
     }
     @FXML
     public void goToCreator(){
+        hideInfoPopup();
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, motherPane.getScene());
+    }
+
+
+    @FXML
+    public void hideInfoPopupOnMouseClicked(MouseEvent event){
+        System.out.println(event.getTarget());
+        if (!(event.getTarget() instanceof Rectangle)){
+            hideInfoPopup();
+        }
+    }
+
+    private void hideInfoPopup(){
+        InfographicsModel.dayInfoPopupListViewContainerPane.getChildren().remove(InfographicsModel.dayInfoPopupListView);
     }
 
 }

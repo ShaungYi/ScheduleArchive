@@ -9,7 +9,8 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
+import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,9 +34,9 @@ public class Stats extends PrototypeController {
     public static boolean currentTimelineLayoutInitialized = false;
 
 
-    public static Comparator<Table.chartDataUnit> chartDataUnitComparator = new Comparator<Table.chartDataUnit>() {
+    public static Comparator<ActivitySummaryTableView.chartDataUnit> chartDataUnitComparator = new Comparator<ActivitySummaryTableView.chartDataUnit>() {
         @Override
-        public int compare(Table.chartDataUnit u1, Table.chartDataUnit u2) {
+        public int compare(ActivitySummaryTableView.chartDataUnit u1, ActivitySummaryTableView.chartDataUnit u2) {
             return ((Integer)u2.getDurationSecs()).compareTo((Integer) u1.getDurationSecs());
         }
     };

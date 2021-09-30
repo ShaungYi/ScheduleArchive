@@ -15,7 +15,7 @@ import main.Controllers.Macro.Search.SearchTag.SearchTag;
 import main.Controllers.PrototypeController;
 import main.Models.MacroDataModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 
 public class SearchScreen extends PrototypeController {

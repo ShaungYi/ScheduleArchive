@@ -1,12 +1,9 @@
 package main.resources.customNodes.activitySummaryTableView;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
-import main.Controllers.Stats.Table;
+import main.Models.DateTimeModel;
 
 public class ActivitySummaryTableView extends TableView {
 
@@ -19,7 +16,7 @@ public class ActivitySummaryTableView extends TableView {
 
 
     EventHandler extendOnMouseEnter = event -> {
-        TableView<Table.chartDataUnit> sourceTable = (TableView) event.getSource();
+        TableView<chartDataUnit> sourceTable = (TableView) event.getSource();
         TableColumn headerCol = sourceTable.getColumns().get(0);
         TableColumn durationCol = sourceTable.getColumns().get(1);
 
@@ -57,11 +54,8 @@ public class ActivitySummaryTableView extends TableView {
 
 
 
-
-
-
     EventHandler shrinkOnMouseExit = event -> {
-        TableView<Table.chartDataUnit> sourceTable = (TableView) event.getSource();
+        TableView<chartDataUnit> sourceTable = (TableView) event.getSource();
         TableColumn headerCol = sourceTable.getColumns().get(0);
         TableColumn durationCol = sourceTable.getColumns().get(1);
 
@@ -69,4 +63,36 @@ public class ActivitySummaryTableView extends TableView {
         durationCol.setPrefWidth(190.0);
     };
 
+    public static class chartDataUnit{
+        String header;
+        int durationSecs;
+        String durationParsed;
+
+        public chartDataUnit(String header, int durationSecs){
+            this.header = header;
+            this.durationSecs = durationSecs;
+            durationParsed = durationSecs == -1 ? "" : DateTimeModel.parseDurationToString(durationSecs, false);
+        }
+
+        public String getHeader() {
+            return header;
+        }
+
+        public String getDurationParsed() {
+            return durationParsed;
+        }
+
+        public int getDurationSecs() {
+            return durationSecs;
+        }
+
+        public void setDurationSecs(int durationSecs) {
+            this.durationSecs = durationSecs;
+            this.durationParsed = DateTimeModel.parseDurationToString(durationSecs, false);
+        }
+
+        public String toString(){
+            return "header: "+header+", duration: "+durationParsed;
+        }
+    }
 }

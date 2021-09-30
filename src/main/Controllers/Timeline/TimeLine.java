@@ -16,7 +16,7 @@ import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 

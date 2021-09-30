@@ -11,7 +11,7 @@ import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;

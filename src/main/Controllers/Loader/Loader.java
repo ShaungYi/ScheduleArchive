@@ -12,7 +12,7 @@ import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 import java.io.IOException;

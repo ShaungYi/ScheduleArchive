@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.Models.BackupArchiveModel;
 import main.Models.DBModels.*;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.EditLog;
 
 

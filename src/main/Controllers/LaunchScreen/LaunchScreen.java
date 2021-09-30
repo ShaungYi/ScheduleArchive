@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ReadFromDBModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 
 public class LaunchScreen extends PrototypeController {
     @FXML

@@ -7,7 +7,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 

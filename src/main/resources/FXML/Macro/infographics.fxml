@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="grandmotherPane" styleClass="background-pane" stylesheets="@infographics.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Infographics.InfographicsController">
+<AnchorPane fx:id="grandmotherPane" onMouseClicked="#hideInfoPopupOnMouseClicked" styleClass="background-pane" stylesheets="@infographics.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Infographics.InfographicsController">
    <children>
       <HBox fx:id="motherPane" onScroll="#onScroll" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: white;">
          <children>
@@ -34,15 +34,15 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#goBack" prefHeight="56.0" prefWidth="130.0" styleClass="navigation-button" text="Back">
+      <Button stylesheets="@../../customNodes/navigationButton/navigation-button.css" layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#goBack" prefHeight="56.0" prefWidth="130.0" styleClass="navigation-button" text="Back">
          <font>
             <Font size="30.0" />
          </font></Button>
-      <Button fx:id="goToCreatorButton" layoutX="313.0" layoutY="6.0" mnemonicParsing="false" onAction="#goToCreator" prefHeight="57.0" prefWidth="152.0" styleClass="navigation-button" text="Creator">
+      <Button fx:id="goToCreatorButton" layoutX="313.0" layoutY="6.0" mnemonicParsing="false" onAction="#goToCreator" prefHeight="57.0" prefWidth="152.0" styleClass="navigation-button" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
          <font>
             <Font size="30.0" />
          </font></Button>
-      <Button layoutX="168.0" layoutY="6.0" mnemonicParsing="false" onAction="#goToStats" prefHeight="57.0" prefWidth="130.0" styleClass="navigation-button" text="Stats">
+      <Button stylesheets="@../../customNodes/navigationButton/navigation-button.css" layoutX="168.0" layoutY="6.0" mnemonicParsing="false" onAction="#goToStats" prefHeight="57.0" prefWidth="130.0" styleClass="navigation-button" text="Stats">
          <font>
             <Font size="30.0" />
          </font></Button>

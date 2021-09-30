@@ -11,10 +11,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ScrollEvent;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
-import main.Models.DateTimeModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
+import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.util.ArrayList;
 
@@ -28,127 +28,127 @@ public class Table extends PrototypeController {
 
 
     @FXML
-    TableView<chartDataUnit> categoryTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> categoryTable;
     @FXML
-    TableColumn<chartDataUnit, String> categoryCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> categoryCol;
     @FXML
-    TableColumn<chartDataUnit, String> durationByCategoryCol;
-    public static ObservableList<chartDataUnit> categoryData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> durationByCategoryCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> categoryData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> studyTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> studyTable;
     @FXML
-    TableColumn<chartDataUnit, String> studyCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> studyCol;
     @FXML
-    TableColumn<chartDataUnit, String> studyDurationCol;
-    public static ObservableList<chartDataUnit> studyData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> studyDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> studyData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> entertainmentTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> entertainmentTable;
     @FXML
-    TableColumn<chartDataUnit, String> entertainmentCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> entertainmentCol;
     @FXML
-    TableColumn<chartDataUnit, String> entertainmentDurationCol;
-    public static ObservableList<chartDataUnit> entertainmentData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> entertainmentDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> entertainmentData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> spiritualityTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> spiritualityTable;
     @FXML
-    TableColumn<chartDataUnit, String> spiritualityCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> spiritualityCol;
     @FXML
-    TableColumn<chartDataUnit, String> spiritualityDurationCol;
-    public static ObservableList<chartDataUnit> spiritualityData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> spiritualityDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> spiritualityData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> exerciseTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> exerciseTable;
     @FXML
-    TableColumn<chartDataUnit, String> exerciseCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> exerciseCol;
     @FXML
-    TableColumn<chartDataUnit, String> exerciseDurationCol;
-    public static ObservableList<chartDataUnit> exerciseData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> exerciseDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> exerciseData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> restTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> restTable;
     @FXML
-    TableColumn<chartDataUnit, String> restCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> restCol;
     @FXML
-    TableColumn<chartDataUnit, String> restDurationCol;
-    public static ObservableList<chartDataUnit> restData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> restDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> restData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> readingTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> readingTable;
     @FXML
-    TableColumn<chartDataUnit, String> readingCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> readingCol;
     @FXML
-    TableColumn<chartDataUnit, String> readingDurationCol;
-    public static ObservableList<chartDataUnit> readingData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> readingDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> readingData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> writingTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> writingTable;
     @FXML
-    TableColumn<chartDataUnit, String> writingCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> writingCol;
     @FXML
-    TableColumn<chartDataUnit, String> writingDurationCol;
-    public static ObservableList<chartDataUnit> writingData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> writingDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> writingData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> artsTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> artsTable;
     @FXML
-    TableColumn<chartDataUnit, String> artsCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> artsCol;
     @FXML
-    TableColumn<chartDataUnit, String> artsDurationCol;
-    public static ObservableList<chartDataUnit> artsData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> artsDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> artsData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
 
 
     @FXML
-    TableView<chartDataUnit> miscellaneousTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> miscellaneousTable;
     @FXML
-    TableColumn<chartDataUnit, String> miscellaneousCol;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> miscellaneousCol;
     @FXML
-    TableColumn<chartDataUnit, String> miscellaneousDurationCol;
-    public static ObservableList<chartDataUnit> miscellaneousData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> miscellaneousDurationCol;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> miscellaneousData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
     public static Boolean miscellaneousTableInitialized = false;
 
     @FXML
-    TableView<chartDataUnit> socialTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> socialTable;
     @FXML
-    TableColumn<chartDataUnit, String> socialColumn;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> socialColumn;
     @FXML
-    TableColumn<chartDataUnit, String> socialDurationColumn;
-    public static ObservableList<chartDataUnit> socialData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> socialDurationColumn;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> socialData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
     public static Boolean socialTableInitialized = false;
 
 
     @FXML
-    TableView<chartDataUnit> mediaTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> mediaTable;
     @FXML
-    TableColumn<chartDataUnit, String> mediaColumn;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> mediaColumn;
     @FXML
-    TableColumn<chartDataUnit, String> mediaDurationColumn;
-    public static ObservableList<chartDataUnit> mediaData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> mediaDurationColumn;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> mediaData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
     public static Boolean mediaTableInitialized = false;
 
     @FXML
-    TableView<chartDataUnit> serviceTable;
+    TableView<ActivitySummaryTableView.chartDataUnit> serviceTable;
     @FXML
-    TableColumn<chartDataUnit, String> serviceColumn;
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> serviceColumn;
     @FXML
-    TableColumn<chartDataUnit, String> serviceDurationColumn;
-    public static ObservableList<chartDataUnit> serviceData = FXCollections.observableArrayList(new chartDataUnit("",-1));
+    TableColumn<ActivitySummaryTableView.chartDataUnit, String> serviceDurationColumn;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> serviceData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
     public static Boolean serviceTableInitialized = false;
 
 
 
 
-    public static chartDataUnit total = new chartDataUnit("Total",0);
+    public static ActivitySummaryTableView.chartDataUnit total = new ActivitySummaryTableView.chartDataUnit("Total",0);
 
 
 
@@ -179,37 +179,37 @@ public class Table extends PrototypeController {
 
     public void setupCategoryChart(){
         categoryData = FXCollections.observableArrayList(
-                new chartDataUnit("Study",0),
-                new chartDataUnit("Entertainment",0),
-                new chartDataUnit("Spirituality",0),
-                new chartDataUnit("Exercise",0),
-                new chartDataUnit("Rest",0),
-                new chartDataUnit("Reading",0),
-                new chartDataUnit("Writing",0),
-                new chartDataUnit("Arts",0),
-                new chartDataUnit("Social",0),
-                new chartDataUnit("Media",0),
-                new chartDataUnit("Service",0),
-                new chartDataUnit("Miscellaneous",0),
+                new ActivitySummaryTableView.chartDataUnit("Study",0),
+                new ActivitySummaryTableView.chartDataUnit("Entertainment",0),
+                new ActivitySummaryTableView.chartDataUnit("Spirituality",0),
+                new ActivitySummaryTableView.chartDataUnit("Exercise",0),
+                new ActivitySummaryTableView.chartDataUnit("Rest",0),
+                new ActivitySummaryTableView.chartDataUnit("Reading",0),
+                new ActivitySummaryTableView.chartDataUnit("Writing",0),
+                new ActivitySummaryTableView.chartDataUnit("Arts",0),
+                new ActivitySummaryTableView.chartDataUnit("Social",0),
+                new ActivitySummaryTableView.chartDataUnit("Media",0),
+                new ActivitySummaryTableView.chartDataUnit("Service",0),
+                new ActivitySummaryTableView.chartDataUnit("Miscellaneous",0),
                 total);
 
         categoryCol.setCellValueFactory(
-                new PropertyValueFactory<chartDataUnit,String>("header"));
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("header"));
 
         durationByCategoryCol.setCellValueFactory(
-                new PropertyValueFactory<chartDataUnit,String>("durationParsed"));
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("durationParsed"));
 
         categoryTable.setItems(categoryData);
 
     }
 
 
-    public void setUpActivityChart(TableView<chartDataUnit> table, TableColumn<chartDataUnit, String> header, TableColumn<chartDataUnit, String> duration, ObservableList<chartDataUnit> data){
+    public void setUpActivityChart(TableView<ActivitySummaryTableView.chartDataUnit> table, TableColumn<ActivitySummaryTableView.chartDataUnit, String> header, TableColumn<ActivitySummaryTableView.chartDataUnit, String> duration, ObservableList<ActivitySummaryTableView.chartDataUnit> data){
 
         header.setCellValueFactory(
-                new PropertyValueFactory<chartDataUnit,String>("header"));
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("header"));
         duration.setCellValueFactory(
-                new PropertyValueFactory<chartDataUnit,String>("durationParsed"));
+                new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("durationParsed"));
         table.setItems(data);
     }
 
@@ -249,9 +249,9 @@ public class Table extends PrototypeController {
 
 
 
-            if (((chartDataUnit)data.get(0)).getHeader().equals("")){
+            if (((ActivitySummaryTableView.chartDataUnit)data.get(0)).getHeader().equals("")){
                 data.clear();
-                data.add(new chartDataUnit(header, duration));
+                data.add(new ActivitySummaryTableView.chartDataUnit(header, duration));
                 return true;
             }
 
@@ -265,12 +265,12 @@ public class Table extends PrototypeController {
 
             for(int i = 0; i < data.size(); i++){
 
-                chartDataUnit unit = (chartDataUnit) data.get(i);
+                ActivitySummaryTableView.chartDataUnit unit = (ActivitySummaryTableView.chartDataUnit) data.get(i);
 
                 if (unit.getHeader().equals(header)){
                     int newDuration = unit.getDurationSecs() + duration;
                     data.remove(unit);
-                    data.add(i ,new chartDataUnit(header, newDuration));
+                    data.add(i ,new ActivitySummaryTableView.chartDataUnit(header, newDuration));
 //                    if (unit.getHeader().equals("Service")){
 //                        System.out.println(unit);
 //                        System.out.println(Stats.parseDuration(unit.getDurationSecs()));
@@ -280,7 +280,7 @@ public class Table extends PrototypeController {
                 }
             }
             if (!fitsIn){
-                data.add(new chartDataUnit(header, duration));
+                data.add(new ActivitySummaryTableView.chartDataUnit(header, duration));
             }
 
 
@@ -295,7 +295,7 @@ public class Table extends PrototypeController {
         }
         updateTotal();
 
-        categoryData.add(new chartDataUnit("update data", 0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("update data", 0));
 
         categoryData.remove(categoryData.size() - 1);
 
@@ -314,18 +314,18 @@ public class Table extends PrototypeController {
 //        total = new chartDataUnit("Total",0);
 
 
-        categoryData.add(new chartDataUnit("Study",0));
-        categoryData.add(new chartDataUnit("Entertainment",0));
-        categoryData.add(new chartDataUnit("Spirituality",0));
-        categoryData.add(new chartDataUnit("Exercise",0));
-        categoryData.add(new chartDataUnit("Rest",0));
-        categoryData.add(new chartDataUnit("Reading",0));
-        categoryData.add(new chartDataUnit("Writing",0));
-        categoryData.add(new chartDataUnit("Arts",0));
-        categoryData.add(new chartDataUnit("Social",0));
-        categoryData.add(new chartDataUnit("Media",0));
-        categoryData.add(new chartDataUnit("Service",0));
-        categoryData.add(new chartDataUnit("Miscellaneous",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Study",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Entertainment",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Spirituality",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Exercise",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Rest",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Reading",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Writing",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Arts",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Social",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Media",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Service",0));
+        categoryData.add(new ActivitySummaryTableView.chartDataUnit("Miscellaneous",0));
         categoryData.add(total);
 
 
@@ -345,18 +345,18 @@ public class Table extends PrototypeController {
 
 
 
-        studyData.add(new chartDataUnit("", -1));
-        entertainmentData.add(new chartDataUnit("", -1));
-        spiritualityData.add(new chartDataUnit("", -1));
-        exerciseData.add(new chartDataUnit("", -1));
-        restData.add(new chartDataUnit("", -1));
-        readingData.add(new chartDataUnit("", -1));
-        writingData.add(new chartDataUnit("", -1));
-        artsData.add(new chartDataUnit("", -1));
-        socialData.add(new chartDataUnit("", -1));
-        mediaData.add(new chartDataUnit("", -1));
-        serviceData.add(new chartDataUnit("", -1));
-        miscellaneousData.add(new chartDataUnit("", -1));
+        studyData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        entertainmentData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        spiritualityData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        exerciseData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        restData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        readingData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        writingData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        artsData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        socialData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        mediaData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        serviceData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
+        miscellaneousData.add(new ActivitySummaryTableView.chartDataUnit("", -1));
 
 
 
@@ -448,7 +448,7 @@ public class Table extends PrototypeController {
 
     public static void moveTotalToBottom(){
 
-        chartDataUnit firstUnit = categoryData.get(0);
+        ActivitySummaryTableView.chartDataUnit firstUnit = categoryData.get(0);
 
         if (firstUnit.getHeader().equals("Total")){
             categoryData.remove(firstUnit);
@@ -469,36 +469,4 @@ public class Table extends PrototypeController {
     }
 
 
-    public static class chartDataUnit{
-        String header;
-        int durationSecs;
-        String durationParsed;
-
-        public chartDataUnit(String header, int durationSecs){
-            this.header = header;
-            this.durationSecs = durationSecs;
-            durationParsed = durationSecs == -1 ? "" : DateTimeModel.parseDurationToString(durationSecs, false);
-        }
-
-        public String getHeader() {
-            return header;
-        }
-
-        public String getDurationParsed() {
-            return durationParsed;
-        }
-
-        public int getDurationSecs() {
-            return durationSecs;
-        }
-
-        public void setDurationSecs(int durationSecs) {
-            this.durationSecs = durationSecs;
-            this.durationParsed = DateTimeModel.parseDurationToString(durationSecs, false);
-        }
-
-        public String toString(){
-            return "header: "+header+", duration: "+durationParsed;
-        }
-    }
 }

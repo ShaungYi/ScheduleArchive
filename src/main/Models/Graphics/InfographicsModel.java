@@ -1,6 +1,9 @@
 package main.Models.Graphics;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
@@ -10,6 +13,13 @@ import java.util.HashMap;
 public class InfographicsModel {
 
     public static ActivitySummaryTableView dayInfoPopupListView = new ActivitySummaryTableView();
+    public static double dayInfoPopupListViewHeight = 500;
+    public static double dayInfoPopupListViewWidth = 380;
+    public static double dayInfoPopupListViewCellHeight = 23;
+    public static double mindayInfoPopupListViewHeight = 62;
+    public static ObservableList<ActivitySummaryTableView.chartDataUnit> dayInfoPopupData = FXCollections.observableArrayList(new ActivitySummaryTableView.chartDataUnit("",-1));
+
+    public static Pane dayInfoPopupListViewContainerPane;
 
     public static double barWidth;
     public static double maxBarHeight = 550;

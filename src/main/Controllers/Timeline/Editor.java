@@ -20,7 +20,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.Graphics.SceneNavigationModel;
+import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -907,7 +907,7 @@ public class Editor extends PrototypeController {
 
 
         Label newLabel = new Label("new");
-        newLabel.setStyle("-fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+        newLabel.setStyle("-fx-alignment: center; -fx-border-color: white; fx-border-width: 1; -fx-background-color: white");
         newLabel.setFont(new Font(30));
         newLabel.setPrefWidth(newSecs * WIDTH_OF_1_SEC);
         newLabel.setPrefHeight(colorLineHeight);
