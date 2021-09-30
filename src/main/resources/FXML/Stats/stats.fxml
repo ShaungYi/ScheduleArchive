@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane minHeight="800.0" minWidth="1300.0" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Stats">
-   <center>
-      <VBox maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#goToBarChart" prefHeight="100.0" prefWidth="200.0" text="Bar Chart">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#goToTimeLine" prefHeight="101.0" prefWidth="208.0" text="Timeline">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#goToTable" prefHeight="104.0" prefWidth="200.0" text="Table">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#goToPiChart" prefHeight="100.0" prefWidth="205.0" text="Pi Chart">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
+<BorderPane minHeight="800.0" minWidth="1300.0" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Stats">
+    <center>
+        <VBox maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#goToBarChart" prefHeight="100.0" prefWidth="200.0" text="Bar Chart">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#goToTimeLine" prefHeight="101.0" prefWidth="208.0" text="Timeline">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#goToTable" prefHeight="104.0" prefWidth="200.0" text="Table">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#goToPiChart" prefHeight="100.0" prefWidth="205.0" text="Pi Chart">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
 
-            <Button fx:id="gotoCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" text="Creator">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToLoader" text="Loader">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToMacro" text="Macro">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToBackups" text="Backups">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Button>
+                <Button fx:id="gotoCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Button>
 
-         </children>
-      </HBox>
-   </top>
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </bottom>
+                <Button mnemonicParsing="false" onAction="#goToLoader" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Loader">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goToMacro" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Macro">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#goToBackups" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Backups">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Button>
+
+            </children>
+         <BorderPane.margin>
+            <Insets left="10.0" top="10.0" />
+         </BorderPane.margin>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </bottom>
 </BorderPane>

@@ -10,15 +10,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import main.App;
+import main.Controllers.Macro.Infographics.BarComponentManager;
 import main.Controllers.Macro.Search.SearchTag.SearchTag;
 import main.Controllers.PrototypeController;
-import main.Models.DBModels.ReadFromDBModel;
 import main.Models.MacroDataModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Models.SearchModel;
-
-import java.io.IOException;
 
 public class SearchScreen extends PrototypeController {
 
@@ -99,7 +97,13 @@ public class SearchScreen extends PrototypeController {
         System.out.println(MacroDataModel.totalActivityDurationsByDate);
 
         //go to infographic
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Macro/infographics.fxml", activityTagBoxContainer.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.infographics, activityTagBoxContainer.getScene());
+        //set macro default screen to infographics
+        SceneNavigationModel.macro = SceneNavigationModel.infographics;
+
+        //update day barcomponents
+        BarComponentManager.updateAllBarCompData();
+
 
         System.out.println("durations: "+MacroDataModel.totalActivityDurationsByDate);
         System.out.println("selectedActivityNames: "+MacroDataModel.selectedActivityNames);

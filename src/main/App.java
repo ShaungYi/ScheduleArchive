@@ -5,11 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.Models.BackupArchiveModel;
 import main.Models.DBModels.*;
-import main.Models.SceneNavigationModel;
-import main.Models.SearchModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Utility.EditLog;
-
-import java.sql.SQLException;
 
 
 public class App extends Application {
@@ -20,6 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage){
+
         // initializing DB connections
         ArchiveDBModel.connect();
         SettingsDBModel.connect();

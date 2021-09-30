@@ -1,13 +1,18 @@
-package main.Models;
+package main.Models.Graphics;
 
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
+import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class InfographicsModel {
+
+    public static ActivitySummaryTableView dayInfoPopupListView = new ActivitySummaryTableView();
+
     public static double barWidth;
-    public static double maxBarHeight = 600;
+    public static double maxBarHeight = 550;
     public static double infographicsPaneHeight;
     public static double monthBarHeight;
     public static double infographicWidth = 0;

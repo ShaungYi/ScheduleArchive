@@ -20,7 +20,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -68,6 +68,9 @@ public class Editor extends PrototypeController {
 
     @FXML
     VBox motherPane;
+
+    @FXML
+    Pane backgroundPane;
 
 
     @FXML
@@ -786,7 +789,7 @@ public class Editor extends PrototypeController {
     private void upDateInfoPanel(int newStartTimeSecs, int newEndTimeSecs, int newDuration){
         beganAt.setText( getAMPMTimeFromSeconds(newStartTimeSecs));
         finishedAt.setText(getAMPMTimeFromSeconds(newEndTimeSecs));
-        durationLabel.setText(DateTimeModel.parseDurationToString(newDuration));
+        durationLabel.setText(DateTimeModel.parseDurationToString(newDuration, false));
     }
 
 
@@ -1117,7 +1120,7 @@ public class Editor extends PrototypeController {
 
 
 
-                    durationLabel.setText(DateTimeModel.parseDurationToString(represented.getDurationSeconds()));
+                    durationLabel.setText(DateTimeModel.parseDurationToString(represented.getDurationSeconds(), false));
 
                     specificField.setText(represented.getName());
 
@@ -1311,6 +1314,7 @@ public class Editor extends PrototypeController {
             checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
             shiftDetails(change);
+            shiftBackground(change);
 
             TimeLine.currentLayout = newLayoutX;
 
@@ -1330,6 +1334,7 @@ public class Editor extends PrototypeController {
         checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
         shiftDetails(change);
+        shiftBackground(change);
 
     }
 
@@ -1366,6 +1371,10 @@ public class Editor extends PrototypeController {
 
     private void shiftDetails(double change) {
         detailPane.setLayoutX(detailPane.getLayoutX() - change);
+    }
+
+    private void shiftBackground(double change){
+        backgroundPane.setLayoutX(backgroundPane.getLayoutX() - change);
     }
 
 

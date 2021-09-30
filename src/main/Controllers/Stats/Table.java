@@ -4,16 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 public class Table extends PrototypeController {
 
     @FXML
-    BorderPane motherPane;
+    ScrollPane motherPane;
 
     @FXML
     Button goToCreatorButton;
@@ -173,6 +172,8 @@ public class Table extends PrototypeController {
         setUpActivityChart(serviceTable, serviceColumn, serviceDurationColumn, serviceData);
         setUpActivityChart(miscellaneousTable, miscellaneousCol, miscellaneousDurationCol, miscellaneousData);
 
+        System.out.println("finished Initialization");
+
 
     }
 
@@ -214,13 +215,13 @@ public class Table extends PrototypeController {
 
 
     public void onScroll(ScrollEvent e){
-        double motherPaneLayoutY = motherPane.getLayoutY();
-        //System.out.println(motherPaneLayoutY);
-        double change = e.getDeltaY();
-
-        if (motherPaneLayoutY + change < 10 && motherPaneLayoutY + change > -2000){
-            motherPane.setLayoutY(motherPaneLayoutY + change);
-        }
+//        double motherPaneLayoutY = motherPane.getLayoutY();
+//        //System.out.println(motherPaneLayoutY);
+//        double change = e.getDeltaY();
+//
+//        if (motherPaneLayoutY + change < 10 && motherPaneLayoutY + change > -2000){
+//            motherPane.setLayoutY(motherPaneLayoutY + change);
+//        }
 
     }
 
@@ -458,56 +459,6 @@ public class Table extends PrototypeController {
 
 
 
-    public void extendOnMouseEnter(MouseEvent e){
-        TableView<chartDataUnit> sourceTable = (TableView) e.getSource();
-        TableColumn headerCol = sourceTable.getColumns().get(0);
-        TableColumn durationCol = sourceTable.getColumns().get(1);
-
-
-        int maxHeaderLength = 0;
-        int maxDurationLength = 0;
-
-        for (int i = 0; i < sourceTable.getItems().size(); i++){
-
-            String header = (String)headerCol.getCellData(i);
-            int headerLength = header.length();
-
-            String duration = (String) durationCol.getCellData(i);
-            int durationLength = duration.length();
-
-            if (headerLength > maxHeaderLength){
-                maxHeaderLength = headerLength;
-            }
-
-            if (durationLength > maxDurationLength){
-                maxDurationLength = durationLength;
-            }
-        }
-
-        if (maxHeaderLength > 25){
-            headerCol.setPrefWidth(maxHeaderLength*7.6);
-        }
-
-        if (maxDurationLength > 25){
-            durationCol.setPrefWidth(maxDurationLength*7.6);
-        }
-
-
-    }
-
-
-    public void shrinkOnMouseExit(MouseEvent e){
-        TableView<chartDataUnit> sourceTable = (TableView) e.getSource();
-        TableColumn headerCol = sourceTable.getColumns().get(0);
-        TableColumn durationCol = sourceTable.getColumns().get(1);
-
-        headerCol.setPrefWidth(190.0);
-        durationCol.setPrefWidth(190.0);
-    }
-
-
-
-
     public void goToScheduleCreator(){
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, SceneNavigationModel.table);
     }
@@ -526,7 +477,7 @@ public class Table extends PrototypeController {
         public chartDataUnit(String header, int durationSecs){
             this.header = header;
             this.durationSecs = durationSecs;
-            durationParsed = durationSecs == -1 ? "" : DateTimeModel.parseDurationToString(durationSecs);
+            durationParsed = durationSecs == -1 ? "" : DateTimeModel.parseDurationToString(durationSecs, false);
         }
 
         public String getHeader() {
@@ -543,7 +494,7 @@ public class Table extends PrototypeController {
 
         public void setDurationSecs(int durationSecs) {
             this.durationSecs = durationSecs;
-            this.durationParsed = DateTimeModel.parseDurationToString(durationSecs);
+            this.durationParsed = DateTimeModel.parseDurationToString(durationSecs, false);
         }
 
         public String toString(){

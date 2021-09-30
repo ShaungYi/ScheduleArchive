@@ -8,8 +8,7 @@ import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ReadFromDBModel;
-import main.Models.SceneNavigationModel;
-import main.Models.SearchModel;
+import main.Models.Graphics.SceneNavigationModel;
 
 public class LaunchScreen extends PrototypeController {
     @FXML
@@ -52,6 +51,10 @@ public class LaunchScreen extends PrototypeController {
             SceneNavigationModel.table = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/table.fxml");
             SceneNavigationModel.piChart = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/piChart.fxml");
             SceneNavigationModel.backups = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
+
+            SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/searchScreen.fxml");
+            SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
+            SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
 
             Platform.runLater(new Runnable() {
                 @Override

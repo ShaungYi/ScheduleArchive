@@ -150,7 +150,7 @@ public class DateTimeModel {
 
 
 
-    public static String parseDurationToString(int durationSecs){
+    public static String parseDurationToString(int durationSecs, boolean abreviate){
 
 
 
@@ -160,12 +160,23 @@ public class DateTimeModel {
         int mm = time.getMm();
         int ss = time.getSs();
 
+        String h = abreviate ? "h" : " hour";
+        String m = abreviate ? "min" : " minute";
+        String s = abreviate ? "sec" : " second";
 
-        String hours = hh + (hh == 1 ? " hour " : " hours ");
-        String minuts = mm + (mm == 1 ? " minute " : " minutes ");
-        String seconds = ss + (ss == 1 ? " second" : " seconds");
+        String hours, minuts, seconds;
 
+        if (!abreviate){
+            hours = hh + (hh == 1 ? h + " " : h + "s ");
+            minuts = mm + (mm == 1 ? m  + " " : m + "s ");
+            seconds = ss + (ss == 1 ? s : s + "s");
+        } else {
+            hours = hh + h + " ";
+            minuts = mm + m + " ";
+            seconds = ss + s;
+        }
 
+        System.out.println(hours + minuts + seconds);
 
         if (hh == 0 && mm == 0){
             return seconds;
@@ -184,15 +195,15 @@ public class DateTimeModel {
     public static Time parseDuration(int durationSecs) {
         int template = durationSecs;
 
-        int hh = ((Integer)(template / 3600));
+        int hh = template / 3600;
 
         template = template % 3600;
 
-        int mm = ((Integer)(template / 60));
+        int mm = template / 60;
 
         template = template % 60;
 
-        int ss = ((Integer) template);
+        int ss = template;
 
         Time time = new Time(hh, mm, ss);
         return time;

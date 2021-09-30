@@ -5,24 +5,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="grandmotherPane" onMouseClicked="#hideSuggestedNames" prefHeight="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
+<Pane fx:id="grandmotherPane" onMouseClicked="#hideSuggestedNames" prefHeight="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
     <children>
         <ListView fx:id="nameSuggestions" onKeyTyped="#handleNameEdit" onMouseClicked="#autoCompleteName" />
         <VBox fx:id="motherPane">
             <children>
                 <Pane fx:id="portalContainerPane" maxHeight="176.0" onScroll="#onScroll" prefHeight="89.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
                     <children>
-                        <HBox fx:id="portalPane">
+                        <Pane fx:id="backgroundPane" style="-fx-background-color: rgb(246, 255, 226);" prefWidth="1440" prefHeight="800"></Pane>
+                        <HBox fx:id="portalPane" spacing="20.0">
                             <children>
-                                <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" text="Creator">
+                                <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
                                     <font>
                                         <Font size="45.0" />
                                     </font></Button>
-                                <Button fx:id="goToCreatorButton" onAction="#goToMain" prefWidth="173" text="Back">
+                                <Button onAction="#goToMain" prefWidth="173" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
                                     <font>
                                         <Font size="45.0" />
                                     </font></Button>
-                                <Button mnemonicParsing="false" onAction="#goToTimeLine" prefHeight="86.0" prefWidth="351.0" text="Display Mode">
+                                <Button mnemonicParsing="false" onAction="#goToTimeLine" prefHeight="86.0" prefWidth="351.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Display Mode">
                                     <font>
                                         <Font size="45.0" />
                                     </font>
@@ -44,6 +45,9 @@
                         </Button>
                                 <Text fx:id="testText" text="text" visible="false" />
                             </children>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
                         </HBox>
                     </children>
 

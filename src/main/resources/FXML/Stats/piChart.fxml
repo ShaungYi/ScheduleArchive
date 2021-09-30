@@ -6,21 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="motherPane" maxHeight="900.0" maxWidth="1300.0" onScroll="#onScroll" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: white;" stylesheets="@pi.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.PiChart">
+<BorderPane fx:id="motherPane" maxHeight="900.0" maxWidth="1300.0" onScroll="#onScroll" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" stylesheets="@pi.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.PiChart">
     <top>
-        <HBox>
+        <HBox spacing="20.0">
 
-            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" text="Creator" GridPane.rowIndex="1">
+            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator" GridPane.rowIndex="1">
                 <font>
                     <Font name="Phosphate" size="45" />
                 </font>
 
             </Button>
-         <Button  mnemonicParsing="false" onAction="#goToMain" text="Back" prefHeight="86.0" prefWidth="173.0">
+         <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="86.0" prefWidth="173.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
             <font>
                <Font size="45.0" />
             </font>
          </Button>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
         </HBox>
     </top>
 

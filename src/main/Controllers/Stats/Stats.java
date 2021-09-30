@@ -9,7 +9,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -153,11 +153,6 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToMacro(){
-
-        if (SceneNavigationModel.macro == null){
-            SceneNavigationModel.macro = App.sceneNavigationModel.loadNewScene("../resources/FXML/Macro/searchScreen.fxml", SceneNavigationModel.stats);
-            return;
-        }
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, SceneNavigationModel.stats);
     }
 

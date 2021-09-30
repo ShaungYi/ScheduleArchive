@@ -38,9 +38,9 @@
          </font>
       </Label>
       <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" style="-fx-background-color: rgba(45, 206, 255, 0.3);" />
-      <HBox prefHeight="109.0" prefWidth="431.0" style="-fx-background-color: rgba(173, 83, 42, 0.438);;">
+      <HBox prefHeight="109.0" prefWidth="431.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: rgb(173, 101, 42); -fx-text-fill: gold; -fx-background-radius: 30px;" text="Back">
+            <Button mnemonicParsing="false" onAction="#goBack" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
                <font>
                   <Font size="45.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" style="-fx-background-color: rgb(173, 101, 42); -fx-text-fill: gold; -fx-background-radius: 30px;" text="Creator">
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
                <font>
                   <Font size="45.0" />
                </font>

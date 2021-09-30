@@ -16,7 +16,7 @@ import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -30,16 +30,12 @@ public class TimeLine extends PrototypeController {
     private int endTimeSecs;
 
 
-
-
-
 //    private int colorLineMargins = 200;
 //    private int timeLineMargins = 140;
 
 
     private int colorLineHeight = 125;
     private int timeLineHeight = 17;
-
 
 
     private int nodeStartPointY = 6;
@@ -58,6 +54,8 @@ public class TimeLine extends PrototypeController {
     private String lastDate = "";
 
 
+    @FXML
+    Pane backgroundPane;
 
     @FXML
     VBox motherPane;
@@ -92,7 +90,6 @@ public class TimeLine extends PrototypeController {
     HBox timePane;
 
 
-
     @FXML
     Pane detailContainerPane;
     @FXML
@@ -118,8 +115,7 @@ public class TimeLine extends PrototypeController {
     public static double currentLayout;
 
 
-
-    public void initialize(){
+    public void initialize() {
 
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
@@ -147,8 +143,8 @@ public class TimeLine extends PrototypeController {
 
         configureDateChangePoint(startTimeSecs - startTimeSecs % FIVE_MINS_IN_SECONDS);
 
-        if (!Stats.currentTimelineLayoutInitialized){
-            currentLayout = -(scrollableWidth-screenWidth);
+        if (!Stats.currentTimelineLayoutInitialized) {
+            currentLayout = -(scrollableWidth - screenWidth);
             Stats.currentTimelineLayoutInitialized = true;
         }
 
@@ -157,26 +153,21 @@ public class TimeLine extends PrototypeController {
     }
 
 
-
-
-
-
-
-    public void computeAndSetScrollableWidth(){
-        scrollableWidth = (endTimeSecs-startTimeSecs) * WIDTH_OF_1_SEC + 600;
-        if (scrollableWidth < 1280){
+    public void computeAndSetScrollableWidth() {
+        scrollableWidth = (endTimeSecs - startTimeSecs) * WIDTH_OF_1_SEC + 600;
+        if (scrollableWidth < 1280) {
             scrollableWidth = 1280;
         }
     }
 
 
-    private void makeTimeLine(int startTimeSecs, int endTimeSecs){
+    private void makeTimeLine(int startTimeSecs, int endTimeSecs) {
         int beginTime = startTimeSecs - startTimeSecs % FIVE_MINS_IN_SECONDS;
-        allContainerPane.setMargin(colorPane, new Insets(0,0,0,200 + (startTimeSecs - beginTime)*WIDTH_OF_1_SEC));
+        allContainerPane.setMargin(colorPane, new Insets(0, 0, 0, 200 + (startTimeSecs - beginTime) * WIDTH_OF_1_SEC));
         int finishTime = FIVE_MINS_IN_SECONDS * (endTimeSecs / FIVE_MINS_IN_SECONDS) + FIVE_MINS_IN_SECONDS;
 
-        if (!archive.isEmpty()){
-            for (int currentTime = beginTime; currentTime<=finishTime; currentTime += FIVE_MINS_IN_SECONDS){
+        if (!archive.isEmpty()) {
+            for (int currentTime = beginTime; currentTime <= finishTime; currentTime += FIVE_MINS_IN_SECONDS) {
                 Label timeLabel = new Label(getAMPMTimeFromSeconds(currentTime));
                 timeLabel.setPrefWidth(WIDTH_OF_5_MINS);
                 timeLabel.setPrefHeight(timeLineHeight);
@@ -189,33 +180,31 @@ public class TimeLine extends PrototypeController {
     }
 
 
-
-    public void addActivities(ArrayList<Activity> archive){
-
+    public void addActivities(ArrayList<Activity> archive) {
 
 
-        if (archive.size() == 1){
+        if (archive.size() == 1) {
             Activity firstAct = archive.get(0);
             startTimeSecs = firstAct.getStartTimeSecs();
             endTimeSecs = firstAct.getEndTimeSecs();
             firstDate = firstAct.getDate();
             lastDate = decrementDate(firstDate);
-        }else if(!archive.isEmpty()){
+        } else if (!archive.isEmpty()) {
             startTimeSecs = archive.get(0).getStartTimeSecs();
-            endTimeSecs = archive.get(archive.size()-1).getEndTimeSecs();
+            endTimeSecs = archive.get(archive.size() - 1).getEndTimeSecs();
             firstDate = archive.get(0).getDate();
-            lastDate = archive.get(archive.size()-1).getDate();
+            lastDate = archive.get(archive.size() - 1).getDate();
 
 //            System.out.println(firstDate + " ---> " + lastDate);
         }
 
-        if (endTimeSecs - startTimeSecs < FIVE_MINS_IN_SECONDS){
+        if (endTimeSecs - startTimeSecs < FIVE_MINS_IN_SECONDS) {
             endTimeSecs += FIVE_MINS_IN_SECONDS;
         }
 
-        for (Activity activity : archive){
+        for (Activity activity : archive) {
             Label newActivity = new Label();
-            newActivity.setStyle("-fx-background-color:"+Stats.colorMap.get(activity.getCategory()) +"; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+            newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
             newActivity.setPrefHeight(colorLineHeight);
             newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
             newActivity.setText(activity.getName());
@@ -224,7 +213,7 @@ public class TimeLine extends PrototypeController {
             colorPane.getChildren().add(newActivity);
             changeFontUntilTextFitsLabel(newActivity);
 
-            if (activity.getEndTimeSecs() > endTimeSecs){
+            if (activity.getEndTimeSecs() > endTimeSecs) {
                 endTimeSecs += SECONDS_IN_A_DAY;
             }
         }
@@ -233,14 +222,12 @@ public class TimeLine extends PrototypeController {
     }
 
 
-    public static String decrementDate(String date){
-        return date.substring(0, date.length()-2) + (Integer.parseInt(date.substring(date.length()-2))-1);
+    public static String decrementDate(String date) {
+        return date.substring(0, date.length() - 2) + (Integer.parseInt(date.substring(date.length() - 2)) - 1);
     }
 
 
-
-
-    private void addHoverHandler(Label activity, int activityStartTimeSecs, int activityEndTimeSecs, int activityDuration, String activityCategory, String activityName){
+    private void addHoverHandler(Label activity, int activityStartTimeSecs, int activityEndTimeSecs, int activityDuration, String activityCategory, String activityName) {
         activity.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -250,11 +237,12 @@ public class TimeLine extends PrototypeController {
                 String color = "white";
                 try {
                     color = (String) colorMap.get(activityCategory);
-                }catch (NullPointerException e){}
+                } catch (NullPointerException e) {
+                }
 
-                categoryTitle.setStyle("-fx-alignment: center; -fx-text-fill:" + color +";");
+                categoryTitle.setStyle("-fx-alignment: center; -fx-text-fill:" + color + ";");
 
-                durationLabel.setText(DateTimeModel.parseDurationToString(activityDuration));
+                durationLabel.setText(DateTimeModel.parseDurationToString(activityDuration, false));
 
                 specificLabel.setText(activityName);
 
@@ -273,7 +261,6 @@ public class TimeLine extends PrototypeController {
     }
 
 
-
     private void changeFontUntilTextFitsLabel(Label label) {
 
         String text = label.getText();
@@ -285,7 +272,7 @@ public class TimeLine extends PrototypeController {
         double resizeFactor = labelWidth / textWidth * 0.9;
         Font font = new Font(label.getFont().getSize() * resizeFactor);
 
-        if (font.getSize() > 100){
+        if (font.getSize() > 100) {
             font = new Font(100);
         }
         label.setFont(font);
@@ -294,29 +281,25 @@ public class TimeLine extends PrototypeController {
     }
 
 
-
-    private void configureDateChangePoint(int beginTime){
+    private void configureDateChangePoint(int beginTime) {
         dateChangePoint = (double) (SECONDS_IN_A_DAY - beginTime) * WIDTH_OF_1_SEC + 200;
 
-        Line upperBorder = new Line(0,0,0,200);
+        Line upperBorder = new Line(0, 0, 0, 200);
         upperBorder.setLayoutY(0);
         upperBorder.setLayoutX(dateChangePoint);
         upperBorder.setStrokeWidth(3);
 
 
-
-        Line marginBorder = new Line(0,0,0,200);
+        Line marginBorder = new Line(0, 0, 0, 200);
         marginBorder.setLayoutY(0);
         marginBorder.setLayoutX(dateChangePoint);
         marginBorder.setStrokeWidth(3);
 
 
-
-        Line bottomBorder = new Line(0,0,0,350);
+        Line bottomBorder = new Line(0, 0, 0, 350);
         bottomBorder.setLayoutY(0);
         bottomBorder.setLayoutX(dateChangePoint);
         bottomBorder.setStrokeWidth(3);
-
 
 
         portalContainerPane.getChildren().add(marginBorder);
@@ -324,14 +307,13 @@ public class TimeLine extends PrototypeController {
         detailContainerPane.getChildren().add(bottomBorder);
 
 
-
     }
 
 
-    private void makeNodes(int nodeNum){
-        if (!archive.isEmpty()){
-            for (int i = 0; i <= nodeNum; i++){
-                Line nodeMarker = new Line(0,nodeStartPointY,0,nodeEndPointY);
+    private void makeNodes(int nodeNum) {
+        if (!archive.isEmpty()) {
+            for (int i = 0; i <= nodeNum; i++) {
+                Line nodeMarker = new Line(0, nodeStartPointY, 0, nodeEndPointY);
                 nodeMarker.setScaleX(2);
                 nodePane.getChildren().add(nodeMarker);
             }
@@ -339,7 +321,7 @@ public class TimeLine extends PrototypeController {
 
     }
 
-    public void resizePanes(double newWidth){
+    public void resizePanes(double newWidth) {
 
         allContainerPane.setPrefWidth(newWidth);
         allContainerPane.setMaxWidth(newWidth);
@@ -372,12 +354,12 @@ public class TimeLine extends PrototypeController {
     }
 
 
-    private int getNumNodes(){
-        return (FIVE_MINS_IN_SECONDS * (endTimeSecs / FIVE_MINS_IN_SECONDS) + FIVE_MINS_IN_SECONDS - (startTimeSecs - startTimeSecs % FIVE_MINS_IN_SECONDS))/FIVE_MINS_IN_SECONDS;
+    private int getNumNodes() {
+        return (FIVE_MINS_IN_SECONDS * (endTimeSecs / FIVE_MINS_IN_SECONDS) + FIVE_MINS_IN_SECONDS - (startTimeSecs - startTimeSecs % FIVE_MINS_IN_SECONDS)) / FIVE_MINS_IN_SECONDS;
     }
 
 
-    public void goToScheduleCreator(){
+    public void goToScheduleCreator() {
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, motherPane.getScene());
         Stats.currentTimelineLayoutInitialized = false;
     }
@@ -394,13 +376,17 @@ public class TimeLine extends PrototypeController {
     }
 
 
-
-    public void onScroll(ScrollEvent e){
+    public void onScroll(ScrollEvent e) {
 
         double motherPaneLayoutX = motherPane.getLayoutX();
         double change = e.getDeltaX();
 
-        if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - screenWidth)){
+        if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
+
+            shiftBackground(change);
+
+            System.out.println(motherPane.getWidth());
+
             double newLayoutX = motherPaneLayoutX + change;
             motherPane.setLayoutX(newLayoutX);
             portalPane.setLayoutX(newLayoutX);
@@ -408,18 +394,15 @@ public class TimeLine extends PrototypeController {
             shiftDateDisplay(-change);
             checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
-
-
             shiftDetails(change);
 
-
-            currentLayout = newLayoutX;
+            TimeLine.currentLayout = newLayoutX;
 
         }
 
     }
 
-    private void setPosition(double layoutX){
+    private void setPosition(double layoutX) {
 
         double change = layoutX - motherPane.getLayoutX();
 
@@ -430,6 +413,7 @@ public class TimeLine extends PrototypeController {
         checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
         shiftDetails(change);
+        shiftBackground(change);
 
     }
 
@@ -445,99 +429,88 @@ public class TimeLine extends PrototypeController {
 //    }
 
 
-    private void checkAndUpdateDate(double currentLayoutX){
+    private void checkAndUpdateDate(double currentLayoutX) {
 
-        if (dateChangePoint != -1 && currentLayoutX < dateChangePoint){
+        if (dateChangePoint != -1 && currentLayoutX < dateChangePoint) {
             dateDisplay.setText(firstDate);
-        }
-        else if (dateChangePoint != -1 && currentLayoutX > dateChangePoint){
+        } else if (dateChangePoint != -1 && currentLayoutX > dateChangePoint) {
             dateDisplay.setText(lastDate);
         }
     }
 
 
-
-    private void shiftPortals(double newLayoutX){
+    private void shiftPortals(double newLayoutX) {
         portalPane.setLayoutX(newLayoutX);
     }
 
 
-    private void shiftDateDisplay(double change){
+    private void shiftDateDisplay(double change) {
         dateDisplay.setLayoutX(dateDisplay.getLayoutX() + change);
     }
 
-    private void shiftDetails(double change){
+    private void shiftDetails(double change) {
         detailPane.setLayoutX(detailPane.getLayoutX() - change);
+    }
+    private void shiftBackground(double change){
+        backgroundPane.setLayoutX(backgroundPane.getLayoutX() - change);
     }
 
 
-
-
-
-
-    public static String getAMPMTimeFromSeconds(int seconds){
+    public static String getAMPMTimeFromSeconds(int seconds) {
 
         int template;
 
-        if (seconds > SECONDS_IN_A_DAY){
+        if (seconds > SECONDS_IN_A_DAY) {
             template = seconds - SECONDS_IN_A_DAY;
-        }
-        else {
+        } else {
             template = seconds;
         }
 
 
-
-        int hh = ((Integer)(template / 3600));
+        int hh = ((Integer) (template / 3600));
 
         template = template % 3600;
 
-        int mm = ((Integer)(template / 60));
+        int mm = ((Integer) (template / 60));
 
         template = template % 60;
 
 
-
         String minutes;
-        if (mm == 0){
+        if (mm == 0) {
             minutes = "00";
-        }
-        else if (mm < 10){
+        } else if (mm < 10) {
             minutes = "0" + mm;
-        }
-        else {
+        } else {
             minutes = ((Integer) mm).toString();
         }
 
 
-        if (hh == 0){
+        if (hh == 0) {
             return "12" + ":" + minutes + " A.M.";
-        }
-        else if (hh == 12){
+        } else if (hh == 12) {
             return hh + ":" + minutes + " P.M.";
-        }
-        else if (hh < 12){
+        } else if (hh < 12) {
             return hh + ":" + minutes + " A.M.";
         }
         return hh - 12 + ":" + minutes + " P.M.";
     }
 
 
-    private void demo(){
+    private void demo() {
         Label newActivity = new Label("activity 1");
         newActivity.setStyle("-fx-background-color: maroon;-fx-alignment: center");
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(450 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,83000,83450,450,"Reading", "activity1");
+        addHoverHandler(newActivity, 83000, 83450, 450, "Reading", "activity1");
 
         newActivity = new Label("activity 2");
         newActivity.setStyle("-fx-background-color: deepskyblue;-fx-alignment: center");
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(250 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,83450,83700,250,"Writing", "activity2");
-
+        addHoverHandler(newActivity, 83450, 83700, 250, "Writing", "activity2");
 
 
         newActivity = new Label("activity 3");
@@ -545,7 +518,7 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(500 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,83700,84200,500,"Miscellaneous", "activity3");
+        addHoverHandler(newActivity, 83700, 84200, 500, "Miscellaneous", "activity3");
 
 
         newActivity = new Label("activity 4");
@@ -553,7 +526,7 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(900 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,84200,85100,900,"Exercise", "activity4");
+        addHoverHandler(newActivity, 84200, 85100, 900, "Exercise", "activity4");
 
 
         newActivity = new Label("activity 5");
@@ -561,7 +534,7 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(1200 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,85100,86300,1200,"Spirituality", "activity5");
+        addHoverHandler(newActivity, 85100, 86300, 1200, "Spirituality", "activity5");
 
 
         newActivity = new Label("activity 6");
@@ -569,7 +542,7 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(600 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,86300,86900,600,"Entertainment", "activity6");
+        addHoverHandler(newActivity, 86300, 86900, 600, "Entertainment", "activity6");
 
 
         newActivity = new Label("activity 7");
@@ -577,8 +550,7 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(500 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,86900,87400,500,"Rest", "activity7");
-
+        addHoverHandler(newActivity, 86900, 87400, 500, "Rest", "activity7");
 
 
         newActivity = new Label("activity 8");
@@ -586,13 +558,12 @@ public class TimeLine extends PrototypeController {
         newActivity.setPrefHeight(colorLineHeight);
         newActivity.setPrefWidth(1000 * WIDTH_OF_1_SEC);
         colorPane.getChildren().add(newActivity);
-        addHoverHandler(newActivity,87400,888400,1000,"Arts", "activity1");
+        addHoverHandler(newActivity, 87400, 888400, 1000, "Arts", "activity1");
 
 
     }
 
 }
-
 
 
 //

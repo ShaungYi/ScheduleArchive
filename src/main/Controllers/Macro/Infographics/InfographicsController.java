@@ -16,6 +16,8 @@ import main.Controllers.Macro.Infographics.Barcomponent.Barcomponent;
 import main.Controllers.PrototypeController;
 import main.Models.*;
 import main.Models.DBModels.ReadFromDBModel;
+import main.Models.Graphics.InfographicsModel;
+import main.Models.Graphics.SceneNavigationModel;
 
 
 public class InfographicsController extends PrototypeController {
@@ -196,7 +198,7 @@ public class InfographicsController extends PrototypeController {
             }
 
             //add barcomponent
-            addDay(date);
+            addDayBar(date);
 
 
             //add another month bar if month has changed
@@ -267,24 +269,19 @@ public class InfographicsController extends PrototypeController {
 
     }
 
-    private void addDay(String date){
-
-        double barFrequency;
-
-        if (MacroDataModel.totalActivityDurationsByDate.containsKey(date)){
-            int totalDurationOfSelectedActivitiesOnDay = MacroDataModel.totalActivityDurationsByDate.get(date);
-            barFrequency = (double) totalDurationOfSelectedActivitiesOnDay / InfographicsModel.maximumActivityDuration;
-        } else {
-            barFrequency = 0;
-        }
-
-        Barcomponent barcomponent = new Barcomponent(DateTimeModel.getDayIDFromDate(date), barFrequency);
+    private void addDayBar(String date){
+        Barcomponent barcomponent = new Barcomponent(DateTimeModel.getDayIDFromDate(date), 0);
         infographicPane.getChildren().add(barcomponent);
+        BarComponentManager.addBarComp(barcomponent, date);
     }
+
+
 
     @FXML
     public void goBack(){
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, motherPane.getScene());
+        //set default macro screen to search
+        SceneNavigationModel.macro = SceneNavigationModel.searchScreen;
     }
     @FXML
     public void goToStats(){

@@ -1,5 +1,6 @@
 package main.Controllers.Loader;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,13 +12,12 @@ import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Loader extends PrototypeController {
@@ -44,7 +44,7 @@ public class Loader extends PrototypeController {
     public static boolean disAbleCreator = false;
 
     public void initialize(){
-        setupBackups();
+        new Thread(setUpBackups).start();
     }
 
 
@@ -64,10 +64,22 @@ public class Loader extends PrototypeController {
         }
 
         if (!backupData.isEmpty()){
+            System.out.println("scrolling to last date");
+            System.out.println(backupData.size());
             backups.scrollTo(backupData.size() - 1);
         }
 
     }
+
+    Runnable setUpBackups = () -> {
+
+        try {
+            Thread.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Platform.runLater(() -> setupBackups());
+    };
 
 
 
@@ -83,7 +95,7 @@ public class Loader extends PrototypeController {
         // exiting
         DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
         Table.updateData(ArchiveDBModel.archive);
-        wrapUpAndGoToCreator();
+        wrapUpAndGoToTimeLine();
     }
 
 
@@ -133,9 +145,12 @@ public class Loader extends PrototypeController {
     }
 
 
-    private void wrapUpAndGoToCreator() {
-        SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", backups.getScene());
-        //reenable creator
+    private void wrapUpAndGoToTimeLine() {
+        SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
+
+        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", backups.getScene());
+
+                //reenable creator
         disAbleCreator = false;
 
         App.editLog.wipe();

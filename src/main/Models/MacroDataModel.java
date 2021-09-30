@@ -1,6 +1,7 @@
 package main.Models;
 
 import main.Models.DBModels.ReadFromDBModel;
+import main.Models.Graphics.InfographicsModel;
 import main.Utility.PastActivity;
 
 import java.util.ArrayList;

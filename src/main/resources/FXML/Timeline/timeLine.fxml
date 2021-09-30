@@ -5,27 +5,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="motherPane" prefHeight="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.TimeLine">
+<VBox fx:id="motherPane" style="-fx-background-color: rgb(246, 255, 226);" prefHeight="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.TimeLine">
     <children>
-        <Pane fx:id="portalContainerPane" maxHeight="176.0" onScroll="#onScroll" prefHeight="176.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
+        <Pane fx:id="portalContainerPane" style="-fx-background-color: rgb(246, 255, 226);" maxHeight="176.0" onScroll="#onScroll" prefHeight="176.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
             <children>
-                <HBox fx:id="portalPane">
+                <Pane fx:id="backgroundPane" style="-fx-background-color: rgb(246, 255, 226);" prefHeight="800.0" prefWidth="1440.0" />
+                <HBox fx:id="portalPane" spacing="20.0">
                     <children>
-                        <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" text="Creator">
+                        <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
                             <font>
                                 <Font size="45.0" />
                             </font></Button>
-                        <Button onAction="#goToMain" prefWidth="173" text="Back">
+                        <Button onAction="#goToMain" prefWidth="173" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
                             <font>
                                 <Font size="45.0" />
                             </font></Button>
-                  <Button mnemonicParsing="false" onAction="#goToEditor" prefHeight="86.0" prefWidth="276.0" text="Edit Mode">
+                  <Button mnemonicParsing="false" onAction="#goToEditor" prefHeight="86.0" prefWidth="276.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Edit Mode">
                      <font>
                         <Font size="45.0" />
                      </font>
                   </Button>
                         <Text fx:id="testText" text="text" visible="false" />
                     </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
                 </HBox>
             </children>
 

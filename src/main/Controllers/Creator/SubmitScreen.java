@@ -11,7 +11,7 @@ import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
-import main.Models.SceneNavigationModel;
+import main.Models.Graphics.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -66,7 +66,7 @@ public class SubmitScreen extends PrototypeController {
 
     public void setUpDisplays(){
 
-        duration.setText(DateTimeModel.parseDurationToString(activityInQuestion.getDurationSeconds()));
+        duration.setText(DateTimeModel.parseDurationToString(activityInQuestion.getDurationSeconds(), false));
 
         startTime.setText(DateTimeModel.parseSeconds(activityInQuestion.getStartTimeSecs()));
         endTime.setText(DateTimeModel.parseSeconds(activityInQuestion.getEndTimeSecs()));

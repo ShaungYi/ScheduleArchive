@@ -1,4 +1,4 @@
-package main.Models;
+package main.Models.Graphics;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +21,13 @@ public class SceneNavigationModel{
     public static Scene bars;
     public static Scene table;
     public static Scene piChart;
-    public static Scene macro;
     public static Scene launchScreen;
     public static Scene backups;
+
+    public static Scene macro;
+    public static Scene infographics;
+    public static Scene searchScreen;
+
     static Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     public static final double screenWidth = screenSize.getWidth();
     public static final double screenHeight = 800;
@@ -83,12 +87,13 @@ public class SceneNavigationModel{
 
     public Scene createNewScene(String fxmlUrl){
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlUrl));
             Parent root = loader.load();
             Scene scene = new Scene(root, screenWidth, screenHeight);
             scene.setUserData(loader);
             return scene;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

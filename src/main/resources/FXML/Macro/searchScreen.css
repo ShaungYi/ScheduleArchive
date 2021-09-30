@@ -1,4 +1,6 @@
 #seek-button{
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
     -fx-background-radius: 25px;
     -fx-background-color:  orange;
     -fx-text-fill:  rgb(211, 108, 211);
