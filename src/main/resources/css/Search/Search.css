@@ -1,22 +1,37 @@
-.list-view{
-    -fx-background-radius: 0.1em;
-    -fx-border-radius: 0.1em;
+.search-list-view{
+    -fx-background-color: rgb(242, 252, 231);
+    -fx-background-radius: 0% 0% 0.5em 0.5em;
+    -fx-border-radius: 0% 0% 0.5em 0.5em;
+    -fx-border-color: transparent #7b8c5a #7b8c5a #7b8c5a;
     -fx-padding: 10px 10px 10px 10px;
 }
 
-.scroll-bar{
-    -fx-min-width: 0;
-    -fx-pref-width: 0;
-    -fx-max-width: 0;
+.big-list-view {
 
-    -fx-min-height: 0;
-    -fx-pref-height: 0;
-    -fx-max-height: 0;
+}
+
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+.list-view .scroll-bar:vertical .increment-arrow,
+.list-view .scroll-bar:vertical .decrement-arrow,
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-padding:0;
 }
 
 
 .list-view-upside-down {
     -fx-background-color: rgb(242, 252, 231);
+    -fx-background-radius: 0.5em 0.5em 0% 0%;
+    -fx-border-radius: 0.5em 0.5em 0% 0%;
+    -fx-border-color: #7b8c5a #7b8c5a transparent #7b8c5a;
+    -fx-padding: 10px 10px 10px 10px;
     /*-fx-padding: 10px 10px 10px 10px;*/
 }
 
@@ -25,16 +40,44 @@
     -fx-background-color: rgb(242, 252, 231);
 }
 
+.big-list-cell {
+    -fx-font-size: 25px;
+}
+
 .list-view-upside-down .list-cell {
     -fx-background-color: rgb(242, 252, 231);
 }
 
-.text-field{
+.search-text-field{
     -fx-background-color: rgb(242, 252, 231);
     -fx-border-color: #7b8c5a;
     -fx-border-width: 1px;
-    -fx-border-radius: 0.5em;
-    -fx-background-radius: 0.5em;
+    -fx-border-radius: 5%;
+    -fx-background-radius: 5%;
+}
+
+.text-field-with-suggestions {
+
+    -fx-background-color: rgb(242, 252, 231);
+    -fx-border-color: #7b8c5a;
+    -fx-border-width: 1px;
+
+    -fx-background-radius: 0.5em 0.5em 0px 0px;
+    -fx-border-radius: 0.5em 0.5em 0px 0px;
+    -fx-border-color: #7b8c5a #7b8c5a transparent #7b8c5a;
+
+}
+
+.text-field-with-reverse-suggestions {
+
+    -fx-background-color: rgb(242, 252, 231);
+    -fx-border-color: #7b8c5a;
+    -fx-border-width: 1px;
+
+    -fx-background-radius: 0% 0% 0.5em 0.5em;
+    -fx-border-radius: 0% 0% 0.5em 0.5em;
+    -fx-border-color: transparent #7b8c5a #7b8c5a #7b8c5a;
+
 }
 
 

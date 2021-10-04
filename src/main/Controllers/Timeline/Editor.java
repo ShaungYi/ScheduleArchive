@@ -445,9 +445,7 @@ public class Editor extends PrototypeController {
             nameSuggestions.scrollTo(suggestedNamesObservableList.get(suggestedNamesObservableList.size() - 1));
         }
 
-        double suggestionsListHeight = suggestedNamesObservableList.size() * 23;
-        System.out.println("size: "+suggestedNamesObservableList.size());
-        System.out.println("height: "+suggestionsListHeight);
+        double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
         if (suggestionsListHeight > 400){
             suggestionsListHeight = 400;
         }
@@ -458,6 +456,9 @@ public class Editor extends PrototypeController {
         nameSuggestions.setLayoutY(fieldBounds.getMinY() - nameSuggestions.getPrefHeight());
 
         suggestedNamesObservableList.remove(newName);
+
+
+        specificField.getStyleClass().add("text-field-with-reverse-suggestions");
     }
 
 
@@ -1165,6 +1166,9 @@ public class Editor extends PrototypeController {
     private void hideSuggestedNames(){
 
         grandmotherPane.getChildren().remove(nameSuggestions);
+
+        specificField.getStyleClass().removeAll("text-field-with-reverse-suggestions");
+        specificField.getStyleClass().add("search-text-field");
 //        System.out.println("suggestedNames Removed");
     }
 

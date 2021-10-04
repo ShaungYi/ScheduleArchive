@@ -123,6 +123,7 @@ public class SubmitScreen extends PrototypeController {
     @FXML
     public void onEntryToNameField(){
 
+
         observableListOfsuggestions.clear();
 
         if (nameField.getText().equals("")) {
@@ -133,11 +134,20 @@ public class SubmitScreen extends PrototypeController {
 
         SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions, activityInQuestion.getCategory());
 
+        System.out.println("suggestions num: "+observableListOfsuggestions.size());
+
         if (observableListOfsuggestions.isEmpty()){
+
+            nameField.getStyleClass().removeAll("text-field-with-suggestions");
+            nameField.getStyleClass().add("search-text-field");
+
             hideSuggestions();
             suggestions.setDisable(true);
         }
         else{
+            nameField.getStyleClass().removeAll("search-text-field");
+            nameField.getStyleClass().add("text-field-with-suggestions");
+
             showSuggestions();
             suggestions.setDisable(false);
 
@@ -154,11 +164,11 @@ public class SubmitScreen extends PrototypeController {
     }
 
     public void showSuggestions(){
-        suggestions.setOpacity(1);
+        suggestions.setVisible(true);
     }
 
     public void hideSuggestions(){
-        suggestions.setOpacity(0);
+        suggestions.setVisible(false);
     }
 
 
@@ -166,7 +176,7 @@ public class SubmitScreen extends PrototypeController {
 
 
     public void goToCreator(){
-        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, suggestionsContainer.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, suggestions.getScene());
     }
 
 }
