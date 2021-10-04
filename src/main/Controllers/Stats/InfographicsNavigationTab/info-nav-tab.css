@@ -1,0 +1,10 @@
+.nav-button{
+    -fx-background-color: #f8fdea;
+    -fx-border-color: #7b8c5a;
+    -fx-border-width: 2px 2px 2px 6px;
+    -fx-padding: 5px 5px 5px 5px;
+}
+
+.nav-button:hover{
+    -fx-background-color: #f5fd54;
+}
