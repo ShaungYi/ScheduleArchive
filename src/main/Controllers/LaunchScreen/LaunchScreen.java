@@ -52,9 +52,9 @@ public class LaunchScreen extends PrototypeController {
             SceneNavigationModel.piChart = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/piChart.fxml");
             SceneNavigationModel.backups = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
 
-//            SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/searchScreen.fxml");
-//            SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
-//            SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
+            SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/searchScreen.fxml");
+            SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
+            SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
 
             Platform.runLater(new Runnable() {
                 @Override

@@ -138,9 +138,6 @@ public class SubmitScreen extends PrototypeController {
 
         if (observableListOfsuggestions.isEmpty()){
 
-            nameField.getStyleClass().removeAll("text-field-with-suggestions");
-            nameField.getStyleClass().add("search-text-field");
-
             hideSuggestions();
             suggestions.setDisable(true);
         }
@@ -159,7 +156,7 @@ public class SubmitScreen extends PrototypeController {
 
         String suggestion = (String)suggestions.getSelectionModel().getSelectedItem();
 
-        nameField.setText((String)suggestions.getSelectionModel().getSelectedItem());
+        nameField.setText(suggestion);
         hideSuggestions();
     }
 
@@ -168,6 +165,8 @@ public class SubmitScreen extends PrototypeController {
     }
 
     public void hideSuggestions(){
+        nameField.getStyleClass().removeAll("text-field-with-suggestions");
+        nameField.getStyleClass().add("search-text-field");
         suggestions.setVisible(false);
     }
 

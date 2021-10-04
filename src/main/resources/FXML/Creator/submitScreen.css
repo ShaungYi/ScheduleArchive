@@ -1,0 +1,10 @@
+
+.label {
+    -fx-text-fill: #816d5c;
+}
+
+.text-area{
+    -fx-border-color: #829600;
+    -fx-control-inner-background: rgb(255, 253, 116);
+    -fx-text-fill: #816d5c;
+}

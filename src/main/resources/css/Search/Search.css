@@ -1,13 +1,11 @@
+
+
 .search-list-view{
     -fx-background-color: rgb(242, 252, 231);
     -fx-background-radius: 0% 0% 0.5em 0.5em;
     -fx-border-radius: 0% 0% 0.5em 0.5em;
     -fx-border-color: transparent #7b8c5a #7b8c5a #7b8c5a;
     -fx-padding: 10px 10px 10px 10px;
-}
-
-.big-list-view {
-
 }
 
 
@@ -35,17 +33,30 @@
     /*-fx-padding: 10px 10px 10px 10px;*/
 }
 
+.big-list-view {
+    -fx-background-color: rgb(242, 252, 231);
+    -fx-border-color: transparent #7b8c5a #7b8c5a #7b8c5a;
+    -fx-background-radius: 0% 0% 15px 15px ;
+    -fx-border-radius: 0% 0% 15px 15px ;
+    -fx-padding: 15px 15px 15px 15px;
+}
+
 .list-cell {
     -fx-text-fill: black;
     -fx-background-color: rgb(242, 252, 231);
+    -fx-text-fill: #816d5c;
 }
 
-.big-list-cell {
-    -fx-font-size: 25px;
+.big-list-view .list-cell {
+    -fx-font-size: 20px;
 }
 
 .list-view-upside-down .list-cell {
     -fx-background-color: rgb(242, 252, 231);
+}
+
+.text-field {
+    -fx-text-fill: #816d5c;
 }
 
 .search-text-field{
