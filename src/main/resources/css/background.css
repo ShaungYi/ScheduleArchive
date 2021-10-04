@@ -1,0 +1,5 @@
+.main-background {
+    -fx-background-image: url("../../resources/Images/universal_background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
+}

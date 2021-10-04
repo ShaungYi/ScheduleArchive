@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="motherPane" alignment="BOTTOM_CENTER" maxHeight="525.0" maxWidth="150.0" prefHeight="182.0" prefWidth="78.0" spacing="10.0" stylesheets="@info-nav-tab.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTabController">
+   <children>
+      <BorderPane fx:id="goToBarChartButton" onMouseClicked="#gotoBarChart" styleClass="nav-button">
+         <center>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/Images/launchScreen/barChart.png" />
+               </image></ImageView>
+         </center>
+      </BorderPane>
+
+      <BorderPane fx:id="goToPiChartButton" onMouseClicked="#gotoPiChart" styleClass="nav-button">
+         <center>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/Images/launchScreen/piChart.png" />
+               </image></ImageView>
+         </center>
+      </BorderPane>
+
+
+      <BorderPane fx:id="goToTablesButton" onMouseClicked="#gotoTables" styleClass="nav-button">
+         <center>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/Images/launchScreen/list.png" />
+               </image></ImageView>
+         </center>
+      </BorderPane>
+
+
+      <BorderPane fx:id="goToTimeLineButton" onMouseClicked="#gotoTimeLine" styleClass="nav-button">
+         <center>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/Images/launchScreen/timeLine.png" />
+               </image>
+            </ImageView>
+         </center>
+      </BorderPane>
+
+
+
+
+   </children>
+   <padding>
+      <Insets right="10.0" />
+   </padding>
+</VBox>

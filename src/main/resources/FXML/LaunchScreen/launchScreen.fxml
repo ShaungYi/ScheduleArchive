@@ -19,22 +19,22 @@
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="199.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" scaleX="1.3" scaleY="1.3">
          <image>
-            <Image url="@../../Images/barChart.png" />
+            <Image url="@../../Images/launchScreen/barChart.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="104.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
          <image>
-            <Image url="@../../Images/piChart.png" />
+            <Image url="@../../Images/launchScreen/piChart.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="62.0" fitWidth="244.0" layoutX="872.0" layoutY="634.0" pickOnBounds="true" preserveRatio="true" scaleX="2.5" scaleY="2.5">
          <image>
-            <Image url="@../../Images/timeLine.png" />
+            <Image url="@../../Images/launchScreen/timeLine.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="155.0" fitWidth="200.0" layoutX="973.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/list.png" />
+            <Image url="@../../Images/launchScreen/list.png" />
          </image>
       </ImageView>
       <Label fx:id="loadingLabel" layoutX="492.0" layoutY="606.0" opacity="0.0" prefHeight="41.0" prefWidth="116.0" style="-fx-text-fill: rgb(216, 143, 9);;" text="Loading">

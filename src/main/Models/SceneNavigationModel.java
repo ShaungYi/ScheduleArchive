@@ -1,12 +1,15 @@
 package main.Models;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.Controllers.Loader.Loader;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.BackupScreenController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
+import main.Controllers.Stats.Table;
 import main.Controllers.Timeline.Editor;
 import main.Models.DBModels.WriteToDBModel;
 
@@ -15,7 +18,7 @@ import java.io.IOException;
 
 public class SceneNavigationModel{
 
-    //stuff related to scenes
+    //scenes
     public static Scene scheduleCreator;
     public static Scene stats;
     public static Scene bars;
@@ -28,15 +31,25 @@ public class SceneNavigationModel{
     public static Scene infographics;
     public static Scene searchScreen;
 
+
+    //positions, bounds, and dimentions
     static Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     public static final double screenWidth = screenSize.getWidth();
     public static final double screenHeight = 800;
+
+    public static Bounds navTabBounds;
+
+    //infographic navigation tab
+    public static InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+
+
 
 
 
     public void gotoScene(Scene scene, Scene currentScene){
         Stage stage = (Stage) currentScene.getWindow();
         executeOnSwitchingScene(scene, currentScene);
+        System.out.println("setting scene");
         stage.setScene(scene);
     }
 
@@ -80,6 +93,11 @@ public class SceneNavigationModel{
         //display current backup settings when going to backups screen
         if (targetSceneController instanceof BackupScreenController){
             ((BackupScreenController) targetSceneController).displaySettings();
+        }
+
+        //resolve annoying scrollpane glitch in tables
+        if (targetSceneController instanceof Table){
+            new Thread(((Table) targetSceneController).scrollPaneInitializer).start();
         }
     }
 

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="grandmotherPane" onMouseClicked="#hideSuggestedNames" prefHeight="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
+<Pane fx:id="grandmotherPane" onMouseClicked="#hideSuggestedNames" prefHeight="700.0" styleClass="main-background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
     <children>
         <ListView fx:id="nameSuggestions" onKeyTyped="#handleNameEdit" onMouseClicked="#autoCompleteName" />
         <VBox fx:id="motherPane">
             <children>
                 <Pane fx:id="portalContainerPane" maxHeight="176.0" onScroll="#onScroll" prefHeight="89.0" prefWidth="1300.0" BorderPane.alignment="CENTER_LEFT">
                     <children>
-                        <Pane fx:id="backgroundPane" style="-fx-background-color: rgb(246, 255, 226);" prefWidth="1440" prefHeight="800"></Pane>
+                        <Pane fx:id="backgroundPane" prefHeight="800" prefWidth="1440" style="-fx-background-color: rgb(246, 255, 226);" />
                         <HBox fx:id="portalPane" spacing="20.0">
                             <children>
                                 <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" prefWidth="220" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
@@ -149,7 +150,7 @@
                                     </right>
                                     <bottom>
                                         <HBox prefHeight="41.0" prefWidth="41.0" BorderPane.alignment="CENTER">
-                                            <Button onAction="#insertActivity" prefHeight="41.0" prefWidth="43.0" text="Add">
+                                            <Button onAction="#insertActivity" prefHeight="41.0" prefWidth="58.0" text="Add">
                                                 <HBox.margin>
                                                     <Insets left="480.0" />
                                                 </HBox.margin></Button>
@@ -182,5 +183,9 @@
 
         </VBox>
     </children>
+   <stylesheets>
+      <URL value="@../../css/editor.css" />
+      <URL value="@../../css/Search/Search.css" />
+   </stylesheets>
 
 </Pane>

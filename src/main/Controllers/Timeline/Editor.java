@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.PastActivityArchiveModel;
@@ -132,6 +133,17 @@ public class Editor extends PrototypeController {
 
 
     public void initialize() {
+
+        //add navigation tab
+        InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+        grandmotherPane.getChildren().add(navTab);
+        navTab.controller.motherPane.setTranslateY(400);
+        navTab.setSelectedInfographic("timeLine");
+
+        navTab.setLayoutX(1352);
+        navTab.setLayoutY(106);
+
+
 
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
@@ -361,18 +373,15 @@ public class Editor extends PrototypeController {
 
         changeName(newName);
 
+
+        updateSuggestedNames(newName);
+
+
         if (!grandmotherPane.getChildren().contains(nameSuggestions)){
             grandmotherPane.getChildren().add(nameSuggestions);
 
-            Bounds fieldBounds = specificField.localToScreen(specificField.getLayoutBounds());
 
-
-
-            nameSuggestions.setLayoutX(fieldBounds.getMinX() - 1);
-            nameSuggestions.setLayoutY(fieldBounds.getMinY() - 444);
         }
-
-        updateSuggestedNames(newName);
 
 
         if (suggestedNamesIsEmpty()){
@@ -432,19 +441,21 @@ public class Editor extends PrototypeController {
         SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, null);
 
 
-        if (!suggestedNamesObservableList.isEmpty() && suggestedNamesObservableList.size() < 16){
-            int Nspaces = 16 - suggestedNamesObservableList.size();
-            for (int i = 0; i < Nspaces; i++){
-
-                suggestedNamesObservableList.add(0, "");
-
-            }
-        }
-
         if (!suggestedNamesObservableList.isEmpty()){
             nameSuggestions.scrollTo(suggestedNamesObservableList.get(suggestedNamesObservableList.size() - 1));
         }
 
+        double suggestionsListHeight = suggestedNamesObservableList.size() * 23;
+        System.out.println("size: "+suggestedNamesObservableList.size());
+        System.out.println("height: "+suggestionsListHeight);
+        if (suggestionsListHeight > 400){
+            suggestionsListHeight = 400;
+        }
+        nameSuggestions.setPrefHeight(suggestionsListHeight);
+
+        Bounds fieldBounds = specificField.localToScene(specificField.getLayoutBounds());
+        nameSuggestions.setLayoutX(fieldBounds.getMinX());
+        nameSuggestions.setLayoutY(fieldBounds.getMinY() - nameSuggestions.getPrefHeight());
 
         suggestedNamesObservableList.remove(newName);
     }
@@ -907,7 +918,7 @@ public class Editor extends PrototypeController {
 
 
         Label newLabel = new Label("new");
-        newLabel.setStyle("-fx-alignment: center; -fx-border-color: white; fx-border-width: 1; -fx-background-color: white");
+        newLabel.setStyle("-fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1; -fx-background-color: white");
         newLabel.setFont(new Font(30));
         newLabel.setPrefWidth(newSecs * WIDTH_OF_1_SEC);
         newLabel.setPrefHeight(colorLineHeight);

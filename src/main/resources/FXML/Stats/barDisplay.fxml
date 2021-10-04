@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="700" maxWidth="1300.0" prefHeight="700" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" stylesheets="@bar.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.BarDisplay">
+<BorderPane fx:id="motherPane" maxHeight="700" maxWidth="1300.0" prefHeight="700" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" styleClass="main-background" stylesheets="@bar.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.BarDisplay">
     <top>
         <HBox spacing="20.0">
 

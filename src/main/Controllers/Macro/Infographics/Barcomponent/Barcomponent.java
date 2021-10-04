@@ -12,8 +12,9 @@ import java.io.IOException;
 public class Barcomponent extends AnchorPane {
 
     String date;
-
     public BarComponentController controller;
+    public static String unselectedColor = "rgba(89, 37, 245, 0.68)";
+    public static String selectedHexColor = "#ec3dff";
 
     public Barcomponent(String date, double barFrequency){
         super();
@@ -73,6 +74,9 @@ public class Barcomponent extends AnchorPane {
     }
 
 
+    public void setBarColor(String color){
+        controller.freqBar.setStyle("-fx-fill: " + color + ";");
+    }
 
 
 

@@ -1,11 +1,16 @@
 package main.Controllers.Stats;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
@@ -13,6 +18,9 @@ import main.App;
 
 public class BarDisplay extends PrototypeController {
     static XYChart.Series activitySeries = new XYChart.Series();
+
+    @FXML
+    public BorderPane motherPane;
 
     @FXML
     Button goToCreatorButton;
@@ -26,7 +34,15 @@ public class BarDisplay extends PrototypeController {
     @FXML
     NumberAxis compoNumAxis;
 
+
     public void initialize(){
+
+        //add navigation tab
+        InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+        motherPane.setRight(navTab);
+        navTab.controller.motherPane.setTranslateY(400);
+        navTab.setSelectedInfographic("bar");
+
 
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
@@ -40,6 +56,8 @@ public class BarDisplay extends PrototypeController {
         compositionBar.getData().add(activitySeries);
 
     }
+
+
 
 
 

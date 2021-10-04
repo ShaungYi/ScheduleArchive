@@ -154,11 +154,11 @@ public class SubmitScreen extends PrototypeController {
     }
 
     public void showSuggestions(){
-        suggestionsContainer.setOpacity(1);
+        suggestions.setOpacity(1);
     }
 
     public void hideSuggestions(){
-        suggestionsContainer.setOpacity(0);
+        suggestions.setOpacity(0);
     }
 
 

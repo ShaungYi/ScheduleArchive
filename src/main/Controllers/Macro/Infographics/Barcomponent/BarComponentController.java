@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import main.Models.DateTimeModel;
@@ -45,7 +46,8 @@ public class BarComponentController {
         //store bar width in model
         InfographicsModel.barWidth = containerPane.getPrefWidth();
 
-        //make info popup cover everything
+        //set bar stroke (border to invisible)
+        freqBar.setStroke(Color.TRANSPARENT);
     }
 
     public void configure(String date, double barFrequency){
@@ -60,11 +62,14 @@ public class BarComponentController {
     @FXML
     public void showInfoPopupOnMouseClicked(MouseEvent event){
 
+
         updateInfoPopup();
 
         if (!InfographicsModel.dayInfoPopupListViewContainerPane.getChildren().contains(InfographicsModel.dayInfoPopupListView)){
             InfographicsModel.dayInfoPopupListViewContainerPane.getChildren().add(InfographicsModel.dayInfoPopupListView);
         }
+
+        //calculate position that is closest to click but doesn't cut the popup
 
         double x = event.getSceneX();
         double y = event.getSceneY();
@@ -87,6 +92,16 @@ public class BarComponentController {
 
         InfographicsModel.dayInfoPopupListView.setLayoutX(x);
         InfographicsModel.dayInfoPopupListView.setLayoutY(y);
+
+
+        //unselect previous selected bar
+        InfographicsModel.selectedBarcomponent.setBarColor(Barcomponent.unselectedColor);
+
+        //change color of bar
+        thisComp.setBarColor(Barcomponent.selectedHexColor);
+
+        //update selected barcomponent to this
+        InfographicsModel.selectedBarcomponent = thisComp;
 
     }
 

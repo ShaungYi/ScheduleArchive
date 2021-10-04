@@ -1,5 +1,6 @@
 package main.Controllers.Stats;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +10,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
@@ -22,6 +26,8 @@ public class Table extends PrototypeController {
 
     @FXML
     ScrollPane motherPane;
+    @FXML
+    Pane grandmotherPane;
 
     @FXML
     Button goToCreatorButton;
@@ -155,6 +161,15 @@ public class Table extends PrototypeController {
 
     public void initialize(){
 
+        //add navigation tab
+        InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+        grandmotherPane.getChildren().add(navTab);
+        navTab.controller.motherPane.setTranslateY(400);
+        navTab.setSelectedInfographic("table");
+
+        navTab.setLayoutX(1352);
+        navTab.setLayoutY(106);
+
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
 
@@ -173,6 +188,10 @@ public class Table extends PrototypeController {
         setUpActivityChart(miscellaneousTable, miscellaneousCol, miscellaneousDurationCol, miscellaneousData);
 
         System.out.println("finished Initialization");
+
+        //hide scroll bars
+        motherPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        motherPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
 
     }
@@ -204,6 +223,21 @@ public class Table extends PrototypeController {
     }
 
 
+    public Runnable scrollPaneInitializer = () -> {
+        //wait until the maddening initialize method finishes and the screen is loaded
+        try {
+            Thread.sleep(7);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Platform.runLater( () -> {
+            motherPane.setVvalue(0.0);
+        });
+
+
+    };
+
     public void setUpActivityChart(TableView<ActivitySummaryTableView.chartDataUnit> table, TableColumn<ActivitySummaryTableView.chartDataUnit, String> header, TableColumn<ActivitySummaryTableView.chartDataUnit, String> duration, ObservableList<ActivitySummaryTableView.chartDataUnit> data){
 
         header.setCellValueFactory(
@@ -213,17 +247,6 @@ public class Table extends PrototypeController {
         table.setItems(data);
     }
 
-
-    public void onScroll(ScrollEvent e){
-//        double motherPaneLayoutY = motherPane.getLayoutY();
-//        //System.out.println(motherPaneLayoutY);
-//        double change = e.getDeltaY();
-//
-//        if (motherPaneLayoutY + change < 10 && motherPaneLayoutY + change > -2000){
-//            motherPane.setLayoutY(motherPaneLayoutY + change);
-//        }
-
-    }
 
 
     public static boolean addNewActivityToData(Activity activity, ObservableList data, String headerType){
@@ -467,6 +490,5 @@ public class Table extends PrototypeController {
     public void goToStats(){
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, SceneNavigationModel.table);
     }
-
 
 }

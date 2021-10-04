@@ -1,8 +1,6 @@
 package main.Controllers.Macro.Infographics;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -21,7 +19,6 @@ import javafx.scene.shape.Rectangle;
 import main.App;
 import main.Controllers.Macro.Infographics.Barcomponent.Barcomponent;
 import main.Controllers.PrototypeController;
-import main.Controllers.Stats.Table;
 import main.Models.*;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.Graphics.InfographicsModel;
@@ -29,7 +26,6 @@ import main.Models.SceneNavigationModel;
 import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.io.File;
-import java.lang.reflect.Field;
 
 
 public class InfographicsController extends PrototypeController {
@@ -116,6 +112,13 @@ public class InfographicsController extends PrototypeController {
         InfographicsModel.dayInfoPopupListView.setPrefHeight(500);
     }
 
+
+
+
+
+
+
+
     private Runnable totallyUnnecessaryBackgroundLabelAlignProcessBecauseOfAStupidCannotGetBoundsInInitializeMethodError = () -> {
         System.out.println("(from exit)waiting for previous process to finish");
         //wait until the maddening initialize method finishes and the screen is loaded
@@ -132,6 +135,13 @@ public class InfographicsController extends PrototypeController {
 
 
     };
+
+
+
+
+
+
+
 
 
     public void onScroll(ScrollEvent e){
@@ -171,6 +181,9 @@ public class InfographicsController extends PrototypeController {
             double newLayoutX = motherPaneLayoutX + change;
             motherPane.setLayoutX(newLayoutX);
             yearLabel.setLayoutX(yearLabel.getLayoutX() - change);
+
+            //move info popup
+            InfographicsModel.dayInfoPopupListView.setLayoutX(InfographicsModel.dayInfoPopupListView.getLayoutX() + change);
         }
 
         //pane has reached extreme
@@ -182,6 +195,13 @@ public class InfographicsController extends PrototypeController {
 
 
     }
+
+
+
+
+
+
+
 
 
 
@@ -205,6 +225,14 @@ public class InfographicsController extends PrototypeController {
         String yearToDisplay = InfographicsModel.getDisplayedDate(yearMid, "year");
         yearLabel.setText(yearToDisplay);
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -279,6 +307,17 @@ public class InfographicsController extends PrototypeController {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
     private void changeYear(String date){
         //new year
         year = new VBox();
@@ -323,8 +362,9 @@ public class InfographicsController extends PrototypeController {
 
     @FXML
     public void goBack(){
+        System.out.println("goback called");
         hideInfoPopup();
-        App.sceneNavigationModel.gotoScene(SceneNavigationModel.macro, motherPane.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.searchScreen, motherPane.getScene());
         //set default macro screen to search
         SceneNavigationModel.macro = SceneNavigationModel.searchScreen;
     }
@@ -345,6 +385,9 @@ public class InfographicsController extends PrototypeController {
         System.out.println(event.getTarget());
         if (!(event.getTarget() instanceof Rectangle)){
             hideInfoPopup();
+
+            //unselect selected bar
+            InfographicsModel.selectedBarcomponent.setBarColor(Barcomponent.unselectedColor);
         }
     }
 

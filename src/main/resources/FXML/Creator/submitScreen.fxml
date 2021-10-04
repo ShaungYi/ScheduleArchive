@@ -1,79 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
-   <left>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="370.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="560.0" minWidth="10.0" prefWidth="560.0" />
-            <ColumnConstraints maxWidth="370.0" minWidth="39.5" prefWidth="370.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="249.0" minHeight="10.0" prefHeight="217.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="212.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="374.0" minHeight="10.0" prefHeight="374.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
+   <top>
+      <Pane BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="startTime" text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label fx:id="startTime" text="Label" visible="false">
                <font>
                   <Font size="20.0" />
                </font></Label>
-             <Label fx:id="endTime" text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+             <Label fx:id="endTime" text="Label" visible="false">
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <GridPane GridPane.columnIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="21.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0" minWidth="10.0" prefWidth="516.0" />
-                  <ColumnConstraints maxWidth="195.5" minWidth="10.0" prefWidth="21.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label fx:id="duration" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+
+                  <Label fx:id="duration" text="Label" visible="false">
                      <font>
                         <Font size="40.0" />
                      </font></Label>
-                   <Label text="  " GridPane.columnIndex="2" />
-               </children>
-            </GridPane>
-            <GridPane fx:id="suggestionsContainer" opacity="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ListView fx:id="suggestions" onMouseClicked="#completeNameField" prefHeight="272.0" prefWidth="560.0" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-               </children>
-            </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" prefWidth="420.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="140.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextField fx:id="nameField" onKeyTyped="#onEntryToNameField" prefHeight="92.0" prefWidth="263.0" promptText="Enter Activity Name" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font size="30.0" />
-                     </font></TextField>
-                  <Button fx:id="submitButton" disable="true" mnemonicParsing="false" onAction="#submit" prefHeight="92.0" prefWidth="142.0" text="Submit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Button>
-               </children>
-            </GridPane>
+                   <Label text="  " visible="false" GridPane.columnIndex="2" />
+
+
+                  <ListView fx:id="suggestions" layoutX="363.0" layoutY="191.0" onMouseClicked="#completeNameField" prefHeight="272.0" prefWidth="434.0" style="-fx-background-radius: 30px;" />
+
+                  <HBox layoutX="353.0" layoutY="99.0">
+                     <TextField fx:id="nameField" layoutX="414.0" layoutY="95.0" onKeyTyped="#onEntryToNameField" prefHeight="92.0" prefWidth="452.0" promptText="Enter Activity Name">
+                        <font>
+                           <Font size="30.0" />
+                        </font></TextField>
+                     <Button fx:id="submitButton" disable="true" layoutX="714.0" layoutY="197.0" mnemonicParsing="false" onAction="#submit" prefHeight="92.0" prefWidth="142.0" text="Submit">
+                        <font>
+                           <Font size="20.0" />
+                        </font>
+                     </Button>
+                  </HBox>
+
          </children>
-      </GridPane>
-   </left>
+      </Pane>
+   </top>
+   <stylesheets>
+      <URL value="@../../css/background.css" />
+      <URL value="@../../css/Search/Search.css" />
+   </stylesheets>
 </BorderPane>

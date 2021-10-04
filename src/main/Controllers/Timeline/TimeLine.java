@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 
 public class TimeLine extends PrototypeController {
 
+    public Pane grandmotherPane;
     private int startTimeSecs;
     private int endTimeSecs;
 
@@ -117,6 +119,17 @@ public class TimeLine extends PrototypeController {
 
     public void initialize() {
 
+
+        //add navigation tab
+        InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+        grandmotherPane.getChildren().add(navTab);
+        navTab.controller.motherPane.setTranslateY(400);
+        navTab.setSelectedInfographic("timeLine");
+
+        navTab.setLayoutX(1352);
+        navTab.setLayoutY(106);
+
+
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
 
@@ -204,7 +217,7 @@ public class TimeLine extends PrototypeController {
 
         for (Activity activity : archive) {
             Label newActivity = new Label();
-            newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+            newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1;");
             newActivity.setPrefHeight(colorLineHeight);
             newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
             newActivity.setText(activity.getName());

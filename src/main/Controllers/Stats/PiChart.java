@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
+import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
@@ -26,6 +27,12 @@ public class PiChart extends PrototypeController {
     static ObservableList<PieChart.Data> piChartData;
 
     public void initialize(){
+
+        //add navigation tab
+        InfographicsNavigationTab navTab = new InfographicsNavigationTab();
+        motherPane.setRight(navTab);
+        navTab.controller.motherPane.setTranslateY(400);
+        navTab.setSelectedInfographic("pi");
 
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
