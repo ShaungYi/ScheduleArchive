@@ -36,7 +36,7 @@
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" onAction="#redo" prefHeight="52.0" prefWidth="67.0" text="Redo">
+                        <Button mnemonicParsing="false" onAction="#redo" prefHeight="52.0" prefWidth="79.0" text="Redo">
                            <font>
                               <Font size="18.0" />
                            </font>

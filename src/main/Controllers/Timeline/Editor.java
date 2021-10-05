@@ -439,25 +439,44 @@ public class Editor extends PrototypeController {
 
         SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, "");
 
+        //remove the mysterious space in suggested list
 
-        if (!suggestedNamesObservableList.isEmpty()){
+        if (suggestedNamesObservableList.get(0).toString() == "" || suggestedNamesObservableList.get(0).toString().isEmpty()){
+            suggestedNamesObservableList.remove(0);
+        }
+
+        boolean blank = true;
+        for (Object sugg : suggestedNamesObservableList){
+            if (!sugg.toString().isEmpty()){
+                blank = false;
+            }
+        }
+
+
+        if (!suggestedNamesObservableList.isEmpty() && !blank) {
+
+            grandmotherPane.getChildren().add(nameSuggestions);
+
             nameSuggestions.scrollTo(suggestedNamesObservableList.get(suggestedNamesObservableList.size() - 1));
+
+
+            double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
+            if (suggestionsListHeight > 400) {
+                suggestionsListHeight = 400;
+            }
+            nameSuggestions.setPrefHeight(suggestionsListHeight);
+
+            Bounds fieldBounds = specificField.localToScene(specificField.getLayoutBounds());
+            nameSuggestions.setLayoutX(fieldBounds.getMinX());
+            nameSuggestions.setLayoutY(fieldBounds.getMinY() - nameSuggestions.getPrefHeight() + 3);
+
+            suggestedNamesObservableList.remove(newName);
+
+
+            specificField.getStyleClass().add("text-field-with-reverse-suggestions");
+        } else {
+            hideSuggestedNames();
         }
-
-        double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
-        if (suggestionsListHeight > 400){
-            suggestionsListHeight = 400;
-        }
-        nameSuggestions.setPrefHeight(suggestionsListHeight);
-
-        Bounds fieldBounds = specificField.localToScene(specificField.getLayoutBounds());
-        nameSuggestions.setLayoutX(fieldBounds.getMinX());
-        nameSuggestions.setLayoutY(fieldBounds.getMinY() - nameSuggestions.getPrefHeight());
-
-        suggestedNamesObservableList.remove(newName);
-
-
-        specificField.getStyleClass().add("text-field-with-reverse-suggestions");
     }
 
 
