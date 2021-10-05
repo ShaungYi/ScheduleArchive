@@ -43,8 +43,6 @@ public class SubmitScreen extends PrototypeController {
     @FXML
     ListView suggestions;
     ObservableList<String> observableListOfsuggestions = FXCollections.observableArrayList();
-    @FXML
-    GridPane suggestionsContainer;
 
 
     Activity activityInQuestion;
@@ -76,6 +74,7 @@ public class SubmitScreen extends PrototypeController {
 
 
     public void submit(){
+        System.out.println(notesTextArea);
 
         DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
 
