@@ -20,7 +20,6 @@ import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.PastActivityArchiveModel;
 import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
@@ -505,30 +504,9 @@ public class Editor extends PrototypeController {
         changeFontUntilTextFitsLabel(givenEpoch);
 
 
-
-
-        PastActivityArchiveModel.loadActivity(givenActivity.getName(), givenActivity.getCategory(), givenActivity.getDurationSeconds(), givenActivity.getDate());
-        removePastActivity(oldName);
-
-
         App.editLog.addLog(ArchiveDBModel.archive);
 
     }
-
-
-
-    public static void removePastActivity(String name){
-        for (Iterator<PastActivity> iterator = PastActivityArchiveModel.pastActivities.iterator(); iterator.hasNext();){
-
-            PastActivity pastActivity = iterator.next();
-
-            if (pastActivity.getName().equals(name) && pastActivity.getFrequency() == 1){
-                iterator.remove();
-
-            }
-        }
-    }
-
 
 
 
@@ -904,7 +882,7 @@ public class Editor extends PrototypeController {
         int newEndTime = existingEndtime;
 
 
-        Activity newActivity = new Activity("new","", newSecs, newStartTime , newEndTime, selectedActivity.getDate());
+        Activity newActivity = new Activity("new","", "", newSecs, newStartTime , newEndTime, selectedActivity.getDate());
 
         selectedActivity.setDurationSeconds(existingSecs);
 
@@ -965,8 +943,6 @@ public class Editor extends PrototypeController {
             Activity merger = ArchiveDBModel.archive.get(mergerIndex);
             Activity engulfed = ArchiveDBModel.archive.get(selectedIndex);
 
-
-            removePastActivity(engulfed.getName());
 
 
             int mergerEndTime = merger.getEndTimeSecs();

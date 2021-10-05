@@ -6,13 +6,15 @@ public class Activity implements Cloneable{
     private String name;
     private String category;
     private int durationSeconds;
+    private String description;
     int startTimeSecs;
     int endTimeSecs;
     String date;
 
-    public Activity (String name, String category, int duration, int startTime, int endTime, String date){
+    public Activity (String name, String category, String description, int duration, int startTime, int endTime, String date){
         this.name = name;
         this.category = category;
+        this.description = description;
         this.durationSeconds = duration;
         this.startTimeSecs = startTime;
         this.endTimeSecs = endTime;
@@ -27,6 +29,10 @@ public class Activity implements Cloneable{
         return category;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public int getDurationSeconds() {
         return durationSeconds;
     }
@@ -34,8 +40,6 @@ public class Activity implements Cloneable{
     public int getStartTimeSecs() {
         return startTimeSecs;
     }
-
-
 
     public int getEndTimeSecs() {
         return endTimeSecs;
@@ -45,8 +49,17 @@ public class Activity implements Cloneable{
         return date;
     }
 
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setDurationSeconds(int durationSeconds) {
@@ -65,12 +78,9 @@ public class Activity implements Cloneable{
         this.date = date;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public String toString(){
-        return "Activity: "+"name = "+name+", category = "+category+", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
+        return "Activity: "+"name = "+name+", category = "+category+", description: "+description+", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
     }
 
 

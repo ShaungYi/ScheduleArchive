@@ -10,7 +10,6 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
-import main.Models.PastActivityArchiveModel;
 import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
@@ -20,9 +19,8 @@ import main.App;
 
 public class SubmitScreen extends PrototypeController {
 
-
-    @FXML Label duration;
-
+    @FXML
+    Label duration;
 
     @FXML
     Label startTime;
@@ -32,6 +30,10 @@ public class SubmitScreen extends PrototypeController {
 
     @FXML
     TextField nameField;
+
+    @FXML
+    TextArea notesTextArea;
+
     @FXML
     Button submitButton;
 
@@ -78,8 +80,7 @@ public class SubmitScreen extends PrototypeController {
         DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
 
         activityInQuestion.setName(nameField.getText());
-
-
+        activityInQuestion.setDescription(notesTextArea.getText());
 
         mergeLikeActivities();
 
@@ -87,10 +88,6 @@ public class SubmitScreen extends PrototypeController {
         Table.updateData(ArchiveDBModel.archive);
         Table.categoryData.sort(Stats.chartDataUnitComparator);
         Table.moveTotalToBottom();
-
-
-        PastActivityArchiveModel.loadActivity(activityInQuestion.getName(), activityInQuestion.getCategory(), activityInQuestion.getDurationSeconds(), activityInQuestion.getDate());
-
 
         WriteToDBModel.saveDataSynchronously();
 

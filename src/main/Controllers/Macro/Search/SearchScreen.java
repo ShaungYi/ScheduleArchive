@@ -13,8 +13,8 @@ import main.App;
 import main.Controllers.Macro.Infographics.BarComponentManager;
 import main.Controllers.Macro.Search.SearchTag.SearchTag;
 import main.Controllers.PrototypeController;
+import main.Models.DBModels.ReadFromDBModel;
 import main.Models.MacroDataModel;
-import main.Models.PastActivityArchiveModel;
 import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 
@@ -52,10 +52,10 @@ public class SearchScreen extends PrototypeController {
     }
 
     void suggestAllActivities(){
-        for (int i = PastActivityArchiveModel.pastActivities.size() - 1; i >= 0; i--){
+        for (int i = SearchModel.suggestionList.size() - 1; i >= 0; i--){
 //            System.out.println("i: " + i);
 //            System.out.println(PastActivityArchiveModel.pastActivities.size() - 1);
-            observableListOfsuggestedActivityNames.add(PastActivityArchiveModel.pastActivities.get(i).getName());
+            observableListOfsuggestedActivityNames.add(SearchModel.suggestionList.get(i).getName());
         }
     }
 

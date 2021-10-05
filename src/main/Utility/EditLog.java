@@ -124,8 +124,10 @@ public class EditLog {
         ArrayList<Activity> cloneList = new ArrayList();
 
         for (Activity activity : list){
-            Activity cloneActivity = new Activity(activity.getName(),
+            Activity cloneActivity = new Activity(
+                    activity.getName(),
                     activity.getCategory(),
+                    activity.getDescription(),
                     activity.getDurationSeconds(),
                     activity.getStartTimeSecs(),
                     activity.getEndTimeSecs(),

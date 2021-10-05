@@ -17,7 +17,7 @@ public class MacroDataModel {
     public static void composeSelectedPastActivitiesListFromNames(){
 
         for (String selectedActivityName : selectedActivityNames){
-            PastActivity pastActivity = ReadFromDBModel.loadSelectedPastActivities(selectedActivityName);
+            PastActivity pastActivity = ReadFromDBModel.loadSelectedPastActivities(selectedActivityName, null);
             selectedPastActivities.add(pastActivity);
         }
     }

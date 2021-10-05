@@ -365,9 +365,7 @@ public class ScheduleCreator extends PrototypeController {
     @FXML
     public void processSubmission() throws NullPointerException, IOException {
         // auto resume when selectedDay is NULL and currentDay is equal to lastDay
-        System.out.println("(from auto resume) currentDay: " + DateTimeModel.currentDay);
-        System.out.println("(from auto resume) lastDay: " + DateTimeModel.getLastDay());
-        String currentDay = DateTimeModel.currentDay;
+        String currentDay = LocalDate.now().toString();
 
 
         if (DateTimeModel.selectedDay == null && currentDay.equals(DateTimeModel.getLastDay())) {
@@ -375,6 +373,8 @@ public class ScheduleCreator extends PrototypeController {
             ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);
             Loader.addNoData(stopWatch.getStartTimeSec());
             System.out.println("(from auto resume) auto resumed");
+        } else if (DateTimeModel.selectedDay == null) {
+            DateTimeModel.selectedDay = currentDay;
         }
 
         String category;
@@ -385,7 +385,7 @@ public class ScheduleCreator extends PrototypeController {
         }
 
         if (!category.equals("null") && stopWatch.getMeasuredTime() != 0){
-            ArchiveDBModel.archive.add(new Activity("undefined",getSelectedActivityCategory(ActivityTypes),stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
+            ArchiveDBModel.archive.add(new Activity("undefined", getSelectedActivityCategory(ActivityTypes), "", stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
             UniversalCommonAncestor.setStyle("-fx-background-color: white");

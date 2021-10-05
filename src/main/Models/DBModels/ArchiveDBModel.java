@@ -13,10 +13,8 @@ public class ArchiveDBModel {
     //preparedStatement for writing data to the database
     public static PreparedStatement insertDataToActivitiesTable;
     public static PreparedStatement insertDataToEventsTable;
-    public static PreparedStatement insertDataToFrequenciesTable;
     public static PreparedStatement deleteEvent;
     public static PreparedStatement deleteActivities;
-    public static PreparedStatement deleteFrequencies;
     public static PreparedStatement addFrequency;
     public static PreparedStatement subFrequency;
 
@@ -47,38 +45,54 @@ public class ArchiveDBModel {
 
             Statement statement = connection.createStatement();
 
-            statement.execute("CREATE TABLE IF NOT EXISTS activities (activityID INTEGER, name TEXT, category TEXT)");
-            statement.execute("CREATE TABLE IF NOT EXISTS events (activityID INTEGER, startTime INTEGER, endTime INTEGER, date TEXT)");
-            statement.execute("CREATE TABLE IF NOT EXISTS frequencies (activityID INTEGER, frequency INTEGER)");
+            statement.execute(
+                        "CREATE TABLE " +
+                            "IF NOT EXISTS " +
+                            "activities (" +
+                            "activityID INTEGER, " +
+                            "name TEXT, " +
+                            "category TEXT, " +
+                            "frequency INTEGER" +
+                            ")"
+            );
+
+            statement.execute(
+                        "CREATE TABLE " +
+                            "IF NOT EXISTS " +
+                            "events " +
+                            "(" +
+                            "activityID INTEGER, " +
+                            "description INTEGER, " +
+                            "startTime INTEGER, " +
+                            "endTime INTEGER, " +
+                            "date TEXT" +
+                            ")"
+            );
 
             statement.close();
 
 
             // write statements
 
-            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?)");
+            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?, ?)");
 
-            insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?)");
-
-            insertDataToFrequenciesTable = connection.prepareStatement("INSERT INTO frequencies VALUES (?, ?)");
+            insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?, ?)");
 
             deleteEvent = connection.prepareStatement(
                         "DELETE FROM events " +
-                            "WHERE activityID = ? AND startTime = ? AND endTime = ? AND date = ?"
+                            "WHERE startTime = ? AND endTime = ? AND date = ?"
             );
 
-            deleteActivities = connection.prepareStatement("DELETE FROM activities WHERE activityID NOT IN (SELECT activityID FROM events)");
-
-            deleteFrequencies = connection.prepareStatement("DELETE FROM frequencies WHERE frequency = 0");
+            deleteActivities = connection.prepareStatement("DELETE FROM activities WHERE frequency = 0");
 
             addFrequency = connection.prepareStatement(
-                        "UPDATE frequencies " +
+                        "UPDATE activities " +
                             "SET frequency = frequency + 1 " +
                             "WHERE activityID = ?"
             );
 
             subFrequency = connection.prepareStatement(
-                        "UPDATE frequencies " +
+                        "UPDATE activities " +
                             "SET frequency = frequency - 1 " +
                             "WHERE activityID = ?"
             );
@@ -86,7 +100,7 @@ public class ArchiveDBModel {
             // read statements
 
             readDayContent = connection.prepareStatement(
-                        "SELECT name, category, startTime, endTime, endTime - startTime AS duration, date " +
+                        "SELECT name, category, description, startTime, endTime, endTime - startTime AS duration, date " +
                             "FROM events " +
                             "JOIN activities USING (activityID) " +
                             "WHERE date = ? ORDER BY startTime"
@@ -118,20 +132,17 @@ public class ArchiveDBModel {
                     "SELECT endTime - startTime AS duration, date " +
                     "FROM events " +
                     "JOIN activities USING (activityID) " +
-                    "WHERE name = ? "
+                    "WHERE name = ? OR category = ?"
             );
 
             getSuggestions = connection.prepareStatement(
                         "SELECT DISTINCT name, category, " +
-
                             "CASE date " +
                                 "WHEN ? " +
                                     "THEN frequency + 50 " +
                                     "ELSE frequency " +
                             "END AS score " +
-
                             "FROM activities " +
-                            "JOIN frequencies USING (activityID) " +
                             "JOIN events USING (activityID) " +
                             "ORDER BY score DESC, date "
             );

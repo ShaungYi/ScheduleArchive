@@ -18,6 +18,7 @@ public class ReadFromDBModel {
         try {
             String name;
             String category;
+            String description;
             int duration;
             int startTime;
             int endTime;
@@ -32,9 +33,10 @@ public class ReadFromDBModel {
                 // extracting data from events
                 name = day.getString(1);
                 category = day.getString(2);
-                startTime = day.getInt(3);
-                endTime = day.getInt(4);
-                duration = day.getInt(5);
+                description = day.getString(3);
+                startTime = day.getInt(4);
+                endTime = day.getInt(5);
+                duration = day.getInt(6);
 
                 // Setting previous endTime to the start time of the day if the event name is DayStart
 
@@ -48,7 +50,7 @@ public class ReadFromDBModel {
                 }
 
                 // saving the event to an arraylist
-                dayContent.add(new Activity(name, category, duration, startTime, endTime, eventDate));
+                dayContent.add(new Activity(name, category, description, duration, startTime, endTime, eventDate));
             }
 
             System.out.println("(from readDay) day: " + dayContent);
@@ -135,7 +137,7 @@ public class ReadFromDBModel {
     }
 
 
-    public static PastActivity loadSelectedPastActivities(String name) {
+    public static PastActivity loadSelectedPastActivities(String name, String category) {
         PastActivity pastActivity = new PastActivity();
 
         int frequency = 0;
@@ -144,6 +146,7 @@ public class ReadFromDBModel {
         try {
             PreparedStatement getAllOccurrences =  ArchiveDBModel.getAllOccurrences;
             getAllOccurrences.setString(1, name);
+            getAllOccurrences.setString(2, category);
             ResultSet occurrences = getAllOccurrences.executeQuery();
 
             while (occurrences.next()) {

@@ -116,7 +116,7 @@ public class Loader extends PrototypeController {
 
         // adding NoData to archive
 
-        ArchiveDBModel.archive.add(new Activity("no data", "NoData", gapEndTime - gapStartTime, gapStartTime, gapEndTime, LocalDate.now().toString()));
+        ArchiveDBModel.archive.add(new Activity("no data", "NoData", "",  gapEndTime - gapStartTime, gapStartTime, gapEndTime, LocalDate.now().toString()));
     }
 
 

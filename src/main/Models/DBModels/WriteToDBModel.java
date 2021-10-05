@@ -18,10 +18,6 @@ public class WriteToDBModel {
         // reading contents of the current day in the database
         ArrayList<Activity> savedData = ReadFromDBModel.readDay(day);
 
-        cleanArchive(savedData, clonedArchive);
-
-        // adding DayStart event to the clonedArchive if the savedData is empty
-
         System.out.println("(from saveArchive) saving data...");
 
         // connecting to the database;
@@ -35,6 +31,7 @@ public class WriteToDBModel {
                 if (!event.arrayListContainsActivity(savedData)) {
                     String name = event.getName();
                     String category = event.getCategory();
+                    String description = event.getDescription();
                     int startTime = event.getStartTimeSecs();
                     int endTime = event.getEndTimeSecs();
                     String date = event.getDate();
@@ -79,22 +76,18 @@ public class WriteToDBModel {
                         saveActivity.setInt(1, activityID);
                         saveActivity.setString(2, name);
                         saveActivity.setString(3, category);
+                        saveActivity.setInt(4, 1);
                         saveActivity.execute();
-
-                        // adding the new activity to the frequency table
-                        PreparedStatement saveActivityToFrequencyTable = ArchiveDBModel.insertDataToFrequenciesTable;
-                        saveActivityToFrequencyTable.setInt(1, activityID);
-                        saveActivityToFrequencyTable.setInt(2, 0);
-                        saveActivityToFrequencyTable.execute();
                     }
 
                     // saving the event
 
                     PreparedStatement saveEvent = ArchiveDBModel.insertDataToEventsTable;
                     saveEvent.setInt(1, activityID);
-                    saveEvent.setInt(2, startTime);
-                    saveEvent.setInt(3, endTime);
-                    saveEvent.setString(4, date);
+                    saveEvent.setString(2, description);
+                    saveEvent.setInt(3, startTime);
+                    saveEvent.setInt(4, endTime);
+                    saveEvent.setString(5, date);
                     saveEvent.execute();
 
                     // adding 1 to the frequency of the activity
@@ -114,16 +107,18 @@ public class WriteToDBModel {
             e.printStackTrace();
         }
 
+        cleanArchive(savedData, clonedArchive);
         ReadFromDBModel.updateSuggestionList();
 
     }
 
 
 
-    private static void cleanArchive(ArrayList<Activity> savedData,ArrayList<Activity> newData) {
+    private static void cleanArchive(ArrayList<Activity> savedData, ArrayList<Activity> newData) {
 
         try {
             int activityID;
+            String description;
             int endTime;
             int startTime;
             String date;
@@ -143,10 +138,9 @@ public class WriteToDBModel {
 
                     // deleting events that's not in the archive
                     PreparedStatement deleteEvent = ArchiveDBModel.deleteEvent;
-                    deleteEvent.setInt(1, activityID);
-                    deleteEvent.setInt(2, startTime);
-                    deleteEvent.setInt(3, endTime);
-                    deleteEvent.setString(4, date);
+                    deleteEvent.setInt(1, startTime);
+                    deleteEvent.setInt(2, endTime);
+                    deleteEvent.setString(3, date);
                     deleteEvent.execute();
 
                     // subtracting 1 from the frequency the activity
@@ -161,8 +155,6 @@ public class WriteToDBModel {
 
             // deleting all activities that's not referenced in the events table
             ArchiveDBModel.deleteActivities.execute();
-
-            ArchiveDBModel.deleteFrequencies.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
