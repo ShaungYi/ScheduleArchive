@@ -136,7 +136,7 @@ public class ArchiveDBModel {
             );
 
             getSuggestions = connection.prepareStatement(
-                        "SELECT DISTINCT name, category, " +
+                        "SELECT DISTINCT name, " +
                             "CASE date " +
                                 "WHEN ? " +
                                     "THEN frequency + 50 " +
@@ -144,6 +144,7 @@ public class ArchiveDBModel {
                             "END AS score " +
                             "FROM activities " +
                             "JOIN events USING (activityID) " +
+                            "WHERE name LIKE ? AND category LIKE ? " +
                             "ORDER BY score DESC, date "
             );
 

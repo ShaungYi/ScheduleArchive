@@ -1,10 +1,8 @@
 package main.Models.DBModels;
 
 import main.Models.DateTimeModel;
-import main.Models.SearchModel;
 import main.Utility.Activity;
 import main.Utility.PastActivity;
-import main.Utility.Suggestion;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -172,25 +170,30 @@ public class ReadFromDBModel {
     }
 
 
-    public static void updateSuggestionList() {
+    public static ArrayList<String> getSuggestions(String nameFragment, String category) {
+        ArrayList<String> suggestionList = new ArrayList<>();
 
         try {
             PreparedStatement getSuggestions = ArchiveDBModel.getSuggestions;
             getSuggestions.setString(1, DateTimeModel.currentDay);
+            getSuggestions.setString(2, "%" + nameFragment + "%");
+            getSuggestions.setString(3, "%" + category + "%");
             ResultSet suggestions = getSuggestions.executeQuery();
 
             while (suggestions.next()) {
-                Suggestion suggestion = new Suggestion(suggestions.getString(1), suggestions.getString(2));
-                String name = suggestion.getName();
+                String suggestion = suggestions.getString(1);
 
-                if (!name.equals("undefined") && !name.equals("new") && !name.equals("no data") && !name.equals("no name")){
-                    SearchModel.suggestionList.add(suggestion);
+                if (!suggestion.equals("undefined") && !suggestion.equals("new") && !suggestion.equals("no data") && !suggestion.equals("no name")){
+                    suggestionList.add(suggestion);
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return suggestionList;
+
     }
 
 

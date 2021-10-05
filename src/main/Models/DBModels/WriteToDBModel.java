@@ -108,8 +108,6 @@ public class WriteToDBModel {
         }
 
         cleanArchive(savedData, clonedArchive);
-        ReadFromDBModel.updateSuggestionList();
-
     }
 
 

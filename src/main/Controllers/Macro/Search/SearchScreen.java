@@ -18,6 +18,8 @@ import main.Models.MacroDataModel;
 import main.Models.SceneNavigationModel;
 import main.Models.SearchModel;
 
+import java.util.ArrayList;
+
 public class SearchScreen extends PrototypeController {
 
 
@@ -52,16 +54,16 @@ public class SearchScreen extends PrototypeController {
     }
 
     void suggestAllActivities(){
-        for (int i = SearchModel.suggestionList.size() - 1; i >= 0; i--){
-//            System.out.println("i: " + i);
-//            System.out.println(PastActivityArchiveModel.pastActivities.size() - 1);
-            observableListOfsuggestedActivityNames.add(SearchModel.suggestionList.get(i).getName());
+        ArrayList<String> suggestionList =  ReadFromDBModel.getSuggestions("", "");
+
+        for (int i = suggestionList.size() - 1; i >= 0; i--){
+            observableListOfsuggestedActivityNames.add(suggestionList.get(i));
         }
     }
 
     @FXML
     void onEntryToActivitySearchField(){
-        SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames, null);
+        SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames, "");
     }
 
     @FXML

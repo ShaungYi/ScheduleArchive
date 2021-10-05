@@ -437,7 +437,7 @@ public class Editor extends PrototypeController {
 
     private void updateSuggestedNames(String newName){
 
-        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, null);
+        SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, "");
 
 
         if (!suggestedNamesObservableList.isEmpty()){

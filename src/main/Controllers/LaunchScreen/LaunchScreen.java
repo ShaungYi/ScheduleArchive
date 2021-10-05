@@ -40,8 +40,6 @@ public class LaunchScreen extends PrototypeController {
     Runnable setupRunnable = new Runnable() {
         @Override
         public void run() {
-            // update suggestionList
-            ReadFromDBModel.updateSuggestionList();
 
             // loading new scenes
 

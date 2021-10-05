@@ -1,52 +1,33 @@
 package main.Models;
 import javafx.collections.ObservableList;
-import main.Utility.Suggestion;
+import main.Models.DBModels.ReadFromDBModel;
+
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SearchModel {
 
-    public static ArrayList<Suggestion> suggestionList = new ArrayList<>();
-
     public static void searchPastActivityListForNameAndLoadToObservableList(String targetFragment, ObservableList<String> list, String category) {
-        String name;
-        String suggestionCategory;
         list.clear();
+        ArrayList<String> suggestionList = ReadFromDBModel.getSuggestions(targetFragment, category);
 
-        for (Suggestion suggestion : suggestionList) {
-            name = suggestion.getName();
-            suggestionCategory = suggestion.getCategory();
+        for (String suggestion : suggestionList) {
 
-            if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
-
-                if (suggestionCategory.equals(category) || category == null) {
-
-                    if (!list.contains(name)) {
-                        list.add(name);
-                    }
-                }
+            if (!list.contains(suggestion)) {
+                list.add(suggestion);
             }
         }
     }
 
 
     public static void searchPastActivityListForNameAndLoadToObservableListInReverse(String targetFragment, ObservableList<String> list, String category) {
-        String name;
-        String suggestionCategory;
         list.clear();
+        ArrayList<String> suggestionList = ReadFromDBModel.getSuggestions(targetFragment, category);
 
         for (int i = suggestionList.size() - 1; i >= 0; i--) {
-            name = suggestionList.get(i).getName();
-            suggestionCategory = suggestionList.get(i).getCategory();
+            String suggestion = suggestionList.get(i);
 
-            if (name.toLowerCase().contains(targetFragment.toLowerCase())) {
-
-                if (suggestionCategory.equals(category) || category == null) {
-
-                    if (!list.contains(name)) {
-                        list.add(name);
-                    }
-                }
+            if (!list.contains(suggestion)) {
+                list.add(suggestion);
             }
         }
     }
