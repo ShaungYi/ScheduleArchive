@@ -5,8 +5,8 @@ import os
 class ScheduleArchiveDBOptimizer:
 
     def __init__(self):
-        self.destination = "C:/Users/Joonius/Desktop/JavaProjects/IdeaProjects/ScheduleArchiveMacroUpdateOptimized/Databases/"
-        self.source = "C:/Users/Joonius/Desktop/JavaProjects/IdeaProjects/ScheduleArchiveMacroUpdateOptimized/Databases/archive.db"
+        self.destination = "C:/Users/Joonius/Downloads/"
+        self.source = "C:/Users/Joonius/Downloads/archive.db"
         self.dbName = "archive2.db"
 
         os.chdir(self.destination)
@@ -20,9 +20,14 @@ class ScheduleArchiveDBOptimizer:
 
     def fillActivitiesTable(self):
         self.oldDBCursor.execute(
-            "SELECT DISTINCT activityID, name, category, frequency "
+            "SELECT DISTINCT activityID, name, category, "
+            "CASE "
+            "   WHEN frequency IS NULL"
+            "       THEN 1"
+            "       ELSE frequency "
+            "END AS frequency "
             "FROM activities "
-            "JOIN frequencies "
+            "LEFT JOIN frequencies "
             "USING (activityID)"
         )
         activitiesTableContent = self.oldDBCursor.fetchall()
