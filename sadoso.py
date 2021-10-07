@@ -5,8 +5,8 @@ import os
 class ScheduleArchiveDBOptimizer:
 
     def __init__(self):
-        self.destination = "C:/Users/Joonius/Downloads/"
-        self.source = "C:/Users/Joonius/Downloads/archive.db"
+        self.source = "C:/Users/Joonius/Desktop/JavaProjects/IdeaProjects/ScheduleArchiveUltimate/Databases/archive.db"
+        self.destination = "C:/Users/Joonius/Desktop/JavaProjects/IdeaProjects/ScheduleArchiveUltimate/Databases/"
         self.dbName = "archive2.db"
 
         os.chdir(self.destination)
