@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScheduleArchive_Macro_Update.iml" filepath="$PROJECT_DIR$/ScheduleArchive_Macro_Update.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScheduleArchive.iml" filepath="$PROJECT_DIR$/ScheduleArchive.iml" />
     </modules>
   </component>
 </project>

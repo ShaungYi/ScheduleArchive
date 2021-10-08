@@ -56,9 +56,7 @@ public class SearchScreen extends PrototypeController {
     void suggestAllActivities(){
         ArrayList<String> suggestionList =  ReadFromDBModel.getSuggestions("", "");
 
-        for (int i = suggestionList.size() - 1; i >= 0; i--){
-            observableListOfsuggestedActivityNames.add(suggestionList.get(i));
-        }
+        observableListOfsuggestedActivityNames.addAll(suggestionList);
     }
 
     @FXML
