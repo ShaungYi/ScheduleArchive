@@ -15,16 +15,17 @@ import main.Models.DateTimeModel;
 import main.Models.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
-import main.Utility.stopWatch;
+import main.Utility.StopWatch;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
 public class ScheduleCreator extends PrototypeController {
 
-    main.Utility.stopWatch stopWatch;
+    StopWatch stopWatch;
 
 
     @FXML
@@ -94,7 +95,7 @@ public class ScheduleCreator extends PrototypeController {
 
 
 
-        stopWatch = new stopWatch(0);
+        stopWatch = new StopWatch(LocalDateTime.now());
 
 
         new Thread(runClock).start();
@@ -137,14 +138,7 @@ public class ScheduleCreator extends PrototypeController {
                     int currentTime = getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond());
 
 
-                    if (currentTime - stopWatch.getStartTimeSec() != stopWatch.getMeasuredTime()){
-
-                        stopWatch.recalibrate(currentTime);
-
-                    }
-                    else {
-                        stopWatch.tick();
-                    }
+                    stopWatch.tick();
 
 
                     String display = stopWatch.makeDisplay();
@@ -259,18 +253,17 @@ public class ScheduleCreator extends PrototypeController {
 
 
     public void startWatch() {
-        stopWatch.setStarTimeSec(getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond() ));
+        stopWatch.reset();
         startTime.setText(getCurrentAMPMTime());
         startTimeAMPM.setText(isAM ? "A.M." : "P.M.");
         stopWatchProcess.start();
     }
 
     public void resetStopWatch(){
-        stopWatch.setStarTimeSec(getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond() ));
+        stopWatch.reset();
         stopWatchDisplay.setText("00:00:00");
         startTime.setText(getCurrentAMPMTime());
         startTimeAMPM.setText(isAM ? "A.M." : "P.M.");
-        stopWatch.setMeasuredSecs(0);
     }
 
 
@@ -385,7 +378,16 @@ public class ScheduleCreator extends PrototypeController {
         }
 
         if (!category.equals("null") && stopWatch.getMeasuredTime() != 0){
-            ArchiveDBModel.archive.add(new Activity("undefined", getSelectedActivityCategory(ActivityTypes), "", stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getStartTimeSec() + stopWatch.getMeasuredTime(), LocalDate.now().toString()));
+
+            //reset toggle buttons
+            ActivityTypes.getToggles().stream().map((toggle) -> (ToggleButton)toggle).forEach((togbut) -> {
+
+                togbut.getStyleClass().clear();
+                togbut.getStyleClass().add("toggle-button");
+
+            });
+
+            ArchiveDBModel.archive.add(new Activity("undefined", getSelectedActivityCategory(ActivityTypes), "", stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getEndTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
             UniversalCommonAncestor.setStyle("-fx-background-color: white");

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
    <top>
       <Pane BorderPane.alignment="CENTER">
          <children>
@@ -29,19 +29,19 @@
                   <ListView fx:id="suggestions" layoutX="149.0" layoutY="208.0" onMouseClicked="#completeNameField" prefHeight="357.0" prefWidth="452.0" styleClass="big-list-view" visible="false" />
 
                   <HBox layoutX="103.0" layoutY="156.0" />
-            <Label layoutX="330.0" layoutY="73.0" text="Name">
+            <Label layoutX="321.0" layoutY="70.0" text="Name">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Times New Roman" size="45.0" />
                </font>
             </Label>
-            <TextArea fx:id="notesTextArea" layoutX="816.0" layoutY="156.0" prefHeight="408.0" prefWidth="452.0">
+            <TextArea fx:id="notesTextArea" layoutX="816.0" layoutY="156.0" prefHeight="408.0" prefWidth="452.0" wrapText="true">
                <font>
                   <Font name="Chalkboard SE Light" size="20.0" />
                </font>
             </TextArea>
-            <Label layoutX="1005.0" layoutY="73.0" text="Note">
+            <Label layoutX="998.0" layoutY="70.0" text="Note">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Times New Roman" size="45.0" />
                </font>
             </Label>
                   <TextField fx:id="nameField" layoutX="149.0" layoutY="147.0" onKeyTyped="#onEntryToNameField" prefHeight="61.0" prefWidth="452.0" promptText="Enter Activity Name" styleClass="search-text-field">
@@ -64,7 +64,7 @@
                   <Font size="20.0" />
                </font>
          <BorderPane.margin>
-            <Insets bottom="30.0" />
+            <Insets bottom="120.0" />
          </BorderPane.margin>
             </Button>
    </bottom>

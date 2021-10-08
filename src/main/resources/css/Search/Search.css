@@ -57,7 +57,9 @@
 
 .text-field {
     -fx-text-fill: #816d5c;
+    -fx-prompt-text-fill: rgba(152, 125, 102, 0.5);
 }
+
 
 .search-text-field{
     -fx-background-color: rgb(242, 252, 231);

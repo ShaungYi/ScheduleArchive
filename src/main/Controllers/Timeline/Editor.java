@@ -375,17 +375,16 @@ public class Editor extends PrototypeController {
 
         updateSuggestedNames(newName);
 
+        if (!suggestedNamesObservableList.isEmpty()){
 
-        if (!grandmotherPane.getChildren().contains(nameSuggestions)){
-            grandmotherPane.getChildren().add(nameSuggestions);
+            nameSuggestions.scrollTo(suggestedNamesObservableList.get(suggestedNamesObservableList.size() - 1));
 
-
-        }
-
-
-        if (suggestedNamesIsEmpty()){
-            hideSuggestedNames();
+            if (!grandmotherPane.getChildren().contains(nameSuggestions)){
+                grandmotherPane.getChildren().add(nameSuggestions);
+            }
 //            System.out.println("suggestions hidden");
+        } else {
+            hideSuggestedNames();
         }
 
 //        String command = event.getCharacter();
@@ -418,21 +417,6 @@ public class Editor extends PrototypeController {
 
     }
 
-    private boolean suggestedNamesIsEmpty(){
-        for (Object name : suggestedNamesObservableList){
-
-            String[] chars = ((String) name).split("");
-
-            for (String ch : chars){
-
-                if (!ch.equals(" ") && !ch.isEmpty()){
-
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
 
     private void updateSuggestedNames(String newName){
@@ -441,24 +425,9 @@ public class Editor extends PrototypeController {
 
         //remove the mysterious space in suggested list
 
-        if (suggestedNamesObservableList.get(0).toString() == "" || suggestedNamesObservableList.get(0).toString().isEmpty()){
-            suggestedNamesObservableList.remove(0);
-        }
-
-        boolean blank = true;
-        for (Object sugg : suggestedNamesObservableList){
-            if (!sugg.toString().isEmpty()){
-                blank = false;
-            }
-        }
 
 
-        if (!suggestedNamesObservableList.isEmpty() && !blank) {
-
-            grandmotherPane.getChildren().add(nameSuggestions);
-
-            nameSuggestions.scrollTo(suggestedNamesObservableList.get(suggestedNamesObservableList.size() - 1));
-
+        System.out.println(suggestedNamesObservableList);
 
             double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
             if (suggestionsListHeight > 400) {
@@ -474,9 +443,7 @@ public class Editor extends PrototypeController {
 
 
             specificField.getStyleClass().add("text-field-with-reverse-suggestions");
-        } else {
-            hideSuggestedNames();
-        }
+
     }
 
 

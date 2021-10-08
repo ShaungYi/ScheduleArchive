@@ -1,15 +1,17 @@
 package main.Controllers.Macro.Infographics.Barcomponent;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import main.Models.DateTimeModel;
 import main.Models.Graphics.InfographicsModel;
 import main.Models.MacroDataModel;
 
 import java.io.IOException;
 
-public class Barcomponent extends AnchorPane {
+public class Barcomponent extends VBox {
 
     String date;
     public BarComponentController controller;
@@ -18,6 +20,8 @@ public class Barcomponent extends AnchorPane {
 
     public Barcomponent(String date, double barFrequency){
         super();
+
+        this.setAlignment(Pos.BOTTOM_CENTER);
 
         this.date = date;
 
@@ -36,6 +40,10 @@ public class Barcomponent extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setBarFrequency (double barFrequency){

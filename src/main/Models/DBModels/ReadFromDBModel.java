@@ -38,7 +38,7 @@ public class ReadFromDBModel {
 
                 // Setting previous endTime to the start time of the day if the event name is DayStart
 
-                // subtracting DateTimeModel.SECONDS_IN_A_DAY from startTime and endTime when the time is above 12:00 am
+                // subtracting SECONDS_IN_A_DAY from startTime and endTime when the time is above 12:00 am
                 if (startTime < DateTimeModel.SECONDS_IN_A_DAY) {
                     eventDate = date;
                 } else {

@@ -56,6 +56,8 @@ public class InfographicsController extends PrototypeController {
 
     public void initialize(){
 
+        loadAllPrototypeBarcomps();
+
         //set prototype property 'gotoCreatorButton'
         setGoToCreatorButton(goToCreatorButton);
 
@@ -114,7 +116,20 @@ public class InfographicsController extends PrototypeController {
 
 
 
+    private void loadAllPrototypeBarcomps(){
+        for (String date : ReadFromDBModel.getAllDates()){
+            new Thread(loadDayBarAndAddToManager).start();
+        }
+    }
 
+
+    Runnable loadDayBarAndAddToManager = () -> {
+        Barcomponent comp = new Barcomponent("2021-01-01", 0);
+        System.out.println(comp.controller.freqBar);
+        Platform.runLater(() -> {
+            BarComponentManager.addBarComp(comp);
+        });
+    };
 
 
 
@@ -249,8 +264,6 @@ public class InfographicsController extends PrototypeController {
             String lastYear = DateTimeModel.getYearFromDate(prevDate);
             if (!prevDate.equals("how many months to babylon?") && !currentYear.equals(lastYear)){
                 //finish up last year's monthBar
-                System.out.println("adding final month of year");
-                System.out.println("month: " + DateTimeModel.getMonthFromDate(date));
                 String lastMonth = DateTimeModel.getMonthFromDate(prevDate);
                 addMonth(lastMonth, monthWidth);
 
@@ -270,7 +283,7 @@ public class InfographicsController extends PrototypeController {
             }
 
             //add barcomponent
-            addDayBar(date);
+            configureADayBar(date);
 
 
             //add another month bar if month has changed
@@ -352,10 +365,10 @@ public class InfographicsController extends PrototypeController {
 
     }
 
-    private void addDayBar(String date){
-        Barcomponent barcomponent = new Barcomponent(date, 0);
+    private void configureADayBar(String date){
+        Barcomponent barcomponent = BarComponentManager.updateBar(date, 0);
+        barcomponent.setDate(date);
         infographicPane.getChildren().add(barcomponent);
-        BarComponentManager.addBarComp(barcomponent);
     }
 
 

@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgba(255, 230, 0, 0.103);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchScreen">
    <children>
-      <TextField fx:id="activitySearchField" layoutX="37.0" layoutY="204.0" onKeyTyped="#onEntryToActivitySearchField" prefHeight="59.0" prefWidth="349.0" promptText="Search Activities">
+      <TextField fx:id="activitySearchField" layoutX="37.0" layoutY="204.0" onKeyTyped="#onEntryToActivitySearchField" prefHeight="59.0" prefWidth="349.0" promptText="Search Activities" styleClass="text-field-with-suggestions">
          <font>
             <Font size="20.0" />
          </font></TextField>
@@ -38,10 +38,10 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" />
+      <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" styleClass="big-list-view" />
       <HBox prefHeight="109.0" prefWidth="431.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#goBack" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
+            <Button mnemonicParsing="false" onAction="#goBack" styleClass="navigation-button" text="Back">
                <font>
                   <Font size="45.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" styleClass="navigation-button" text="Creator">
                <font>
                   <Font size="45.0" />
                </font>

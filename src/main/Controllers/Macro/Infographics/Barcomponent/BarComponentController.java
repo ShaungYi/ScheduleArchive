@@ -32,7 +32,7 @@ public class BarComponentController {
     Label durationLabel;
 
     @FXML
-    Rectangle freqBar;
+    public Rectangle freqBar;
 
     @FXML
     Label dateLabel;

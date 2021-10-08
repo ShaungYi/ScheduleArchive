@@ -128,7 +128,7 @@ public class SubmitScreen extends PrototypeController {
             submitButton.setDisable(false);
         }
 
-        SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions, activityInQuestion.getCategory());
+        SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions, "");
 
         System.out.println("suggestions num: "+observableListOfsuggestions.size());
 
