@@ -399,13 +399,11 @@ public class TimeLine extends PrototypeController {
     public void onScroll(ScrollEvent e) {
 
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaY();
+        double change = e.getDeltaY() * 15;
 
         if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
 
             shiftBackground(change);
-
-            System.out.println(motherPane.getWidth());
 
             double newLayoutX = motherPaneLayoutX + change;
             motherPane.setLayoutX(newLayoutX);
