@@ -28,7 +28,7 @@ public class InfographicsModel {
 
     //graphic dimentions parameters
     public static double barWidth;
-    public static double maxBarHeight = 550;
+    public static double maxBarHeight = 500;
     public static double infographicsPaneHeight;
     public static double monthBarHeight;
     public static double infographicWidth = 0;

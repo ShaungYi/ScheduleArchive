@@ -68,8 +68,10 @@ public class InfographicsController extends PrototypeController {
 
         //store pane dimentions in model
         InfographicsModel.infographicsPaneHeight = infographicPane.getPrefHeight();
+        System.out.println("infographicsPaneHeight: "+infographicPane.getPrefHeight());
         InfographicsModel.monthBarHeight = monthBar.getPrefHeight();
         InfographicsModel.yearPaneHeight = yearDisplayPane.getPrefHeight();
+        System.out.println("yearPaneHeight: "+yearDisplayPane.getPrefHeight());
 
         createInfographic();
 
@@ -239,6 +241,13 @@ public class InfographicsController extends PrototypeController {
 
         String yearToDisplay = InfographicsModel.getDisplayedDate(yearMid, "year");
         yearLabel.setText(yearToDisplay);
+
+        //deploy lighter month label color for darker months
+        if (monthToDisplay.equals("November") || monthToDisplay.equals("August")){
+            monthLabel.setStyle("-fx-text-fill: rgb(243, 213, 193)");
+        } else {
+            monthLabel.setStyle("-fx-text-fill: #5f5543");
+        }
     }
 
 
@@ -334,24 +343,36 @@ public class InfographicsController extends PrototypeController {
     private void changeYear(String date){
         //new year
         year = new VBox();
+        year.setPrefHeight(800);
         InfographicsModel.addStyleClassToYear(year, date);
         motherPane.getChildren().add(year);
 
         //new yearDisplayPane
         yearDisplayPane = new Pane();
         yearDisplayPane.setPrefHeight(InfographicsModel.yearPaneHeight);
+        yearDisplayPane.setMinHeight(InfographicsModel.yearPaneHeight);
+        yearDisplayPane.setMaxHeight(InfographicsModel.yearPaneHeight);
         year.getChildren().add(yearDisplayPane);
+//        yearDisplayPane.setStyle("-fx-border-color: black");
 
         //new infographics pane
         infographicPane = new HBox();
         infographicPane.setPrefHeight(InfographicsModel.infographicsPaneHeight);
+        infographicPane.setMinHeight(InfographicsModel.infographicsPaneHeight);
+        infographicPane.setMaxHeight(InfographicsModel.infographicsPaneHeight);
         VBox.setMargin(infographicPane, new Insets(0, 0, 10, 0));
         year.getChildren().add(infographicPane);
+//        infographicPane.setStyle("-fx-border-color: black");
+
 
         //new monthBar
         monthBar = new HBox();
         monthBar.setPrefHeight(InfographicsModel.monthBarHeight);
+        monthBar.setMinHeight(InfographicsModel.monthBarHeight);
+        monthBar.setMaxHeight(InfographicsModel.monthBarHeight);
         year.getChildren().add(monthBar);
+//        monthBar.setStyle("-fx-border-color: black");
+
 
     }
 
@@ -359,7 +380,9 @@ public class InfographicsController extends PrototypeController {
         Pane monthPane = new Pane();
         System.out.println(monthPane);
         monthPane.setPrefWidth(width);
-        monthPane.setStyle("-fx-background-color: " + DateTimeModel.getMonthProperty("color", "number", numericalDay));
+        String backgroundColor = DateTimeModel.getMonthProperty("color", "number", numericalDay);
+        String borderColor = DateTimeModel.getMonthProperty("border", "number", numericalDay);
+        monthPane.setStyle("-fx-background-color: " + backgroundColor + "; -fx-border-width: " + "6px;" + "-fx-border-color: " + borderColor);
         monthBar.getChildren().add(monthPane);
 
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import main.resources.customNodes.activitySummaryTableView.*?>
 
-<?import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView?>
-<?import java.net.URL?>
-<Pane fx:id="grandmotherPane" prefHeight="2800.0" prefWidth="1200.0" style="-fx-background-color: rgb(246, 255, 226);" stylesheets="@../../customNodes/activitySummaryTableView/activity-summary-table-view.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Table">
-    <ScrollPane styleClass="main-background" fx:id="motherPane" maxHeight="2800.0" minHeight="-Infinity" minWidth="-Infinity" layoutY="0" layoutX="0" prefHeight="800" prefWidth="1440">
-        <BorderPane  layoutX="0" layoutY="0" minWidth="1440.0" prefHeight="2800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);">
+<Pane fx:id="grandmotherPane" prefHeight="2800.0" prefWidth="1200.0" style="-fx-background-color: rgb(246, 255, 226);" stylesheets="@../../customNodes/activitySummaryTableView/activity-summary-table-view.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Table">
+    <ScrollPane fx:id="motherPane" layoutX="0" layoutY="0" maxHeight="2800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800" prefWidth="1440" styleClass="main-background">
+        <BorderPane layoutX="0" layoutY="0" minWidth="1440.0" prefHeight="2800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);">
 
             <center>
                 <GridPane maxHeight="2500.0" maxWidth="1200.0" prefHeight="2500.0" BorderPane.alignment="TOP_CENTER">
@@ -194,20 +194,17 @@
         </stylesheets>
     </ScrollPane>
 
-    <HBox prefHeight="100.0" prefWidth="1000.0" spacing="20.0" layoutX="0" layoutY="0">
+    <HBox layoutX="0" layoutY="0" prefHeight="100.0" prefWidth="1000.0" spacing="20.0">
         <children>
-            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToScheduleCreator" prefHeight="100.0" prefWidth="226.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator">
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToScheduleCreator" stylesheets="@../../css/navigation-button.css" text="Creator">
                 <font>
                     <Font size="45.0" />
                 </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#goToStats" prefHeight="100.0" prefWidth="180.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
+            <Button mnemonicParsing="false" onAction="#goToStats" stylesheets="@../../css/navigation-button.css" text="Back">
                 <font>
                     <Font size="45.0" />
                 </font>
-                <padding>
-                    <Insets bottom="1.0" />
-                </padding>
             </Button>
         </children>
         <padding>

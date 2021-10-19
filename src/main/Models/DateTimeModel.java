@@ -13,7 +13,9 @@ public class DateTimeModel {
     public static String selectedDay;
     static final String [] monthNamesInOrder = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     static final String [] numericalMonthNamesInOrder = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-    static final String [] monthColorsInOrder = {"red", "orange", "yellow", "green", "blue", "violet", "purple", "magenta", "cyan", "lime", "crimson", "coral"};
+    static final String [] monthColorsInOrder = {"rgb(241, 251, 255)", "rgb(250, 250, 250)", "rgb(252, 255, 50)", "rgb(190, 245, 182)", "rgb(166, 245, 163)", "rgb(126, 243, 115)", "rgb(94, 219, 115)", "rgb(67, 177, 67)", "rgb(179, 211, 105)", "rgb(220, 236, 130)" , "rgb(206, 112, 99)", "rgb(255, 243, 242)"};
+    static final String [] monthBorderColorsInOrder = {"rgb(199, 209, 212)", "rgb(207, 207, 207)", "rgb(186, 189, 40)", "rgb(156, 201, 149)", "rgb(126, 184, 124)", "rgb(98, 189, 89)", "rgb(70, 165, 86)", "rgb(47, 122, 47)", "rgb(122, 143, 72)", "rgb(144, 155, 86)", "rgb(148, 81, 72)", "rgb(201, 185, 183)"};
+
     static final HashMap<String, String[]> monthData = new HashMap<>();
 
     public static String getLastDay() {
@@ -46,6 +48,7 @@ public class DateTimeModel {
             monthData.put("name", monthNamesInOrder);
             monthData.put("number", numericalMonthNamesInOrder);
             monthData.put("color", monthColorsInOrder);
+            monthData.put("border", monthBorderColorsInOrder);
         }
 
         //find index of input in all arrays

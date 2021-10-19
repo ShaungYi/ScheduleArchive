@@ -95,10 +95,10 @@ public class ScheduleCreator extends PrototypeController {
 
 
 
-        stopWatch = new StopWatch(LocalDateTime.now());
+        stopWatch = new StopWatch();
 
 
-        new Thread(runClock).start();
+        clockProcess.start();
 
         if (Loader.loadMode){
             Study.setDisable(true);
@@ -135,10 +135,13 @@ public class ScheduleCreator extends PrototypeController {
                 Platform.runLater(() -> {
 
 
-                    int currentTime = getTimeInSeconds(LocalTime.now().getHour(), LocalTime.now().getMinute(), LocalTime.now().getSecond());
-
-
                     stopWatch.tick();
+
+//                    System.out.println("start time: " + stopWatch.getStartTimeSec());
+//                    System.out.println("duration: " + stopWatch.makeDisplay());
+//                    System.out.println("current time" + getCurrentAMPMTime());
+//                    System.out.println();
+
 
 
                     String display = stopWatch.makeDisplay();
@@ -179,6 +182,8 @@ public class ScheduleCreator extends PrototypeController {
             }
         }
     };
+
+    Thread clockProcess = new Thread(runClock);
 
     static String convertToAMPM(int hour, int minute, int second){
         if (!isAM ){
@@ -430,6 +435,11 @@ public class ScheduleCreator extends PrototypeController {
         }
         return "error: selected category does not exist";
 
+    }
+
+    public void terminateAllThreads(){
+        stopWatchProcess.stop();
+        clockProcess.stop();
     }
 
 }

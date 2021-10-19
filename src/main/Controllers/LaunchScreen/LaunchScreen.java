@@ -43,7 +43,6 @@ public class LaunchScreen extends PrototypeController {
 
             // loading new scenes
 
-            SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
             SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
             SceneNavigationModel.bars = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/barDisplay.fxml");
             SceneNavigationModel.table = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/table.fxml");

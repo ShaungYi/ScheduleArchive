@@ -2,6 +2,7 @@ package main.Utility;
 
 
 import main.Controllers.Timeline.TimeLine;
+import main.Models.DateTimeModel;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -9,15 +10,15 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class StopWatch {
-    private LocalDateTime starTime;
-    private LocalDateTime endTime;
-    private Duration measuredDuration;
+    public int starTimeSecs;
+    private int endTimeSecs;
+    private int measuredDurationSecs;
     private String display = "00:00:00";
 
-    public StopWatch(LocalDateTime start) {
-        measuredDuration = Duration.ZERO;
-        starTime = start;
-        endTime = LocalDateTime.now();
+    public StopWatch() {
+        measuredDurationSecs = 0;
+        starTimeSecs = LocalTime.now().toSecondOfDay();
+        endTimeSecs = starTimeSecs;
 
     }
 
@@ -25,7 +26,7 @@ public class StopWatch {
     public String makeDisplay() {
 
         String freshAndSteamingDisplay;
-        int unprocessed = (int) measuredDuration.getSeconds();
+        int unprocessed = measuredDurationSecs;
 
         Integer hh;
         Integer mm;
@@ -44,26 +45,31 @@ public class StopWatch {
     }
 
     public void tick() {
-        endTime = LocalDateTime.now();
-        measuredDuration = Duration.between(starTime, endTime);
+        endTimeSecs = LocalTime.now().toSecondOfDay();
+//        System.out.println("startTime: "+starTimeSecs);
+//        System.out.println("duration: "+measuredDurationSecs);
+//        System.out.println("endTime: "+endTimeSecs);
+        System.out.println();
+        if (endTimeSecs < starTimeSecs){
+            measuredDurationSecs = (endTimeSecs + DateTimeModel.SECONDS_IN_A_DAY) - starTimeSecs;
+        } else {
+            measuredDurationSecs = endTimeSecs - starTimeSecs;
+        }
     }
 
 
     public int getMeasuredTime() {
-        return (int) measuredDuration.getSeconds();
+        return measuredDurationSecs;
     }
 
     public int getStartTimeSec() {
-        return starTime.toLocalTime().toSecondOfDay();
+        return starTimeSecs;
     }
 
     public int getEndTime(){
-        return endTime.toLocalTime().toSecondOfDay();
+        return endTimeSecs;
     }
 
-    public void setStarTime(LocalDateTime starTime) {
-        this.starTime = starTime;
-    }
 
     public String doubleDigitize(Integer i) {
         String duplexI = i.toString();
@@ -74,8 +80,8 @@ public class StopWatch {
     }
 
     public void reset(){
-        starTime = LocalDateTime.now();
-        measuredDuration = Duration.ZERO;
+        starTimeSecs = LocalTime.now().toSecondOfDay();
+        measuredDurationSecs = 0;
     }
 
 }

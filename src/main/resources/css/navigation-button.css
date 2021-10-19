@@ -1,5 +1,5 @@
 .button{
-
+    -fx-font-size: 30px;
     -fx-background-radius: 0.5em;
     -fx-background-color: #b3cb99;
     -fx-text-fill: rgb(110, 84, 68);
@@ -12,5 +12,5 @@
 
 .button:hover{
     -fx-background-color: #798f6b;
-    -fx-text-fill: rgb(143, 114, 104);
+    -fx-text-fill: rgb(76, 59, 42);
 }

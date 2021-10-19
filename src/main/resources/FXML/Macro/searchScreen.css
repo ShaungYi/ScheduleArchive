@@ -1,31 +1,24 @@
-#seek-button{
-    -fx-hbar-policy: never;
-    -fx-vbar-policy: never;
-    -fx-background-radius: 25px;
-    -fx-background-color:  orange;
-    -fx-text-fill:  rgb(211, 108, 211);
+
+
+.action-button {
+    -fx-background-radius: 0.2em;
+    -fx-background-color: #907867;
+    -fx-text-fill: rgb(255, 248, 241);
+    -fx-border-color: #534439;
+    -fx-border-width: 0.1em;
+    -fx-border-radius: 0.2em;
 }
 
-.clear-button{
-    -fx-background-radius: 25px;
-    -fx-background-color: #9d9b0a;
-    -fx-text-fill: rgb(147, 38, 147);
-    -fx-opacity: 0.45;
-
+.action-button:hover {
+    -fx-background-color: #57483e;
+    -fx-text-fill: rgb(186, 173, 159);
 }
 
-.clear-button-hovered{
-    -fx-opacity: 1;
-}
 
-.clear-button-clicked{
-    -fx-opacity: 1;
-    -fx-background-color: #df4c4c;
-    -fx-text-fill: rgb(222, 172, 236);
-}
 
 .navigation-button{
 
+    -fx-font-size: 30px;
     -fx-background-radius: 0.5em;
     -fx-background-color: #c4cb99;
     -fx-text-fill: rgb(110, 84, 68);
@@ -37,7 +30,21 @@
 }
 
 .navigation-button:hover{
-    -fx-background-color: #8f8e6b;
-    -fx-text-fill: rgb(143, 114, 104);
+    -fx-background-color: #838e59;
+    -fx-text-fill: rgb(76, 56, 40);
 }
 
+.tag-container {
+    -fx-background-color: rgba(255, 254, 173, 0.7);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.tag-container-container{
+    -fx-border-color: #534439;
+    -fx-border-width: 8px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-color: transparent;
+}

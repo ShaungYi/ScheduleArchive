@@ -1,71 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
-   <top>
-      <Pane BorderPane.alignment="CENTER">
+<Pane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#hideSuggestions" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
+
+    <children>
+        <Label text="  " visible="false" GridPane.columnIndex="2" />
+        <Pane layoutX="157.0" layoutY="43.0" prefHeight="678.0" prefWidth="1089.0">
          <children>
-            <Label fx:id="startTime" text="Label" visible="false">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-             <Label fx:id="endTime" text="Label" visible="false">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
 
-                  <Label fx:id="duration" text="Label" visible="false">
-                     <font>
-                        <Font size="40.0" />
-                     </font></Label>
-                   <Label text="  " visible="false" GridPane.columnIndex="2" />
+              <Pane layoutX="-48.0" layoutY="115.0" prefHeight="500.0" prefWidth="562.0">
+                  <children>
+                      <Label layoutX="56.0" layoutY="25.0" styleClass="description-label" text="This Activity...">
+                          <font>
+                              <Font size="35.0" />
+                          </font>
+                      </Label>
+                      <Label layoutX="234.0" layoutY="110.0" styleClass="description-label" text="Began At">
+                          <font>
+                              <Font size="30.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="startTime" layoutX="361.0" layoutY="110.0" styleClass="time-label" text="00:00:00 A. M.">
+                          <font>
+                              <Font size="20.0" />
+                          </font>
+                      </Label>
+      
+                      <Label fx:id="duration" layoutX="136.0" layoutY="232.0" styleClass="time-label" text="00 hours 00 minutes 00 seconds">
+                          <font>
+                              <Font size="20.0" />
+                          </font>
+                      </Label>
+                      <Label layoutX="56.0" layoutY="232.0" styleClass="description-label" text="Took">
+                          <font>
+                              <Font size="30.0" />
+                          </font>
+                      </Label>
+                      <Label layoutX="234.0" layoutY="355.0" styleClass="description-label" text="Finished In">
+                          <font>
+                              <Font size="30.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="endTime" layoutX="382.0" layoutY="355.0" styleClass="time-label" text="00:00:00 P. M.">
+                          <font>
+                              <Font size="20.0" />
+                          </font>
+                      </Label>
+                  </children>
+              </Pane>
+             <Pane layoutX="421.0" layoutY="5.0" prefHeight="699.0" prefWidth="671.0">
+                 <children>
+                     <TextField fx:id="nameField" layoutX="14.0" layoutY="73.0" onKeyTyped="#onEntryToNameField" prefHeight="61.0" prefWidth="452.0" promptText="Enter Activity Name" styleClass="search-text-field">
+                         <font>
+                             <Font size="30.0" />
+                         </font>
+                     </TextField>
+                     <Label layoutX="318.0" layoutY="23.0" styleClass="description-label" text="Name">
+                         <font>
+                             <Font size="45.0" />
+                         </font>
+                     </Label>
+                     <TextArea fx:id="notesTextArea" layoutX="162.0" layoutY="169.0" onMouseClicked="#hideSuggestions" prefHeight="408.0" prefWidth="452.0" wrapText="true">
+                         <font>
+                             <Font name="Chalkboard SE Light" size="20.0" />
+                         </font>
+                     </TextArea>
+                     <Label layoutX="494.0" layoutY="119.0" styleClass="description-label" text="Note">
+                         <font>
+                             <Font name="Times New Roman" size="45.0" />
+                         </font>
+                     </Label>
+                     <ListView fx:id="suggestions" layoutX="14.0" layoutY="127.0" onMouseClicked="#completeNameField" prefHeight="357.0" prefWidth="452.0" styleClass="big-list-view" visible="false" />
+                     <Button fx:id="submitButton" disable="true" layoutX="548.0" layoutY="600.0" mnemonicParsing="false" onAction="#submit" prefHeight="63.0" prefWidth="110.0" style="-fx-font-size: 20;" styleClass="action-button" text="Submit">
+                         <font>
+                             <Font size="20.0" />
+                         </font>
+                     </Button>
+                 </children>
+             </Pane>
+         </children></Pane>
+
+    </children>
 
 
-                  <ListView fx:id="suggestions" layoutX="149.0" layoutY="208.0" onMouseClicked="#completeNameField" prefHeight="357.0" prefWidth="452.0" styleClass="big-list-view" visible="false" />
+    <stylesheets>
+        <URL value="@../../css/background.css" />
+        <URL value="@../../css/Search.css" />
+        <URL value="@submitScreen.css" />
+        <URL value="@../../css/action-button.css" />
+    </stylesheets>
 
-                  <HBox layoutX="103.0" layoutY="156.0" />
-            <Label layoutX="321.0" layoutY="70.0" text="Name">
-               <font>
-                  <Font name="Times New Roman" size="45.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="notesTextArea" layoutX="816.0" layoutY="156.0" prefHeight="408.0" prefWidth="452.0" wrapText="true">
-               <font>
-                  <Font name="Chalkboard SE Light" size="20.0" />
-               </font>
-            </TextArea>
-            <Label layoutX="998.0" layoutY="70.0" text="Note">
-               <font>
-                  <Font name="Times New Roman" size="45.0" />
-               </font>
-            </Label>
-                  <TextField fx:id="nameField" layoutX="149.0" layoutY="147.0" onKeyTyped="#onEntryToNameField" prefHeight="61.0" prefWidth="452.0" promptText="Enter Activity Name" styleClass="search-text-field">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-            </TextField>
-
-         </children>
-      </Pane>
-   </top>
-   <stylesheets>
-      <URL value="@../../css/background.css" />
-      <URL value="@../../css/Search/Search.css" />
-      <URL value="@submitScreen.css" />
-   </stylesheets>
-   <bottom>
-            <Button fx:id="submitButton" disable="true" mnemonicParsing="false" onAction="#submit" prefHeight="63.0" prefWidth="110.0" styleClass="search-button" text="Submit" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-         <BorderPane.margin>
-            <Insets bottom="120.0" />
-         </BorderPane.margin>
-            </Button>
-   </bottom>
-</BorderPane>
+</Pane>

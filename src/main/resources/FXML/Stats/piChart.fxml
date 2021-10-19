@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="motherPane" maxHeight="900.0" maxWidth="1300.0" onScroll="#onScroll" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" styleClass="main-background" stylesheets="@pi.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.PiChart">
+<BorderPane fx:id="motherPane" maxHeight="900.0" maxWidth="1300.0" onScroll="#onScroll" prefHeight="900.0" prefWidth="1300.0" style="-fx-background-color: rgb(246, 255, 226);" styleClass="main-background" stylesheets="@pi.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.PiChart">
     <top>
         <HBox spacing="20.0">
 
-            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Creator" GridPane.rowIndex="1">
+            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" stylesheets="@../../css/navigation-button.css" text="Creator" GridPane.rowIndex="1">
                 <font>
                     <Font name="Phosphate" size="45" />
                 </font>
 
             </Button>
-         <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="86.0" prefWidth="173.0" stylesheets="@../../customNodes/navigationButton/navigation-button.css" text="Back">
+         <Button mnemonicParsing="false" onAction="#goToMain" stylesheets="@../../css/navigation-button.css" text="Back">
             <font>
                <Font size="45.0" />
             </font>

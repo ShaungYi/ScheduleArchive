@@ -9,13 +9,13 @@
     <top>
         <HBox>
 
-            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" text="Creator" GridPane.rowIndex="1" stylesheets="@../../customNodes/navigationButton/navigation-button.css">
+            <Button fx:id="goToCreatorButton" onAction="#goToScheduleCreator" text="Creator" GridPane.rowIndex="1" stylesheets="@../../css/navigation-button.css">
                 <font>
                     <Font name="Phosphate" size="45" />
                 </font>
 
             </Button>
-            <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="86.0" prefWidth="173.0" text="Back" stylesheets="@../../customNodes/navigationButton/navigation-button.css">
+            <Button mnemonicParsing="false" onAction="#goToMain" prefHeight="86.0" prefWidth="173.0" text="Back" stylesheets="@../../css/navigation-button.css">
                 <font>
                     <Font size="45.0" />
                 </font>

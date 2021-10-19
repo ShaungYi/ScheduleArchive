@@ -15,8 +15,8 @@ public class Barcomponent extends VBox {
 
     String date;
     public BarComponentController controller;
-    public static String unselectedColor = "rgba(89, 37, 245, 0.68)";
-    public static String selectedHexColor = "#ec3dff";
+    public static String unselectedColor = "rgba(129, 104, 86, 0.84)";
+    public static String selectedHexColor = "#685345";
 
     public Barcomponent(String date, double barFrequency){
         super();

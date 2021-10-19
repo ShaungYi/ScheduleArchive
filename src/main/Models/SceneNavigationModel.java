@@ -117,7 +117,4 @@ public class SceneNavigationModel{
         return null;
     }
 
-    public void setScheduleCreator(Scene scheduleCreator) {
-        scheduleCreator = scheduleCreator;
-    }
 }

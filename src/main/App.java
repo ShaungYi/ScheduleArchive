@@ -37,9 +37,6 @@ public class App extends Application {
     }
 
 
-    public static void setScheduleCreator(Scene newSc){
-        SceneNavigationModel.scheduleCreator = newSc;
-    }
 
 
     public void stop() {

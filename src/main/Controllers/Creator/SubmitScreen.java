@@ -4,8 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import javafx.scene.layout.Pane;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
@@ -18,6 +21,9 @@ import main.Utility.Activity;
 import main.App;
 
 public class SubmitScreen extends PrototypeController {
+
+    @FXML
+    Pane motherPane;
 
     @FXML
     Label duration;
@@ -155,6 +161,7 @@ public class SubmitScreen extends PrototypeController {
         nameField.setText(suggestion);
         hideSuggestions();
     }
+
 
     public void showSuggestions(){
         suggestions.setVisible(true);

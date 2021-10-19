@@ -1,0 +1,43 @@
+.list-view{
+    -fx-padding: 50px 10px 10px 10px;
+    -fx-background-radius: 20px;
+    -fx-background-color:  #534439;
+}
+
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+.list-view .scroll-bar:vertical .increment-arrow,
+.list-view .scroll-bar:vertical .decrement-arrow,
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-padding:0;
+}
+
+
+
+.list-view-header-label{
+    -fx-text-fill: #f5dab6;
+}
+
+.list-cell{
+    -fx-text-fill: #453e30;
+    -fx-border-color: #020202;
+    -fx-border-width: 1px;
+    -fx-background-color: #f2ffcb;
+
+}
+
+.list-cell:odd{
+    -fx-text-fill: #453e30;
+    -fx-background-color: #fffcd8;
+}
+
+.list-cell:selected{
+    -fx-text-fill: #f8e7b5;
+    -fx-background-color: #7ca716;
+}

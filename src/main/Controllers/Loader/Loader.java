@@ -3,9 +3,12 @@ package main.Controllers.Loader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import main.Controllers.Creator.ScheduleCreator;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.Table;
 import main.Controllers.Timeline.TimeLine;
@@ -26,8 +29,8 @@ public class Loader extends PrototypeController {
 
 
     @FXML
-    ListView backups;
-    ObservableList<String> backupData = FXCollections.observableArrayList();
+    ListView dateToViewListView;
+    ObservableList<String> dateToViewObservableList = FXCollections.observableArrayList();
 
 
     @FXML
@@ -49,7 +52,7 @@ public class Loader extends PrototypeController {
 
 
     public void loadData() {
-        DateTimeModel.selectedDay = (String)backups.getSelectionModel().getSelectedItem();
+        DateTimeModel.selectedDay = (String) dateToViewListView.getSelectionModel().getSelectedItem();
         // reading contents of selectedDay on the database
         ArrayList<Activity> loadedDay = ReadFromDBModel.readDay(DateTimeModel.selectedDay);
         // overwriting archive to the contents of the selectedDay
@@ -57,16 +60,16 @@ public class Loader extends PrototypeController {
     }
 
     public void setupBackups() {
-        backups.setItems(backupData);
+        dateToViewListView.setItems(dateToViewObservableList);
 
         for (String date : ReadFromDBModel.getAllDates()) {
-            backupData.add(date);
+            dateToViewObservableList.add(date);
         }
 
-        if (!backupData.isEmpty()){
+        if (!dateToViewObservableList.isEmpty()){
             System.out.println("scrolling to last date");
-            System.out.println(backupData.size());
-            backups.scrollTo(backupData.size() - 1);
+            System.out.println(dateToViewObservableList.size());
+            dateToViewListView.scrollTo(dateToViewObservableList.size() - 1);
         }
 
     }
@@ -128,7 +131,7 @@ public class Loader extends PrototypeController {
 
     @FXML
     public void goToStats(){
-        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, backups.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, dateToViewListView.getScene());
     }
 
 
@@ -140,21 +143,22 @@ public class Loader extends PrototypeController {
         App.editLog.wipe();
 
         SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
-        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, backups.getScene());
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, dateToViewListView.getScene());
 
     }
 
 
     private void wrapUpAndGoToTimeLine() {
+        ((ScheduleCreator) ((FXMLLoader) SceneNavigationModel.scheduleCreator.getUserData()).getController()).terminateAllThreads();
         SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
 
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", backups.getScene());
+        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", dateToViewListView.getScene());
 
                 //reenable creator
         disAbleCreator = false;
 
         App.editLog.wipe();
-        DateTimeModel.selectedDay = (String)backups.getSelectionModel().getSelectedItem();
+        DateTimeModel.selectedDay = (String) dateToViewListView.getSelectionModel().getSelectedItem();
 
 
     }
@@ -163,7 +167,7 @@ public class Loader extends PrototypeController {
 
     private boolean canResume(){
         // getting the selectedDay
-        String currentSelectedDate = (String)backups.getSelectionModel().getSelectedItem();
+        String currentSelectedDate = (String) dateToViewListView.getSelectionModel().getSelectedItem();
         String currentDay = DateTimeModel.currentDay;
 
         // checking if the selected date is equal to the currentDate or day before the currentDate
@@ -192,7 +196,7 @@ public class Loader extends PrototypeController {
 
     public void assessSelectedDay() throws ParseException {
 
-        String selectedDayTemp = (String)backups.getSelectionModel().getSelectedItem();
+        String selectedDayTemp = (String) dateToViewListView.getSelectionModel().getSelectedItem();
 
         if (!(selectedDayTemp == null)){
 
@@ -214,5 +218,8 @@ public class Loader extends PrototypeController {
 
     }
 
-
+    @FXML
+    public void goToScheduleCreator() {
+        App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, dateToViewListView.getScene());
+    }
 }

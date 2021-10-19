@@ -23,20 +23,22 @@ import java.util.ArrayList;
 public class SearchScreen extends PrototypeController {
 
 
-    @FXML
-    Button goToCreatorButton;
-    @FXML
-    ScrollPane activityTagBoxContainer;
-    @FXML
-    FlowPane selectedActivitiesBox;
-    @FXML
-    TextField activitySearchField;
-    @FXML
-    ListView suggestedActivityNamesListView;
+
+    @FXML Button goToCreatorButton;
+
+    @FXML TextField activitySearchField;
+
+    @FXML ScrollPane activityTagBoxContainer;
+    @FXML FlowPane selectedActivitiesBox;
+    @FXML Button seekButton;
+    @FXML Button clearButton;
+
+    @FXML ListView suggestedActivityNamesListView;
     ObservableList<String> observableListOfsuggestedActivityNames = FXCollections.observableArrayList();
 
-    @FXML
-    Button clearButton;
+
+
+
 
 
     public void initialize(){
@@ -62,16 +64,28 @@ public class SearchScreen extends PrototypeController {
     @FXML
     void onEntryToActivitySearchField(){
         SearchModel.searchPastActivityListForNameAndLoadToObservableList(activitySearchField.getText(), observableListOfsuggestedActivityNames, "");
+        //remove already selected activity names
+        observableListOfsuggestedActivityNames.removeAll(MacroDataModel.selectedActivityNames);
     }
 
     @FXML
     void onActivitySelectedFromSuggestions(){
         String selectedActivityName = (String) suggestedActivityNamesListView.getSelectionModel().getSelectedItem();
+
+        //remove selected activity name from listview
+        observableListOfsuggestedActivityNames.remove(selectedActivityName);
+
         if (!(selectedActivityName == null) && !MacroDataModel.selectedActivityNames.contains(selectedActivityName)){
             addActivityTag(selectedActivityName);
+
+            //scroll scrollpane to bottomost position
+            activityTagBoxContainer.setVvalue(1);
+
             // add name to model
             MacroDataModel.selectedActivityNames.add(selectedActivityName);
-//            System.out.println(MacroDataModel.selectedActivityNames);
+
+            //enable seek button
+            seekButton.setDisable(false);
         }
     }
 
@@ -123,8 +137,12 @@ public class SearchScreen extends PrototypeController {
         //clear model
         MacroDataModel.selectedActivityNames.clear();
 
+        //disable seek button
+        seekButton.setDisable(true);
+
         //run animation
         new Thread(clearButtonClickedAnimation).start();
+
     }
 
 
@@ -142,6 +160,8 @@ public class SearchScreen extends PrototypeController {
     @FXML
     public void onClearButtonHovered(){
 //        System.out.println("mouse entered");
+        System.out.println(activityTagBoxContainer.getHeight());
+        System.out.println(activityTagBoxContainer.getWidth());
         clearButton.getStyleClass().add("clear-button-hovered");
     }
 
@@ -180,6 +200,14 @@ public class SearchScreen extends PrototypeController {
 
         }
     };
+
+
+
+    public void checkIfTagContainerEmptyAndDisableSeekButton(){
+        if (MacroDataModel.selectedActivityNames.isEmpty()){
+            seekButton.setDisable(true);
+        }
+    }
 
 
 

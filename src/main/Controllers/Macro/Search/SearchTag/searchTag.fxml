@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox fx:id="tagBodyHbox" alignment="CENTER_RIGHT" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-background-color: rgba(99, 132, 241, 0.548);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchTag.SearchTagController">
+<HBox fx:id="tagBodyHbox" alignment="CENTER_RIGHT" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-background-color: #fdeac1;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchTag.SearchTagController">
    <children>
-      <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeTagSelf" opacity="0.67" style="-fx-background-radius: 50%; -fx-background-color: #ec7883; -fx-text-fill: #e33949;" text="✕">
+      <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeTagSelf" opacity="0.67" style="-fx-background-radius: 50%; -fx-background-color: #907867; -fx-text-fill: white;" text="✕">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="activityNameLabel" opacity="0.77" style="-fx-text-alignment: center; -fx-text-fill: rgb(250, 237, 183);" text="Label" textAlignment="CENTER">
+      <Label fx:id="activityNameLabel" opacity="0.77" style="-fx-text-alignment: center; -fx-text-fill: black;" text="Label" textAlignment="CENTER">
          <font>
             <Font name="Chalkboard SE Light" size="12.0" />
          </font>

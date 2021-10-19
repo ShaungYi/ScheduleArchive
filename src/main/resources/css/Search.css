@@ -41,6 +41,14 @@
     -fx-padding: 15px 15px 15px 15px;
 }
 
+.macro-big-list-view{
+    -fx-background-color: rgba(255, 254, 173, 0.46);
+    -fx-border-color: transparent #7b8c5a #7b8c5a #7b8c5a;
+    -fx-background-radius: 0% 0% 15px 15px ;
+    -fx-border-radius: 0% 0% 15px 15px ;
+    -fx-padding: 15px 15px 15px 15px;
+}
+
 .list-cell {
     -fx-text-fill: black;
     -fx-background-color: rgb(242, 252, 231);
@@ -49,6 +57,11 @@
 
 .big-list-view .list-cell {
     -fx-font-size: 20px;
+}
+
+.macro-big-list-view .list-cell {
+    -fx-font-size: 20px;
+    -fx-background-color: transparent;
 }
 
 .list-view-upside-down .list-cell {
@@ -81,6 +94,16 @@
 
 }
 
+.macro-text-field-with-suggestions{
+    -fx-background-color: rgba(255, 254, 173, 0.46);
+    -fx-border-color: #7b8c5a;
+    -fx-border-width: 1px;
+
+    -fx-background-radius: 0.5em 0.5em 0px 0px;
+    -fx-border-radius: 0.5em 0.5em 0px 0px;
+    -fx-border-color: #7b8c5a #7b8c5a transparent #7b8c5a;
+}
+
 .text-field-with-reverse-suggestions {
 
     -fx-background-color: rgb(242, 252, 231);
@@ -104,7 +127,7 @@
 
 }
 
-.button:hover{
-    -fx-background-color: #abcd9a;
-    -fx-text-fill: rgb(143, 114, 104);
+.search-button:hover{
+    -fx-background-color: #659746;
+    -fx-text-fill: rgb(215, 164, 146);
 }

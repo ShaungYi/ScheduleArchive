@@ -6,39 +6,36 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgba(255, 230, 0, 0.103);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchScreen">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: rgba(255, 230, 0, 0.103);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Search.SearchScreen">
    <children>
-      <TextField fx:id="activitySearchField" layoutX="37.0" layoutY="204.0" onKeyTyped="#onEntryToActivitySearchField" prefHeight="59.0" prefWidth="349.0" promptText="Search Activities" styleClass="text-field-with-suggestions">
+      <TextField fx:id="activitySearchField" layoutX="37.0" layoutY="204.0" onKeyTyped="#onEntryToActivitySearchField" prefHeight="59.0" prefWidth="349.0" promptText="Search Activities" styleClass="macro-text-field-with-suggestions">
          <font>
             <Font size="20.0" />
          </font></TextField>
-      <Button fx:id="clearButton" layoutX="906.0" layoutY="655.0" mnemonicParsing="false" onAction="#clear" onMouseEntered="#onClearButtonHovered" onMouseExited="#onClearButtonUnHovered" prefHeight="65.0" prefWidth="150.0" styleClass="clear-button" text="Clear">
+      <Button fx:id="clearButton" layoutX="906.0" layoutY="655.0" mnemonicParsing="false" onAction="#clear" onMouseEntered="#onClearButtonHovered" onMouseExited="#onClearButtonUnHovered" prefHeight="65.0" prefWidth="150.0" styleClass="action-button" text="Clear">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button id="seek-button" layoutX="668.0" layoutY="655.0" mnemonicParsing="false" onAction="#seek" prefHeight="65.0" prefWidth="150.0" styleClass="seek-button" text="Seek">
+      <Button id="seek-button" fx:id="seekButton" disable="true" layoutX="668.0" layoutY="655.0" mnemonicParsing="false" onAction="#seek" prefHeight="65.0" prefWidth="150.0" styleClass="action-button" text="Seek">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <ScrollPane fx:id="activityTagBoxContainer" layoutX="470.0" layoutY="42.0" prefHeight="592.0" prefWidth="783.0">
+      <ScrollPane fx:id="activityTagBoxContainer" layoutX="470.0" layoutY="42.0" prefHeight="592.0" prefWidth="783.0" styleClass="tag-container-container">
          <content>
-            <FlowPane fx:id="selectedActivitiesBox" hgap="10.0" prefHeight="592.0" prefWidth="783.0" style="-fx-background-color: rgba(255, 253, 116, 0.46);" vgap="10.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
+            <FlowPane fx:id="selectedActivitiesBox" hgap="10.0" prefHeight="574.0" prefWidth="775.0" styleClass="tag-container" vgap="10.0">
                <children>
                </children></FlowPane>
          </content>
       </ScrollPane>
 
-      <Label layoutX="91.0" layoutY="128.0" prefHeight="76.0" prefWidth="269.0" style="-fx-text-fill: brown;" text="Add Activities">
+      <Label layoutX="91.0" layoutY="128.0" prefHeight="76.0" prefWidth="269.0" style="-fx-text-fill:  #816d5c;" text="Add Activities">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" styleClass="big-list-view" />
+      <ListView fx:id="suggestedActivityNamesListView" layoutX="37.0" layoutY="263.0" onMouseClicked="#onActivitySelectedFromSuggestions" prefHeight="450.0" prefWidth="349.0" styleClass="macro-big-list-view" />
       <HBox prefHeight="109.0" prefWidth="431.0">
          <children>
             <Button mnemonicParsing="false" onAction="#goBack" styleClass="navigation-button" text="Back">
@@ -49,7 +46,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" prefHeight="86.0" prefWidth="224.0" styleClass="navigation-button" text="Creator">
+            <Button fx:id="goToCreatorButton" mnemonicParsing="false" onAction="#goToCreator" styleClass="navigation-button" text="Creator">
                <font>
                   <Font size="45.0" />
                </font>
@@ -63,6 +60,6 @@
    </children>
    <stylesheets>
       <URL value="@searchScreen.css" />
-      <URL value="@../../css/Search/Search.css" />
+      <URL value="@../../css/Search.css" />
    </stylesheets>
 </AnchorPane>

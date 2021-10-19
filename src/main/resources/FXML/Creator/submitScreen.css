@@ -1,6 +1,6 @@
 
 .label {
-    -fx-text-fill: #816d5c;
+    -fx-text-fill: #5a432d;
 }
 
 .text-area {
@@ -8,6 +8,18 @@
     -fx-border-width: 0px;
     -fx-accent: none;
     -fx-focus-color: none;
+}
+
+
+.time-label{
+    -fx-background-color: #f8fdea;
+    -fx-border-color: #7b8c5a;
+    -fx-border-width: 6px 6px 6px 6px;
+    -fx-padding: 10px 10px 10px 10px;
+}
+
+.description-label{
+    -fx-font-family: "Times New Roman";
 }
 
 

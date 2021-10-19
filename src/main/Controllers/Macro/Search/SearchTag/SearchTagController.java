@@ -1,11 +1,14 @@
 package main.Controllers.Macro.Search.SearchTag;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import main.Controllers.Macro.Search.SearchScreen;
 import main.Models.MacroDataModel;
+import main.Models.SceneNavigationModel;
 
 
 public class SearchTagController{
@@ -40,6 +43,11 @@ public class SearchTagController{
 
         //also remove data
         MacroDataModel.selectedActivityNames.remove(activityNameLabel.getText());
+
+        //call checkIfTagBoxEmpty in SearchScreen controller
+        FXMLLoader searchScreenLoader = (FXMLLoader) SceneNavigationModel.searchScreen.getUserData();
+        SearchScreen searchScreenController = searchScreenLoader.getController();
+        searchScreenController.checkIfTagContainerEmptyAndDisableSeekButton();
     }
 
 

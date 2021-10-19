@@ -47,8 +47,14 @@ public class WriteToDBModel {
                     // adding DateTimeModel.SECONDS_IN_A_DAY to endTime if the time is above 12:00 am
 
                     if (!date.equals(day) && endTime < DateTimeModel.SECONDS_IN_A_DAY) {
-                        startTime += DateTimeModel.SECONDS_IN_A_DAY;
+
                         endTime += DateTimeModel.SECONDS_IN_A_DAY;
+
+                        if (startTime <= endTime) {
+                            startTime += DateTimeModel.SECONDS_IN_A_DAY;
+                        }
+
+                        date = day;
                     }
 
                     // searching for activityID for the event name and category
@@ -107,7 +113,7 @@ public class WriteToDBModel {
             e.printStackTrace();
         }
 
-        cleanArchive(savedData, clonedArchive);
+        cleanArchive(ReadFromDBModel.readDay(day), clonedArchive);
     }
 
 

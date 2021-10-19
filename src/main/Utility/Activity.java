@@ -1,6 +1,7 @@
 package main.Utility;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Activity implements Cloneable{
     private String name;
@@ -10,6 +11,8 @@ public class Activity implements Cloneable{
     int startTimeSecs;
     int endTimeSecs;
     String date;
+
+    public static Comparator<Activity> activityComparator = Comparator.comparingInt(Activity::getStartTimeSecs);
 
     public Activity (String name, String category, String description, int duration, int startTime, int endTime, String date){
         this.name = name;
@@ -118,4 +121,6 @@ public class Activity implements Cloneable{
         //return false if loop didn't find an activity matching this
         return false;
     }
+
+
 }

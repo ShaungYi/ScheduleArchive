@@ -119,6 +119,13 @@ public class TimeLine extends PrototypeController {
 
     public void initialize() {
 
+        for (Activity activity : archive){
+            System.out.println(activity);
+        }
+        archive.sort(Activity.activityComparator);
+        for (Activity activity : archive){
+            System.out.println(activity);
+        }
 
         //add navigation tab
         InfographicsNavigationTab navTab = new InfographicsNavigationTab();
