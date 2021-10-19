@@ -4,10 +4,10 @@ import os
 
 class ScheduleArchiveDBOptimizer:
 
-    def __init__(self):
-        self.destination = "/Users/seonghayi/Desktop/ScheduleArchiveUltimate_copy/Databases"
-        self.source = "/Users/seonghayi/Desktop/ScheduleArchiveUltimate/Databases/archive.db"
-        self.dbName = "archive.db"
+    def __init__(self, source, destination):
+        self.source = source
+        self.destination = destination
+        self.dbName = "archive2.db"
 
         os.chdir(self.destination)
 
@@ -16,7 +16,6 @@ class ScheduleArchiveDBOptimizer:
 
         self.oldDBCursor = self.oldDB.cursor()
         self.optimizedDBCursor = self.optimizedDB.cursor()
-
 
     def fillActivitiesTable(self):
         self.oldDBCursor.execute(
@@ -37,24 +36,21 @@ class ScheduleArchiveDBOptimizer:
                                            activitiesTableContent
                                            )
 
-
-
     def fillEventsTable(self):
         self.oldDBCursor.execute("SELECT * FROM events")
         eventsTableContent = self.oldDBCursor.fetchall()
         self.optimizedDBCursor.executemany(
-                                           "INSERT INTO "
-                                           "events "
-                                           "("
-                                           "activityID, "
-                                           "startTime, "
-                                           "endTime, "
-                                           "date"
-                                           ") "
-                                           "VALUES (?, ?, ?, ?)",
-                                           eventsTableContent
-                                           )
-
+            "INSERT INTO "
+            "events "
+            "("
+            "activityID, "
+            "startTime, "
+            "endTime, "
+            "date"
+            ") "
+            "VALUES (?, ?, ?, ?)",
+            eventsTableContent
+        )
 
     def createDB(self):
         print("[+] Creating new DB...")
@@ -112,10 +108,10 @@ class ScheduleArchiveDBOptimizer:
 
         print("[+] Created file " + self.destination + self.dbName)
 
-
     def run(self):
         self.createDB()
 
 
-optimizer = ScheduleArchiveDBOptimizer()
-optimizer.run()
+if __name__:
+    optimizer = ScheduleArchiveDBOptimizer(source="", destination="")
+    optimizer.run()

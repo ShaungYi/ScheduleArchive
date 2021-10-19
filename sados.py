@@ -1,18 +1,14 @@
 import sqlite3
-import optparse
 import os
+import sadoso
+
+SECONDS_IN_A_DAY = 86400
+dbName = "archive.db"
+source = ""
+destination = ""
 
 
 # functions
-
-def getPaths():
-    parser = optparse.OptionParser()
-    parser.add_option("-s", "--source", dest="source", help="path to the archive.db file")
-    parser.add_option("-d", "--destination", dest="destination", help="destination path for optimizedArchive.db")
-    parser.add_option("-n", "--name", dest="name", help="name of the optimized DB file")
-    (options, arguments) = parser.parse_args()
-    return options
-
 
 def readTables(cursor):
     data = []
@@ -80,12 +76,12 @@ def fillEvents(cursor, data):
 
             if dateOfRow != date:
 
-                if endTime < DateTimeModel.SECONDS_IN_A_DAY:
+                if endTime < SECONDS_IN_A_DAY:
 
                     if startTime < endTime:
-                        startTime += DateTimeModel.SECONDS_IN_A_DAY
+                        startTime += SECONDS_IN_A_DAY
 
-                    endTime += DateTimeModel.SECONDS_IN_A_DAY
+                    endTime += SECONDS_IN_A_DAY
 
             tableContent.append((activityID, startTime, endTime, date))
             activityCount.append(activityID)
@@ -119,22 +115,51 @@ def fillFrequencies(cursor, data):
 
 print("[+] Creating DB file...")
 
-oldDB = sqlite3.connect(getPaths().source)
-os.chdir(getPaths().destination)
-optimizedDB = sqlite3.connect(getPaths().name)
+oldDB = sqlite3.connect(source)
+os.chdir(destination)
+optimizedDB = sqlite3.connect(dbName)
 
 oldDBCursor = oldDB.cursor()
 optimizedDBCursor = optimizedDB.cursor()
 
-optimizedDBCursor.execute("CREATE TABLE IF NOT EXISTS activities (activityID INTEGER, name TEXT, category TEXT)")
-optimizedDBCursor.execute("CREATE TABLE IF NOT EXISTS events (activityID INTEGER, startTime, endTime INTEGER, date TEXT)")
-optimizedDBCursor.execute("CREATE TABLE IF NOT EXISTS frequencies (activityID INTEGER, frequency INTEGER)")
+optimizedDBCursor.execute(
+    "CREATE TABLE "
+    "IF NOT EXISTS "
+    "activities ("
+    "activityID INTEGER, "
+    "name TEXT, "
+    "category TEXT"
+    ")"
+)
+
+optimizedDBCursor.execute(
+    "CREATE TABLE "
+    "IF NOT EXISTS "
+    "events "
+    "("
+    "activityID INTEGER, "
+    "startTime, "
+    "endTime INTEGER, "
+    "date TEXT"
+    ")"
+)
+
+optimizedDBCursor.execute(
+    "CREATE TABLE "
+    "IF NOT EXISTS "
+    "frequencies "
+    "(activityID INTEGER, "
+    "frequency INTEGER"
+    ")"
+)
+
 optimizedDBCursor.execute("DELETE FROM activities")
 optimizedDBCursor.execute("DELETE FROM events")
+optimizedDBCursor.execute("DELETE FROM frequencies")
 
 # reading databases
 
-print("[+] Reading file %s..." % getPaths().source)
+print("[+] Reading file %s..." % source)
 
 allTables = readTables(oldDBCursor)
 
@@ -157,4 +182,7 @@ optimizedDB.close()
 
 oldDB.close()
 
-print("[+] Created file {0}\\{1}".format(getPaths().destination, getPaths().name))
+sadoso = sadoso.ScheduleArchiveDBOptimizer(source, destination)
+sadoso.run()
+
+print("[+] Created file {0}\\{1}".format(destination, dbName))
