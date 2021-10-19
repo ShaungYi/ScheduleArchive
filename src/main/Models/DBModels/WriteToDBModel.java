@@ -18,6 +18,9 @@ public class WriteToDBModel {
         // reading contents of the current day in the database
         ArrayList<Activity> savedData = ReadFromDBModel.readDay(day);
 
+        // removing any unwanted data from the database
+        cleanArchive(savedData, clonedArchive);
+
         System.out.println("(from saveArchive) saving data...");
 
         // connecting to the database;
@@ -102,6 +105,8 @@ public class WriteToDBModel {
                     addFrequency.setInt(1, activityID);
                     addFrequency.execute();
 
+                    savedData.add(event);
+
                     System.out.println("(from saveArchive) event saved to optimizedArchive.db");
 
                 } else {
@@ -112,8 +117,6 @@ public class WriteToDBModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        cleanArchive(ReadFromDBModel.readDay(day), clonedArchive);
     }
 
 
