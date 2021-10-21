@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 
 class Combiner:
@@ -12,7 +11,6 @@ class Combiner:
         self.destination = destination
         self.db1 = sqlite3.connect(source1)
         self.db2 = sqlite3.connect(source2)
-        self.dbName = "combinedDB.db"
         self.cursor1 = self.db1.cursor()
         self.cursor2 = self.db2.cursor()
 
@@ -45,7 +43,8 @@ class Combiner:
             # appending an element to the dictionary
             # where the key is the tableName and the
             # value is a list of all rows from the table
-            dbContent[tableName].append(cursor.fetchall())
+            tableContent = cursor.fetchall()
+            dbContent[tableName].extend(tableContent)
 
         return dbContent
 
@@ -56,6 +55,7 @@ class Combiner:
         # reading the contents of both databases
         db1Content = self.readTables(self.cursor1)
         db2Content = self.readTables(self.cursor2)
+        print(db2Content)
 
         # getting all table names from the db1
         tableNameList = self.getTableNames(self.cursor1)
@@ -79,11 +79,7 @@ class Combiner:
     def createDB(self):
 
         # getting the full path to the destination
-        pathToNewDB = self.destination + self.dbName\
-
-        # changing the current working directory to the destination directory
-        os.chdir(self.destination)
-
+        pathToNewDB = self.destination
         print("[+] merging databases..")
 
         # getting a dictionary with the merged db content
@@ -106,11 +102,11 @@ class Combiner:
 
         # emptying the table and inserting all the merged data
         for tableName in tableNameList:
-            newTableContent = newDBContent[tableName][0]
-            fillTablesQuery = "INSERT INTO {0} VALUES(?{1})".format(tableName, ", ?" * (len(newTableContent[0]) - 1))
+            newTableContent = newDBContent[tableName]
+            fillTables = "INSERT INTO {0} VALUES(?{1})".format(tableName, ", ?" * (len(newTableContent[0]) - 1))
 
             cursor.execute("DELETE FROM " + tableName)
-            cursor.executemany(fillTablesQuery, newTableContent)
+            cursor.executemany(fillTables, newTableContent)
 
 
         # committing and closing the database
@@ -125,7 +121,5 @@ class Combiner:
 
 
 if __name__ == "__main__":
-    combiner = Combiner("C:/Users/Joonius/Downloads/archive1.db", "C:/Users/Joonius/Downloads/archive2.db", "")
+    combiner = Combiner("", "", "..")
     combiner.run()
-
-

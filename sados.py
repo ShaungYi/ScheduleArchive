@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 
 class Optimizer:
@@ -8,12 +7,11 @@ class Optimizer:
 
         # declaring variables
         self.SECONDS_IN_A_DAY = 86400
-        self.dbName = "optimizedArchive.db"
         self.source = source
         self.destination = destination
 
         self.oldDB = sqlite3.connect(self.source)
-        self.newDB = sqlite3.connect(self.dbName)
+        self.newDB = sqlite3.connect(self.destination)
 
         self.oldDBCursor = self.oldDB.cursor()
         self.newDBCursor = self.newDB.cursor()
@@ -140,10 +138,7 @@ class Optimizer:
 
 
     def createDB(self):
-        print("[+] Creating DB file...")
-
-        # changing the current working directory to the destination
-        os.chdir(self.destination)
+        print("[+] Creating the database...")
 
         # creating tables on the new database
         self.newDBCursor.execute(
@@ -194,7 +189,7 @@ class Optimizer:
 
         self.oldDB.close()
 
-        print("[+] Created file {0}\\{1}".format(self.destination, self.dbName))
+        print("[+] Created file " + self.destination)
 
 
     def run(self):
@@ -204,4 +199,3 @@ class Optimizer:
 if __name__ == "__main__":
     optimizer = Optimizer("C:/Users/Joonius/Downloads/archive_copy.db", "..")
     optimizer.run()
-

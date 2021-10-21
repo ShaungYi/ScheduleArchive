@@ -9,12 +9,11 @@ class ScheduleArchiveDBOptimizer:
         # declaring variables
         self.source = source
         self.destination = destination
-        self.dbName = "archive2.db"
 
         os.chdir(self.destination)
 
         self.oldDB = sqlite3.connect(self.source)
-        self.optimizedDB = sqlite3.connect(self.dbName)
+        self.optimizedDB = sqlite3.connect(self.destination)
 
         self.oldDBCursor = self.oldDB.cursor()
         self.optimizedDBCursor = self.optimizedDB.cursor()
@@ -119,7 +118,7 @@ class ScheduleArchiveDBOptimizer:
 
         self.oldDB.close()
 
-        print("[+] Created file " + self.destination + self.dbName)
+        print("[+] Created file " + self.destination)
 
 
     def run(self):
