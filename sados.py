@@ -1,188 +1,207 @@
 import sqlite3
 import os
-import sadoso
-
-SECONDS_IN_A_DAY = 86400
-dbName = "archive.db"
-source = ""
-destination = ""
 
 
-# functions
+class Optimizer:
 
-def readTables(cursor):
-    data = []
+    def __init__(self, source, destination):
 
-    cursor.execute("SELECT name FROM sqlite_master WHERE type = 'table';")
-    tableNameList = cursor.fetchall()
+        # declaring variables
+        self.SECONDS_IN_A_DAY = 86400
+        self.dbName = "optimizedArchive.db"
+        self.source = source
+        self.destination = destination
 
-    if tableNameList[0][0] == "annals":
-        tableNameList.pop(0)
+        self.oldDB = sqlite3.connect(self.source)
+        self.newDB = sqlite3.connect(self.dbName)
 
-    for tableName in tableNameList:
-        cursor.execute("SELECT * FROM " + tableName[0])
-        data.append(cursor.fetchall())
-
-    return data
-
-
-def fillActivities(cursor, data):
-    activityList = []
-    tableContent = []
-    activityID = 0
-
-    for table in data:
-
-        for row in table:
-            name = row[0]
-            category = row[1]
-
-            activity = [name, category]
-
-            if activity not in activityList:
-                activityList.append(activity)
-                tableContent.append((activityID, name, category))
-                activityID += 1
-
-    cursor.executemany(
-        "INSERT INTO activities "
-        "VALUES (?, ?, ?)", tableContent
-    )
+        self.oldDBCursor = self.oldDB.cursor()
+        self.newDBCursor = self.newDB.cursor()
 
 
-def fillEvents(cursor, data):
-    tableContent = []
-    activityCount = []
+    def readTables(self):
+        dbContent = []
 
-    for day in data:
-        date = day[0][-1]
+        # querying for table names in the old database
+        self.oldDBCursor.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+        tableNameList = self.oldDBCursor.fetchall()
 
-        for row in day:
-            name = row[0]
-            category = row[1]
-            startTime = row[3]
-            endTime = row[4]
-            dateOfRow = row[-1]
+        # ignoring the name if the table name is annals
+        if tableNameList[0][0] == "annals":
+            tableNameList.pop(0)
 
-            cursor.execute(
-                "SELECT activityID "
-                "FROM activities "
-                "WHERE name = ? AND category = ?",
-                (name, category)
-            )
+        # reading all the tables from the oldDB and appending it to the list
+        for tableName in tableNameList:
+            self.oldDBCursor.execute("SELECT * FROM " + tableName[0])
+            tableContent = self.oldDBCursor.fetchall()
+            dbContent.append(tableContent)
 
-            activityID = cursor.fetchall()
-            activityID = activityID[0][0]
-
-            if dateOfRow != date:
-
-                if endTime < SECONDS_IN_A_DAY:
-
-                    if startTime < endTime:
-                        startTime += SECONDS_IN_A_DAY
-
-                    endTime += SECONDS_IN_A_DAY
-
-            tableContent.append((activityID, startTime, endTime, date))
-            activityCount.append(activityID)
-
-    cursor.executemany(
-        "INSERT INTO events "
-        "VALUES (?, ?, ?, ?)",
-        tableContent
-    )
-
-    # getting frequencies of the activities
-    print("[+] Moving data to 'frequencies' table")
-    fillFrequencies(cursor, activityCount)
+        return dbContent
 
 
-def fillFrequencies(cursor, data):
-    tableContent = []
+    def fillActivitiesTable(self, dbContent):
+        activityList = []
+        tableContent = []
+        activityID = 0
 
-    for activityID in data:
-        activityFrequency = data.count(activityID)
-        tableContent.append((activityID, activityFrequency))
+        for table in dbContent:
 
-    cursor.executemany(
-        "INSERT INTO frequencies "
-        "VALUES (?, ?)",
-        tableContent
-    )
+            for row in table:
+
+                # getting name and category from the row
+                name = row[0]
+                category = row[1]
+
+                activity = [name, category]
+
+                # appending the activity to the activityList if the activity is not already in the list
+                if activity not in activityList:
+                    activityList.append(activity)
+                    tableContent.append((activityID, name, category))
+
+                    # adding 1 to the activity ID whenever it adds an activity to the tableContent
+                    activityID += 1
+
+        # inserting all the activities to the newDB
+        self.newDBCursor.executemany(
+            "INSERT INTO activities (activityID, name, category)    "
+            "VALUES (?, ?, ?)", tableContent
+        )
 
 
-# creating the database and tables
+    def fillEventsTable(self, dbContent):
+        tableContent = []
+        activityCount = []
 
-print("[+] Creating DB file...")
+        for day in dbContent:
 
-oldDB = sqlite3.connect(source)
-os.chdir(destination)
-optimizedDB = sqlite3.connect(dbName)
+            # getting the date of the table
+            date = day[0][-1]
 
-oldDBCursor = oldDB.cursor()
-optimizedDBCursor = optimizedDB.cursor()
+            for row in day:
+                name = row[0]
+                category = row[1]
+                startTime = row[3]
+                endTime = row[4]
+                dateOfRow = row[-1]
 
-optimizedDBCursor.execute(
-    "CREATE TABLE "
-    "IF NOT EXISTS "
-    "activities ("
-    "activityID INTEGER, "
-    "name TEXT, "
-    "category TEXT"
-    ")"
-)
+                # querying for activityID of the given name and category from the newDB
+                self.newDBCursor.execute(
+                    "SELECT activityID "
+                    "FROM activities "
+                    "WHERE name = ? AND category = ?",
+                    (name, category)
+                )
 
-optimizedDBCursor.execute(
-    "CREATE TABLE "
-    "IF NOT EXISTS "
-    "events "
-    "("
-    "activityID INTEGER, "
-    "startTime, "
-    "endTime INTEGER, "
-    "date TEXT"
-    ")"
-)
+                queriedActivityID = self.newDBCursor.fetchall()
+                activityID = queriedActivityID[0][0]
 
-optimizedDBCursor.execute(
-    "CREATE TABLE "
-    "IF NOT EXISTS "
-    "frequencies "
-    "(activityID INTEGER, "
-    "frequency INTEGER"
-    ")"
-)
+                if dateOfRow != date:
 
-optimizedDBCursor.execute("DELETE FROM activities")
-optimizedDBCursor.execute("DELETE FROM events")
-optimizedDBCursor.execute("DELETE FROM frequencies")
+                    if endTime < self.SECONDS_IN_A_DAY:
 
-# reading databases
+                        # adding SECONDS_IN_A_DAY to startTime and endTime
+                        # if the event's date has exceeded the date of the table
+                        if startTime < endTime:
+                            startTime += self.SECONDS_IN_A_DAY
 
-print("[+] Reading file %s..." % source)
+                        endTime += self.SECONDS_IN_A_DAY
 
-allTables = readTables(oldDBCursor)
+                # appending the data to the tableContent list
+                # and appending the activityID to the activityCount list to get the frequencies
+                tableContent.append((activityID, startTime, endTime, date))
+                activityCount.append(activityID)
 
-# giving activities id and storing them in the activities table
+        # inserting all events to the events table
+        self.newDBCursor.executemany(
+            "INSERT INTO events (activityID, startTime, endTime, date) "
+            "VALUES (?, ?, ?, ?)",
+            tableContent
+        )
 
-print("[+] Moving data to 'activities' table...")
-fillActivities(optimizedDBCursor, allTables)
+        # adding frequencies to the activities
+        self.addFrequencies(activityCount)
 
-# matching id with time and storing them in the time table
 
-print("[+] Moving data to 'events' table...")
-fillEvents(optimizedDBCursor, allTables)
+    def addFrequencies(self, activityCount):
+        frequencyList = []
 
-# saving and closing databases
+        # getting frequencies of activities and appending it to the frequency list
+        for activityID in activityCount:
+            activityFrequency = activityCount.count(activityID)
+            frequencyList.append((activityID, activityFrequency))
 
-print("[+] Saving databases...")
+        # update the frequency value of the activities table with the new frequency values
+        self.newDBCursor.executemany(
+            "UPDATE activities "
+            "SET frequency = ? WHERE activityID = ?",
+            frequencyList
+        )
 
-optimizedDB.commit()
-optimizedDB.close()
 
-oldDB.close()
+    def createDB(self):
+        print("[+] Creating DB file...")
 
-sadoso = sadoso.ScheduleArchiveDBOptimizer(source, destination)
-sadoso.run()
+        # changing the current working directory to the destination
+        os.chdir(self.destination)
 
-print("[+] Created file {0}\\{1}".format(destination, dbName))
+        # creating tables on the new database
+        self.newDBCursor.execute(
+            "CREATE TABLE "
+            "IF NOT EXISTS "
+            "activities ("
+            "activityID INTEGER, "
+            "name TEXT, "
+            "category TEXT, "
+            "frequency INTEGER"
+            ")"
+        )
+
+        self.newDBCursor.execute(
+            "CREATE TABLE "
+            "IF NOT EXISTS "
+            "events "
+            "("
+            "activityID INTEGER, "
+            "description TEXT, "
+            "startTime INTEGER, "
+            "endTime INTEGER, "
+            "date TEXT"
+            ")"
+        )
+
+        # emptying the tables
+        self.newDBCursor.execute("DELETE FROM activities")
+        self.newDBCursor.execute("DELETE FROM events")
+
+        # reading the old database
+        print("[+] Reading file %s..." % self.source)
+        dbContent = self.readTables()
+
+        # giving activities ID and storing them in the activities table
+        print("[+] Moving data to 'activities' table...")
+        self.fillActivitiesTable(dbContent)
+
+        # matching id with time and storing them in the events table
+        print("[+] Moving data to 'events' table...")
+        self.fillEventsTable(dbContent)
+
+        # saving and closing databases
+        print("[+] Saving databases...")
+
+        self.newDB.commit()
+        self.newDB.close()
+
+        self.oldDB.close()
+
+        print("[+] Created file {0}\\{1}".format(self.destination, self.dbName))
+
+
+    def run(self):
+        self.createDB()
+
+
+if __name__ == "__main__":
+    optimizer = Optimizer("C:/Users/Joonius/Downloads/archive_copy.db", "..")
+    optimizer.run()
+

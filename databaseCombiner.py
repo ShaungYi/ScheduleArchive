@@ -88,7 +88,7 @@ class Combiner:
 
         # getting a dictionary with the merged db content
         newDBContent = self.merge()
-        print("[+] creating the new database")
+        print("[+] creating the new database...")
 
         # copy and pasting the db1 to the destination folder to preserve all the tables and the columns
         with open(self.source1, "rb") as sourceFile:
@@ -102,7 +102,7 @@ class Combiner:
         cursor = newDB.cursor()
 
         tableNameList = self.readTables(cursor)
-        print("[+] inserting values")
+        print("[+] inserting values...")
 
         # emptying the table and inserting all the merged data
         for tableName in tableNameList:
@@ -115,8 +115,9 @@ class Combiner:
 
         # committing and closing the database
         newDB.commit()
-        cursor.close()
         newDB.close()
+
+        print("[+] merge complete.")
 
 
     def run(self):
