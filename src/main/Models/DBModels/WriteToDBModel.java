@@ -63,16 +63,17 @@ public class WriteToDBModel {
                     // searching for activityID for the event name and category
                     activityID = ReadFromDBModel.getActivityID(name, category);
 
-                    // if id was not found
+                    // saving the new activity if id was not found
                     if (activityID == -1) {
                         System.out.println("(from saveArchive) saving new activity");
-
-                        // saving the new activity
                         PreparedStatement saveActivity = ArchiveDBModel.insertDataToActivitiesTable;
                         saveActivity.setString(1, name);
                         saveActivity.setString(2, category);
                         saveActivity.setInt(3, 1);
                         saveActivity.execute();
+
+                        // re-querying the activityID
+                        activityID = ReadFromDBModel.getActivityID(name, category);
                     }
 
                     // saving the event

@@ -73,7 +73,7 @@ public class ArchiveDBModel {
 
             // write statements
 
-            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities (name, category, frequency) VALUES (?, ?, ?)");
+            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities(name, category, frequency) VALUES(?, ?, ?)");
 
             insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?, ?)");
 
