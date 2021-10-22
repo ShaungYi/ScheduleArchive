@@ -194,5 +194,5 @@ class Optimizer:
 
 
 if __name__ == "__main__":
-    optimizer = Optimizer("C:/Users/Joonius/Downloads/archive_copy.db", "optimized.db")
+    optimizer = Optimizer("", "")
     optimizer.run()

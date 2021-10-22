@@ -106,7 +106,7 @@ public class ArchiveDBModel {
                             "WHERE date = ? ORDER BY startTime"
             );
 
-            getAllDatesEntered = connection.prepareStatement("SELECT DISTINCT date FROM events");
+            getAllDatesEntered = connection.prepareStatement("SELECT DISTINCT date FROM events ORDER BY date");
 
             getAllActivityNamesEntered = connection.prepareStatement("SELECT name FROM activities");
 
