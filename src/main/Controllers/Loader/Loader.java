@@ -67,8 +67,8 @@ public class Loader extends PrototypeController {
         }
 
         if (!dateToViewObservableList.isEmpty()){
-            System.out.println("scrolling to last date");
-            System.out.println(dateToViewObservableList.size());
+//            System.out.println("scrolling to last date");
+//            System.out.println(dateToViewObservableList.size());
             dateToViewListView.scrollTo(dateToViewObservableList.size() - 1);
         }
 
@@ -165,7 +165,7 @@ public class Loader extends PrototypeController {
 
 
 
-    private boolean canResume(){
+    private boolean canResume() throws ParseException {
         // getting the selectedDay
         String currentSelectedDate = (String) dateToViewListView.getSelectionModel().getSelectedItem();
         String currentDay = DateTimeModel.currentDay;

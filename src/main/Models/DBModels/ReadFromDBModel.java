@@ -5,6 +5,7 @@ import main.Utility.Activity;
 import main.Utility.PastActivity;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ReadFromDBModel {
@@ -43,6 +44,7 @@ public class ReadFromDBModel {
                     eventDate = date;
                 } else {
                     eventDate = DateTimeModel.addDayToDate(date, 1);
+                    System.out.println(eventDate);
                     startTime -= DateTimeModel.SECONDS_IN_A_DAY;
                     endTime -= DateTimeModel.SECONDS_IN_A_DAY;
                 }
@@ -54,7 +56,7 @@ public class ReadFromDBModel {
             System.out.println("(from readDay) day: " + dayContent);
             day.close();
 
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             e.printStackTrace();
         }
 

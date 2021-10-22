@@ -51,11 +51,13 @@ public class WriteToDBModel {
 
                     if (!date.equals(day) && endTime < DateTimeModel.SECONDS_IN_A_DAY) {
 
-                        endTime += DateTimeModel.SECONDS_IN_A_DAY;
+
 
                         if (startTime <= endTime) {
                             startTime += DateTimeModel.SECONDS_IN_A_DAY;
                         }
+
+                        endTime += DateTimeModel.SECONDS_IN_A_DAY;
 
                         date = day;
                     }

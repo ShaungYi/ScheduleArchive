@@ -370,7 +370,7 @@ public class ScheduleCreator extends PrototypeController {
             DateTimeModel.selectedDay = currentDay;
             ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);
             Loader.addNoData(stopWatch.getStartTimeSec());
-            System.out.println("(from auto resume) auto resumed");
+//            System.out.println("(from auto resume) auto resumed");
         } else if (DateTimeModel.selectedDay == null) {
             DateTimeModel.selectedDay = currentDay;
         }

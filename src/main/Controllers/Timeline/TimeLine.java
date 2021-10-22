@@ -119,12 +119,13 @@ public class TimeLine extends PrototypeController {
 
     public void initialize() {
 
-        for (Activity activity : archive){
-            System.out.println(activity);
-        }
+
         archive.sort(Activity.activityComparator);
         for (Activity activity : archive){
             System.out.println(activity);
+            if (activity.getDate().equals("2021-10-22")){
+                System.out.println("found!!!!!!!!!!!!!!!");
+            }
         }
 
         //add navigation tab
@@ -399,7 +400,7 @@ public class TimeLine extends PrototypeController {
     public void onScroll(ScrollEvent e) {
 
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaY() * 10;
+        double change = e.getDeltaX();
 
         if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
 

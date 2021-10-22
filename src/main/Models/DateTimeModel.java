@@ -3,8 +3,13 @@ package main.Models;
 import main.Controllers.Creator.ScheduleCreator;
 import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.ReadFromDBModel;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class DateTimeModel {
@@ -69,10 +74,14 @@ public class DateTimeModel {
         return "";
     }
 
-    public static String addDayToDate(String date, int amount) {
-        String[] intDate = date.split("-");
-        LocalDate nextDay = LocalDate.of(Integer.valueOf(intDate[0]), Integer.valueOf(intDate[1]), Integer.valueOf(intDate[2])).plusDays(amount);
-        return String.valueOf(nextDay);
+    public static String addDayToDate(String date, int amount) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = sdf.parse(date);
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        c.add(Calendar.DATE, amount);  // number of days to add
+        return sdf.format(c.getTime());  // dt is now the new date
     }
 
     public static String subDayFromDate(String date, int amount) {

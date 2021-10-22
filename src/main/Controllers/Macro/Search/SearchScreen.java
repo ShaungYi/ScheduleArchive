@@ -119,9 +119,9 @@ public class SearchScreen extends PrototypeController {
         BarComponentManager.updateAllBarCompData();
 
 
-        System.out.println("durations: "+MacroDataModel.totalActivityDurationsByDate);
-        System.out.println("selectedActivityNames: "+MacroDataModel.selectedActivityNames);
-        System.out.println("selectedActivities: "+MacroDataModel.selectedPastActivities);
+//        System.out.println("durations: "+MacroDataModel.totalActivityDurationsByDate);
+//        System.out.println("selectedActivityNames: "+MacroDataModel.selectedActivityNames);
+//        System.out.println("selectedActivities: "+MacroDataModel.selectedPastActivities);
 
 //        for (PastActivity pastActivity : MacroDataModel.selectedPastActivities){
 //            System.out.println(pastActivity.getName());

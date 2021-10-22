@@ -1,7 +1,10 @@
 package main.Utility;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 public class Activity implements Cloneable{
     private String name;
@@ -12,7 +15,38 @@ public class Activity implements Cloneable{
     int endTimeSecs;
     String date;
 
-    public static Comparator<Activity> activityComparator = Comparator.comparingInt(Activity::getStartTimeSecs);
+    public static Comparator<Activity> activityComparator = (Activity a1, Activity a2) -> {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date1 = new Date();
+        Date date2 = new Date();
+
+        try {
+            date1 = sdf.parse(a1.getDate());
+            date2 = sdf.parse(a2.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date1.after(date2)){
+            System.out.println("date1 greater than date2");
+            return 1;
+        } else if (date1.equals(date2)){
+            int start1 = a1.getStartTimeSecs();
+            int start2 = a2.getStartTimeSecs();
+
+            if (start1 > start2){
+                return 1;
+            } else if (start1 == start2){
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    };
 
     public Activity (String name, String category, String description, int duration, int startTime, int endTime, String date){
         this.name = name;

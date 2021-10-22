@@ -68,10 +68,10 @@ public class InfographicsController extends PrototypeController {
 
         //store pane dimentions in model
         InfographicsModel.infographicsPaneHeight = infographicPane.getPrefHeight();
-        System.out.println("infographicsPaneHeight: "+infographicPane.getPrefHeight());
+//        System.out.println("infographicsPaneHeight: "+infographicPane.getPrefHeight());
         InfographicsModel.monthBarHeight = monthBar.getPrefHeight();
         InfographicsModel.yearPaneHeight = yearDisplayPane.getPrefHeight();
-        System.out.println("yearPaneHeight: "+yearDisplayPane.getPrefHeight());
+//        System.out.println("yearPaneHeight: "+yearDisplayPane.getPrefHeight());
 
         createInfographic();
 
@@ -378,7 +378,7 @@ public class InfographicsController extends PrototypeController {
 
     private void addMonth(String numericalDay, double width) {
         Pane monthPane = new Pane();
-        System.out.println(monthPane);
+//        System.out.println(monthPane);
         monthPane.setPrefWidth(width);
         String backgroundColor = DateTimeModel.getMonthProperty("color", "number", numericalDay);
         String borderColor = DateTimeModel.getMonthProperty("border", "number", numericalDay);
@@ -398,7 +398,7 @@ public class InfographicsController extends PrototypeController {
 
     @FXML
     public void goBack(){
-        System.out.println("goback called");
+//        System.out.println("goback called");
         hideInfoPopup();
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.searchScreen, motherPane.getScene());
         //set default macro screen to search

@@ -80,7 +80,7 @@ public class SubmitScreen extends PrototypeController {
 
 
     public void submit(){
-        System.out.println(notesTextArea);
+//        System.out.println(notesTextArea);
 
         DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
 
@@ -136,7 +136,7 @@ public class SubmitScreen extends PrototypeController {
 
         SearchModel.searchPastActivityListForNameAndLoadToObservableList(nameField.getText(), observableListOfsuggestions, "");
 
-        System.out.println("suggestions num: "+observableListOfsuggestions.size());
+//        System.out.println("suggestions num: "+observableListOfsuggestions.size());
 
         if (observableListOfsuggestions.isEmpty()){
 
