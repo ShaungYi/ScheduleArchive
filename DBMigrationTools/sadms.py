@@ -3,6 +3,7 @@ import databaseCombiner
 
 def addLargestActivityID(cursor, largestID):
     cursor.execute("UPDATE activities SET activityID = activityID + ?", (largestID + 1,))
+    cursor.execute("UPDATE events SET activityID = activityID + ?", (largestID + 1,))
 
 
 def main():
