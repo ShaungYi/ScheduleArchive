@@ -23,7 +23,6 @@ public class ArchiveDBModel {
     public static PreparedStatement getAllDatesEntered;
     public static PreparedStatement getAllActivityNamesEntered;
     public static PreparedStatement findActivityID;
-    public static PreparedStatement getLastIDEntered;
     public static PreparedStatement readAllFromActivitiesTable;
     public static PreparedStatement readAllFromEventsTable;
     public static PreparedStatement getAllOccurrences;
@@ -49,7 +48,7 @@ public class ArchiveDBModel {
                         "CREATE TABLE " +
                             "IF NOT EXISTS " +
                             "activities (" +
-                            "activityID INTEGER, " +
+                            "activityID INTEGER PRIMARY KEY, " +
                             "name TEXT, " +
                             "category TEXT, " +
                             "frequency INTEGER" +
@@ -74,7 +73,7 @@ public class ArchiveDBModel {
 
             // write statements
 
-            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?, ?)");
+            insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities (name, category, frequency) VALUES (?, ?, ?)");
 
             insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?, ?)");
 
@@ -115,13 +114,6 @@ public class ArchiveDBModel {
                                 "FROM activities " +
                                 "WHERE name = ? AND category = ? " +
                                 "LIMIT 1"
-            );
-
-            getLastIDEntered = connection.prepareStatement(
-                    "SELECT activityID " +
-                    "FROM activities " +
-                    "ORDER BY activityID DESC " +
-                    "LIMIT 1"
             );
 
             readAllFromActivitiesTable = connection.prepareStatement("SELECT * FROM activities");

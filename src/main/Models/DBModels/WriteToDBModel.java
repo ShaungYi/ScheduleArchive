@@ -67,25 +67,11 @@ public class WriteToDBModel {
                     if (activityID == -1) {
                         System.out.println("(from saveArchive) saving new activity");
 
-                        // searching for the last id entered
-                        ResultSet lastIdEntered = ArchiveDBModel.getLastIDEntered.executeQuery();
-
-                        if (lastIdEntered.next()) {
-                            activityID = lastIdEntered.getInt("activityID");
-                            activityID++;
-                        } else {
-                            activityID = 0;
-                        }
-
-                        lastIdEntered.close();
-
                         // saving the new activity
-
                         PreparedStatement saveActivity = ArchiveDBModel.insertDataToActivitiesTable;
-                        saveActivity.setInt(1, activityID);
-                        saveActivity.setString(2, name);
-                        saveActivity.setString(3, category);
-                        saveActivity.setInt(4, 1);
+                        saveActivity.setString(1, name);
+                        saveActivity.setString(2, category);
+                        saveActivity.setInt(3, 1);
                         saveActivity.execute();
                     }
 

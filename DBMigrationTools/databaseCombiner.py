@@ -55,7 +55,6 @@ class Combiner:
         # reading the contents of both databases
         db1Content = self.readTables(self.cursor1)
         db2Content = self.readTables(self.cursor2)
-        print(db2Content)
 
         # getting all table names from the db1
         tableNameList = self.getTableNames(self.cursor1)
@@ -80,7 +79,7 @@ class Combiner:
 
         # getting the full path to the destination
         pathToNewDB = self.destination
-        print("[+] merging databases..")
+        print("[+] merging databases...")
 
         # getting a dictionary with the merged db content
         newDBContent = self.merge()

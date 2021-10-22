@@ -38,9 +38,7 @@ class Optimizer:
 
 
     def fillActivitiesTable(self, dbContent):
-        activityList = []
         tableContent = []
-        activityID = 0
 
         for table in dbContent:
 
@@ -50,20 +48,16 @@ class Optimizer:
                 name = row[0]
                 category = row[1]
 
-                activity = [name, category]
+                activity = (name, category)
 
                 # appending the activity to the activityList if the activity is not already in the list
-                if activity not in activityList:
-                    activityList.append(activity)
-                    tableContent.append((activityID, name, category))
-
-                    # adding 1 to the activity ID whenever it adds an activity to the tableContent
-                    activityID += 1
+                if activity not in tableContent:
+                    tableContent.append(activity)
 
         # inserting all the activities to the newDB
         self.newDBCursor.executemany(
-            "INSERT INTO activities (activityID, name, category)    "
-            "VALUES (?, ?, ?)", tableContent
+            "INSERT INTO activities(name, category)    "
+            "VALUES(?, ?)", tableContent
         )
 
 
@@ -112,8 +106,8 @@ class Optimizer:
 
         # inserting all events to the events table
         self.newDBCursor.executemany(
-            "INSERT INTO events (activityID, startTime, endTime, date) "
-            "VALUES (?, ?, ?, ?)",
+            "INSERT INTO events(activityID, startTime, endTime, date) "
+            "VALUES(?, ?, ?, ?)",
             tableContent
         )
 
@@ -127,12 +121,14 @@ class Optimizer:
         # getting frequencies of activities and appending it to the frequency list
         for activityID in activityCount:
             activityFrequency = activityCount.count(activityID)
-            frequencyList.append((activityID, activityFrequency))
+            print(activityFrequency)
+            frequencyList.append((activityFrequency, activityID))
 
         # update the frequency value of the activities table with the new frequency values
         self.newDBCursor.executemany(
             "UPDATE activities "
-            "SET frequency = ? WHERE activityID = ?",
+            "SET frequency = ? "
+            "WHERE activityID = ?",
             frequencyList
         )
 
@@ -144,8 +140,9 @@ class Optimizer:
         self.newDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "activities ("
-            "activityID INTEGER, "
+            "activities"
+            "("
+            "activityID INTEGER PRIMARY KEY, "
             "name TEXT, "
             "category TEXT, "
             "frequency INTEGER"
@@ -155,7 +152,7 @@ class Optimizer:
         self.newDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "events "
+            "events"
             "("
             "activityID INTEGER, "
             "description TEXT, "
@@ -197,5 +194,5 @@ class Optimizer:
 
 
 if __name__ == "__main__":
-    optimizer = Optimizer("C:/Users/Joonius/Downloads/archive_copy.db", "..")
+    optimizer = Optimizer("C:/Users/Joonius/Downloads/archive_copy.db", "optimized.db")
     optimizer.run()
