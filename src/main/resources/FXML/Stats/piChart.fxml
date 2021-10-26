@@ -47,7 +47,10 @@
         </GridPane>
     </left>
    <center>
-      <PieChart fx:id="piChart" BorderPane.alignment="CENTER" />
+      <PieChart fx:id="piChart" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="40.0" />
+         </BorderPane.margin></PieChart>
    </center>
    <opaqueInsets>
       <Insets />

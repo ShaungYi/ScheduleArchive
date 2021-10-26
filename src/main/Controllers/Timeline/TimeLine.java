@@ -120,7 +120,7 @@ public class TimeLine extends PrototypeController {
 
     ArrayList<Activity> archive = ArchiveDBModel.archive;
 
-    public static double currentLayout;
+    public static double currentLayout = 2000;
 
 
     public void initialize() {
@@ -170,12 +170,13 @@ public class TimeLine extends PrototypeController {
 
         configureDateChangePoint(startTimeSecs - startTimeSecs % FIVE_MINS_IN_SECONDS);
 
-        if (!Stats.currentTimelineLayoutInitialized) {
+        if (currentLayout > 100) {
             currentLayout = -(scrollableWidth - screenWidth);
             Stats.currentTimelineLayoutInitialized = true;
         }
-
         setPosition(currentLayout);
+
+
 
     }
 
@@ -234,8 +235,17 @@ public class TimeLine extends PrototypeController {
             TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, false);
 
             Label newActivity = period.getActivityLabel();
-            newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1;");
+
+
+            newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) +
+                    "; -fx-alignment: center; " +
+                    "-fx-border-color:  rgb(246, 255, 226);" +
+                    " fx-border-width: 1;");
+
             newActivity.setPrefHeight(colorLineHeight);
+            newActivity.setMaxHeight(colorLineHeight);
+
+
             newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
             newActivity.setText(activity.getName());
             //newActivity.setFont(new Font(40));
@@ -268,9 +278,11 @@ public class TimeLine extends PrototypeController {
 
 
                 String color = "white";
+                int colorIndex = Stats.categorySequence.indexOf(activityCategory);
                 try {
-                    color = (String) colorMap.get(activityCategory);
+                    color = Stats.textColorSequence.get(colorIndex);
                 } catch (NullPointerException e) {
+                    e.printStackTrace();
                 }
 
                 categoryTitle.setStyle("-fx-alignment: center; -fx-text-fill:" + color + ";");

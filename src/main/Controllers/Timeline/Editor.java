@@ -349,8 +349,9 @@ public class Editor extends PrototypeController {
 //                System.out.println(activity.getCategory());
 //            }
 //        }
-        String newColor = Stats.colorMap.get(newCat);
-        ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel().setStyle("-fx-background-color:" + newColor + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+        int colorIndex = Stats.categorySequence.indexOf(newCat);
+        String newColor = Stats.textColorSequence.get(colorIndex);
+        ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel().setStyle("-fx-background-color:" + Stats.colorMap.get(newCat) + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
         if (newColor != null){
             categoryTitlePicker.setStyle("-fx-alignment: center; -fx-text-fill:" + newColor);
         }
@@ -872,7 +873,7 @@ public class Editor extends PrototypeController {
         int newEndTime = existingEndtime;
 
 
-        Activity newActivity = new Activity("new","", "", newSecs, newStartTime , newEndTime, selectedActivity.getDate());
+        Activity newActivity = new Activity("new","New", "", newSecs, newStartTime , newEndTime, selectedActivity.getDate());
 
         selectedActivity.setDurationSeconds(existingSecs);
 
@@ -1099,11 +1100,11 @@ public class Editor extends PrototypeController {
                 String activityCategory = represented.getCategory();
 
                 String color = "white";
+                int colorIndex = Stats.categorySequence.indexOf(activityCategory);
                 try {
-                    color = (String) colorMap.get(activityCategory);
-
+                    color = Stats.textColorSequence.get(colorIndex);
                 } catch (NullPointerException e) {
-
+                    e.printStackTrace();
                 }
                 categoryTitlePicker.setStyle("-fx-alignment:center; -fx-text-fill:" + color + ";");
                 categoryTitlePicker.setText(activityCategory);
@@ -1187,9 +1188,11 @@ public class Editor extends PrototypeController {
             System.out.println("note added to selected index activity");
             TimeLineActivityPeriod.previousSelectedPeriod.addNoteTag();
             TimeLineActivityPeriod.previousSelectedPeriod.noteTag.setOpacity(1); // assert note tag
+            TimeLineActivityPeriod.previousSelectedPeriod.noteTagIsPrompt = false;
         } else {
             System.out.println("no content - note removed");
             TimeLineActivityPeriod.previousSelectedPeriod.removeNoteTag(); //remove note tag
+            TimeLineActivityPeriod.previousSelectedPeriod.noteTagIsPrompt = true;
         }
     }
 
@@ -1224,7 +1227,7 @@ public class Editor extends PrototypeController {
         testText.setFont(new Font(100));
 
         double textWidth = testText.getLayoutBounds().getWidth();
-        double labelWidth = label.getPrefWidth();
+        double labelWidth = label.getPrefWidth() - 6;
 
         double resizeFactor = labelWidth / textWidth * 0.9;
 

@@ -3,53 +3,64 @@
 
 .chart-plot-background {
     -fx-background-color: transparent;
+;
 }
 
 .data0.chart-bar {
-    -fx-bar-fill: cyan;
-}
-.data1.chart-bar {
-    -fx-bar-fill: fuchsia;
+    -fx-bar-fill: rgb(201, 252, 252);
 }
 
+.data1.chart-bar {
+    -fx-bar-fill: rgb(255, 180, 249)
+;
+}
 .data2.chart-bar {
-    -fx-bar-fill: gold;
+    -fx-bar-fill: rgb(248, 234, 163)
+;
 }
 
 .data3.chart-bar {
-    -fx-bar-fill: chartreuse;
+    -fx-bar-fill: rgb(227, 255, 200)
+;
 }
 
 .data4.chart-bar {
-    -fx-bar-fill: bisque;
+    -fx-bar-fill: rgb(252, 235, 213)
+;
 }
 
 .data5.chart-bar {
-    -fx-bar-fill: chocolate;
+    -fx-bar-fill: rgb(226, 183, 150)
+;
 }
 
 .data6.chart-bar {
-    -fx-bar-fill: deepskyblue;
+    -fx-bar-fill: rgb(171, 220, 236)
+;
 }
 
 .data7.chart-bar {
-    -fx-bar-fill: crimson;
+    -fx-bar-fill: rgb(236, 108, 133)
+;
 }
 
 .data8.chart-bar {
-    -fx-bar-fill: olive;
+    -fx-bar-fill: rgb(184, 184, 117)
+;
 }
 
 .data9.chart-bar {
-    -fx-bar-fill: green;
+    -fx-bar-fill: rgb(117, 185, 117)
+;
 }
 
 .data10.chart-bar {
-    -fx-bar-fill: coral;
+    -fx-bar-fill: rgb(250, 188, 164)
+;
 }
 
 .data11.chart-bar {
-    -fx-bar-fill: blueviolet;
+    -fx-bar-fill: rgb(206, 173, 236);
 }
 
 

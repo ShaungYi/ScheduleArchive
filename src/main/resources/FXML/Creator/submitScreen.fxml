@@ -64,7 +64,7 @@
                              <Font size="45.0" />
                          </font>
                      </Label>
-                     <TextArea fx:id="notesTextArea" layoutX="162.0" layoutY="169.0" onMouseClicked="#hideSuggestions" prefHeight="408.0" prefWidth="452.0" stylesheets="@../../css/note-text-area.css" wrapText="true">
+                     <TextArea fx:id="notesTextArea" layoutX="162.0" layoutY="169.0" onMouseClicked="#hideSuggestions" prefHeight="408.0" prefWidth="452.0" style="-fx-font-size: 20;" stylesheets="@../../css/note-text-area.css" wrapText="true">
                          <font>
                              <Font name="Chalkboard SE Light" size="20.0" />
                          </font>

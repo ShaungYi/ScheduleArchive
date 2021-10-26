@@ -59,16 +59,23 @@ public class LaunchScreen extends PrototypeController {
             SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
             SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
 
-            //load note image
-            File imageFile = new File("src/main/resources/Images/note-tag.png");
-            Image noteImage = null;
+            //load note images
+            File normalFile = new File("src/main/resources/Images/note-tag.png");
+            File hoveredFile = new File("src/main/resources/Images/note-tag-hovered.png");
+            Image normalImage = null;
+            Image hoveredImage = null;
             try {
-                noteImage = new Image(new FileInputStream(imageFile.getAbsolutePath()));
+                normalImage = new Image(new FileInputStream(normalFile.getAbsolutePath()));
+                hoveredImage = new Image(new FileInputStream(hoveredFile.getAbsolutePath()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            TimeLineActivityPeriod.noteImage = noteImage;
+            TimeLineActivityPeriod.noteImage = normalImage;
+            TimeLineActivityPeriod.noteHoveredImage = hoveredImage;
+
+
+
 
             Platform.runLater(new Runnable() {
                 @Override

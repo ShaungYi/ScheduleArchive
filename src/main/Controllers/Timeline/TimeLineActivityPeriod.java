@@ -18,6 +18,7 @@ public class TimeLineActivityPeriod extends Pane {
 
     ImageView noteTag;
     public static Image noteImage;
+    public static Image noteHoveredImage;
     public boolean noteTagIsPrompt;
 
     TextArea noteTextArea;
@@ -49,12 +50,26 @@ public class TimeLineActivityPeriod extends Pane {
 
     private EventHandler<MouseEvent> onMouseEnteredNoteTag = (MouseEvent event) -> {
         //change note tag image to hovered
+        noteTag.setImage(noteHoveredImage);
+        noteTag.setFitWidth(70);
+        noteTag.setFitHeight(87.5);
+        noteTag.setLayoutY(-95);
+
         //set opacity to 1
+        noteTag.setOpacity(1);
     };
 
     private EventHandler<MouseEvent> onMouseExitedNoteTag = (MouseEvent event) -> {
         //change note tag image to normal
+        noteTag.setImage(noteImage);
+        noteTag.setFitWidth(60);
+        noteTag.setFitHeight(75);
+        noteTag.setLayoutY(-80);
+
         //set opacity to 0.4 if note tag is a prompt
+        if (noteTagIsPrompt){
+            noteTag.setOpacity(0.4);
+        }
     };
 
     private EventHandler<MouseEvent> onPeriodClicked = (MouseEvent event) -> {
@@ -62,6 +77,7 @@ public class TimeLineActivityPeriod extends Pane {
         System.out.println("period clicked");
         if (!children.contains(noteTag)){
             addNoteTag();
+            noteTagIsPrompt = true;
             noteTag.setOpacity(0.4);
             System.out.println("adding semitransparent prompt note tag");
         }
@@ -85,7 +101,7 @@ public class TimeLineActivityPeriod extends Pane {
         noteTag.setImage(noteImage);
         noteTag.setFitWidth(60);
         noteTag.setFitHeight(75);
-        noteTag.setLayoutY(-75);
+        noteTag.setLayoutY(-80);
 
 
         //add note to period if exists in activity
@@ -102,6 +118,10 @@ public class TimeLineActivityPeriod extends Pane {
         if (editable){
             this.setOnMouseClicked(onPeriodClicked);
         }
+
+        //add hover response handlers to note tag
+        noteTag.setOnMouseEntered(onMouseEnteredNoteTag);
+        noteTag.setOnMouseExited(onMouseExitedNoteTag);
 
     }
 

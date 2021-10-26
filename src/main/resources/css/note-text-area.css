@@ -6,6 +6,7 @@
     -fx-font-family: "Chalkboard SE";
     -fx-hbar-policy: never;
     -fx-vbar-policy: never;
+    -fx-font-size: 20px;
 }
 
 .text-area .content {
