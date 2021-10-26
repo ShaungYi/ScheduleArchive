@@ -258,10 +258,8 @@ public class WriteToDBModel {
         if (ArchiveDBModel.archive.isEmpty()){
             return;
         }
+        saveArchive();
 
-        if (!Loader.loadMode){
-            saveArchive();
-        }
     }
 
 

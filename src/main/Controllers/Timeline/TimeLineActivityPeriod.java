@@ -15,11 +15,15 @@ import main.Utility.Activity;
 
 public class TimeLineActivityPeriod extends Pane {
     Label activityLabel;
+
     ImageView noteTag;
+    public static Image noteImage;
+    public boolean noteTagIsPrompt;
+
     TextArea noteTextArea;
+
     ObservableList<Node> children = this.getChildren();
     Activity thisActivity;
-    public static Image noteImage;
 
     public static TimeLineActivityPeriod previousSelectedPeriod;
 
@@ -41,6 +45,16 @@ public class TimeLineActivityPeriod extends Pane {
         //execute to do event handler
         toDoOnNoteTagClicked.handle(event);
 
+    };
+
+    private EventHandler<MouseEvent> onMouseEnteredNoteTag = (MouseEvent event) -> {
+        //change note tag image to hovered
+        //set opacity to 1
+    };
+
+    private EventHandler<MouseEvent> onMouseExitedNoteTag = (MouseEvent event) -> {
+        //change note tag image to normal
+        //set opacity to 0.4 if note tag is a prompt
     };
 
     private EventHandler<MouseEvent> onPeriodClicked = (MouseEvent event) -> {

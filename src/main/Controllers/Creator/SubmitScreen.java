@@ -109,7 +109,7 @@ public class SubmitScreen extends PrototypeController {
             Activity prevActivity = ArchiveDBModel.archive.get(ArchiveDBModel.archive.indexOf(activityInQuestion) - 1);
 
 
-            if (activityInQuestion.getName().equals(prevActivity.getName()) && activityInQuestion.getCategory().equals(prevActivity.getCategory())){
+            if (activityInQuestion.getName().equals(prevActivity.getName()) && activityInQuestion.getCategory().equals(prevActivity.getCategory()) && activityInQuestion.getNote().equals(prevActivity.getNote())){
 
                 activityInQuestion.setDurationSeconds(prevActivity.getDurationSeconds() + activityInQuestion.getDurationSeconds());
                 activityInQuestion.setStartTimeSecs(prevActivity.getStartTimeSecs());
