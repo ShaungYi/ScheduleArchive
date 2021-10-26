@@ -120,5 +120,5 @@ class Combiner:
 
 
 if __name__ == "__main__":
-    combiner = Combiner("", "", "..")
+    combiner = Combiner("", "", "")
     combiner.run()
