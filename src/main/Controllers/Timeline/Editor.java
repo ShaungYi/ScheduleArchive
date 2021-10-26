@@ -350,7 +350,7 @@ public class Editor extends PrototypeController {
 //            }
 //        }
         String newColor = Stats.colorMap.get(newCat);
-        colorPane.getChildren().get(selectedIndex).setStyle("-fx-background-color:" + newColor + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+        ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel().setStyle("-fx-background-color:" + newColor + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
         if (newColor != null){
             categoryTitlePicker.setStyle("-fx-alignment: center; -fx-text-fill:" + newColor);
         }
@@ -481,8 +481,7 @@ public class Editor extends PrototypeController {
 
         App.editLog.addLog(ArchiveDBModel.archive);
 
-        Label givenEpoch = (Label)colorPane.getChildren().get(selectedIndex);
-        String oldName = givenEpoch.getText();
+        Label givenEpoch = ((TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex)).activityLabel;
 
         givenEpoch.setText(newName);
 
@@ -867,7 +866,6 @@ public class Editor extends PrototypeController {
         int existingSecs = currentSecs / 2;
         int newSecs = currentSecs - existingSecs;
 
-        int existingStartTime = selectedActivity.getStartTimeSecs();
         int existingEndtime = selectedActivity.getEndTimeSecs();
 
         int newStartTime = existingEndtime - newSecs;
@@ -890,13 +888,14 @@ public class Editor extends PrototypeController {
         TimeLineActivityPeriod period = new TimeLineActivityPeriod(newActivity, noteTextArea, true);
 
         Label newLabel = period.getActivityLabel();
+        newLabel.setText("new");
         newLabel.setStyle("-fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1; -fx-background-color: white");
         newLabel.setFont(new Font(30));
         newLabel.setPrefWidth(newSecs * WIDTH_OF_1_SEC);
         newLabel.setPrefHeight(colorLineHeight);
         addClickHandler(period);
         addDragHandler(newLabel);
-        colorPane.getChildren().add(selectedIndex+1, newLabel);
+        colorPane.getChildren().add(selectedIndex+1, period);
         changeFontUntilTextFitsLabel(newLabel);
 
 
@@ -938,7 +937,7 @@ public class Editor extends PrototypeController {
 
 
 
-            int mergerEndTime = merger.getEndTimeSecs();
+            int mergerEndTime;
             int mergerDuration = merger.getDurationSeconds();
 
 
@@ -955,10 +954,14 @@ public class Editor extends PrototypeController {
             merger.setDurationSeconds(mergerDuration);
 
 
-            Label mergerLabel = (Label) colorPane.getChildren().get(mergerIndex);
-            Label engulfedLabel = (Label)colorPane.getChildren().get(selectedIndex);
+            Label mergerLabel = ((TimeLineActivityPeriod) colorPane.getChildren().get(mergerIndex)).activityLabel;
+            System.out.println("engulfed: " + colorPane.getChildren().get(selectedIndex));
+            for (Node node : colorPane.getChildren()){
+                System.out.println( node);
+            }
+            TimeLineActivityPeriod engulfedPeriod = (TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex);
 
-            colorPane.getChildren().remove(engulfedLabel);
+            colorPane.getChildren().remove(engulfedPeriod);
 
             mergerLabel.setPrefWidth(mergerDuration * WIDTH_OF_1_SEC);
             mergerLabel.setMaxWidth(mergerDuration * WIDTH_OF_1_SEC);
