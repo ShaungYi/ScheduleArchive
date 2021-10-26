@@ -188,8 +188,6 @@ public class DateTimeModel {
             seconds = ss + s;
         }
 
-        System.out.println(hours + minuts + seconds);
-
         if (hh == 0 && mm == 0){
             return seconds;
         }

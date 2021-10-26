@@ -17,7 +17,7 @@ public class ReadFromDBModel {
         try {
             String name;
             String category;
-            String description;
+            String note;
             int duration;
             int startTime;
             int endTime;
@@ -32,7 +32,7 @@ public class ReadFromDBModel {
                 // extracting data from events
                 name = day.getString(1);
                 category = day.getString(2);
-                description = day.getString(3);
+                note = day.getString(3);
                 startTime = day.getInt(4);
                 endTime = day.getInt(5);
                 duration = day.getInt(6);
@@ -44,13 +44,12 @@ public class ReadFromDBModel {
                     eventDate = date;
                 } else {
                     eventDate = DateTimeModel.addDayToDate(date, 1);
-                    System.out.println(eventDate);
                     startTime -= DateTimeModel.SECONDS_IN_A_DAY;
                     endTime -= DateTimeModel.SECONDS_IN_A_DAY;
                 }
 
                 // saving the event to an arraylist
-                dayContent.add(new Activity(name, category, description, duration, startTime, endTime, eventDate));
+                dayContent.add(new Activity(name, category, note, duration, startTime, endTime, eventDate));
             }
 
             System.out.println("(from readDay) day: " + dayContent);

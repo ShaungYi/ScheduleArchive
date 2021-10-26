@@ -17,7 +17,7 @@ class Optimizer:
         self.newDBCursor = self.newDB.cursor()
 
 
-    def readTables(self):
+    def getTableNames(self):
         dbContent = []
 
         # querying for table names in the old database
@@ -106,22 +106,20 @@ class Optimizer:
 
         # inserting all events to the events table
         self.newDBCursor.executemany(
-            "INSERT INTO events(activityID, startTime, endTime, date) "
-            "VALUES(?, ?, ?, ?)",
+            "INSERT INTO events VALUES(?, '', ?, ?, ?)",
             tableContent
         )
 
         # adding frequencies to the activities
-        self.addFrequencies(activityCount)
+        self.setFrequencies(activityCount)
 
 
-    def addFrequencies(self, activityCount):
+    def setFrequencies(self, activityCount):
         frequencyList = []
 
         # getting frequencies of activities and appending it to the frequency list
         for activityID in activityCount:
             activityFrequency = activityCount.count(activityID)
-            print(activityFrequency)
             frequencyList.append((activityFrequency, activityID))
 
         # update the frequency value of the activities table with the new frequency values
@@ -155,7 +153,7 @@ class Optimizer:
             "events"
             "("
             "activityID INTEGER, "
-            "description TEXT, "
+            "note TEXT, "
             "startTime INTEGER, "
             "endTime INTEGER, "
             "date TEXT"
@@ -168,7 +166,7 @@ class Optimizer:
 
         # reading the old database
         print("[+] Reading file %s..." % self.source)
-        dbContent = self.readTables()
+        dbContent = self.getTableNames()
 
         # giving activities ID and storing them in the activities table
         print("[+] Moving data to 'activities' table...")

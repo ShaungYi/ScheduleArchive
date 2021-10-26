@@ -36,11 +36,10 @@ class ScheduleArchiveDBOptimizer:
         activitiesTableContent = self.oldDBCursor.fetchall()
 
         # inserting the frequency values to the activities table of the newDB
-        self.optimizedDBCursor.executemany("INSERT INTO "
-                                           "activities "
-                                           "VALUES (?, ?, ?, ?)",
-                                           activitiesTableContent
-                                           )
+        self.optimizedDBCursor.executemany(
+            "INSERT INTO activities VALUES (?, ?, ?, ?)",
+            activitiesTableContent
+        )
 
 
     def fillEventsTable(self):
@@ -51,15 +50,7 @@ class ScheduleArchiveDBOptimizer:
 
         # inserting the data to the events table of the newDB
         self.optimizedDBCursor.executemany(
-            "INSERT INTO "
-            "events "
-            "("
-            "activityID, "
-            "startTime, "
-            "endTime, "
-            "date"
-            ") "
-            "VALUES (?, ?, ?, ?)",
+            "INSERT INTO events VALUES (?, '', ?, ?, ?)",
             eventsTableContent
         )
 
@@ -86,7 +77,7 @@ class ScheduleArchiveDBOptimizer:
             "events"
             "("
             "activityID INTEGER, "
-            "description TEXT, "
+            "note TEXT, "
             "startTime, "
             "endTime INTEGER, "
             "date TEXT"

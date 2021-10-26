@@ -62,7 +62,7 @@ public class ArchiveDBModel {
                             "events " +
                             "(" +
                             "activityID INTEGER, " +
-                            "description INTEGER, " +
+                            "note INTEGER, " +
                             "startTime INTEGER, " +
                             "endTime INTEGER, " +
                             "date TEXT" +
@@ -80,7 +80,7 @@ public class ArchiveDBModel {
 
             deleteEvent = connection.prepareStatement(
                         "DELETE FROM events " +
-                            "WHERE startTime = ? AND endTime = ? AND date = ?"
+                            "WHERE activityID = ? AND note = ? AND startTime = ? AND endTime = ? AND date = ?"
             );
 
             deleteActivities = connection.prepareStatement("DELETE FROM activities WHERE frequency = 0");
@@ -100,7 +100,7 @@ public class ArchiveDBModel {
             // read statements
 
             readDayContent = connection.prepareStatement(
-                        "SELECT name, category, description, startTime, endTime, endTime - startTime AS duration, date " +
+                        "SELECT name, category, note, startTime, endTime, endTime - startTime AS duration, date " +
                             "FROM events " +
                             "JOIN activities USING (activityID) " +
                             "WHERE date = ? ORDER BY startTime"

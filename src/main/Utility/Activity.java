@@ -117,7 +117,7 @@ public class Activity implements Cloneable{
 
 
     public String toString(){
-        return "Activity: "+"name = "+name+", category = "+category+", description: "+ note +", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
+        return "Activity: "+"name = "+name+", category = "+category+", note: "+ note +", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
     }
 
 
