@@ -4,9 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.Pane;
 import main.Controllers.PrototypeController;
@@ -85,7 +82,7 @@ public class SubmitScreen extends PrototypeController {
         DateTimeModel.currentDay = ArchiveDBModel.archive.get(0).getDate();
 
         activityInQuestion.setName(nameField.getText());
-        activityInQuestion.setDescription(notesTextArea.getText());
+        activityInQuestion.setNote(notesTextArea.getText());
 
         mergeLikeActivities();
 

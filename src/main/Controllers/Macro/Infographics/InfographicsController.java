@@ -97,7 +97,7 @@ public class InfographicsController extends PrototypeController {
         TableColumn durationCol = new TableColumn("Net Duration");
         InfographicsModel.dayInfoPopupListView.getColumns().clear();
         InfographicsModel.dayInfoPopupListView.getColumns().addAll(nameCol, durationCol);
-        System.out.println(InfographicsModel.dayInfoPopupListView.getColumns());
+//        System.out.println(InfographicsModel.dayInfoPopupListView.getColumns());
 
         nameCol.setCellValueFactory(
                 new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("header"));
@@ -127,7 +127,7 @@ public class InfographicsController extends PrototypeController {
 
     Runnable loadDayBarAndAddToManager = () -> {
         Barcomponent comp = new Barcomponent("2021-01-01", 0);
-        System.out.println(comp.controller.freqBar);
+//        System.out.println(comp.controller.freqBar);
         Platform.runLater(() -> {
             BarComponentManager.addBarComp(comp);
         });
@@ -137,7 +137,7 @@ public class InfographicsController extends PrototypeController {
 
 
     private Runnable totallyUnnecessaryBackgroundLabelAlignProcessBecauseOfAStupidCannotGetBoundsInInitializeMethodError = () -> {
-        System.out.println("(from exit)waiting for previous process to finish");
+//        System.out.println("(from exit)waiting for previous process to finish");
         //wait until the maddening initialize method finishes and the screen is loaded
         try {
             Thread.sleep(10);
@@ -418,7 +418,7 @@ public class InfographicsController extends PrototypeController {
 
     @FXML
     public void hideInfoPopupOnMouseClicked(MouseEvent event){
-        System.out.println(event.getTarget());
+//        System.out.println(event.getTarget());
         if (!(event.getTarget() instanceof Rectangle)){
             hideInfoPopup();
 

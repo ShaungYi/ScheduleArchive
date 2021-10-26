@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="grandmotherPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.TimeLine">
+<Pane fx:id="grandmotherPane" onMouseClicked="#hideNoteAreaOnScreenClicked" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.TimeLine">
     <children>
         <VBox fx:id="motherPane" prefHeight="700.0" style="-fx-background-color: rgb(246, 255, 226);" styleClass="main-background">
             <children>
@@ -151,6 +151,7 @@
                 <Insets />
             </opaqueInsets>
         </VBox>
+      <TextArea fx:id="noteTextArea" editable="false" layoutX="200.0" layoutY="130.0" prefHeight="396.0" prefWidth="324.0" stylesheets="@../../css/note-text-area.css" visible="false" />
 
     </children>
 

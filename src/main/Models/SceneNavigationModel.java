@@ -49,7 +49,7 @@ public class SceneNavigationModel{
     public void gotoScene(Scene scene, Scene currentScene){
         Stage stage = (Stage) currentScene.getWindow();
         executeOnSwitchingScene(scene, currentScene);
-        System.out.println("setting scene");
+//        System.out.println("setting scene");
         stage.setScene(scene);
     }
 

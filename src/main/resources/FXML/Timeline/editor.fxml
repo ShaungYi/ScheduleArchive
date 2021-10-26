@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="grandmotherPane" onMouseClicked="#hideSuggestedNames" prefHeight="700.0" styleClass="main-background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
+<Pane fx:id="grandmotherPane" onMouseClicked="#onScreenClicked" prefHeight="700.0" styleClass="main-background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
     <children>
         <ListView fx:id="nameSuggestions" onKeyTyped="#handleNameEdit" onMouseClicked="#autoCompleteName" styleClass="list-view-upside-down" />
         <VBox fx:id="motherPane">
@@ -176,6 +176,7 @@
 
 
         </VBox>
+        <TextArea fx:id="noteTextArea" layoutX="200.0" layoutY="130.0" onKeyTyped="#editNote" prefHeight="396.0" prefWidth="324.0" stylesheets="@../../css/note-text-area.css" visible="false" />
     </children>
    <stylesheets>
       <URL value="@../../css/Search.css" />

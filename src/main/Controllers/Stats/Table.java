@@ -187,7 +187,7 @@ public class Table extends PrototypeController {
         setUpActivityChart(serviceTable, serviceColumn, serviceDurationColumn, serviceData);
         setUpActivityChart(miscellaneousTable, miscellaneousCol, miscellaneousDurationCol, miscellaneousData);
 
-        System.out.println("finished Initialization");
+//        System.out.println("finished Initialization");
 
         //hide scroll bars
         motherPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

@@ -34,7 +34,7 @@ public class WriteToDBModel {
                 if (!event.arrayListContainsActivity(savedData)) {
                     String name = event.getName();
                     String category = event.getCategory();
-                    String description = event.getDescription();
+                    String description = event.getNote();
                     int startTime = event.getStartTimeSecs();
                     int endTime = event.getEndTimeSecs();
                     String date = event.getDate();

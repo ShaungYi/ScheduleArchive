@@ -7,15 +7,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.control.Label;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
@@ -27,7 +26,6 @@ import main.Controllers.Stats.Table;
 import main.Utility.Activity;
 import main.Utility.Cycler;
 import main.App;
-import main.Utility.PastActivity;
 
 import java.io.IOException;
 import java.util.*;
@@ -36,6 +34,8 @@ public class Editor extends PrototypeController {
 
     @FXML
     Button goToCreatorButton;
+    @FXML
+    TextArea noteTextArea;
 
     private int startTimeSecs;
     private int endTimeSecs;
@@ -289,7 +289,7 @@ public class Editor extends PrototypeController {
     @FXML
     public void handleCategoryEdit(KeyEvent event){
 
-        System.out.println("A");
+//        System.out.println("A");
         String input = event.getCharacter();
 
         if (event.getCharacter().equals(" ")){
@@ -303,9 +303,9 @@ public class Editor extends PrototypeController {
         else{
             updateCycler(input);
             editCategory(cycler.nextItem());
-            System.out.println("finished editing category");
+//            System.out.println("finished editing category");
         }
-        System.out.println("B");
+//        System.out.println("B");
 
     }
 
@@ -360,7 +360,7 @@ public class Editor extends PrototypeController {
         categoryTitlePicker.setText(newCat);
 
         ArchiveDBModel.archive.get(selectedIndex).setCategory(newCat);
-        System.out.println(ArchiveDBModel.archive.get(selectedIndex).getCategory());
+//        System.out.println(ArchiveDBModel.archive.get(selectedIndex).getCategory());
         App.editLog.addLog(ArchiveDBModel.archive);
     }
 
@@ -418,6 +418,12 @@ public class Editor extends PrototypeController {
     }
 
 
+    @FXML
+    public void editNote(){
+        ArchiveDBModel.archive.get(selectedIndex).setNote(noteTextArea.getText());
+    }
+
+
 
     private void updateSuggestedNames(String newName){
 
@@ -427,7 +433,7 @@ public class Editor extends PrototypeController {
 
 
 
-        System.out.println(suggestedNamesObservableList);
+//        System.out.println(suggestedNamesObservableList);
 
             double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
             if (suggestionsListHeight > 400) {
@@ -531,8 +537,8 @@ public class Editor extends PrototypeController {
 
 
 
-                Label selectedDisplay = (Label)colorPane.getChildren().get(selectedIndex);
-                Label neighborDisplay = (Label) colorPane.getChildren().get(neighborIndex);
+                Label selectedDisplay = ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel();
+                Label neighborDisplay = ((TimeLineActivityPeriod) colorPane.getChildren().get(neighborIndex)).getActivityLabel();
 
                 selectedDisplay.setPrefWidth(selectedDuration * WIDTH_OF_1_SEC);
                 selectedDisplay.setMaxWidth(selectedDuration * WIDTH_OF_1_SEC);
@@ -600,8 +606,8 @@ public class Editor extends PrototypeController {
 
 
 
-                Label selectedDisplay = (Label)colorPane.getChildren().get(selectedIndex);
-                Label neighborDisplay = (Label) colorPane.getChildren().get(neighborIndex);
+                Label selectedDisplay = ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel();
+                Label neighborDisplay = ((TimeLineActivityPeriod) colorPane.getChildren().get(neighborIndex)).getActivityLabel();
 
                 selectedDisplay.setPrefWidth(selectedDuration * WIDTH_OF_1_SEC);
                 selectedDisplay.setMaxWidth(selectedDuration * WIDTH_OF_1_SEC);
@@ -664,8 +670,8 @@ public class Editor extends PrototypeController {
 
 
 
-            Label selectedDisplay = (Label)colorPane.getChildren().get(selectedIndex);
-            Label neighborDisplay = (Label) colorPane.getChildren().get(neighborIndex);
+            Label selectedDisplay = ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel();
+            Label neighborDisplay = ((TimeLineActivityPeriod) colorPane.getChildren().get(neighborIndex)).getActivityLabel();
 
             selectedDisplay.setPrefWidth(selectedDuration * WIDTH_OF_1_SEC);
             selectedDisplay.setMaxWidth(selectedDuration * WIDTH_OF_1_SEC);
@@ -731,8 +737,8 @@ public class Editor extends PrototypeController {
 
 
 
-            Label selectedDisplay = (Label)colorPane.getChildren().get(selectedIndex);
-            Label neighborDisplay = (Label) colorPane.getChildren().get(neighborIndex);
+            Label selectedDisplay = ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel();
+            Label neighborDisplay = ((TimeLineActivityPeriod) colorPane.getChildren().get(neighborIndex)).getActivityLabel();
 
             selectedDisplay.setPrefWidth(selectedDuration * WIDTH_OF_1_SEC);
             selectedDisplay.setMaxWidth(selectedDuration * WIDTH_OF_1_SEC);
@@ -778,7 +784,7 @@ public class Editor extends PrototypeController {
         activity.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("log added when drag started");
+//                System.out.println("log added when drag started");
                 App.editLog.addLog(ArchiveDBModel.archive);
             }
         });
@@ -789,7 +795,7 @@ public class Editor extends PrototypeController {
 
                 //addUneditedOriginalToEditLogIfNoLogs()
 
-                selectedIndex = colorPane.getChildren().indexOf(activity);
+                selectedIndex = colorPane.getChildren().indexOf(activity.getParent());
 
                 double mousePos = event.getScreenX();
 //                System.out.println(mousePos);
@@ -854,7 +860,7 @@ public class Editor extends PrototypeController {
         //addUneditedOriginalToEditLogIfNoLogs();
 
         Activity selectedActivity = ArchiveDBModel.archive.get(selectedIndex);
-        Label selectedLabel = (Label) colorPane.getChildren().get(selectedIndex);
+        Label selectedLabel = ((TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex)).getActivityLabel();
 
 
         int currentSecs = selectedActivity.getDurationSeconds();
@@ -881,13 +887,14 @@ public class Editor extends PrototypeController {
         selectedLabel.setMaxWidth(existingSecs * WIDTH_OF_1_SEC);
         selectedLabel.setMinWidth(existingSecs * WIDTH_OF_1_SEC);
 
+        TimeLineActivityPeriod period = new TimeLineActivityPeriod(newActivity, noteTextArea, true);
 
-        Label newLabel = new Label("new");
+        Label newLabel = period.getActivityLabel();
         newLabel.setStyle("-fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1; -fx-background-color: white");
         newLabel.setFont(new Font(30));
         newLabel.setPrefWidth(newSecs * WIDTH_OF_1_SEC);
         newLabel.setPrefHeight(colorLineHeight);
-        addClickHandler(newLabel);
+        addClickHandler(period);
         addDragHandler(newLabel);
         colorPane.getChildren().add(selectedIndex+1, newLabel);
         changeFontUntilTextFitsLabel(newLabel);
@@ -1041,21 +1048,30 @@ public class Editor extends PrototypeController {
             }
 
             for (Activity activity : activities) {
-                Label newActivity = new Label();
-                newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
+
+
+                TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, true);
+
+                Label newActivity = period.getActivityLabel();
+                newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1;");
                 newActivity.setPrefHeight(colorLineHeight);
                 newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
                 newActivity.setText(activity.getName());
                 //newActivity.setFont(new Font(40));
-                addClickHandler(newActivity);
+
+                addClickHandler(period);
                 addDragHandler(newActivity);
-                colorPane.getChildren().add(newActivity);
+
+
+                colorPane.getChildren().add(period);
+
                 changeFontUntilTextFitsLabel(newActivity);
 
-
-                if (activity.getEndTimeSecs() > endTimeSecs){
+                if (activity.getEndTimeSecs() > endTimeSecs) {
                     endTimeSecs += DateTimeModel.SECONDS_IN_A_DAY;
                 }
+
+
             }
         }
 
@@ -1071,60 +1087,51 @@ public class Editor extends PrototypeController {
 
 
 
-    private void addClickHandler(Label activity) {
-        activity.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+    private void addClickHandler(TimeLineActivityPeriod period) {
 
-                if (!ArchiveDBModel.archive.isEmpty()){
-                    Activity represented = ArchiveDBModel.archive.get(colorPane.getChildren().indexOf(activity));
+        Activity represented = period.thisActivity;
 
-                    String activityCategory = represented.getCategory();
+        EventHandler<MouseEvent> clickHandler = (MouseEvent event) -> {
+            if (!ArchiveDBModel.archive.isEmpty()) {
+                String activityCategory = represented.getCategory();
 
-                    String color = "white";
-                    try {
-                        color = (String) colorMap.get(activityCategory);
+                String color = "white";
+                try {
+                    color = (String) colorMap.get(activityCategory);
 
-                    }
-                    catch (NullPointerException e){
-
-                    }
-                    categoryTitlePicker.setStyle("-fx-alignment:center; -fx-text-fill:" + color + ";");
-                    categoryTitlePicker.setText(activityCategory);
-
-
-
-                    durationLabel.setText(DateTimeModel.parseDurationToString(represented.getDurationSeconds(), false));
-
-                    specificField.setText(represented.getName());
-
-                    beganAt.setText(getAMPMTimeFromSeconds(represented.getStartTimeSecs()));
-
-                    finishedAt.setText(getAMPMTimeFromSeconds(represented.getEndTimeSecs()));
-
-                    selectedIndex = ArchiveDBModel.archive.indexOf(represented);
-
-                    detailPane.setOpacity(1);
-                    detailPane.setDisable(false);
-
-                    hideSuggestedNames();
-
-
-
-
-
-//                    System.out.println(Main.editLog);
-
-
+                } catch (NullPointerException e) {
 
                 }
+                categoryTitlePicker.setStyle("-fx-alignment:center; -fx-text-fill:" + color + ";");
+                categoryTitlePicker.setText(activityCategory);
 
 
+                durationLabel.setText(DateTimeModel.parseDurationToString(represented.getDurationSeconds(), false));
+
+                specificField.setText(represented.getName());
+
+                beganAt.setText(getAMPMTimeFromSeconds(represented.getStartTimeSecs()));
+
+                finishedAt.setText(getAMPMTimeFromSeconds(represented.getEndTimeSecs()));
+
+                selectedIndex = ArchiveDBModel.archive.indexOf(represented);
+
+                detailPane.setOpacity(1);
+                detailPane.setDisable(false);
+
+                hideSuggestedNames();
             }
-        });
+        };
+
+
+
+        period.getActivityLabel().setOnMouseClicked(clickHandler);
+        period.toDoOnNoteTagClicked = clickHandler;
+
     }
 
-    @FXML
+
+
     private void hideSuggestedNames(){
 
         grandmotherPane.getChildren().remove(nameSuggestions);
@@ -1134,6 +1141,54 @@ public class Editor extends PrototypeController {
 //        System.out.println("suggestedNames Removed");
     }
 
+    @FXML
+    public void onScreenClicked(MouseEvent event) {
+
+        hideSuggestedNames();
+
+        if (!(event.getTarget() instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
+            if (noteTextArea.isVisible()){
+                confirmOrRemoveNoteTag();
+            }
+            noteTextArea.setVisible(false);
+
+        }
+
+//        System.out.println("target: "+event.getTarget());
+//        System.out.println("target parent: "+((Node)event.getTarget()).getParent());
+
+        Node target = (Node)event.getTarget();
+        if (target instanceof Text){
+            target = target.getParent();
+        }
+
+        if (TimeLineActivityPeriod.previousSelectedPeriod != null && target != TimeLineActivityPeriod.previousSelectedPeriod.getActivityLabel()) { //if user clicks anything else but the activity they are editing
+
+            //update the note graphics of selected period
+            confirmOrRemoveNoteTag();
+
+        }
+
+        //update previously selected target
+        Node targetParent = target.getParent();
+        if (targetParent instanceof TimeLineActivityPeriod){
+            TimeLineActivityPeriod.previousSelectedPeriod = (TimeLineActivityPeriod) targetParent;
+        }
+    }
+
+    private void confirmOrRemoveNoteTag(){
+        Activity previousSelectedActivity = TimeLineActivityPeriod.previousSelectedPeriod.thisActivity;
+        String note = previousSelectedActivity.getNote();
+
+        if (!(note == null) && !note.isBlank()) {
+            System.out.println("note added to selected index activity");
+            TimeLineActivityPeriod.previousSelectedPeriod.addNoteTag();
+            TimeLineActivityPeriod.previousSelectedPeriod.noteTag.setOpacity(1); // assert note tag
+        } else {
+            System.out.println("no content - note removed");
+            TimeLineActivityPeriod.previousSelectedPeriod.removeNoteTag(); //remove note tag
+        }
+    }
 
 //    private void changeFontUntilTextFitsLabel(Label label, double deltaX) {
 //
@@ -1289,6 +1344,7 @@ public class Editor extends PrototypeController {
             shiftPortals(-newLayoutX);
             shiftDateDisplay(-change);
             checkAndUpdateDate(dateDisplay.getLayoutX());
+            noteTextArea.setLayoutX(noteTextArea.getLayoutX() + change);
 //            hammerDownUpperBorderOnMeetingPortals();
             shiftDetails(change);
             shiftBackground(change);
@@ -1308,6 +1364,7 @@ public class Editor extends PrototypeController {
         portalPane.setLayoutX(layoutX);
         shiftPortals(-layoutX);
         shiftDateDisplay(-change);
+        noteTextArea.setLayoutX(noteTextArea.getLayoutX() + change);
         checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
         shiftDetails(change);
@@ -1353,6 +1410,7 @@ public class Editor extends PrototypeController {
     private void shiftBackground(double change){
         backgroundPane.setLayoutX(backgroundPane.getLayoutX() - change);
     }
+
 
 
     public static String getAMPMTimeFromSeconds(int seconds) {

@@ -132,7 +132,7 @@ public class Stats extends PrototypeController {
     @FXML
     public void goToLoader() throws IOException {
 
-        System.out.println(SceneNavigationModel.stats);
+//        System.out.println(SceneNavigationModel.stats);
 
 
         App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", SceneNavigationModel.stats);

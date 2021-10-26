@@ -127,7 +127,7 @@ public class EditLog {
             Activity cloneActivity = new Activity(
                     activity.getName(),
                     activity.getCategory(),
-                    activity.getDescription(),
+                    activity.getNote(),
                     activity.getDurationSeconds(),
                     activity.getStartTimeSecs(),
                     activity.getEndTimeSecs(),

@@ -19,7 +19,7 @@ public class BarComponentManager {
     //iterate over all stored barcomps and update data
     public static  void updateAllBarCompData(){
         for (Barcomponent comp : barComps){
-            System.out.println(comp.getDate() );
+//            System.out.println(comp.getDate() );
             comp.updateDayData(comp.getDate());
         }
     }

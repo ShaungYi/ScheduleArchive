@@ -3,13 +3,6 @@
     -fx-text-fill: #5a432d;
 }
 
-.text-area {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
-    -fx-border-width: 0px;
-    -fx-accent: none;
-    -fx-focus-color: none;
-}
-
 
 .time-label{
     -fx-background-color: #f8fdea;
@@ -22,12 +15,6 @@
     -fx-font-family: "Times New Roman";
 }
 
-
-
-.text-area .content {
-    -fx-background-color: #f8fdea;
-
-}
 
 
 .scroll-bar:horizontal .increment-arrow,

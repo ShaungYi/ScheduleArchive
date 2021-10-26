@@ -4,10 +4,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
@@ -27,7 +31,9 @@ import java.util.HashMap;
 
 public class TimeLine extends PrototypeController {
 
-    public Pane grandmotherPane;
+    @FXML public Pane grandmotherPane;
+    @FXML TextArea noteTextArea;
+
     private int startTimeSecs;
     private int endTimeSecs;
 
@@ -124,7 +130,7 @@ public class TimeLine extends PrototypeController {
         for (Activity activity : archive){
             System.out.println(activity);
             if (activity.getDate().equals("2021-10-22")){
-                System.out.println("found!!!!!!!!!!!!!!!");
+//                System.out.println("found!!!!!!!!!!!!!!!");
             }
         }
 
@@ -224,14 +230,20 @@ public class TimeLine extends PrototypeController {
         }
 
         for (Activity activity : archive) {
-            Label newActivity = new Label();
+
+            TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, false);
+
+            Label newActivity = period.getActivityLabel();
             newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1;");
             newActivity.setPrefHeight(colorLineHeight);
             newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
             newActivity.setText(activity.getName());
             //newActivity.setFont(new Font(40));
             addHoverHandler(newActivity, activity.getStartTimeSecs(), activity.getEndTimeSecs(), activity.getDurationSeconds(), activity.getCategory(), activity.getName());
-            colorPane.getChildren().add(newActivity);
+
+
+            colorPane.getChildren().add(period);
+
             changeFontUntilTextFitsLabel(newActivity);
 
             if (activity.getEndTimeSecs() > endTimeSecs) {
@@ -411,6 +423,7 @@ public class TimeLine extends PrototypeController {
             portalPane.setLayoutX(newLayoutX);
             shiftPortals(-newLayoutX);
             shiftDateDisplay(-change);
+            noteTextArea.setLayoutX(noteTextArea.getLayoutX() + change);
             checkAndUpdateDate(dateDisplay.getLayoutX());
 //            hammerDownUpperBorderOnMeetingPortals();
             shiftDetails(change);
@@ -472,6 +485,14 @@ public class TimeLine extends PrototypeController {
     }
     private void shiftBackground(double change){
         backgroundPane.setLayoutX(backgroundPane.getLayoutX() - change);
+    }
+
+    @FXML
+    public void hideNoteAreaOnScreenClicked(MouseEvent event){
+
+        if (!(event.getTarget() instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
+            noteTextArea.setVisible(false);
+        }
     }
 
 

@@ -10,7 +10,7 @@ public class Activity implements Cloneable{
     private String name;
     private String category;
     private int durationSeconds;
-    private String description;
+    private String note;
     int startTimeSecs;
     int endTimeSecs;
     String date;
@@ -30,7 +30,7 @@ public class Activity implements Cloneable{
         }
 
         if (date1.after(date2)){
-            System.out.println("date1 greater than date2");
+//            System.out.println("date1 greater than date2");
             return 1;
         } else if (date1.equals(date2)){
             int start1 = a1.getStartTimeSecs();
@@ -48,10 +48,10 @@ public class Activity implements Cloneable{
         }
     };
 
-    public Activity (String name, String category, String description, int duration, int startTime, int endTime, String date){
+    public Activity (String name, String category, String note, int duration, int startTime, int endTime, String date){
         this.name = name;
         this.category = category;
-        this.description = description;
+        this.note = note;
         this.durationSeconds = duration;
         this.startTimeSecs = startTime;
         this.endTimeSecs = endTime;
@@ -66,8 +66,8 @@ public class Activity implements Cloneable{
         return category;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
     public int getDurationSeconds() {
@@ -95,8 +95,8 @@ public class Activity implements Cloneable{
         this.category = category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public void setDurationSeconds(int durationSeconds) {
@@ -117,7 +117,7 @@ public class Activity implements Cloneable{
 
 
     public String toString(){
-        return "Activity: "+"name = "+name+", category = "+category+", description: "+description+", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
+        return "Activity: "+"name = "+name+", category = "+category+", description: "+ note +", startTimeSecs: "+startTimeSecs+", endTimeSecs: "+getEndTimeSecs()+", duration = "+durationSeconds+" seconds, Date: "+getDate();
     }
 
 
@@ -132,6 +132,7 @@ public class Activity implements Cloneable{
         //check if all field of other and this are equal
         if (this.name.equals(other.getName()) &&
         this.category.equals(other.getCategory()) &&
+        this.note.equals(other.getNote()) &&
         this.durationSeconds == other.getDurationSeconds() &&
         this.startTimeSecs == other.getStartTimeSecs() &&
         this.endTimeSecs == other.getEndTimeSecs() &&

@@ -1,0 +1,10 @@
+.text-area {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-border-width: 0px;
+    -fx-accent: none;
+    -fx-focus-color: none;
+}
+
+.text-area .content {
+    -fx-background-color: #f8fdea;
+}

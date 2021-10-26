@@ -66,14 +66,14 @@ public class BackupScreenController extends PrototypeController {
         BackupArchiveModel.maxBackupNum = maxBackupNum;
         BackupArchiveModel.backupCreationIntervalInSeconds = backupCreationIntervalInSeconds;
 
-        System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
-        System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
+//        System.out.println("(from BackupScreenController.applySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
+//        System.out.println("(from BackupScreenController.applySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + " seconds");
 
         WriteToDBModel.updateBackupSettings(SettingsDBModel.maxBackupNum, maxBackupNum);
         WriteToDBModel.updateBackupSettings(SettingsDBModel.backupCreationInterval, backupCreationIntervalInSeconds);
 
-        System.out.println("(from apply settings) settings saved to DB");
-        System.out.println(BackupArchiveModel.backupCreationIntervalInSeconds);
+//        System.out.println("(from apply settings) settings saved to DB");
+//        System.out.println(BackupArchiveModel.backupCreationIntervalInSeconds);
 
         App.backupRegularly.stop();
         App.backupRegularly = new Thread(BackupArchiveModel.createBackupArchiveDBRegularly);
@@ -92,14 +92,14 @@ public class BackupScreenController extends PrototypeController {
             loadBackupButton.setDisable(true);
             deleteBackupButton.setDisable(true);
 
-            System.out.println("(from BackupScreenController.setSelectedBackup) invalid selection");
+//            System.out.println("(from BackupScreenController.setSelectedBackup) invalid selection");
         }
         // enable load button and update selected day
         else {
             loadBackupButton.setDisable(false);
             deleteBackupButton.setDisable(false);
             selectedBackup = backupName;
-            System.out.println("(from BackupScreenController.setSelectedBackup) backup to load: " + selectedBackup);
+//            System.out.println("(from BackupScreenController.setSelectedBackup) backup to load: " + selectedBackup);
         }
     }
 
@@ -147,8 +147,8 @@ public class BackupScreenController extends PrototypeController {
         backupEveryHourField.setText(String.valueOf(time.getHh()));
         backupEveryMinuteField.setText(String.valueOf(time.getMm()));
 
-        System.out.println("(from BackupScreenController.displaySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
-        System.out.println("(from BackupScreenController.displaySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + "seconds");
+//        System.out.println("(from BackupScreenController.displaySettings) max num backups: " + BackupArchiveModel.maxBackupNum);
+//        System.out.println("(from BackupScreenController.displaySettings) create backup archive every " + BackupArchiveModel.backupCreationIntervalInSeconds + "seconds");
     }
 
 

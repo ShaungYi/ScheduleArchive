@@ -4,11 +4,17 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
+import main.Controllers.Timeline.TimeLineActivityPeriod;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.SceneNavigationModel;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class LaunchScreen extends PrototypeController {
     @FXML
@@ -52,6 +58,17 @@ public class LaunchScreen extends PrototypeController {
             SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/searchScreen.fxml");
             SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
             SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
+
+            //load note image
+            File imageFile = new File("src/main/resources/Images/note-tag.png");
+            Image noteImage = null;
+            try {
+                noteImage = new Image(new FileInputStream(imageFile.getAbsolutePath()));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            TimeLineActivityPeriod.noteImage = noteImage;
 
             Platform.runLater(new Runnable() {
                 @Override

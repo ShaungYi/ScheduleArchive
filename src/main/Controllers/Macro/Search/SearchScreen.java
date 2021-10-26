@@ -103,12 +103,12 @@ public class SearchScreen extends PrototypeController {
 
         //add selected pastActivities to macro data model
         MacroDataModel.composeSelectedPastActivitiesListFromNames();
-        System.out.println("selectedPastActivities: " + MacroDataModel.selectedPastActivities);
+//        System.out.println("selectedPastActivities: " + MacroDataModel.selectedPastActivities);
         MacroDataModel.composeTotalActivityDurationsByDate();
 
         //find maximum duration of activity
         MacroDataModel.setMaximumActivityDuration();
-        System.out.println(MacroDataModel.totalActivityDurationsByDate);
+//        System.out.println(MacroDataModel.totalActivityDurationsByDate);
 
         //go to infographic
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.infographics, activityTagBoxContainer.getScene());
@@ -159,9 +159,9 @@ public class SearchScreen extends PrototypeController {
 
     @FXML
     public void onClearButtonHovered(){
-//        System.out.println("mouse entered");
-        System.out.println(activityTagBoxContainer.getHeight());
-        System.out.println(activityTagBoxContainer.getWidth());
+////        System.out.println("mouse entered");
+//        System.out.println(activityTagBoxContainer.getHeight());
+//        System.out.println(activityTagBoxContainer.getWidth());
         clearButton.getStyleClass().add("clear-button-hovered");
     }
 
