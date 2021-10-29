@@ -67,8 +67,6 @@ public class Loader extends PrototypeController {
         }
 
         if (!dateToViewObservableList.isEmpty()){
-//            System.out.println("scrolling to last date");
-//            System.out.println(dateToViewObservableList.size());
             dateToViewListView.scrollTo(dateToViewObservableList.size() - 1);
         }
 

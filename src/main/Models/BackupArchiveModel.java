@@ -48,7 +48,9 @@ public class BackupArchiveModel {
                     while (!WriteToDBModel.dataBackupProcessAtRest){
                         Thread.sleep(10);
                     }
+
                     createBackup();
+
                 }
 
                 removeOldBackups();
@@ -127,14 +129,15 @@ public class BackupArchiveModel {
         File backupDirectory = new File("Backups");
         String[] backupList = backupDirectory.list();
 
-        for (int index = 0; index < backupList.length; index++) {
-            String backupName = backupList[index];
+        assert backupList != null;
+        for (String backupName : backupList) {
             Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
             parsedBackupList.add(parsedBackupName);
         }
 
-        return parsedBackupList;
+        parsedBackupList.sort(Comparator.naturalOrder());
 
+        return parsedBackupList;
     }
 
 
@@ -154,6 +157,17 @@ public class BackupArchiveModel {
             removeBackup(formatBackupName(oldestBackup));
 
         }
+    }
+
+    public static void updateBackupsObservableList() {
+
+        Platform.runLater(() -> {
+            availableBackupsObservableList.clear();
+
+            for (int index = listBackups().size() - 1; index > 0; index--) {
+                availableBackupsObservableList.add(listBackups().get(index).toString());
+            }
+        });
     }
 
 
@@ -176,17 +190,5 @@ public class BackupArchiveModel {
 
         return null;
 
-    }
-
-
-    public static void updateBackupsObservableList() {
-
-        Platform.runLater(() -> {
-            availableBackupsObservableList.clear();
-
-            for (int index = listBackups().size() - 1; index > 0; index--) {
-                availableBackupsObservableList.add(listBackups().get(index).toString());
-            }
-        });
     }
 }

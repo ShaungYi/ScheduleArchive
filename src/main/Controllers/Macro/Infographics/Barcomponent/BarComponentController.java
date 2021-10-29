@@ -110,7 +110,6 @@ public class BarComponentController {
         InfographicsModel.dayInfoPopupListView.setMaxHeight(InfographicsModel.mindayInfoPopupListViewHeight);
         InfographicsModel.dayInfoPopupListView.setMinHeight(InfographicsModel.mindayInfoPopupListViewHeight);
         InfographicsModel.dayInfoPopupListViewHeight = InfographicsModel.mindayInfoPopupListViewHeight;
-//        System.out.println("reset: "+InfographicsModel.dayInfoPopupListView.getPrefHeight());
 
         for (PastActivity pastActivity : MacroDataModel.selectedPastActivities){
             HashMap<String, Integer> durationsByDate = pastActivity.getDurationsByDate();
@@ -129,10 +128,7 @@ public class BarComponentController {
                 InfographicsModel.dayInfoPopupListView.setMaxHeight(newHeight);
                 InfographicsModel.dayInfoPopupListView.setMinHeight(newHeight);
                 InfographicsModel.dayInfoPopupListViewHeight = newHeight;
-//                System.out.println("after data added: " +InfographicsModel.dayInfoPopupListView.getPrefHeight());
             }
         }
-
     }
-
 }

@@ -179,7 +179,6 @@ public class WriteToDBModel {
 
         if (dataBackupProcessAtRest){
             // just back up if no backup process is in progress
-            //System.out.println("(from syncro)just start data backup thread when resting");
             new Thread(backingUpData).start();
 
                 //do nothing though edit made if synchro is already running
@@ -220,8 +219,6 @@ public class WriteToDBModel {
     private static final Runnable backupSynchronizer = new Runnable() {
         @Override
         public void run() {
-            //System.out.println("(from synchro)waiting for previous process to finish");
-            //wait until previous backup process finishes
             while (!dataBackupProcessAtRest){
                 try {
                     Thread.sleep(1);
@@ -229,7 +226,6 @@ public class WriteToDBModel {
                     e.printStackTrace();
                 }
             }
-            //System.out.println("(from syncro)previous process finished. Starting new process...");
             //start new data backup process
             new Thread(backingUpData).start();
 
@@ -242,12 +238,10 @@ public class WriteToDBModel {
     private static final Runnable backingUpData = new Runnable() {
         @Override
         public void run() {
-            //System.out.println("(from backingUpData runnable)data backup process started");
             //data backup process in progress
             dataBackupProcessAtRest = false;
             saveData();
             //data backup process finished
-            //System.out.println("(from backingUpData runnable)data backup process finished");
             dataBackupProcessAtRest = true;
         }
     };

@@ -46,10 +46,6 @@ public class StopWatch {
 
     public void tick() {
         endTimeSecs = LocalTime.now().toSecondOfDay();
-//        System.out.println("startTime: "+starTimeSecs);
-//        System.out.println("duration: "+measuredDurationSecs);
-//        System.out.println("endTime: "+endTimeSecs);
-        System.out.println();
         if (endTimeSecs < starTimeSecs){
             measuredDurationSecs = (endTimeSecs + DateTimeModel.SECONDS_IN_A_DAY) - starTimeSecs;
         } else {

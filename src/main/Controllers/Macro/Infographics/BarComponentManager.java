@@ -19,19 +19,19 @@ public class BarComponentManager {
     //iterate over all stored barcomps and update data
     public static  void updateAllBarCompData(){
         for (Barcomponent comp : barComps){
-//            System.out.println(comp.getDate() );
             comp.updateDayData(comp.getDate());
         }
     }
 
-    public void resetUpdate(){
-        index = 0;
-    }
-
     public static Barcomponent updateBar(String date, double barFreq){
-        Barcomponent comp = barComps.get(index);
-        comp.controller.configure(date, barFreq);
-        index++;
+        Barcomponent comp = null;
+
+        try {
+            comp = barComps.get(index);
+            comp.controller.configure(date, barFreq);
+            index++;
+        } catch (IndexOutOfBoundsException ignored) {}
+
         return comp;
     }
 }

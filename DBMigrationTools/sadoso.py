@@ -62,7 +62,7 @@ class ScheduleArchiveDBOptimizer:
         self.optimizedDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "activities"
+            "activities "
             "("
             "activityID INTEGER PRIMARY KEY, "
             "name TEXT, "
@@ -74,7 +74,7 @@ class ScheduleArchiveDBOptimizer:
         self.optimizedDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "events"
+            "events "
             "("
             "activityID INTEGER, "
             "note TEXT, "

@@ -60,7 +60,6 @@ public class DateTimeModel {
         int universalInputIndex = -1;
         String [] sourceArray = monthData.get(from);
         for (int i = 0; i < sourceArray.length; i++){
-//            System.out.println(sourceArray[i]);
             if (sourceArray[i].equals(input)){
                 universalInputIndex = i;
             }

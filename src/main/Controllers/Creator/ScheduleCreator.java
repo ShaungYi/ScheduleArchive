@@ -134,15 +134,7 @@ public class ScheduleCreator extends PrototypeController {
 
                 Platform.runLater(() -> {
 
-
                     stopWatch.tick();
-
-//                    System.out.println("start time: " + stopWatch.getStartTimeSec());
-//                    System.out.println("duration: " + stopWatch.makeDisplay());
-//                    System.out.println("current time" + getCurrentAMPMTime());
-//                    System.out.println();
-
-
 
                     String display = stopWatch.makeDisplay();
                     stopWatchDisplay.setText(display);
@@ -171,8 +163,6 @@ public class ScheduleCreator extends PrototypeController {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-
-                        //System.out.println(LocalTime.now().getSecond() +"."+ LocalTime.now().getNano());
                         universalClockDisplay.setText(currentAMPMtime);
                         noonRelationMarker.setText(isAM ? "AM" : "PM");
                         date.setText(currentDate);
@@ -370,7 +360,6 @@ public class ScheduleCreator extends PrototypeController {
             DateTimeModel.selectedDay = currentDay;
             ArchiveDBModel.archive = ReadFromDBModel.readDay(currentDay);
             Loader.addNoData(stopWatch.getStartTimeSec());
-//            System.out.println("(from auto resume) auto resumed");
         } else if (DateTimeModel.selectedDay == null) {
             DateTimeModel.selectedDay = currentDay;
         }

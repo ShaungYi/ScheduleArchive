@@ -40,11 +40,6 @@ public class Editor extends PrototypeController {
     private int startTimeSecs;
     private int endTimeSecs;
 
-
-//    private int colorLineMargins = 200;
-//    private int timeLineMargins = 140;
-
-
     private int colorLineHeight = 125;
     private int timeLineHeight = 17;
 
@@ -177,7 +172,6 @@ public class Editor extends PrototypeController {
 
         suggestedNamesObservableList.add("mama");
         suggestedNamesObservableList.add("dada");
-
     }
 
 
@@ -287,26 +281,19 @@ public class Editor extends PrototypeController {
 
     boolean switchModeOn = false;
     @FXML
-    public void handleCategoryEdit(KeyEvent event){
-
-//        System.out.println("A");
+    public void handleCategoryEdit(KeyEvent event) {
         String input = event.getCharacter();
 
-        if (event.getCharacter().equals(" ")){
-            if (cycler.getItems().isEmpty()){
+        if (event.getCharacter().equals(" ")) {
+            if (cycler.getItems().isEmpty()) {
                 categoryTitlePicker.setText("");
-            }
-            else{
+            } else {
                 editCategory(cycler.nextItem());
             }
-        }
-        else{
+        } else {
             updateCycler(input);
             editCategory(cycler.nextItem());
-//            System.out.println("finished editing category");
         }
-//        System.out.println("B");
-
     }
 
 
@@ -322,33 +309,23 @@ public class Editor extends PrototypeController {
         for (String category : Stats.categorySequence){
             if (category.startsWith(input)){
                 cycler.addNewItem(category);
-//                System.out.println(cycler.getItems());
             }
         }
 
         if (cycler.getItems().isEmpty()){
             cycler.setItems((ArrayList<String>) Stats.categorySequence.clone());
-//            System.out.println("default");
         }
-
     }
 
 
     boolean isFirstEdit = true;
     private void editCategory(String newCat){
 
-//        System.out.println(Main.archive.get(selectedIndex).getCategory());
-//        Main.editLog.debuggingIndex = selectedIndex;
         if (isFirstEdit){
             App.editLog.addLog(ArchiveDBModel.archive);
             isFirstEdit = false;
         }
 
-//        for (ArrayList<Activity> activities : Main.editLog.logs){
-//            for (Activity activity : activities){
-//                System.out.println(activity.getCategory());
-//            }
-//        }
         int colorIndex = Stats.categorySequence.indexOf(newCat);
         String newColor = Stats.textColorSequence.get(colorIndex);
         ((TimeLineActivityPeriod)colorPane.getChildren().get(selectedIndex)).getActivityLabel().setStyle("-fx-background-color:" + Stats.colorMap.get(newCat) + "; -fx-alignment: center; -fx-border-color: white; fx-border-width: 1;");
@@ -361,7 +338,6 @@ public class Editor extends PrototypeController {
         categoryTitlePicker.setText(newCat);
 
         ArchiveDBModel.archive.get(selectedIndex).setCategory(newCat);
-//        System.out.println(ArchiveDBModel.archive.get(selectedIndex).getCategory());
         App.editLog.addLog(ArchiveDBModel.archive);
     }
 
@@ -383,39 +359,9 @@ public class Editor extends PrototypeController {
             if (!grandmotherPane.getChildren().contains(nameSuggestions)){
                 grandmotherPane.getChildren().add(nameSuggestions);
             }
-//            System.out.println("suggestions hidden");
         } else {
             hideSuggestedNames();
         }
-
-//        String command = event.getCharacter();
-//
-//        switch (command){
-//            case "w":
-//                nameSuggestions.setLayoutY(nameSuggestions.getLayoutY() - 1);
-//
-//                break;
-//            case "s":
-//                nameSuggestions.setLayoutY(nameSuggestions.getLayoutY() + 1);
-//
-//                break;
-//            case "a":
-//                nameSuggestions.setLayoutX(nameSuggestions.getLayoutX() - 1);
-//
-//                break;
-//            case "d":
-//                nameSuggestions.setLayoutX(nameSuggestions.getLayoutX() + 1);
-//
-//                break;
-//
-//        }
-//
-//        System.out.println("x: "+nameSuggestions.getLayoutX());
-//        System.out.println("y: "+nameSuggestions.getLayoutY());
-
-
-
-
     }
 
 
@@ -431,10 +377,6 @@ public class Editor extends PrototypeController {
         SearchModel.searchPastActivityListForNameAndLoadToObservableListInReverse(newName, suggestedNamesObservableList, "");
 
         //remove the mysterious space in suggested list
-
-
-
-//        System.out.println(suggestedNamesObservableList);
 
             double suggestionsListHeight = suggestedNamesObservableList.size() * 23 + 20;
             if (suggestionsListHeight > 400) {
@@ -463,7 +405,6 @@ public class Editor extends PrototypeController {
         String selectedName = (String)nameSuggestions.getSelectionModel().getSelectedItem();
         changeName(selectedName);
         specificField.setText(selectedName);
-//        System.out.println((String)nameSuggestions.getSelectionModel().getSelectedItem());
         hideSuggestedNames();
     }
 
@@ -477,9 +418,6 @@ public class Editor extends PrototypeController {
     }
 
     private void changeName(String newName){
-
-        //addUneditedOriginalToEditLogIfNoLogs();
-
         App.editLog.addLog(ArchiveDBModel.archive);
 
         Label givenEpoch = ((TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex)).activityLabel;
@@ -784,7 +722,6 @@ public class Editor extends PrototypeController {
         activity.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                System.out.println("log added when drag started");
                 App.editLog.addLog(ArchiveDBModel.archive);
             }
         });
@@ -793,12 +730,10 @@ public class Editor extends PrototypeController {
             @Override
             public void handle(MouseEvent event) {
 
-                //addUneditedOriginalToEditLogIfNoLogs()
 
                 selectedIndex = colorPane.getChildren().indexOf(activity.getParent());
 
                 double mousePos = event.getScreenX();
-//                System.out.println(mousePos);
                 Bounds activityBounds = activity.localToScreen(activity.getBoundsInLocal());
                 double activityPos = (activityBounds.getMinX() + activityBounds.getMaxX()) / 2;
 
@@ -855,10 +790,6 @@ public class Editor extends PrototypeController {
 
     @FXML
     public void insertActivity(){
-
-
-        //addUneditedOriginalToEditLogIfNoLogs();
-
         Activity selectedActivity = ArchiveDBModel.archive.get(selectedIndex);
         Label selectedLabel = ((TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex)).getActivityLabel();
 
@@ -913,30 +844,14 @@ public class Editor extends PrototypeController {
 
     }
 
-
-//    private void addUneditedOriginalToEditLogIfNoLogs(){
-//
-//        if (Main.editLog.isEmpty()){
-//            Main.editLog.addLog(Main.archive);
-//        }
-//    }
-
-
-
-
-
     @FXML
     public void deleteActivity(){
+
         if (selectedIndex != 0){
-
-            //addUneditedOriginalToEditLogIfNoLogs();
-
             int mergerIndex = selectedIndex - 1;
 
             Activity merger = ArchiveDBModel.archive.get(mergerIndex);
             Activity engulfed = ArchiveDBModel.archive.get(selectedIndex);
-
-
 
             int mergerEndTime;
             int mergerDuration = merger.getDurationSeconds();
@@ -957,9 +872,6 @@ public class Editor extends PrototypeController {
 
             Label mergerLabel = ((TimeLineActivityPeriod) colorPane.getChildren().get(mergerIndex)).activityLabel;
             System.out.println("engulfed: " + colorPane.getChildren().get(selectedIndex));
-            for (Node node : colorPane.getChildren()){
-                System.out.println( node);
-            }
             TimeLineActivityPeriod engulfedPeriod = (TimeLineActivityPeriod) colorPane.getChildren().get(selectedIndex);
 
             colorPane.getChildren().remove(engulfedPeriod);
@@ -1044,8 +956,6 @@ public class Editor extends PrototypeController {
                 firstDate = firstAct.getDate();
                 lastDate = ArchiveDBModel.archive.get(ArchiveDBModel.archive.size() - 1).getDate();
             }
-//        System.out.println("starttime: "+this.startTimeSecs);
-//        System.out.println("endTime: "+this.endTimeSecs);
 
             if (endTimeSecs - startTimeSecs < FIVE_MINS_IN_SECONDS) {
                 endTimeSecs += FIVE_MINS_IN_SECONDS;
@@ -1061,8 +971,6 @@ public class Editor extends PrototypeController {
                 newActivity.setPrefHeight(colorLineHeight);
                 newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
                 newActivity.setText(activity.getName());
-                //newActivity.setFont(new Font(40));
-
                 addClickHandler(period);
                 addDragHandler(newActivity);
 
@@ -1142,7 +1050,6 @@ public class Editor extends PrototypeController {
 
         specificField.getStyleClass().removeAll("text-field-with-reverse-suggestions");
         specificField.getStyleClass().add("search-text-field");
-//        System.out.println("suggestedNames Removed");
     }
 
     @FXML
@@ -1157,9 +1064,6 @@ public class Editor extends PrototypeController {
             noteTextArea.setVisible(false);
 
         }
-
-//        System.out.println("target: "+event.getTarget());
-//        System.out.println("target parent: "+((Node)event.getTarget()).getParent());
 
         Node target = (Node)event.getTarget();
         if (target instanceof Text){
@@ -1339,9 +1243,8 @@ public class Editor extends PrototypeController {
 
 
     public void onScroll(ScrollEvent e) {
-
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaX();
+        double change = e.getDeltaX() + (e.getDeltaY() * 15);
 
         if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
             double newLayoutX = motherPaneLayoutX + change;

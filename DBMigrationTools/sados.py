@@ -56,8 +56,7 @@ class Optimizer:
 
         # inserting all the activities to the newDB
         self.newDBCursor.executemany(
-            "INSERT INTO activities(name, category)    "
-            "VALUES(?, ?)", tableContent
+            "INSERT INTO activities (name, category) VALUES(?, ?)", tableContent
         )
 
 
@@ -106,7 +105,7 @@ class Optimizer:
 
         # inserting all events to the events table
         self.newDBCursor.executemany(
-            "INSERT INTO events VALUES(?, '', ?, ?, ?)",
+            "INSERT INTO events VALUES (?, '', ?, ?, ?)",
             tableContent
         )
 
@@ -138,7 +137,7 @@ class Optimizer:
         self.newDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "activities"
+            "activities "
             "("
             "activityID INTEGER PRIMARY KEY, "
             "name TEXT, "
@@ -150,7 +149,7 @@ class Optimizer:
         self.newDBCursor.execute(
             "CREATE TABLE "
             "IF NOT EXISTS "
-            "events"
+            "events "
             "("
             "activityID INTEGER, "
             "note TEXT, "

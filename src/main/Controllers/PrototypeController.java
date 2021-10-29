@@ -17,11 +17,9 @@ public class PrototypeController {
 
     public void disableCreatorButton(){
         goToCreatorButton.setDisable(true);
-//        System.out.println("disabled creator button");
     }
 
     public void enableCreatorButton(){
         goToCreatorButton.setDisable(false);
-//        System.out.println("enabled creator button");
     }
 }

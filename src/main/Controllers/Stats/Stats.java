@@ -131,18 +131,6 @@ public class Stats extends PrototypeController {
 
     public void makeColorMap(){
         colorMap.clear();
-//        colorMap.put("Study", "aqua");
-//        colorMap.put("Entertainment","fuchsia");
-//        colorMap.put("Spirituality","gold");
-//        colorMap.put("Exercise","chartreuse");
-//        colorMap.put("Rest","bisque");
-//        colorMap.put("Reading","chocolate");
-//        colorMap.put("Writing","deepskyblue");
-//        colorMap.put("Arts","crimson");
-//        colorMap.put("Social","olive");
-//        colorMap.put("Media","green");
-//        colorMap.put("Service","coral");
-//        colorMap.put("Miscellaneous","blueviolet");
 
         for (int i = 0; i < colorSequence.size(); i++){
             colorMap.put(categorySequence.get(i), colorSequence.get(i));
@@ -181,10 +169,6 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToLoader() throws IOException {
-
-//        System.out.println(SceneNavigationModel.stats);
-
-
         App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", SceneNavigationModel.stats);
 
 

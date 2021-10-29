@@ -120,7 +120,6 @@ public class LaunchScreen extends PrototypeController {
                     }
                 });
                 opacityIncrement = opacityIncrement * 1.5;
-//                System.out.println(loadingLabel.getOpacity());
             }
             loadingLabel.setOpacity(1);
 

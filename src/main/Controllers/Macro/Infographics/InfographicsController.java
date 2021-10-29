@@ -68,13 +68,10 @@ public class InfographicsController extends PrototypeController {
 
         //store pane dimentions in model
         InfographicsModel.infographicsPaneHeight = infographicPane.getPrefHeight();
-//        System.out.println("infographicsPaneHeight: "+infographicPane.getPrefHeight());
         InfographicsModel.monthBarHeight = monthBar.getPrefHeight();
         InfographicsModel.yearPaneHeight = yearDisplayPane.getPrefHeight();
-//        System.out.println("yearPaneHeight: "+yearDisplayPane.getPrefHeight());
 
         createInfographic();
-
 
         //set month label to first month
         updateDateLabels();
@@ -97,7 +94,6 @@ public class InfographicsController extends PrototypeController {
         TableColumn durationCol = new TableColumn("Net Duration");
         InfographicsModel.dayInfoPopupListView.getColumns().clear();
         InfographicsModel.dayInfoPopupListView.getColumns().addAll(nameCol, durationCol);
-//        System.out.println(InfographicsModel.dayInfoPopupListView.getColumns());
 
         nameCol.setCellValueFactory(
                 new PropertyValueFactory<ActivitySummaryTableView.chartDataUnit,String>("header"));
@@ -127,7 +123,6 @@ public class InfographicsController extends PrototypeController {
 
     Runnable loadDayBarAndAddToManager = () -> {
         Barcomponent comp = new Barcomponent("2021-01-01", 0);
-//        System.out.println(comp.controller.freqBar);
         Platform.runLater(() -> {
             BarComponentManager.addBarComp(comp);
         });
@@ -137,7 +132,6 @@ public class InfographicsController extends PrototypeController {
 
 
     private Runnable totallyUnnecessaryBackgroundLabelAlignProcessBecauseOfAStupidCannotGetBoundsInInitializeMethodError = () -> {
-//        System.out.println("(from exit)waiting for previous process to finish");
         //wait until the maddening initialize method finishes and the screen is loaded
         try {
             Thread.sleep(10);
@@ -149,15 +143,7 @@ public class InfographicsController extends PrototypeController {
             yearLabelBounds = yearLabel.localToScreen(yearLabel.getBoundsInLocal());
             alignLabels(yearLabelBounds, monthLabel);
         });
-
-
     };
-
-
-
-
-
-
 
 
 
@@ -222,10 +208,15 @@ public class InfographicsController extends PrototypeController {
 
 
 
-    private void alignLabels(Bounds reference, Label aligned){
-        double midX = (reference.getMinX() + reference.getMaxX()) / 2;
-        double newLayoutX = midX - aligned.getWidth()/2;
-        aligned.setLayoutX(newLayoutX);
+    private void alignLabels(Bounds reference, Label aligned) {
+
+        try {
+            double midX = (reference.getMinX() + reference.getMaxX()) / 2;
+            double newLayoutX = midX - aligned.getWidth() / 2;
+            aligned.setLayoutX(newLayoutX);
+        } catch (NullPointerException ignored) {
+
+        }
     }
 
     //updates month label if year label midpoint crosses a boundary
@@ -378,7 +369,6 @@ public class InfographicsController extends PrototypeController {
 
     private void addMonth(String numericalDay, double width) {
         Pane monthPane = new Pane();
-//        System.out.println(monthPane);
         monthPane.setPrefWidth(width);
         String backgroundColor = DateTimeModel.getMonthProperty("color", "number", numericalDay);
         String borderColor = DateTimeModel.getMonthProperty("border", "number", numericalDay);
@@ -390,15 +380,17 @@ public class InfographicsController extends PrototypeController {
 
     private void configureADayBar(String date){
         Barcomponent barcomponent = BarComponentManager.updateBar(date, 0);
-        barcomponent.setDate(date);
-        infographicPane.getChildren().add(barcomponent);
+
+        if (barcomponent != null) {
+            barcomponent.setDate(date);
+            infographicPane.getChildren().add(barcomponent);
+        }
     }
 
 
 
     @FXML
     public void goBack(){
-//        System.out.println("goback called");
         hideInfoPopup();
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.searchScreen, motherPane.getScene());
         //set default macro screen to search
@@ -418,7 +410,6 @@ public class InfographicsController extends PrototypeController {
 
     @FXML
     public void hideInfoPopupOnMouseClicked(MouseEvent event){
-//        System.out.println(event.getTarget());
         if (!(event.getTarget() instanceof Rectangle)){
             hideInfoPopup();
 

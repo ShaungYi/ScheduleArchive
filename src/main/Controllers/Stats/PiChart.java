@@ -47,7 +47,6 @@ public class PiChart extends PrototypeController {
 
         for (int i = 0; i < piChartData.size(); i++){
             piChartData.get(i).getNode().setStyle( "fx-background-color: "+Stats.colorSequence.get(i));
-            //System.out.println("fx-pie-color: "+Stats.colorSequence.get(i));
         }
     }
 

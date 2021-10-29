@@ -37,11 +37,6 @@ public class TimeLine extends PrototypeController {
     private int startTimeSecs;
     private int endTimeSecs;
 
-
-//    private int colorLineMargins = 200;
-//    private int timeLineMargins = 140;
-
-
     private int colorLineHeight = 125;
     private int timeLineHeight = 17;
 
@@ -129,9 +124,6 @@ public class TimeLine extends PrototypeController {
         archive.sort(Activity.activityComparator);
         for (Activity activity : archive){
             System.out.println(activity);
-            if (activity.getDate().equals("2021-10-22")){
-//                System.out.println("found!!!!!!!!!!!!!!!");
-            }
         }
 
         //add navigation tab
@@ -222,8 +214,6 @@ public class TimeLine extends PrototypeController {
             endTimeSecs = archive.get(archive.size() - 1).getEndTimeSecs();
             firstDate = archive.get(0).getDate();
             lastDate = archive.get(archive.size() - 1).getDate();
-
-//            System.out.println(firstDate + " ---> " + lastDate);
         }
 
         if (endTimeSecs - startTimeSecs < FIVE_MINS_IN_SECONDS) {
@@ -248,7 +238,6 @@ public class TimeLine extends PrototypeController {
 
             newActivity.setPrefWidth(activity.getDurationSeconds() * WIDTH_OF_1_SEC);
             newActivity.setText(activity.getName());
-            //newActivity.setFont(new Font(40));
             addHoverHandler(newActivity, activity.getStartTimeSecs(), activity.getEndTimeSecs(), activity.getDurationSeconds(), activity.getCategory(), activity.getName());
 
 
@@ -422,9 +411,8 @@ public class TimeLine extends PrototypeController {
 
 
     public void onScroll(ScrollEvent e) {
-
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaX();
+        double change = e.getDeltaX() + (e.getDeltaY() * 15);
 
         if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
 
@@ -437,7 +425,6 @@ public class TimeLine extends PrototypeController {
             shiftDateDisplay(-change);
             noteTextArea.setLayoutX(noteTextArea.getLayoutX() + change);
             checkAndUpdateDate(dateDisplay.getLayoutX());
-//            hammerDownUpperBorderOnMeetingPortals();
             shiftDetails(change);
 
             TimeLine.currentLayout = newLayoutX;
@@ -455,23 +442,10 @@ public class TimeLine extends PrototypeController {
         shiftPortals(-layoutX);
         shiftDateDisplay(-change);
         checkAndUpdateDate(dateDisplay.getLayoutX());
-//            hammerDownUpperBorderOnMeetingPortals();
         shiftDetails(change);
         shiftBackground(change);
 
     }
-
-//    private void hammerDownUpperBorderOnMeetingPortals(){
-//        double borderX = upperBorder.getLayoutX();
-//        double portalX = portalPane.getLayoutX();
-//        if (borderX > portalX && borderX < portalX + 393){
-//            upperBorder.setStartY(0);
-//        }
-//        else {
-//            upperBorder.setStartY(-86);
-//        }
-//    }
-
 
     private void checkAndUpdateDate(double currentLayoutX) {
 

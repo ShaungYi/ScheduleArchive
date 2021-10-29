@@ -17,11 +17,7 @@ public class EditLog {
 
         cursorPos ++;
         logs.add(cursorPos, clone);
-
-
         System.out.println("logg added");
-
-
     }
 
     public void wipe(){
@@ -33,15 +29,7 @@ public class EditLog {
 
         if (canGoBack()){
             cursorPos --;
-//            System.out.println("most recent log at cursorPos: "+cursorPos);
-//            System.out.println("category of activity in loaded log: "+logs.get(cursorPos).get(debuggingIndex).getCategory());
-//            for (ArrayList<Activity.java> activities : Main.editLog.logs){
-//                for (Activity.java activity : activities){
-//                    System.out.println(activity.getCategory());
-//                }
-//            }
             return cloneActivityList(logs.get(cursorPos));
-
         }
         else {
             return null;

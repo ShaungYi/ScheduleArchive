@@ -30,7 +30,6 @@ public class Activity implements Cloneable{
         }
 
         if (date1.after(date2)){
-//            System.out.println("date1 greater than date2");
             return 1;
         } else if (date1.equals(date2)){
             int start1 = a1.getStartTimeSecs();

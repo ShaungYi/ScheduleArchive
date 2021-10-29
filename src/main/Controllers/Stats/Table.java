@@ -187,8 +187,6 @@ public class Table extends PrototypeController {
         setUpActivityChart(serviceTable, serviceColumn, serviceDurationColumn, serviceData);
         setUpActivityChart(miscellaneousTable, miscellaneousCol, miscellaneousDurationCol, miscellaneousData);
 
-//        System.out.println("finished Initialization");
-
         //hide scroll bars
         motherPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         motherPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -278,12 +276,6 @@ public class Table extends PrototypeController {
                 return true;
             }
 
-
-//            if (header.equals("Service")){
-//                System.out.println(Stats.parseDuration(activity.getDurationSeconds()));
-//            }
-
-
             boolean fitsIn = false;
 
             for(int i = 0; i < data.size(); i++){
@@ -294,38 +286,18 @@ public class Table extends PrototypeController {
                     int newDuration = unit.getDurationSecs() + duration;
                     data.remove(unit);
                     data.add(i ,new ActivitySummaryTableView.chartDataUnit(header, newDuration));
-//                    if (unit.getHeader().equals("Service")){
-//                        System.out.println(unit);
-//                        System.out.println(Stats.parseDuration(unit.getDurationSecs()));
-//                        System.out.println(Stats.parseDuration(newDuration));;
-//                    }
                     fitsIn = true;
                 }
             }
             if (!fitsIn){
                 data.add(new ActivitySummaryTableView.chartDataUnit(header, duration));
             }
-
-
-//            if (header.equals("category")){
-//                int totalIndex = data.size() - 1;
-//
-//                data.remove(totalIndex);
-//
-//            }
-
-
         }
         updateTotal();
 
         categoryData.add(new ActivitySummaryTableView.chartDataUnit("update data", 0));
-
         categoryData.remove(categoryData.size() - 1);
-
-//        System.out.println("total: "+ total.getDurationParsed());
         return true;
-
-
     }
 
 
@@ -454,11 +426,6 @@ public class Table extends PrototypeController {
         categoryData.sort(Stats.chartDataUnitComparator);
         updateTotal();
         moveTotalToBottom();
-
-
-//        System.out.println("total: "+ total.getDurationParsed());
-
-
     }
 
     public static void updateTotal(){
