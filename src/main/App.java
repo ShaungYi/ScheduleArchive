@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import main.Models.BackupArchiveModel;
 import main.Models.DBModels.*;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.EditLog;
 
 
@@ -27,7 +27,7 @@ public class App extends Application {
         BackupArchiveModel.updateBackupsObservableList();
 
         //initializing launchscreen scene
-        SceneNavigationModel.launchScreen = sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
+        SceneNavigationModel.launchScreen = sceneNavigationModel.createNewScene("FXML/LaunchScreen/launchScreen.fxml");
 
         primaryStage.setTitle("Schedule Archive");
         primaryStage.setScene(SceneNavigationModel.launchScreen);
@@ -45,6 +45,7 @@ public class App extends Application {
 
 
     public static void main(String[] args) {
+        System.out.println(System.getenv("APPDATA"));
         Application.launch(args);
     }
 }

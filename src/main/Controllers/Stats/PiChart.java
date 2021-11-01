@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 

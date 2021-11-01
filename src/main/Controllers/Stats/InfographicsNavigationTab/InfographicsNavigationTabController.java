@@ -1,15 +1,13 @@
 package main.Controllers.Stats.InfographicsNavigationTab;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import main.App;
 import main.Controllers.Stats.BarDisplay;
 import main.Controllers.Stats.PiChart;
 import main.Models.DBModels.ArchiveDBModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 
 import java.util.HashMap;
 
@@ -60,7 +58,7 @@ public class InfographicsNavigationTabController {
 
     @FXML
     public void gotoTimeLine() {
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", motherPane.getScene());
+        App.sceneNavigationModel.loadNewScene("FXML/Timeline/timeLine.fxml", motherPane.getScene());
 
     }
 }

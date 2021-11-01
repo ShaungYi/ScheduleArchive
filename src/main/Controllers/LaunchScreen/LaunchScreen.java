@@ -9,12 +9,13 @@ import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
 import main.Controllers.Timeline.TimeLineActivityPeriod;
-import main.Models.DBModels.ReadFromDBModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 public class LaunchScreen extends PrototypeController {
     @FXML
@@ -49,33 +50,26 @@ public class LaunchScreen extends PrototypeController {
 
             // loading new scenes
 
-            SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
-            SceneNavigationModel.bars = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/barDisplay.fxml");
-            SceneNavigationModel.table = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/table.fxml");
-            SceneNavigationModel.piChart = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/piChart.fxml");
-            SceneNavigationModel.backups = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/backupScreen.fxml");
+            SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("FXML/Stats/stats.fxml");
+            SceneNavigationModel.bars = App.sceneNavigationModel.createNewScene("FXML/Stats/barDisplay.fxml");
+            SceneNavigationModel.table = App.sceneNavigationModel.createNewScene("FXML/Stats/table.fxml");
+            SceneNavigationModel.piChart = App.sceneNavigationModel.createNewScene("FXML/Stats/piChart.fxml");
+            SceneNavigationModel.backups = App.sceneNavigationModel.createNewScene("FXML/Stats/backupScreen.fxml");
 
-            SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/searchScreen.fxml");
+            SceneNavigationModel.macro = App.sceneNavigationModel.createNewScene("FXML/Macro/searchScreen.fxml");
             SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
-            SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("../resources/FXML/Macro/infographics.fxml");
+            SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("FXML/Macro/infographics.fxml");
 
             //load note images
-            File normalFile = new File("src/main/resources/Images/note-tag.png");
-            File hoveredFile = new File("src/main/resources/Images/note-tag-hovered.png");
+
             Image normalImage = null;
             Image hoveredImage = null;
-            try {
-                normalImage = new Image(new FileInputStream(normalFile.getAbsolutePath()));
-                hoveredImage = new Image(new FileInputStream(hoveredFile.getAbsolutePath()));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+
+            normalImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/Images/note-tag.png")));
+            hoveredImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/Images/note-tag-hovered.png")));
 
             TimeLineActivityPeriod.noteImage = normalImage;
             TimeLineActivityPeriod.noteHoveredImage = hoveredImage;
-
-
-
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -83,7 +77,7 @@ public class LaunchScreen extends PrototypeController {
 
                     loadingAnimationThread.stop();
 
-                    Scene creator = App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/scheduleCreator.fxml", SceneNavigationModel.launchScreen);
+                    Scene creator = App.sceneNavigationModel.loadNewScene("FXML/Creator/scheduleCreator.fxml", SceneNavigationModel.launchScreen);
                     SceneNavigationModel.scheduleCreator = creator;
 
                 }

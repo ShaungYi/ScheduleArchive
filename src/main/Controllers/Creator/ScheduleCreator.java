@@ -12,14 +12,13 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 import main.Utility.StopWatch;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
@@ -343,7 +342,7 @@ public class ScheduleCreator extends PrototypeController {
     }
 
     public void goToSubmitField() throws IOException {
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Creator/submitScreen.fxml", SceneNavigationModel.scheduleCreator);
+        App.sceneNavigationModel.loadNewScene("FXML/Creator/submitScreen.fxml", SceneNavigationModel.scheduleCreator);
     }
 
 

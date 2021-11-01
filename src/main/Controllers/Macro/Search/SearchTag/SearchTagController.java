@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import main.Controllers.Macro.Search.SearchScreen;
 import main.Models.MacroDataModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 
 
 public class SearchTagController{

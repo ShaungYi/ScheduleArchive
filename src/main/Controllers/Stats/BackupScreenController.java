@@ -13,7 +13,7 @@ import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import java.sql.SQLException;
 
 public class BackupScreenController extends PrototypeController {

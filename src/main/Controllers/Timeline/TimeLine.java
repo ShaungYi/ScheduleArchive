@@ -5,13 +5,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.Label;
@@ -21,7 +19,7 @@ import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 
@@ -406,7 +404,7 @@ public class TimeLine extends PrototypeController {
 
     public void goToEditor() throws IOException {
         Table.updateData(ArchiveDBModel.archive);
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/editor.fxml", motherPane.getScene());
+        App.sceneNavigationModel.loadNewScene("FXML/Timeline/editor.fxml", motherPane.getScene());
     }
 
 

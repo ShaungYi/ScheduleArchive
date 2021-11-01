@@ -1,18 +1,15 @@
 package main.Controllers.Stats;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 

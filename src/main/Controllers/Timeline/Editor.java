@@ -19,7 +19,7 @@ import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
@@ -1238,7 +1238,7 @@ public class Editor extends PrototypeController {
 
     public void goToTimeLine() throws IOException {
         Table.updateData(ArchiveDBModel.archive);
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", motherPane.getScene());
+        App.sceneNavigationModel.loadNewScene("FXML/Timeline/timeLine.fxml", motherPane.getScene());
     }
 
 

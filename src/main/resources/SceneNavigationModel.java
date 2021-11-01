@@ -1,4 +1,4 @@
-package main.Models;
+package main.resources;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -38,12 +38,6 @@ public class SceneNavigationModel{
     public static final double screenHeight = 800;
 
     public static Bounds navTabBounds;
-
-    //infographic navigation tab
-    public static InfographicsNavigationTab navTab = new InfographicsNavigationTab();
-
-
-
 
 
     public void gotoScene(Scene scene, Scene currentScene){

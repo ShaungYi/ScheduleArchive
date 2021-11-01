@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class SettingsDBModel {
     public static Connection connection;
-    public static String pathToSettingsDB = "Databases/settings.db";
+    public static String pathToSettingsDB = "../Databases/settings.db";
     public static PreparedStatement updateBackupSettings;
     public static PreparedStatement readBackupSettings;
     public static String maxBackupNum = "maxBackupNum";

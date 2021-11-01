@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class BackupArchiveModel {
+    public static String pathToBackupsFolder = "../Backups";
+
     public static int backupCreationIntervalInSeconds = ReadFromDBModel.getBackupSettings(SettingsDBModel.backupCreationInterval);
     //if adding a backup makes backup list grow to more than this, delete the oldest backup
     public static int maxBackupNum = ReadFromDBModel.getBackupSettings(SettingsDBModel.maxBackupNum);
@@ -84,7 +86,7 @@ public class BackupArchiveModel {
         String backupName = formatBackupName(new Date());
 
         if (!listBackups().contains(backupName)) {
-            copyPasteFile(ArchiveDBModel.pathToArchiveDB, "Backups/" + backupName);
+            copyPasteFile(ArchiveDBModel.pathToArchiveDB, pathToBackupsFolder + backupName);
             updateBackupsObservableList();
             System.out.println("(from createBackup) successfully created backup: " + backupName);
         }
@@ -92,7 +94,7 @@ public class BackupArchiveModel {
 
 
     public static void removeBackup(String name) {
-        File backup = new File("Backups/" + name);
+        File backup = new File(pathToBackupsFolder + name);
 
         if (!backup.exists()) {
             System.out.println("(from removeBackup) backup not found, name: " + name);
@@ -112,7 +114,7 @@ public class BackupArchiveModel {
 
         Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
         String formattedBackupName = formatBackupName(parsedBackupName);
-        copyPasteFile("Backups/" + formattedBackupName, ArchiveDBModel.pathToArchiveDB);
+        copyPasteFile(pathToBackupsFolder + formattedBackupName, ArchiveDBModel.pathToArchiveDB);
 
         BackupArchiveModel.removeBackup(formattedBackupName);
         ArchiveDBModel.archive = new ArrayList<>();
@@ -126,7 +128,7 @@ public class BackupArchiveModel {
     public static ArrayList<Date> listBackups() {
         ArrayList<Date> parsedBackupList = new ArrayList<>();
 
-        File backupDirectory = new File("Backups");
+        File backupDirectory = new File(pathToBackupsFolder);
         String[] backupList = backupDirectory.list();
 
         assert backupList != null;

@@ -1,7 +1,6 @@
 package main.Controllers.Stats;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import main.App;
 import main.Controllers.Loader.Loader;
@@ -9,7 +8,7 @@ import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.io.IOException;
@@ -169,7 +168,7 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToLoader() throws IOException {
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Loader/loader.fxml", SceneNavigationModel.stats);
+        App.sceneNavigationModel.loadNewScene("FXML/Loader/loader.fxml", SceneNavigationModel.stats);
 
 
         if (Loader.resumeMode || Loader.loadMode) {
@@ -199,7 +198,7 @@ public class Stats extends PrototypeController {
 
     @FXML
     public void goToTimeLine(){
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", SceneNavigationModel.stats);
+        App.sceneNavigationModel.loadNewScene("FXML/Timeline/timeLine.fxml", SceneNavigationModel.stats);
     }
 
 

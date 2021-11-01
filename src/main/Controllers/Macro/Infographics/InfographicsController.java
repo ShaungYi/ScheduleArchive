@@ -22,7 +22,7 @@ import main.Controllers.PrototypeController;
 import main.Models.*;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.Graphics.InfographicsModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 
 import java.io.File;

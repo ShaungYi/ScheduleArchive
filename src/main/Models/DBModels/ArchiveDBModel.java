@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ArchiveDBModel {
-    public static String pathToArchiveDB = "Databases/archive.db";
+    public static String pathToArchiveDB = "../Databases/archive.db";
     public static ArrayList<Activity> archive = new ArrayList<>();
     public static Connection connection;
 

@@ -12,7 +12,7 @@ import javafx.stage.Screen;
 import main.Models.DateTimeModel;
 import main.Models.Graphics.InfographicsModel;
 import main.Models.MacroDataModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.PastActivity;
 import main.resources.customNodes.activitySummaryTableView.ActivitySummaryTableView;
 

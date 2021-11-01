@@ -3,7 +3,6 @@ package main.Controllers.Loader;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -15,7 +14,7 @@ import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DateTimeModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
 import java.io.IOException;
@@ -150,7 +149,7 @@ public class Loader extends PrototypeController {
         ((ScheduleCreator) ((FXMLLoader) SceneNavigationModel.scheduleCreator.getUserData()).getController()).terminateAllThreads();
         SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
 
-        App.sceneNavigationModel.loadNewScene("../resources/FXML/Timeline/timeLine.fxml", dateToViewListView.getScene());
+        App.sceneNavigationModel.loadNewScene("FXML/Timeline/timeLine.fxml", dateToViewListView.getScene());
 
                 //reenable creator
         disAbleCreator = false;

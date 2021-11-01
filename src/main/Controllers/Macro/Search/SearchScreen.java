@@ -15,7 +15,7 @@ import main.Controllers.Macro.Search.SearchTag.SearchTag;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.MacroDataModel;
-import main.Models.SceneNavigationModel;
+import main.resources.SceneNavigationModel;
 import main.Models.SearchModel;
 
 import java.util.ArrayList;
