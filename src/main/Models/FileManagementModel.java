@@ -28,7 +28,7 @@ public class FileManagementModel {
             System.out.println("(from createFolder) successfully created folder: " + path);
 
         } else {
-            System.out.println("(from createFolder) failed to create folder");
+            System.out.println("(from createFolder) failed to create folder: " + path);
         }
     }
 
