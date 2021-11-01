@@ -23,7 +23,13 @@ public class FileManagementModel {
 
     public static void createFolder(String path) {
         File newFile = new File(path);
-        newFile.mkdir();
+
+        if (newFile.mkdir()) {
+            System.out.println("(from createFolder) successfully created folder: " + path);
+
+        } else {
+            System.out.println("(from createFolder) failed to create folder");
+        }
     }
 
 
