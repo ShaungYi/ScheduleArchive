@@ -126,7 +126,7 @@ public class BackupScreenController extends PrototypeController {
         ArchiveDBModel.connection.close();
         ArchiveDBModel.connect();
 
-        SceneNavigationModel.launchScreen = App.sceneNavigationModel.createNewScene("../resources/FXML/LaunchScreen/launchScreen.fxml");
+        SceneNavigationModel.launchScreen = App.sceneNavigationModel.createNewScene("FXML/LaunchScreen/launchScreen.fxml");
         Stage primaryStage = (Stage) availableBackupsListView.getScene().getWindow();
         primaryStage.setScene(SceneNavigationModel.launchScreen);
     }

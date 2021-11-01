@@ -139,7 +139,7 @@ public class Loader extends PrototypeController {
         loadMode = true;
         App.editLog.wipe();
 
-        SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("../resources/FXML/Stats/stats.fxml");
+        SceneNavigationModel.stats = App.sceneNavigationModel.createNewScene("FXML/Stats/stats.fxml");
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.stats, dateToViewListView.getScene());
 
     }
@@ -147,7 +147,7 @@ public class Loader extends PrototypeController {
 
     private void wrapUpAndGoToTimeLine() {
         ((ScheduleCreator) ((FXMLLoader) SceneNavigationModel.scheduleCreator.getUserData()).getController()).terminateAllThreads();
-        SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("../resources/FXML/Creator/scheduleCreator.fxml");
+        SceneNavigationModel.scheduleCreator = App.sceneNavigationModel.createNewScene("FXML/Creator/scheduleCreator.fxml");
 
         App.sceneNavigationModel.loadNewScene("FXML/Timeline/timeLine.fxml", dateToViewListView.getScene());
 
