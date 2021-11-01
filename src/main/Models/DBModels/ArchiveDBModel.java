@@ -10,7 +10,7 @@ public class ArchiveDBModel {
     public static Connection connection;
     public static String pathToDBDirectory = "/Databases/";
     public static String archiveDBName = "archive.db";
-    public static String pathToArchiveDB = App.cacheDirectory + pathToDBDirectory + archiveDBName;
+    public static String pathToArchiveDB = App.appDataDirectory + pathToDBDirectory + archiveDBName;
     public static ArrayList<Activity> archive = new ArrayList<>();
 
     //preparedStatement for writing data to the database

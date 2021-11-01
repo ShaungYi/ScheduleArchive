@@ -8,7 +8,7 @@ import java.sql.*;
 public class SettingsDBModel {
     public static Connection connection;
     public static String settingsDBName = "settings.db";
-    public static String pathToSettingsDB = App.cacheDirectory + ArchiveDBModel.pathToDBDirectory + settingsDBName;
+    public static String pathToSettingsDB = App.appDataDirectory + ArchiveDBModel.pathToDBDirectory + settingsDBName;
     public static PreparedStatement updateBackupSettings;
     public static PreparedStatement readBackupSettings;
     public static String maxBackupNum = "maxBackupNum";

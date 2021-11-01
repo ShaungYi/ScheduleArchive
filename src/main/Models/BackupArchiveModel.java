@@ -17,7 +17,7 @@ import java.util.*;
 
 public class BackupArchiveModel {
 
-    public static String pathToBackupsFolder = App.cacheDirectory + "/Backups";
+    public static String pathToBackupsFolder = App.appDataDirectory + "/Backups";
 
     // the amount of delay before create a backup
     public static int backupCreationIntervalInSeconds;

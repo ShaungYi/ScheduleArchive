@@ -13,15 +13,15 @@ public class App extends Application {
     public static EditLog editLog = new EditLog();
     public static SceneNavigationModel sceneNavigationModel = new SceneNavigationModel();
     public static Thread backupRegularly;
-    public static String cacheDirectory = "/ScheduleArchiveCache";
+    public static String appDataDirectory = "/ScheduleArchiveCache";
 
 
     @Override
     public void start(Stage primaryStage){
 
         // creating cache folders
-        FileManagementModel.createFolder(cacheDirectory);
-        FileManagementModel.createFolder(cacheDirectory + ArchiveDBModel.pathToDBDirectory);
+        FileManagementModel.createFolder(appDataDirectory);
+        FileManagementModel.createFolder(appDataDirectory + ArchiveDBModel.pathToDBDirectory);
         FileManagementModel.createFolder(BackupArchiveModel.pathToBackupsFolder);
 
         // connecting to the databases
