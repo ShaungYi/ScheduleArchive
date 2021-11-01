@@ -1,13 +1,12 @@
 package main.Models.DBModels;
 
 import main.Models.DateTimeModel;
-import main.Controllers.Loader.Loader;
 import main.Utility.Activity;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class WriteToDBModel {
-    public static boolean dataBackupProcessAtRest = true;
+    public static boolean saveArchiveProcessAtRest = true;
     static Thread backupSynchronizerThread = new Thread();
 
     public static void saveArchive() {
@@ -177,14 +176,14 @@ public class WriteToDBModel {
 
     public static void saveDataSynchronously(){
 
-        if (dataBackupProcessAtRest){
+        if (saveArchiveProcessAtRest){
             // just back up if no backup process is in progress
-            new Thread(backingUpData).start();
+            new Thread(savingData).start();
 
                 //do nothing though edit made if synchro is already running
         }else if (!backupSynchronizerThread.isAlive()){
 
-            backupSynchronizerThread = new Thread(backupSynchronizer);
+            backupSynchronizerThread = new Thread(saveArchiveSynchronizer);
             backupSynchronizerThread.start();
 
         }
@@ -194,7 +193,7 @@ public class WriteToDBModel {
     public static Runnable exitSystemSynchronously = () -> {
         System.out.println("(from exit) waiting for previous process to finish");
         //wait until previous backup process finishes
-        while (!dataBackupProcessAtRest){
+        while (!saveArchiveProcessAtRest){
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {
@@ -213,13 +212,12 @@ public class WriteToDBModel {
         }
 
         System.exit(0);
-
     };
 
-    private static final Runnable backupSynchronizer = new Runnable() {
+    private static final Runnable saveArchiveSynchronizer = new Runnable() {
         @Override
         public void run() {
-            while (!dataBackupProcessAtRest){
+            while (!saveArchiveProcessAtRest){
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -227,7 +225,7 @@ public class WriteToDBModel {
                 }
             }
             //start new data backup process
-            new Thread(backingUpData).start();
+            new Thread(savingData).start();
 
 
         }
@@ -235,25 +233,23 @@ public class WriteToDBModel {
 
 
 
-    private static final Runnable backingUpData = new Runnable() {
+    private static final Runnable savingData = new Runnable() {
         @Override
         public void run() {
             //data backup process in progress
-            dataBackupProcessAtRest = false;
+            saveArchiveProcessAtRest = false;
             saveData();
             //data backup process finished
-            dataBackupProcessAtRest = true;
+            saveArchiveProcessAtRest = true;
         }
     };
 
 
     private static void saveData(){
 
-        if (ArchiveDBModel.archive.isEmpty()){
-            return;
+        if (!ArchiveDBModel.archive.isEmpty()){
+            saveArchive();
         }
-        saveArchive();
-
     }
 
 

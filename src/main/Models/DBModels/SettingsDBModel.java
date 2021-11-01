@@ -1,11 +1,14 @@
 package main.Models.DBModels;
 
+import main.App;
+
 import java.io.File;
 import java.sql.*;
 
 public class SettingsDBModel {
     public static Connection connection;
-    public static String pathToSettingsDB = "../Databases/settings.db";
+    public static String settingsDBName = "settings.db";
+    public static String pathToSettingsDB = App.cacheDirectory + ArchiveDBModel.pathToDBDirectory + settingsDBName;
     public static PreparedStatement updateBackupSettings;
     public static PreparedStatement readBackupSettings;
     public static String maxBackupNum = "maxBackupNum";
@@ -24,9 +27,7 @@ public class SettingsDBModel {
             // creating tables
 
             Statement statement = connection.createStatement();
-
             statement.execute("CREATE TABLE IF NOT EXISTS backupSettings (name TEXT, value TEXT)");
-
             statement.close();
 
             // write statements

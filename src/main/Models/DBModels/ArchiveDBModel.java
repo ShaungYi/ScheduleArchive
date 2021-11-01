@@ -1,14 +1,17 @@
 package main.Models.DBModels;
 
+import main.App;
 import main.Utility.Activity;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class ArchiveDBModel {
-    public static String pathToArchiveDB = "../Databases/archive.db";
-    public static ArrayList<Activity> archive = new ArrayList<>();
     public static Connection connection;
+    public static String pathToDBDirectory = "/Databases/";
+    public static String archiveDBName = "archive.db";
+    public static String pathToArchiveDB = App.cacheDirectory + pathToDBDirectory + archiveDBName;
+    public static ArrayList<Activity> archive = new ArrayList<>();
 
     //preparedStatement for writing data to the database
     public static PreparedStatement insertDataToActivitiesTable;

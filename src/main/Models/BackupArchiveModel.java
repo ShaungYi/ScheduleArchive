@@ -3,24 +3,28 @@ package main.Models;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import main.App;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 
 import java.io.*;
-import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
 public class BackupArchiveModel {
-    public static String pathToBackupsFolder = "../Backups";
 
-    public static int backupCreationIntervalInSeconds = ReadFromDBModel.getBackupSettings(SettingsDBModel.backupCreationInterval);
-    //if adding a backup makes backup list grow to more than this, delete the oldest backup
-    public static int maxBackupNum = ReadFromDBModel.getBackupSettings(SettingsDBModel.maxBackupNum);
+    public static String pathToBackupsFolder = App.cacheDirectory + "/Backups";
+
+    // the amount of delay before create a backup
+    public static int backupCreationIntervalInSeconds;
+
+    // the maximum number of backups that can exist at the same time
+    public static int maxBackupNum;
+
     //a list of available archive backup names
     public static ObservableList<String> availableBackupsObservableList = FXCollections.observableArrayList();
 
@@ -28,11 +32,18 @@ public class BackupArchiveModel {
     public static String formattedDateFormat = "yyyy,MM,dd,hh,mm,ss";
 
 
+    public static void loadSettings() {
+
+        // loading saved settings from the settings database
+        backupCreationIntervalInSeconds = ReadFromDBModel.getBackupSettings(SettingsDBModel.backupCreationInterval);
+        maxBackupNum = ReadFromDBModel.getBackupSettings(SettingsDBModel.maxBackupNum);
+    }
+
+
     public static Runnable createBackupArchiveDBRegularly = () -> {
 
         //run while app is on
         while (true){
-
 
             try {
 
@@ -42,12 +53,12 @@ public class BackupArchiveModel {
                     Thread.sleep(1000);
                 }
 
-                if (!WriteToDBModel.dataBackupProcessAtRest){
+                if (!WriteToDBModel.saveArchiveProcessAtRest){
                     //just create backup
                     createBackup();
                 } else {
                     //wait until data backup process finished then create backup to prevent DB corruption
-                    while (!WriteToDBModel.dataBackupProcessAtRest){
+                    while (WriteToDBModel.saveArchiveProcessAtRest){
                         Thread.sleep(10);
                     }
 
@@ -67,45 +78,17 @@ public class BackupArchiveModel {
     };
 
 
-    private static void copyPasteFile(String source, String destination) {
-
-        try {
-            FileChannel sourceChannel = new FileInputStream(source).getChannel();
-            FileChannel destChannel = new FileOutputStream(destination).getChannel();
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-            sourceChannel.close();
-            destChannel.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static void createBackup() {
         String backupName = formatBackupName(new Date());
-
-        if (!listBackups().contains(backupName)) {
-            copyPasteFile(ArchiveDBModel.pathToArchiveDB, pathToBackupsFolder + backupName);
-            updateBackupsObservableList();
-            System.out.println("(from createBackup) successfully created backup: " + backupName);
-        }
+        FileManagementModel.copyPasteFile(ArchiveDBModel.pathToArchiveDB, pathToBackupsFolder + backupName);
+        updateBackupsObservableList();
+        System.out.println("(from createBackup) successfully created backup: " + backupName);
     }
 
 
     public static void removeBackup(String name) {
-        File backup = new File(pathToBackupsFolder + name);
-
-        if (!backup.exists()) {
-            System.out.println("(from removeBackup) backup not found, name: " + name);
-        }
-
-        else if(backup.delete()) {
-            System.out.println("(from removeBackup) backup deleted, name: " + name);
-        }
-
+        FileManagementModel.deleteFile(pathToBackupsFolder + name);
         updateBackupsObservableList();
-
     }
 
 
@@ -114,7 +97,7 @@ public class BackupArchiveModel {
 
         Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
         String formattedBackupName = formatBackupName(parsedBackupName);
-        copyPasteFile(pathToBackupsFolder + formattedBackupName, ArchiveDBModel.pathToArchiveDB);
+        FileManagementModel.copyPasteFile(pathToBackupsFolder + formattedBackupName, ArchiveDBModel.pathToArchiveDB);
 
         BackupArchiveModel.removeBackup(formattedBackupName);
         ArchiveDBModel.archive = new ArrayList<>();
@@ -130,8 +113,8 @@ public class BackupArchiveModel {
 
         File backupDirectory = new File(pathToBackupsFolder);
         String[] backupList = backupDirectory.list();
-
         assert backupList != null;
+
         for (String backupName : backupList) {
             Date parsedBackupName = parseBackupName(backupName, formattedDateFormat);
             parsedBackupList.add(parsedBackupName);

@@ -107,13 +107,13 @@ public class BackupScreenController extends PrototypeController {
                 );
 
 
-        if (WriteToDBModel.dataBackupProcessAtRest) {
+        if (WriteToDBModel.saveArchiveProcessAtRest) {
             //just create backup
             BackupArchiveModel.loadBackup(formattedBackupName);
 
         } else {
             //wait until data backup process finished then create backup to prevent DB corruption
-            while (!WriteToDBModel.dataBackupProcessAtRest) {
+            while (!WriteToDBModel.saveArchiveProcessAtRest) {
 
             }
 
