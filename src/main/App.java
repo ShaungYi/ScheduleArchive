@@ -13,7 +13,7 @@ public class App extends Application {
     public static EditLog editLog = new EditLog();
     public static SceneNavigationModel sceneNavigationModel = new SceneNavigationModel();
     public static Thread backupRegularly;
-    public static String appDataDirectory = "/ScheduleArchiveCache";
+    public static String appDataDirectory = "/ScheduleArchive";
 
 
     @Override
