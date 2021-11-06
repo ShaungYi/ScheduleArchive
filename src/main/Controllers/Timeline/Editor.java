@@ -1244,7 +1244,16 @@ public class Editor extends PrototypeController {
 
     public void onScroll(ScrollEvent e) {
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaX() + (e.getDeltaY() * 15);
+
+        double change;
+        double changeX = e.getDeltaX();
+        double changeY = e.getDeltaY() * 15;
+
+        if (changeX == 0){
+            change = changeY;
+        } else {
+            change = changeX;
+        }
 
         if (motherPaneLayoutX + change < 10 && motherPaneLayoutX + change > -(scrollableWidth - TimeLine.screenWidth)) {
             double newLayoutX = motherPaneLayoutX + change;

@@ -176,7 +176,7 @@
 
 
         </VBox>
-        <TextArea fx:id="noteTextArea" layoutX="200.0" layoutY="130.0" onKeyTyped="#editNote" prefHeight="396.0" prefWidth="324.0" style="-fx-font-size: 20;" stylesheets="@../../css/note-text-area.css" visible="false">
+        <TextArea fx:id="noteTextArea" layoutX="200.0" layoutY="130.0" onKeyTyped="#editNote" prefHeight="396.0" prefWidth="324.0" style="-fx-font-size: 20;" stylesheets="@../../css/note-text-area.css" visible="false" wrapText="true">
          <font>
             <Font size="20.0" />
          </font></TextArea>

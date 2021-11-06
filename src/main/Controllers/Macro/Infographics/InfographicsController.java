@@ -151,7 +151,16 @@ public class InfographicsController extends PrototypeController {
 
 
         double motherPaneLayoutX = motherPane.getLayoutX();
-        double change = e.getDeltaX();
+
+        double change;
+        double changeX = e.getDeltaX();
+        double changeY = e.getDeltaY() * 15;
+
+        if (changeX == 0){
+            change = changeY;
+        } else {
+            change = changeX;
+        }
 
         //update bounds of labels
         monthLabelBounds = monthLabel.localToScreen(monthLabel.getBoundsInLocal());
