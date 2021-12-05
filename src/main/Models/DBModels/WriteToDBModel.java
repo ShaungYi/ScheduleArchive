@@ -129,6 +129,7 @@ public class WriteToDBModel {
         try {
             int activityID;
             String note;
+            boolean noteIsPrivate;
             int endTime;
             int startTime;
             String date;
@@ -138,6 +139,7 @@ public class WriteToDBModel {
                 if (!event.arrayListContainsActivity(newData)) {
                     activityID = ReadFromDBModel.getActivityID(event.getName(), event.getCategory());
                     note = event.getNote();
+                    noteIsPrivate = event.noteIsPrivate();
                     startTime = event.getStartTimeSecs();
                     endTime = event.getEndTimeSecs();
                     date = event.getDate();
@@ -151,9 +153,10 @@ public class WriteToDBModel {
                     PreparedStatement deleteEvent = ArchiveDBModel.deleteEvent;
                     deleteEvent.setInt(1, activityID);
                     deleteEvent.setString(2, note);
-                    deleteEvent.setInt(3, startTime);
-                    deleteEvent.setInt(4, endTime);
-                    deleteEvent.setString(5, date);
+                    deleteEvent.setBoolean(3, noteIsPrivate);
+                    deleteEvent.setInt(4, startTime);
+                    deleteEvent.setInt(5, endTime);
+                    deleteEvent.setString(6, date);
                     deleteEvent.execute();
 
                     // subtracting 1 from the frequency the activity

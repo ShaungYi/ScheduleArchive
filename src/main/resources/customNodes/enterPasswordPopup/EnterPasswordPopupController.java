@@ -1,15 +1,10 @@
 package main.resources.customNodes.enterPasswordPopup;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import main.Models.DBModels.ReadFromDBModel;
 import main.Models.Graphics.General;
 
@@ -20,25 +15,33 @@ public class EnterPasswordPopupController {
     PasswordField passField;
 
     Pane grandmotherPane;
-    VBox motherPane;
+    Pane motherPane;
     TextArea noteTextArea;
     ImageView noteLock;
+
+    boolean timeLineRelated;
 
     Runnable executeAfterAuthRunnable;
 
     @FXML
     public void onPassFieldTyped(){
         if (passField.getText().equals(ReadFromDBModel.getPassword())){
-            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+            System.out.println(timeLineRelated);
+            if (timeLineRelated){
+                General.reenableMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+            } else {
+                General.removePopup(grandmotherPane);
+            }
             executeAfterAuthRunnable.run();
         }
     }
 
-    public void setMotherSceneParameters(Pane gmPane, VBox mPane, TextArea ntArea, ImageView nLock, Runnable execAfterAuth){
+    public void setParameters(Pane gmPane, Pane mPane, TextArea ntArea, ImageView nLock, Runnable execAfterAuth, boolean tlRelated){
         grandmotherPane = gmPane;
         motherPane = mPane;
         noteTextArea = ntArea;
         noteLock = nLock;
         executeAfterAuthRunnable = execAfterAuth;
+        timeLineRelated = tlRelated;
     }
 }

@@ -11,6 +11,7 @@ import main.Controllers.Stats.BackupScreenController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Controllers.Stats.Table;
 import main.Controllers.Timeline.Editor;
+import main.Controllers.Timeline.TimeLine;
 import main.Models.DBModels.WriteToDBModel;
 
 import java.awt.*;
@@ -67,7 +68,7 @@ public class SceneNavigationModel{
         PrototypeController currentSceneController = currentSceneLoader.getController();
 
         // saving data when exiting the editor screen
-        if (currentSceneController instanceof Editor) {
+        if (currentSceneController instanceof Editor || currentSceneController instanceof TimeLine) {
             WriteToDBModel.saveDataSynchronously();
         }
 

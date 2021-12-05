@@ -1,6 +1,5 @@
 package main.Controllers.Timeline;
 
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -22,8 +21,6 @@ import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.Graphics.General;
-import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
-import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
 import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
@@ -504,7 +501,7 @@ public class TimeLine extends PrototypeController {
 
         //hide either password popup
         if (target.equals(grandmotherPane)){ //!(targetFromSetPassPopup || targetFromEnterPassPopup)
-            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+            General.reenableMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
         }
 
 

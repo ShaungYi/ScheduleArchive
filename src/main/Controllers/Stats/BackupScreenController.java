@@ -5,6 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.App;
 import main.Controllers.PrototypeController;
@@ -13,10 +17,19 @@ import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.SettingsDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
+import main.Models.Graphics.General;
 import main.resources.SceneNavigationModel;
+import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
+import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
+
 import java.sql.SQLException;
 
 public class BackupScreenController extends PrototypeController {
+
+    @FXML
+    Pane grandMotherPane;
+    @FXML
+    BorderPane motherPane;
 
     @FXML
     ListView availableBackupsListView;
@@ -223,4 +236,32 @@ public class BackupScreenController extends PrototypeController {
             saveSettings();
         }
     }
+
+
+
+    /**reset password**/
+
+    Runnable execAfterAuth = () -> {
+        SetPasswordPopup setPasswordPopup = new SetPasswordPopup(grandMotherPane, motherPane);
+        General.popupOnCenterOfScreen(grandMotherPane, setPasswordPopup);
+    };
+
+
+    @FXML
+    public void onResetPasswordButtonClicked(){
+        motherPane.setDisable(true);
+
+        EnterPasswordPopup enterPasswordPopup = new EnterPasswordPopup(grandMotherPane, motherPane, execAfterAuth);
+        General.popupOnCenterOfScreen(grandMotherPane, enterPasswordPopup);
+    }
+
+    @FXML
+    public void onScreenClicked(MouseEvent event){
+        //hide either password popup
+        if (event.getTarget().equals(grandMotherPane)){ //!(targetFromSetPassPopup || targetFromEnterPassPopup)
+            General.reenableMainScreen(grandMotherPane, motherPane, null, null);
+        }
+    }
+
+
 }

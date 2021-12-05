@@ -5,9 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import main.Utility.Activity;
 import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
 import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
@@ -27,20 +25,28 @@ public class General {
         }
     }
 
-    public static void reenableTimeLineMainScreen(Pane grandmotherPane, VBox motherPane, TextArea noteTextArea, ImageView noteLock){
+
+    public static void reenableMainScreen(Pane grandmotherPane, Pane motherPane, TextArea noteTextArea, ImageView noteLock){
+
+        removePopup(grandmotherPane);
+
+        motherPane.setDisable(false);
+        if (noteTextArea != null && noteLock != null){
+            afterTimeLineReenable(noteTextArea, noteLock);
+        }
+    }
+
+    public static void removePopup(Pane grandmotherPane){
         ObservableList<Node> children = grandmotherPane.getChildren();
         for (int i = 0; i < children.size(); i++){
             Node child = children.get(i);
             if (child instanceof EnterPasswordPopup || child instanceof SetPasswordPopup){
-                reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock, child);
+                grandmotherPane.getChildren().remove(child);
             }
         }
     }
 
-    public static void reenableTimeLineMainScreen(Pane grandmotherPane, VBox motherPane, TextArea noteTextArea, ImageView noteLock, Node grannyChild){
-
-        grandmotherPane.getChildren().remove(grannyChild);
-        motherPane.setDisable(false);
+    public static void afterTimeLineReenable(TextArea noteTextArea, ImageView noteLock){
         noteTextArea.setDisable(false);
         noteLock.setDisable(false);
 

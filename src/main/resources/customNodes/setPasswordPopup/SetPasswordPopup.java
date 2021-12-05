@@ -6,7 +6,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -16,9 +15,21 @@ public class SetPasswordPopup extends AnchorPane {
 
 
 
-    public SetPasswordPopup(Pane gmPane, VBox mPane, TextArea ntArea, ImageView nLock){
+    public SetPasswordPopup(Pane gmPane, Pane mPane, TextArea ntArea, ImageView nLock){
         super();
+        universalConstructorStuff();
+        controller.setParameters(gmPane, mPane, ntArea, nLock, true);
 
+    }
+
+    public SetPasswordPopup(Pane gmPane, Pane mPane){
+        super();
+        universalConstructorStuff();
+        controller.setParameters(gmPane, mPane, null, null, false);
+
+    }
+
+    public void universalConstructorStuff(){
         this.setStyle("-fx-background-color: transparent;");
 
         try {
@@ -28,8 +39,6 @@ public class SetPasswordPopup extends AnchorPane {
             this.getChildren().add(n);
 
             controller = fxmlLoader.getController();
-            controller.setMotherSceneParameters(gmPane, mPane, ntArea, nLock);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

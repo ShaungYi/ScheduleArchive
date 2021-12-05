@@ -20,8 +20,6 @@ import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTa
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
 import main.Models.Graphics.General;
-import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
-import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
 import main.resources.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
@@ -1075,7 +1073,7 @@ public class Editor extends PrototypeController {
 
         //hide either password popup
         if (target.equals(grandmotherPane)){ //!(targetFromSetPassPopup || targetFromEnterPassPopup)
-            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+            General.reenableMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
         }
 
 

@@ -1,15 +1,11 @@
 package main.resources.customNodes.setPasswordPopup;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.Graphics.General;
 
@@ -23,17 +19,23 @@ public class SetPasswordPopupController {
     Label passwordMismatchMessageLabel;
 
     Pane grandmotherPane;
-    VBox motherPane;
+    Pane motherPane;
     TextArea noteTextArea;
     ImageView noteLock;
-    SetPasswordPopup thisPopup;
+
+    boolean timeLineRelated;
 
     @FXML
     public void onDoneButtonClicked(){
         String pass = passField.getText();
         if (pass.equals(confirmField.getText())){
             savePassword(pass);
-            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+
+            if (timeLineRelated){
+                General.reenableMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+            } else {
+                General.reenableMainScreen(grandmotherPane, motherPane, null, null);
+            }
         } else {
             passwordMismatchMessageLabel.setVisible(true);
         }
@@ -43,10 +45,11 @@ public class SetPasswordPopupController {
         WriteToDBModel.updateBackupSettings("password", pass);
     }
 
-    public void setMotherSceneParameters(Pane gmPane, VBox mPane, TextArea ntArea, ImageView nLock){
+    public void setParameters(Pane gmPane, Pane mPane, TextArea ntArea, ImageView nLock, boolean tlRelated){
         grandmotherPane = gmPane;
         motherPane = mPane;
         noteTextArea = ntArea;
         noteLock = nLock;
+        timeLineRelated = tlRelated;
     }
 }

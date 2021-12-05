@@ -84,7 +84,7 @@ public class ArchiveDBModel {
 
             deleteEvent = connection.prepareStatement(
                         "DELETE FROM events " +
-                            "WHERE activityID = ? AND note = ? AND startTime = ? AND endTime = ? AND date = ?"
+                            "WHERE activityID = ? AND note = ? AND noteIsPrivate = ? AND startTime = ? AND endTime = ? AND date = ?"
             );
 
             deleteActivities = connection.prepareStatement("DELETE FROM activities WHERE frequency = 0");

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane minHeight="800.0" minWidth="1300.0" prefHeight="800.0" prefWidth="1300.0" styleClass="main-background" stylesheets="@../../css/background.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Stats">
+<BorderPane minHeight="800.0" minWidth="1300.0" prefHeight="800.0" prefWidth="1300.0" styleClass="main-background" stylesheets="@../../css/background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Stats.Stats">
     <center>
         <VBox maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
@@ -60,7 +60,7 @@
                         <Font size="45.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#goToBackups" stylesheets="@../../css/navigation-button.css" text="Backups">
+                <Button mnemonicParsing="false" onAction="#goToBackups" stylesheets="@../../css/navigation-button.css" text="Settings">
                     <font>
                         <Font size="45.0" />
                     </font>
