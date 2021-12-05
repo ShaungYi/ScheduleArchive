@@ -5,11 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Controllers.PrototypeController;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DBModels.WriteToDBModel;
 import main.Models.DateTimeModel;
+import main.Models.Graphics.General;
 import main.resources.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
@@ -36,6 +38,8 @@ public class SubmitScreen extends PrototypeController {
 
     @FXML
     TextArea notesTextArea;
+    @FXML
+    ImageView lockImageView;
 
     @FXML
     Button submitButton;
@@ -176,5 +180,10 @@ public class SubmitScreen extends PrototypeController {
     public void goToCreator(){
         App.sceneNavigationModel.gotoScene(SceneNavigationModel.scheduleCreator, suggestions.getScene());
     }
+
+    public void toggleLockIcon(){
+        General.toggleLockImageView(lockImageView, activityInQuestion);
+    }
+
 
 }

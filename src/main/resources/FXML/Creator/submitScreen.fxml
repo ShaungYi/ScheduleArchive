@@ -2,10 +2,11 @@
 
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#hideSuggestions" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
+<Pane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#hideSuggestions" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: rgb(246, 255, 226);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Creator.SubmitScreen">
 
     <children>
         <Label text="  " visible="false" GridPane.columnIndex="2" />
@@ -80,6 +81,10 @@
                              <Font size="20.0" />
                          </font>
                      </Button>
+                  <ImageView fx:id="lockImageView" fitHeight="34.0" fitWidth="34.0" layoutX="564.0" layoutY="177.0" onMouseClicked="#toggleLockIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/lock-open.png" />
+                     </image></ImageView>
                  </children>
              </Pane>
          </children></Pane>

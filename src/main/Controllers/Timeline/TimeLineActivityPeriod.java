@@ -10,16 +10,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import main.Models.DBModels.ReadFromDBModel;
+import main.Models.Graphics.General;
 import main.Utility.Activity;
+import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
+import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
 
 
 public class TimeLineActivityPeriod extends Pane {
+
     Label activityLabel;
 
     ImageView noteTag;
+    private ImageView noteLock;
     public static Image noteImage;
     public static Image noteHoveredImage;
     public boolean noteTagIsPrompt;
+
 
     TextArea noteTextArea;
 
@@ -29,24 +37,84 @@ public class TimeLineActivityPeriod extends Pane {
     public static TimeLineActivityPeriod previousSelectedPeriod;
 
 
+    public EventHandler<MouseEvent> toDoOnNoteTagClicked = (e) -> {
 
-    public EventHandler<MouseEvent> toDoOnNoteTagClicked = (MouseEvent event) -> {};
+    };
 
-    private EventHandler<MouseEvent> onNoteTagClicked = (MouseEvent event) -> {
 
+
+    public EventHandler<MouseEvent> toDoOnNoteLockClicked = (MouseEvent event) -> {
+        General.toggleLockImageView(noteLock, thisActivity);
+
+
+
+        if (ReadFromDBModel.getPassword().isBlank() && thisActivity.noteIsPrivate()){
+            /**pop up set password form**/
+
+            Pane grandmotherPane = getGrandMotherPane();
+            VBox motherPane = getMotherPane();
+
+            disableMainScreen(motherPane);
+
+            //pop up time
+            SetPasswordPopup setPasswordPopup = new SetPasswordPopup(grandmotherPane, motherPane, noteTextArea, noteLock);
+            General.popupOnCenterOfScreen(grandmotherPane, setPasswordPopup);
+
+        }
+    };
+
+
+
+
+    private Runnable popUpNoteRunnable = () -> {
         noteTextArea.setText(thisActivity.getNote());
 
         //settle note area in the right position
         Bounds noteTagBounds = noteTag.localToScene(noteTag.getBoundsInLocal());
-        double noteTextAreaLayoutX = noteTagBounds.getCenterX() - noteTextArea.getWidth() / 2;
+        double noteTextAreaWidth = noteTextArea.getWidth();
+        double noteTextAreaLayoutX = noteTagBounds.getCenterX() - noteTextAreaWidth / 2;
         noteTextArea.setLayoutX(noteTextAreaLayoutX);
 
         noteTextArea.setVisible(true);
 
-        //execute to do event handler
+        //settle not lock in right position
+        noteLock.setLayoutX(noteTextAreaLayoutX + noteTextAreaWidth - 40);
+
+        //update note lock status
+        if (thisActivity.noteIsPrivate()){
+            noteLock.setImage(General.closedLock);
+        } else {
+            noteLock.setImage(General.openLock);
+        }
+
+        //update note lock event handler
+        noteLock.setOnMouseClicked(toDoOnNoteLockClicked);
+
+        noteLock.setVisible(true);
+    };
+
+
+
+
+    private EventHandler<MouseEvent> onNoteTagClicked = (MouseEvent event) -> {
+
         toDoOnNoteTagClicked.handle(event);
 
+
+        if (thisActivity.noteIsPrivate()){
+
+            Pane grandmotherPane = getGrandMotherPane();
+            VBox motherPane = getMotherPane();
+            disableMainScreen(motherPane);
+
+            EnterPasswordPopup enterPasswordPopup = new EnterPasswordPopup(grandmotherPane, motherPane, noteTextArea, noteLock, popUpNoteRunnable);
+            General.popupOnCenterOfScreen(grandmotherPane, enterPasswordPopup);
+        } else {
+            popUpNoteRunnable.run();
+        }
     };
+
+
 
     private EventHandler<MouseEvent> onMouseEnteredNoteTag = (MouseEvent event) -> {
         //change note tag image to hovered
@@ -58,6 +126,8 @@ public class TimeLineActivityPeriod extends Pane {
         //set opacity to 1
         noteTag.setOpacity(1);
     };
+
+
 
     private EventHandler<MouseEvent> onMouseExitedNoteTag = (MouseEvent event) -> {
         //change note tag image to normal
@@ -86,11 +156,13 @@ public class TimeLineActivityPeriod extends Pane {
 
 
 
-    public TimeLineActivityPeriod(Activity act, TextArea ntTextArea, boolean editable){
+    public TimeLineActivityPeriod(Activity act, TextArea ntTextArea, ImageView ntLock, boolean editable){
 
         noteTextArea = ntTextArea;
-
         thisActivity = act;
+
+        noteLock = ntLock;
+        ntLock.setImage(General.openLock);
 
         //initialize activity label
         activityLabel = new Label();
@@ -126,6 +198,7 @@ public class TimeLineActivityPeriod extends Pane {
     }
 
 
+
     public void addNoteTag(){
         if (!children.contains(noteTag)){
             children.add(noteTag);
@@ -144,7 +217,20 @@ public class TimeLineActivityPeriod extends Pane {
     }
 
 
-    public ImageView getNoteTag() {
-        return noteTag;
+    private Pane getGrandMotherPane(){
+        return (Pane) noteTextArea.getParent();
     }
+
+    private VBox getMotherPane(){
+        return  (VBox) getGrandMotherPane().getChildren().get(0);
+    }
+
+    private void disableMainScreen(VBox motherPane){
+        motherPane.setDisable(true);
+        noteTextArea.setDisable(true);
+        noteLock.setDisable(true);
+        noteLock.setOpacity(1);
+    }
+
+
 }

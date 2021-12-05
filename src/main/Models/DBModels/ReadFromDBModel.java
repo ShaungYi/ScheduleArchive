@@ -18,6 +18,7 @@ public class ReadFromDBModel {
             String name;
             String category;
             String note;
+            boolean noteIsPrivate;
             int duration;
             int startTime;
             int endTime;
@@ -33,9 +34,10 @@ public class ReadFromDBModel {
                 name = day.getString(1);
                 category = day.getString(2);
                 note = day.getString(3);
-                startTime = day.getInt(4);
-                endTime = day.getInt(5);
-                duration = day.getInt(6);
+                noteIsPrivate = day.getBoolean(4);
+                startTime = day.getInt(5);
+                endTime = day.getInt(6);
+                duration = day.getInt(7);
 
                 // Setting previous endTime to the start time of the day if the event name is DayStart
 
@@ -49,7 +51,7 @@ public class ReadFromDBModel {
                 }
 
                 // saving the event to an arraylist
-                dayContent.add(new Activity(name, category, note, duration, startTime, endTime, eventDate));
+                dayContent.add(new Activity(name, category, note, noteIsPrivate, duration, startTime, endTime, eventDate));
             }
 
             System.out.println("(from readDay) day: " + dayContent);
@@ -217,5 +219,24 @@ public class ReadFromDBModel {
 
         return 0;
 
+    }
+
+    public static String getPassword() {
+        try {
+            PreparedStatement getBackupSettingValue = SettingsDBModel.readBackupSettings;
+            getBackupSettingValue.setString(1, "password");
+            ResultSet value = getBackupSettingValue.executeQuery();
+
+            if (value.next()) {
+                return value.getString(1);
+            }
+
+            value.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

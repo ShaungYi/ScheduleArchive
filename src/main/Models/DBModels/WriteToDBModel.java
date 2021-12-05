@@ -34,6 +34,7 @@ public class WriteToDBModel {
                     String name = event.getName();
                     String category = event.getCategory();
                     String note = event.getNote();
+                    boolean noteIsPrivate = event.noteIsPrivate();
                     int startTime = event.getStartTimeSecs();
                     int endTime = event.getEndTimeSecs();
                     String date = event.getDate();
@@ -94,10 +95,11 @@ public class WriteToDBModel {
 
                     PreparedStatement saveEvent = ArchiveDBModel.insertDataToEventsTable;
                     saveEvent.setInt(1, activityID);
-                    saveEvent.setString(2, note);
-                    saveEvent.setInt(3, startTime);
-                    saveEvent.setInt(4, endTime);
-                    saveEvent.setString(5, date);
+                    saveEvent.setBoolean(2, noteIsPrivate);
+                    saveEvent.setString(3, note);
+                    saveEvent.setInt(4, startTime);
+                    saveEvent.setInt(5, endTime);
+                    saveEvent.setString(6, date);
                     saveEvent.execute();
 
                     // adding 1 to the frequency of the activity
@@ -258,6 +260,17 @@ public class WriteToDBModel {
         try {
             PreparedStatement updateBackupSettings = SettingsDBModel.updateBackupSettings;
             updateBackupSettings.setInt(1, value);
+            updateBackupSettings.setString(2, name);
+            updateBackupSettings.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateBackupSettings(String name, String value) {
+
+        try {
+            PreparedStatement updateBackupSettings = SettingsDBModel.updateBackupSettings;
+            updateBackupSettings.setString(1, value);
             updateBackupSettings.setString(2, name);
             updateBackupSettings.execute();
         } catch (SQLException e) {

@@ -116,6 +116,7 @@ public class EditLog {
                     activity.getName(),
                     activity.getCategory(),
                     activity.getNote(),
+                    activity.noteIsPrivate(),
                     activity.getDurationSeconds(),
                     activity.getStartTimeSecs(),
                     activity.getEndTimeSecs(),

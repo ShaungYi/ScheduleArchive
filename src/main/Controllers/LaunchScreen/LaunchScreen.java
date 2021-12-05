@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import main.App;
 import main.Controllers.PrototypeController;
 import main.Controllers.Timeline.TimeLineActivityPeriod;
+import main.Models.Graphics.General;
 import main.resources.SceneNavigationModel;
 
 import java.io.File;
@@ -60,7 +61,7 @@ public class LaunchScreen extends PrototypeController {
             SceneNavigationModel.searchScreen = SceneNavigationModel.macro;
             SceneNavigationModel.infographics = App.sceneNavigationModel.createNewScene("FXML/Macro/infographics.fxml");
 
-            //load note images
+            //load images
 
             Image normalImage = null;
             Image hoveredImage = null;
@@ -70,6 +71,9 @@ public class LaunchScreen extends PrototypeController {
 
             TimeLineActivityPeriod.noteImage = normalImage;
             TimeLineActivityPeriod.noteHoveredImage = hoveredImage;
+
+            General.openLock = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/Images/lock-open.png")));
+            General.closedLock = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/Images/lock-closed.png")));
 
             Platform.runLater(new Runnable() {
                 @Override

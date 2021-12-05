@@ -53,8 +53,19 @@ public class SettingsDBModel {
             // creating settings
 
             createSetting(maxBackupNum, 6, createNewSetting);
-
             createSetting(backupCreationInterval, 3600, createNewSetting);
+
+
+            //create pasword row in settings table
+            try {
+                createNewSetting.setString(1, "password");
+                createNewSetting.setString(2, "");
+                createNewSetting.setString(3, "password");
+                createNewSetting.execute();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

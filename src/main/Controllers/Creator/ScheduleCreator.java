@@ -380,7 +380,7 @@ public class ScheduleCreator extends PrototypeController {
 
             });
 
-            ArchiveDBModel.archive.add(new Activity("undefined", getSelectedActivityCategory(ActivityTypes), "", stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getEndTime(), LocalDate.now().toString()));
+            ArchiveDBModel.archive.add(new Activity("undefined", getSelectedActivityCategory(ActivityTypes), "", false, stopWatch.getMeasuredTime(), stopWatch.getStartTimeSec(), stopWatch.getEndTime(), LocalDate.now().toString()));
             resetStopWatch();
             ActivityTypes.getSelectedToggle().setSelected(false);
             UniversalCommonAncestor.setStyle("-fx-background-color: white");

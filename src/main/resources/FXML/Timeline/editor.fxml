@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.ImageView?>
 <Pane fx:id="grandmotherPane" onMouseClicked="#onScreenClicked" prefHeight="700.0" styleClass="main-background" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Timeline.Editor">
     <children>
         <ListView fx:id="nameSuggestions" onKeyTyped="#handleNameEdit" onMouseClicked="#autoCompleteName" styleClass="list-view-upside-down" />
@@ -180,6 +181,7 @@
          <font>
             <Font size="20.0" />
          </font></TextArea>
+        <ImageView visible="false" fx:id="noteLock" fitHeight="35.0" fitWidth="34.0" layoutX="480.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
     </children>
    <stylesheets>
       <URL value="@../../css/Search.css" />

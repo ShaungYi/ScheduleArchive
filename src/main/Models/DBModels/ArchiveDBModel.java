@@ -66,6 +66,7 @@ public class ArchiveDBModel {
                             "(" +
                             "activityID INTEGER, " +
                             "note INTEGER, " +
+                            "noteIsPrivate BIT" +
                             "startTime INTEGER, " +
                             "endTime INTEGER, " +
                             "date TEXT" +
@@ -79,7 +80,7 @@ public class ArchiveDBModel {
 
             insertDataToActivitiesTable = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?, ?)");
 
-            insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?, ?)");
+            insertDataToEventsTable = connection.prepareStatement("INSERT INTO events VALUES (?, ?, ?, ?, ?, ?)");
 
             deleteEvent = connection.prepareStatement(
                         "DELETE FROM events " +
@@ -103,7 +104,7 @@ public class ArchiveDBModel {
             // read statements
 
             readDayContent = connection.prepareStatement(
-                        "SELECT name, category, note, startTime, endTime, endTime - startTime AS duration, date " +
+                        "SELECT name, category, note, noteIsPrivate, startTime, endTime, endTime - startTime AS duration, date " +
                             "FROM events " +
                             "JOIN activities USING (activityID) " +
                             "WHERE date = ? ORDER BY startTime"

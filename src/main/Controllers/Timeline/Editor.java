@@ -19,6 +19,9 @@ import main.Controllers.PrototypeController;
 import main.Controllers.Stats.InfographicsNavigationTab.InfographicsNavigationTab;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
+import main.Models.Graphics.General;
+import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
+import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
 import main.resources.SceneNavigationModel;
 import main.Models.SearchModel;
 import main.Controllers.Stats.Stats;
@@ -36,6 +39,7 @@ public class Editor extends PrototypeController {
     Button goToCreatorButton;
     @FXML
     TextArea noteTextArea;
+    @FXML ImageView noteLock;
 
     private int startTimeSecs;
     private int endTimeSecs;
@@ -804,7 +808,7 @@ public class Editor extends PrototypeController {
         int newEndTime = existingEndtime;
 
 
-        Activity newActivity = new Activity("new","New", "", newSecs, newStartTime , newEndTime, selectedActivity.getDate());
+        Activity newActivity = new Activity("new","New", "", false, newSecs, newStartTime , newEndTime, selectedActivity.getDate());
 
         selectedActivity.setDurationSeconds(existingSecs);
 
@@ -817,7 +821,7 @@ public class Editor extends PrototypeController {
         selectedLabel.setMaxWidth(existingSecs * WIDTH_OF_1_SEC);
         selectedLabel.setMinWidth(existingSecs * WIDTH_OF_1_SEC);
 
-        TimeLineActivityPeriod period = new TimeLineActivityPeriod(newActivity, noteTextArea, true);
+        TimeLineActivityPeriod period = new TimeLineActivityPeriod(newActivity, noteTextArea, noteLock, true);
 
         Label newLabel = period.getActivityLabel();
         newLabel.setText("new");
@@ -964,7 +968,7 @@ public class Editor extends PrototypeController {
             for (Activity activity : activities) {
 
 
-                TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, true);
+                TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, noteLock, true);
 
                 Label newActivity = period.getActivityLabel();
                 newActivity.setStyle("-fx-background-color:" + Stats.colorMap.get(activity.getCategory()) + "; -fx-alignment: center; -fx-border-color:  rgb(246, 255, 226); fx-border-width: 1;");
@@ -1057,15 +1061,24 @@ public class Editor extends PrototypeController {
 
         hideSuggestedNames();
 
-        if (!(event.getTarget() instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
+        Node target = (Node) event.getTarget();
+
+        if (!(target instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
             if (noteTextArea.isVisible()){
                 confirmOrRemoveNoteTag();
             }
             noteTextArea.setVisible(false);
+            noteLock.setVisible(false);
 
         }
 
-        Node target = (Node)event.getTarget();
+
+        //hide either password popup
+        if (target.equals(grandmotherPane)){ //!(targetFromSetPassPopup || targetFromEnterPassPopup)
+            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+        }
+
+
         if (target instanceof Text){
             target = target.getParent();
         }

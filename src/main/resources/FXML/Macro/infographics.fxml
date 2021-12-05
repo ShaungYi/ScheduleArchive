@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="grandmotherPane" onMouseClicked="#hideInfoPopupOnMouseClicked" styleClass="background-pane" stylesheets="@infographics.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Infographics.InfographicsController">
+<AnchorPane fx:id="grandmotherPane" onMouseClicked="#hideInfoPopupOnMouseClicked" styleClass="background-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Controllers.Macro.Infographics.InfographicsController">
    <children>
       <HBox fx:id="motherPane" onScroll="#onScroll" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: white;">
          <children>
@@ -48,5 +49,9 @@
             <Font size="30.0" />
          </font></Button>
    </children>
+   <stylesheets>
+      <URL value="@infographics.css" />
+      <URL value="@../../customNodes/activitySummaryTableView/activity-summary-table-view.css" />
+   </stylesheets>
 
 </AnchorPane>

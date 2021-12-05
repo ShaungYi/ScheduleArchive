@@ -1,8 +1,10 @@
 package main.Controllers.Timeline;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -19,6 +21,9 @@ import main.Controllers.Stats.Stats;
 import main.Controllers.Stats.Table;
 import main.Models.DBModels.ArchiveDBModel;
 import main.Models.DateTimeModel;
+import main.Models.Graphics.General;
+import main.resources.customNodes.enterPasswordPopup.EnterPasswordPopup;
+import main.resources.customNodes.setPasswordPopup.SetPasswordPopup;
 import main.resources.SceneNavigationModel;
 import main.Utility.Activity;
 import main.App;
@@ -31,6 +36,7 @@ public class TimeLine extends PrototypeController {
 
     @FXML public Pane grandmotherPane;
     @FXML TextArea noteTextArea;
+    @FXML ImageView noteLock;
 
     private int startTimeSecs;
     private int endTimeSecs;
@@ -59,7 +65,7 @@ public class TimeLine extends PrototypeController {
     Pane backgroundPane;
 
     @FXML
-    VBox motherPane;
+    public VBox motherPane;
 
     @FXML
     Button goToCreatorButton;
@@ -117,6 +123,9 @@ public class TimeLine extends PrototypeController {
 
 
     public void initialize() {
+
+        System.out.println(grandmotherPane);
+        System.out.println(motherPane);
 
 
         archive.sort(Activity.activityComparator);
@@ -220,7 +229,8 @@ public class TimeLine extends PrototypeController {
 
         for (Activity activity : archive) {
 
-            TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, false);
+            TimeLineActivityPeriod period = new TimeLineActivityPeriod(activity, noteTextArea, noteLock, false);
+
 
             Label newActivity = period.getActivityLabel();
 
@@ -431,6 +441,7 @@ public class TimeLine extends PrototypeController {
             shiftPortals(-newLayoutX);
             shiftDateDisplay(-change);
             noteTextArea.setLayoutX(noteTextArea.getLayoutX() + change);
+            noteLock.setLayoutX(noteLock.getLayoutX() + change);
             checkAndUpdateDate(dateDisplay.getLayoutX());
             shiftDetails(change);
 
@@ -481,12 +492,24 @@ public class TimeLine extends PrototypeController {
     }
 
     @FXML
-    public void hideNoteAreaOnScreenClicked(MouseEvent event){
+    public void hideStuffOnScreenClicked(MouseEvent event){
 
-        if (!(event.getTarget() instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
+        Node target = (Node) event.getTarget();
+        //hide note area
+        if (!(target instanceof ImageView)) { //check that event didn't come from noteTag: show and hide? what a waste!
             noteTextArea.setVisible(false);
+            noteLock.setVisible(false);
         }
+
+
+        //hide either password popup
+        if (target.equals(grandmotherPane)){ //!(targetFromSetPassPopup || targetFromEnterPassPopup)
+            General.reenableTimeLineMainScreen(grandmotherPane, motherPane, noteTextArea, noteLock);
+        }
+
+
     }
+
 
 
     public static String getAMPMTimeFromSeconds(int seconds) {

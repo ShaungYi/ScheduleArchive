@@ -11,6 +11,7 @@ public class Activity implements Cloneable{
     private String category;
     private int durationSeconds;
     private String note;
+    boolean noteIsPrivate;
     int startTimeSecs;
     int endTimeSecs;
     String date;
@@ -47,10 +48,11 @@ public class Activity implements Cloneable{
         }
     };
 
-    public Activity (String name, String category, String note, int duration, int startTime, int endTime, String date){
+    public Activity (String name, String category, String note, boolean noteIsPrivate, int duration, int startTime, int endTime, String date){
         this.name = name;
         this.category = category;
         this.note = note;
+        this.noteIsPrivate = noteIsPrivate;
         this.durationSeconds = duration;
         this.startTimeSecs = startTime;
         this.endTimeSecs = endTime;
@@ -98,6 +100,18 @@ public class Activity implements Cloneable{
         this.note = note;
     }
 
+    public void lockNote(){
+        noteIsPrivate = true;
+    }
+
+    public void unlockNote(){
+        noteIsPrivate = false;
+    }
+
+    public boolean noteIsPrivate() {
+        return noteIsPrivate;
+    }
+
     public void setDurationSeconds(int durationSeconds) {
         this.durationSeconds = durationSeconds;
     }
@@ -135,7 +149,8 @@ public class Activity implements Cloneable{
         this.durationSeconds == other.getDurationSeconds() &&
         this.startTimeSecs == other.getStartTimeSecs() &&
         this.endTimeSecs == other.getEndTimeSecs() &&
-        this.date.equals(other.getDate())){
+        this.date.equals(other.getDate()) &&
+        this.noteIsPrivate == other.noteIsPrivate){
             //return true if fields match
             return true;
         }

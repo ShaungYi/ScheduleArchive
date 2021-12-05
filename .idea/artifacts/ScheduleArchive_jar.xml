@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/ScheduleArchive_jar</output-path>
     <root id="archive" name="ScheduleArchive.jar">
       <element id="module-output" name="ScheduleArchive" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/sqlite-jdbc-3.36.0.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.base.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.controls.jar" path-in-jar="/" />
@@ -11,7 +12,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.web.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/sqlite-jdbc-3.36.0.3.jar" path-in-jar="/" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx-swt.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.base.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/javafx.controls.jar" />
@@ -30,7 +30,6 @@
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libjavafx_iio.dylib" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libjfxmedia_avf.dylib" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libjfxmedia.dylib" />
-      <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libjfxwebkit.dylib" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libprism_common.dylib" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libprism_es2.dylib" />
       <element id="file-copy" path="$PROJECT_DIR$/lib/javafx-sdk-17.0.1-macOS/lib/libprism_sw.dylib" />
