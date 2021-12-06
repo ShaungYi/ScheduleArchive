@@ -13,7 +13,7 @@ public class App extends Application {
     public static EditLog editLog = new EditLog();
     public static SceneNavigationModel sceneNavigationModel = new SceneNavigationModel();
     public static Thread backupRegularly;
-    public static String appDataDirectory = System.getProperty("user.home") + "/Desktop/archive/" + "Yooni/";
+    public static String appDataDirectory = "ScheduleArchiveAppData/";
 
 
     @Override
